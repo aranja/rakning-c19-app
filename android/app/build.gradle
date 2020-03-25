@@ -108,7 +108,7 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('RAKNING_RELEASE_STORE_FILE')) {
+            if (project.hasProperty('RAKNING_RELEASE_STORE_PASSWORD')) {
                 storeFile file(RAKNING_RELEASE_STORE_FILE)
                 storePassword RAKNING_RELEASE_STORE_PASSWORD
                 keyAlias RAKNING_RELEASE_KEY_ALIAS
