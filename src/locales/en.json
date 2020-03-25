@@ -1,5 +1,18 @@
 {
   "translation": {
+    "welcomeTitle": "Tracing – COVID-19",
+    "welcomeSubtitle": "Let’s help the Department of Civil Protection and Emergency Management’s Contact Tracing Team to trace potential COVID-19 contagion paths in Iceland.",
+    "welcomeHowTitle": "How does the app work, and what information does it store?",
+    "welcomeHowDescription": "The app saves data on your movements/locations and stores them securely in your device. In certain instances, the Contact Tracing Team may send you a notification and request that you forward them the data. Then you can send the data to the Team with a single click. This will make it easier to trace the spread of COVID-19 while the epidemic is ongoing.",
+    "welcomeInfoTitle": "Your device stores your location data for the past 14 days. Older data are deleted automatically.",
+    "welcomeInfoDescription": "Only your telephone number is stored in the centralised database; no other information is sent there.",
+    "welcomeRegisterButton": "Sign me up for tracing",
+    "enableLocationAllow": "Allow location sharing and notifications",
+    "enableLocationDescriptionIOS": "The app will request permission to record your movements/location data. During this process, it is very important to select the option <1>“Allow while using app”</1>.",
+    "enableLocationMessageIOS": "Shortly after you have set up the app in your device, it will ask you for permission to save location data while the app is not in use. At this point, it is important to select the option <1>“Change to Always Allow”</1>. This is required if the app is to perform its intended function.",
+    "enableLocationDescriptionAndroid": "The app will request permission to record your movements/location data.",
+    "enableLocationButton": "Next",
+    "enableNotificationDescription": "The app will also request permission to send you notifications.",
     "tosAcceptance": "I agree to the <1>Privacy Policy</1>.",
     "enterPin": "Enter pin nr.",
     "phoneNumber": "Phone number",

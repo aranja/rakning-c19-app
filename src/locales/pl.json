@@ -1,5 +1,18 @@
 {
   "translation": {
+    "welcomeTitle": "Śledzenie - COVID-19",
+    "welcomeSubtitle": "Pomóżmy Zespołowi Śledczemu Sztabu Obrony Cywilnej śledzić potencjalne infekcje COVID-19 na Islandii.",
+    "welcomeHowTitle": "Jak działa i jakie informacje przechowuje aplikacja?",
+    "welcomeHowDescription": "Aplikacja zapisuje Twoje podróże i bezpiecznie przechowuje je na twoim urządzeniu. W niektórych przypadkach zespół śledczy może wysłać Ci powiadomienie z prośbą o przesłanie danych. Następnie za pomocą jednego kliknięcia możesz wysłać dane do Zespołu Śledczego Sztabu Ochrony Cywilnej. Odbywa się to w celu ułatwienia śledzenia/ monitorowania infekcji COVID-19.",
+    "welcomeInfoTitle": "Urządzenie przechowuje lokalizacje z ostatnich 14 dni. Starsze dane są automatycznie usuwane.",
+    "welcomeInfoDescription": "Żadne inne informacje prócz Twojego numeru telefonu nie są przechowywane w centralnej bazie danych użytkowników.",
+    "welcomeRegisterButton": "Zarejestruj mnie",
+    "enableLocationAllow": "Zezwolenie na udzielenie lokalizacji i wysyłanie powiadomień",
+    "enableLocationDescriptionIOS": "Aplikacja poprosi o pozwolenie na rejestrowanie twoich podróży / lokalizacji. Bardzo ważne jest wybranie opcji <1>„Zezwól podczas korzystania z aplikacji”</1>.",
+    "enableLocationMessageIOS": "Po zainstalowaniu aplikacji na Twoim urządzeniu, poprosi Cię o pozwolenie na zapisywanie lokalizacji, gdy aplikacja nie jest używana. Bardzo ważne jest, aby wybrać <1>„Zmień na zawsze zezwalaj”</1>. Jest to warunek, aby aplikacja mogła odgrywać swoją rolę.",
+    "enableLocationDescriptionAndroid": "Aplikacja poprosi o pozwolenie na rejestrowanie twoich podróży / lokalizacji.",
+    "enableNotificationDescription": "Aplikacja poprosi również o pozwolenie na wysyłanie powiadomień.",
+    "enableLocationButton": "Do przodu",
     "tosAcceptance": "I agree to the <1>Privacy Policy</1>.",
     "enterPin": "Enter pin nr.",
     "phoneNumber": "Phone number",

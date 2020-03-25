@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
+import { Trans } from 'react-i18next';
 import { CtaButton } from '../../../components/Button/Button';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
@@ -10,6 +11,8 @@ import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import LoadingScreen from '../../../components/LoadingScreen';
 import { resetStack } from '../../../utils/navigation';
+
+const isIOS = Platform.OS === 'ios';
 
 const AllowLocationScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -49,11 +52,15 @@ const AllowLocationScreen = ({ navigation }) => {
       >
         <Content>
           <Heading level={1}>{t('enableLocationAllow')}</Heading>
-          <Text>{t('enableLocationDescription')}</Text>
+          <Text>{isIOS ? (<Trans i18nKey="enableLocationDescriptionIOS">
+            Appið mun óska eftir heimild til að skrá ferðir/staðsetningu þína. Það er mjög mikilvægt að velja í ferlinu möguleikann <Text bold>„Allow while using app“</Text>.
+          </Trans>) : t('enableLocationDescriptionAndroid')}</Text>
+          {isIOS && <Text><Trans i18nKey="enableLocationMessageIOS">
+            Nokkru eftir að appið hefur verið sett upp í tækinu þínu mun það biðja þig um leyfi til að vista staðsetningar á meðan appið er ekki í notkun. Þá er mikilbægt að velja <Text bold>„Change to Always Allow“</Text>. Það er skilyrði fyrir að appið gegni hlutverki sínu.
+          </Trans></Text>}
           <Text>{t('enableNotificationDescription')}</Text>
-          <Text>{t('allowWhileUsingAppInstruction')}</Text>
           <CtaButton onPress={getPermission}>
-            {t('welcomeRegisterButton')}
+            {t('enableLocationButton')}
           </CtaButton>
         </Content>
       </ScrollView>

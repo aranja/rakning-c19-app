@@ -20,10 +20,6 @@ const WelcomeScreen = ({ navigation }) => {
           <Text>{t('welcomeHowDescription')}</Text>
           <Text bold>{t('welcomeInfoTitle')}</Text>
           <Text>{t('welcomeInfoDescription')}</Text>
-
-          <Text bold marginBottom={1}>
-            {t('welcomeDisclaimer')}
-          </Text>
         </Content>
       </ScrollView>
       <SlimContent>
