@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Rakning.app"
+               BuildableName = "Rakning C-19.app"
                BlueprintName = "Rakning"
                ReferencedContainer = "container:Rakning.xcodeproj">
             </BuildableReference>
@@ -59,7 +59,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Rakning.app"
+            BuildableName = "Rakning C-19.app"
             BlueprintName = "Rakning"
             ReferencedContainer = "container:Rakning.xcodeproj">
          </BuildableReference>
@@ -92,7 +92,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Rakning.app"
+            BuildableName = "Rakning C-19.app"
             BlueprintName = "Rakning"
             ReferencedContainer = "container:Rakning.xcodeproj">
          </BuildableReference>
@@ -109,7 +109,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Rakning.app"
+            BuildableName = "Rakning C-19.app"
             BlueprintName = "Rakning"
             ReferencedContainer = "container:Rakning.xcodeproj">
          </BuildableReference>

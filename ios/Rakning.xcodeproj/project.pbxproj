@@ -272,7 +272,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aranja.Rakning;
+				PRODUCT_BUNDLE_IDENTIFIER = is.covid.Rakning;
 				PRODUCT_NAME = "Rakning C-19";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -292,7 +292,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aranja.Rakning;
+				PRODUCT_BUNDLE_IDENTIFIER = is.covid.Rakning;
 				PRODUCT_NAME = "Rakning C-19";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

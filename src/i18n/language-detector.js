@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import * as Localization from 'expo-localization';
 
 const storageKey = 'hopp/user-language';
