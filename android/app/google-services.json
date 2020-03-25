@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "195603472125",
+    "firebase_url": "https://covid-19-rakning.firebaseio.com",
+    "project_id": "covid-19-rakning",
+    "storage_bucket": "covid-19-rakning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195603472125:android:1f920774250909ede9a894",
+        "android_client_info": {
+          "package_name": "com.aranja.covid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195603472125-rv07o92vtmrli4bp20vo7vcb7rum48cu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLPHkgEXzqdS7zyQQRM53C5Y1z46l_4lQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195603472125-rv07o92vtmrli4bp20vo7vcb7rum48cu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "195603472125-ti6mlqaq3i609kkapvcseanmp1cv8pa8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aranja.covid"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

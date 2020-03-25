@@ -10,6 +10,7 @@ import LoadingScreen from './components/LoadingScreen';
 import initI18n from './i18n';
 import fixTextCutoff from './utils/fix-text-cutoff';
 import { AppStateProvider } from './context/app-state';
+import { initFirebaseConnection } from './push-notifications';
 import Colors from './constants/Colors';
 
 initI18n();
@@ -26,6 +27,8 @@ const App = () => {
   async function preload() {
     try {
       await Promise.all([
+        // Initialize firebase for push notifications.
+        initFirebaseConnection(),
 
         // Load theme fonts
         Font.loadAsync({

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>195603472125-ti6mlqaq3i609kkapvcseanmp1cv8pa8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.195603472125-ti6mlqaq3i609kkapvcseanmp1cv8pa8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBICqdFq-sjiU02ndTcIJnt8k6svJeXQzo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>195603472125</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.aranja.covid</string>
+	<key>PROJECT_ID</key>
+	<string>covid-19-rakning</string>
+	<key>STORAGE_BUCKET</key>
+	<string>covid-19-rakning.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:195603472125:ios:584463b9adc395b3e9a894</string>
+	<key>DATABASE_URL</key>
+	<string>https://covid-19-rakning.firebaseio.com</string>
+</dict>
+</plist>

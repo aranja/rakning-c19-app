@@ -6,13 +6,10 @@ import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
 import { useTranslation, withTranslation } from 'react-i18next';
-import { updatePushToken, getUser } from '../../../api/User';
+import { getUser } from '../../../api/User';
 import { AuthConsumer } from '../../../context/authentication';
-import {
-  getPoints,
-  initBackgroundTracking,
-  stopBackgroundTracking,
-} from '../../../tracking';
+import { initBackgroundTracking } from '../../../tracking';
+import { registerPushNotifications } from '../../../push-notifications';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import { ButtonGroup } from '../../../components/Button';
@@ -20,6 +17,7 @@ import bullHorn from '../../../assets/images/bullhorn.png';
 import { scale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
+import messaging from '@react-native-firebase/messaging';
 
 const links = {
   en: {
@@ -98,42 +96,14 @@ const HomeScreen = ({ navigation, logout }) => {
 
   // Check user status when app is focused
   useEffect(() => {
+    const unsubscribePushMessage = messaging().onMessage(checkUser);
     AppState.addEventListener('change', checkUser);
 
     return () => {
+      unsubscribePushMessage();
       AppState.removeEventListener('change', checkUser);
     };
   }, []);
-
-  const registerForPushNotificationsAsync = async () => {
-    const { status: existingStatus } = await Permissions.getAsync(
-      Permissions.NOTIFICATIONS,
-    );
-    let finalStatus = existingStatus;
-    // only ask if permissions have not already been determined, because
-    // iOS won't necessarily prompt the user a second time.
-    if (existingStatus !== 'granted') {
-      // Android remote notification permissions are granted during the app
-      // install, so this will only ask on iOS
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-
-    // Stop here if the user did not grant permissions
-    if (finalStatus !== 'granted') {
-      return;
-    }
-
-    // // Get the token that uniquely identifies this device
-    // const token = await Notifications.getExpoPushTokenAsync();
-    //
-    // // POST the token to your backend server from where you can retrieve it to send push notifications.
-    // try {
-    //   await updatePushToken(token);
-    // } catch (error) {
-    //   console.log(error); // eslint-disable-line no-console
-    // }
-  };
 
   const onPressLogout = () => {
     navigation.navigate({ routeName: 'LoggedOut' });
@@ -142,15 +112,8 @@ const HomeScreen = ({ navigation, logout }) => {
   };
 
   useEffect(() => {
-    getPoints().then(points => {
-      console.log((points || []).map(point => new Date(point.time)));
-    });
     initBackgroundTracking();
-    registerForPushNotificationsAsync();
-
-    return () => {
-      stopBackgroundTracking();
-    };
+    registerPushNotifications();
   }, []);
 
   return (
