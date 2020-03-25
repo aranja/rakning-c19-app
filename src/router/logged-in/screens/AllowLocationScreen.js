@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { Platform, ScrollView } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
 import { Trans } from 'react-i18next';
