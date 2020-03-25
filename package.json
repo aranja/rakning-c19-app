@@ -6,6 +6,7 @@
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
+    "postinstall": "patch-package",
     "prepare": "if [ -f ./scripts/postinstall.sh ]; then sh ./scripts/postinstall.sh; fi"
   },
   "dependencies": {
@@ -35,6 +36,8 @@
     "google-libphonenumber": "^3.2.8",
     "i18next": "^17.0.6",
     "lodash": "^4.17.15",
+    "patch-package": "^6.2.1",
+    "postinstall-postinstall": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",

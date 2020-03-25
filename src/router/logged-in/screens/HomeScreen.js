@@ -119,7 +119,7 @@ const HomeScreen = ({ navigation, logout }) => {
 
   useEffect(() => {
     getPoints().then(points => {
-      console.log((points || []).map(point => new Date(point.timestamp)));
+      console.log((points || []).map(point => new Date(point.time)));
     });
     initBackgroundTracking();
     registerForPushNotificationsAsync();

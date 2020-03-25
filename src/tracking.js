@@ -1,15 +1,20 @@
-import * as Permissions from 'expo-permissions';
-import BackgroundGeolocation from '@mauron85/react-native-background-geolocation'
-import { storage } from './utils';
+import * as Permissions from "expo-permissions";
+import BackgroundGeolocation from "@mauron85/react-native-background-geolocation";
+import { storage } from "./utils";
 
-const BACKGROUND_LOCATION_TASK = 'background-location';
-const POINTS_BUFFER = 'points-buffer';
-const LAST_TIMESTAMP = 'last-timestamp';
+const BACKGROUND_LOCATION_TASK = "background-location";
+const POINTS_BUFFER = "points-buffer";
+const LAST_TIMESTAMP = "last-timestamp";
 
-BackgroundGeolocation.on('location', onLocation);
+BackgroundGeolocation.on("location", onLocation);
 
 export function getPoints() {
-  return storage.get(POINTS_BUFFER);
+  return new Promise((resolve, reject) => {
+    BackgroundGeolocation.getLocations(
+      locations => resolve(locations),
+      error => reject(error)
+    );
+  });
 }
 
 // TaskManager.defineTask(BACKGROUND_LOCATION_TASK, handleLocationUpdate);
@@ -46,16 +51,16 @@ async function restartBackgroundTracking() {
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 50,
       distanceFilter: 50,
-      notificationTitle: 'Background tracking',
-      notificationText: 'enabled',
-      debug: true,
+      notificationTitle: "Background tracking",
+      notificationText: "enabled",
+      // debug: true,
       startOnBoot: true,
       stopOnTerminate: false,
       // locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
       interval: 1000 * 60 * 5,
-      fastestInterval: 5000,
-      activitiesInterval: 10000,
-      stopOnStillActivity: false,
+      // fastestInterval: 1000 * 60,
+      // activitiesInterval: 10000,
+      stopOnStillActivity: false
     });
     BackgroundGeolocation.start();
     // await Location.startLocationUpdatesAsync(BACKGROUND_LOCATION_TASK, {
@@ -114,7 +119,7 @@ export async function handleLocationUpdate({ data, error }) {
     }
     const {
       coords: { longitude, latitude, accuracy },
-      timestamp,
+      timestamp
     } = location;
     points.push({ longitude, latitude, accuracy, timestamp });
     lastTimestamp = timestamp;
