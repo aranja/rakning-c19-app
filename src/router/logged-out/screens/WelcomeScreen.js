@@ -6,7 +6,7 @@ import AppShell, { Content, SlimContent } from '../../../components/AppShell';
 import Text from '../../../components/ui/Text';
 import { ScrollView } from 'react-native';
 import covidIcon from '../../../assets/images/covid-icon.png';
-import { scale } from '../../../utils';
+import { scale, verticalScale } from '../../../utils';
 
 const WelcomeScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <AppShell title={t('welcomeTitle')} subtitle={t('welcomeSubtitle')}>
       <ScrollView>
-        <Content>
+        <Content style={{ paddingBottom: verticalScale(110) }}>
           <Text bold>{t('welcomeHowTitle')}</Text>
 
           <Text>{t('welcomeHowDescription')}</Text>
@@ -22,7 +22,16 @@ const WelcomeScreen = ({ navigation }) => {
           <Text>{t('welcomeInfoDescription')}</Text>
         </Content>
       </ScrollView>
-      <SlimContent>
+      <SlimContent
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          width: '100%',
+          paddingBottom: verticalScale(32),
+          paddingTop: verticalScale(64),
+          paddingHorizontal: scale(32),
+        }}
+      >
         <CtaButton
           onPress={() => navigation.navigate('Login')}
           image={covidIcon}

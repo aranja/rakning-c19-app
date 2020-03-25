@@ -35,7 +35,7 @@ const font = (
 `;
 
 export const Paragraph = styled.Text<FontProps & { bold?: boolean }>`
-  ${({ marginBottom }) => font(16, 1.5, marginBottom)};
+  ${({ marginBottom }) => font(15, 1.5, marginBottom)};
   font-family: 'OpenSans${({ bold }) => (bold ? 'Bold' : '')};
 `;
 

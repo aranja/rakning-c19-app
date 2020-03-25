@@ -3,8 +3,10 @@ import styled from 'styled-components/native';
 import { scale, verticalScale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
 import Colors from '../../constants/Colors';
-import { SafeAreaView, Platform, StatusBar } from 'react-native';
+import color from 'color';
+import { SafeAreaView, Platform, StatusBar, ViewProps } from 'react-native';
 import Text, { Heading } from '../ui/Text';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Wrap = styled.View`
   background: ${Colors.background};
@@ -42,11 +44,21 @@ export const Content = styled.View`
   padding: ${verticalScale(28)}px ${scale(32)}px;
 `;
 
-export const SlimContent = styled.View`
-  padding: 0 ${scale(32)}px ${verticalScale(32)}px;
-  box-shadow: 0 -20px 10px ${Colors.background};
-  background: ${Colors.background};
-`;
+export const SlimContent = ({
+  children,
+  ...props
+}: {
+children: ReactNode;
+}) => (
+  <LinearGradient
+    colors={[color(Colors.background).alpha(0), Colors.background]}
+    start={[0, 0]}
+    end={[0, 0.4]}
+    {...props}
+  >
+    {children}
+  </LinearGradient>
+);
 
 interface Props {
   title?: string;
