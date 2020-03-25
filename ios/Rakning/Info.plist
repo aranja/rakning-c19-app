@@ -44,11 +44,11 @@
     <key>NSContactsUsageDescription</key>
     <string>Allow Rakning experiences to access your contacts</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Allow Rakning to use your location</string>
+    <string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>Allow Rakning to use your location</string>
+    <string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Allow Rakning to use your location</string>
+    <string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Allow Rakning to access your microphone</string>
     <key>NSMotionUsageDescription</key>
@@ -59,6 +59,10 @@
     <string>Give Rakning periences permission to access your photos</string>
     <key>NSRemindersUsageDescription</key>
     <string>Allow Rakning to access your reminders</string>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>location</string>
+    </array>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
@@ -73,9 +77,5 @@
     </array>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
-    <key>UIBackgroundModes</key>
-    <array>
-      <string>location</string>
-    </array>
   </dict>
 </plist>

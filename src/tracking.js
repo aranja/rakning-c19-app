@@ -1,34 +1,30 @@
 import * as Permissions from "expo-permissions";
 import BackgroundGeolocation from "@mauron85/react-native-background-geolocation";
-import { storage } from "./utils";
 
-const BACKGROUND_LOCATION_TASK = "background-location";
-const POINTS_BUFFER = "points-buffer";
-const LAST_TIMESTAMP = "last-timestamp";
-
-BackgroundGeolocation.on("location", onLocation);
+const LOCATION_AGE_LIMIT = 1000 * 60 * 60 * 24 * 14;
+const trimLocation = value => Number(value.toFixed(5));
 
 export function getPoints() {
   return new Promise((resolve, reject) => {
     BackgroundGeolocation.getLocations(
-      locations => resolve(locations),
+      locations => {
+        const timeCutoff = Date.now() - LOCATION_AGE_LIMIT;
+        const filtered = locations.filter(location => location.time > timeCutoff);
+
+        const cleaned = filtered.map(location => ({
+          lat: trimLocation(location.latitude),
+          lon: trimLocation(location.longitude),
+          acc: Math.round(location.accuracy),
+          time: location.time,
+        }))
+        resolve(cleaned);
+      },
       error => reject(error)
     );
   });
 }
 
-// TaskManager.defineTask(BACKGROUND_LOCATION_TASK, handleLocationUpdate);
-
 export async function stopBackgroundTracking() {
-  // // Check if task is already registered
-  // let isTaskRegistered = await TaskManager.isTaskRegisteredAsync(
-  //   BACKGROUND_LOCATION_TASK,
-  // );
-  //
-  // // Remove old task if one is registered
-  // if (isTaskRegistered) {
-  //   await TaskManager.unregisterTaskAsync(BACKGROUND_LOCATION_TASK);
-  // }
   BackgroundGeolocation.stop();
 }
 
@@ -53,78 +49,18 @@ async function restartBackgroundTracking() {
       distanceFilter: 50,
       notificationTitle: "Background tracking",
       notificationText: "enabled",
-      // debug: true,
+      debug: false,
       startOnBoot: true,
       stopOnTerminate: false,
-      // locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
-      interval: 1000 * 60 * 5,
-      // fastestInterval: 1000 * 60,
-      // activitiesInterval: 10000,
-      stopOnStillActivity: false
+      startForeground: true,
+      interval: 1000 * 60,
+      stopOnStillActivity: false,
+      saveBatteryOnBackground: true
     });
     BackgroundGeolocation.start();
-    // await Location.startLocationUpdatesAsync(BACKGROUND_LOCATION_TASK, {
-    //   accuracy: Location.Accuracy.High,
-    //   activityType: Location.ActivityType.Other,
-    //   timeInterval: 60 * 1000, // Android only
-    //   pausesUpdatesAutomatically: true, // iOS only.
-    //   showsBackgroundLocationIndicator: false, // iOS only.
-    //   distanceInterval: 10, // Avoid tracking events within 10 meters
-    //   deferredUpdatesInterval: 3 * 60 * 1000, // Store locations every hour
-    // });
+
     return true;
   } catch (error) {
     return false;
   }
-}
-
-function onLocation(location) {
-  console.log(new Date(location.time));
-}
-
-export async function handleLocationUpdate({ data, error }) {
-  const noLocations = !data || !data.locations || data.locations.length === 0;
-
-  if (error || noLocations) {
-    return;
-  }
-
-  const timeResolution = 1;
-
-  console.log(data.locations.map(location => new Date(location.timestamp)));
-
-  // Get the current buffer (if sending to the server has failed in the past)
-  let points;
-  try {
-    points = (await storage.get(POINTS_BUFFER)) || [];
-  } catch (err) {
-    // If it fails we ignore it
-    points = [];
-  }
-
-  // Add new points
-
-  // Reduce the resolution of the points
-  const { locations } = data;
-  let lastTimestamp = await storage.get(LAST_TIMESTAMP);
-  if (!lastTimestamp && points.length > 0) {
-    lastTimestamp = points[points.length - 1].timestamp;
-  }
-  for (const location of locations) {
-    if (
-      lastTimestamp &&
-      location.timestamp - lastTimestamp < timeResolution * 60 * 1000
-    ) {
-      continue;
-    }
-    const {
-      coords: { longitude, latitude, accuracy },
-      timestamp
-    } = location;
-    points.push({ longitude, latitude, accuracy, timestamp });
-    lastTimestamp = timestamp;
-  }
-
-  await storage.save(LAST_TIMESTAMP, lastTimestamp);
-  await storage.save(POINTS_BUFFER, points);
 }

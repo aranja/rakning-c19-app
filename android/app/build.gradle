@@ -106,6 +106,16 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('RAKNING_RELEASE_STORE_FILE')) {
+                storeFile file(RAKNING_RELEASE_STORE_FILE)
+                storePassword RAKNING_RELEASE_STORE_PASSWORD
+                keyAlias RAKNING_RELEASE_KEY_ALIAS
+                keyPassword RAKNING_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     splits {
         abi {
             reset()
@@ -118,6 +128,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
