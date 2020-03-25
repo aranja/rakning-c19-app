@@ -1,5 +1,5 @@
-import * as Permissions from "expo-permissions";
-import BackgroundGeolocation from "@mauron85/react-native-background-geolocation";
+import * as Permissions from 'expo-permissions';
+import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 
 const LOCATION_AGE_LIMIT = 1000 * 60 * 60 * 24 * 14;
 const trimLocation = value => Number(value.toFixed(5));
@@ -9,17 +9,19 @@ export function getPoints() {
     BackgroundGeolocation.getLocations(
       locations => {
         const timeCutoff = Date.now() - LOCATION_AGE_LIMIT;
-        const filtered = locations.filter(location => location.time > timeCutoff);
+        const filtered = locations.filter(
+          location => location.time > timeCutoff,
+        );
 
         const cleaned = filtered.map(location => ({
           lat: trimLocation(location.latitude),
           lon: trimLocation(location.longitude),
           acc: Math.round(location.accuracy),
           time: location.time,
-        }))
+        }));
         resolve(cleaned);
       },
-      error => reject(error)
+      error => reject(error),
     );
   });
 }
@@ -47,15 +49,15 @@ async function restartBackgroundTracking() {
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 50,
       distanceFilter: 50,
-      notificationTitle: "Background tracking",
-      notificationText: "enabled",
+      notificationTitle: 'Background tracking',
+      notificationText: 'enabled',
       debug: false,
       startOnBoot: true,
       stopOnTerminate: false,
       startForeground: true,
       interval: 1000 * 60,
       stopOnStillActivity: false,
-      saveBatteryOnBackground: true
+      saveBatteryOnBackground: true,
     });
     BackgroundGeolocation.start();
 
