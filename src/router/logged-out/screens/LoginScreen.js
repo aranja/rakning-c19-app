@@ -31,16 +31,10 @@ class LoginScreen extends React.Component {
 
   onSubmitPin = async accessToken => {
     this.props.login(accessToken);
-    await this.updateLanguage();
 
     const { navigation } = this.props;
     navigation.navigate('LoggedIn');
   };
-
-  async updateLanguage() {
-    const { i18n } = this.props;
-    await switchLocale(i18n.language);
-  }
 
   render() {
     const { pinToken, phoneNumber, countryCode } = this.state;
