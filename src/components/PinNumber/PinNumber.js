@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
@@ -11,14 +11,36 @@ import PinCode from '../PinCode';
 import { styles } from './styles';
 import Colors from '../../constants/Colors';
 import { scale } from '../../utils';
+import { CtaButton } from '../Button';
+import { Vertical } from '../ui/Spacer';
 
-const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
+const PinNumber = ({
+  phoneNumber,
+  pinToken,
+  countryCode,
+  resetPin,
+  onVerified,
+  t,
+}) => {
   const [pin, setPin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showResetBtn, setShowResetBtn] = useState(false);
+  const timeOutRef = useRef(null);
   const { createAlert } = useAlert();
+
+  const startTimeout = () => {
+    timeOutRef.current = setTimeout(() => {
+      setShowResetBtn(true);
+    }, 7000);
+  };
+
+  const cancelTimeout = () => {
+    clearTimeout(timeOutRef.current);
+  };
 
   const onVerifyPin = async pinNumber => {
     setIsLoading(true);
+    cancelTimeout();
 
     try {
       const { token, isNewUser } = await verifyPin(
@@ -29,6 +51,8 @@ const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
       );
       return onVerified(token, isNewUser);
     } catch (error) {
+      startTimeout();
+
       if (error.status === 400) {
         createAlert({
           message: t('incorrentPINMessage'),
@@ -55,6 +79,11 @@ const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
 
   const textColor = isLoading ? Colors.placeholder : Colors.text;
 
+  useEffect(() => {
+    startTimeout();
+    return cancelTimeout;
+  }, []);
+
   return (
     <View style={styles.container}>
       <PinCode
@@ -68,6 +97,13 @@ const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
           fontSize: 36,
         }}
       />
+      <Vertical fill />
+
+      <CtaButton transparent disabled={!showResetBtn} onPress={resetPin}>
+        <Text color={showResetBtn ? Colors.gray : 'transparent'}>
+          {t('pinResendBtn')}
+        </Text>
+      </CtaButton>
     </View>
   );
 };

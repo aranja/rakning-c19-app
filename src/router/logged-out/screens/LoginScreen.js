@@ -69,6 +69,7 @@ class LoginScreen extends React.Component {
                   countryCode={countryCode}
                   phoneNumber={phoneNumber}
                   pinToken={pinToken}
+                  resetPin={this.onResetPin}
                   onVerified={this.onSubmitPin}
                 />
               ) : (
