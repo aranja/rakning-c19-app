@@ -4,6 +4,7 @@ import { getUser } from '../api/User/index';
 interface User {
   id?: number;
   phone?: string;
+  requiresKennitala?: boolean;
 }
 
 interface State extends User {
@@ -63,6 +64,7 @@ const UserProvider = ({ children }) => {
   const fetchUser = async () => {
     const res = await getUser();
     dispatch({ type: 'LOAD_USER', user: res });
+    return res;
   };
 
   const updateUser = updatedUser => {
