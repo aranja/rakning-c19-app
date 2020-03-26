@@ -1,4 +1,4 @@
-package is.covid.rakning;
+package is.landlaeknir.rakning;
 
 import android.os.Bundle;
 

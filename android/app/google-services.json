@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:195603472125:android:f6fc4718e5c766d0e9a894",
+        "mobilesdk_app_id": "1:195603472125:android:fa3bdb91d3ee37b9e9a894",
         "android_client_info": {
-          "package_name": "is.covid.rakning"
+          "package_name": "is.landlaeknir.rakning"
         }
       },
       "oauth_client": [
@@ -32,10 +32,11 @@
               "client_type": 3
             },
             {
-              "client_id": "195603472125-ti6mlqaq3i609kkapvcseanmp1cv8pa8.apps.googleusercontent.com",
+              "client_id": "195603472125-hghe458rhvo6g9h9ncpq9qest588vhlj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.aranja.covid"
+                "bundle_id": "is.landlaeknir.rakning",
+                "app_store_id": "1504655876"
               }
             }
           ]

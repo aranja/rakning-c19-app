@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>195603472125-0qehacbuq4nouiktdb0vtv5i76arvbui.apps.googleusercontent.com</string>
+	<string>195603472125-hghe458rhvo6g9h9ncpq9qest588vhlj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.195603472125-0qehacbuq4nouiktdb0vtv5i76arvbui</string>
+	<string>com.googleusercontent.apps.195603472125-hghe458rhvo6g9h9ncpq9qest588vhlj</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBICqdFq-sjiU02ndTcIJnt8k6svJeXQzo</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>is.covid.Rakning</string>
+	<string>is.landlaeknir.rakning</string>
 	<key>PROJECT_ID</key>
 	<string>covid-19-rakning</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:195603472125:ios:90951647fd803fc7e9a894</string>
+	<string>1:195603472125:ios:ca5378690c50ab74e9a894</string>
 	<key>DATABASE_URL</key>
 	<string>https://covid-19-rakning.firebaseio.com</string>
 </dict>

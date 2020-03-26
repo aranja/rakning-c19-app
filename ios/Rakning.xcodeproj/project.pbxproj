@@ -148,7 +148,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 42S9SY3BVB;
+						DevelopmentTeam = B5Y59G9ZGB;
 					};
 				};
 			};
@@ -286,7 +286,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rakning/Rakning.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 42S9SY3BVB;
+				DEVELOPMENT_TEAM = B5Y59G9ZGB;
 				INFOPLIST_FILE = Rakning/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -294,7 +294,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = is.covid.Rakning;
+				PRODUCT_BUNDLE_IDENTIFIER = is.landlaeknir.rakning;
 				PRODUCT_NAME = "Rakning C-19";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -307,7 +307,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Rakning/Rakning.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 42S9SY3BVB;
+				DEVELOPMENT_TEAM = B5Y59G9ZGB;
 				INFOPLIST_FILE = Rakning/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -315,7 +315,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = is.covid.Rakning;
+				PRODUCT_BUNDLE_IDENTIFIER = is.landlaeknir.rakning;
 				PRODUCT_NAME = "Rakning C-19";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

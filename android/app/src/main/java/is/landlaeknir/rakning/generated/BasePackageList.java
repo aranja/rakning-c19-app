@@ -1,4 +1,4 @@
-package is.covid.rakning.generated;
+package is.landlaeknir.rakning.generated;
 
 import java.util.Arrays;
 import java.util.List;
