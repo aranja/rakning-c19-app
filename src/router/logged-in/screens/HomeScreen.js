@@ -78,6 +78,7 @@ const HomeScreen = ({ navigation, logout }) => {
       const { status } = await Permissions.getAsync(Permissions.LOCATION);
       if (status !== 'granted') {
         resetStack(navigation, 'Permission');
+        return;
       }
       await checkUser();
     };

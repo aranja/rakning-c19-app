@@ -5,7 +5,6 @@ import { withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
 import PhoneNumberInput from '../../../components/PhoneNumberInput';
 import PinNumber from '../../../components/PinNumber';
-import { switchLocale } from '../../../api/User';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import { Trans } from 'react-i18next';
@@ -31,16 +30,10 @@ class LoginScreen extends React.Component {
 
   onSubmitPin = async accessToken => {
     this.props.login(accessToken);
-    await this.updateLanguage();
 
     const { navigation } = this.props;
     navigation.navigate('LoggedIn');
   };
-
-  async updateLanguage() {
-    const { i18n } = this.props;
-    await switchLocale(i18n.language);
-  }
 
   render() {
     const { pinToken, phoneNumber, countryCode } = this.state;
