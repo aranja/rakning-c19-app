@@ -55,9 +55,12 @@ class LoginScreen extends React.Component {
                 </Trans>
               </Heading>
               <Text>
-                <Trans>
-                  {pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'}
-                </Trans>
+                <Trans
+                  i18nKey={
+                    pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'
+                  }
+                  values={{ phoneNumber }}
+                />
               </Text>
             </Content>
             <View>

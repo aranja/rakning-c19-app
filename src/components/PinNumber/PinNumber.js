@@ -10,6 +10,7 @@ import PinCode from '../PinCode';
 
 import { styles } from './styles';
 import Colors from '../../constants/Colors';
+import { scale } from '../../utils';
 
 const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
   const [pin, setPin] = useState('');
@@ -47,7 +48,7 @@ const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
   const updatePin = value => {
     setPin(value);
 
-    if (value.length === 4) {
+    if (value.length === 6) {
       onVerifyPin(value);
     }
   };
@@ -56,11 +57,12 @@ const PinNumber = ({ phoneNumber, pinToken, countryCode, onVerified, t }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.phoneNumber}>{t('pinPhone', { phoneNumber })}</Text>
       <PinCode
         autoFocus
         value={pin}
         onTextChange={updatePin}
+        codeLength={6}
+        cellSpacing={scale(2)}
         textStyle={{
           color: textColor,
           fontSize: 36,
