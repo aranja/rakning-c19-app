@@ -128,7 +128,10 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
+
+            if (project.hasProperty('RAKNING_RELEASE_STORE_PASSWORD')) {
+              signingConfig signingConfigs.release
+            }
         }
     }
     // applicationVariants are e.g. debug, release
