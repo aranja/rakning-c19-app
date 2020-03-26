@@ -5,7 +5,6 @@ import { withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
 import PhoneNumberInput from '../../../components/PhoneNumberInput';
 import PinNumber from '../../../components/PinNumber';
-import { switchLocale } from '../../../api/User';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import { Trans } from 'react-i18next';

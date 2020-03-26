@@ -21,9 +21,3 @@ export const updatePushToken = async pushToken => {
     pushToken,
   });
 };
-
-export const switchLocale = async locale => {
-  return ApiClient.put(`/user`, {
-    locale,
-  });
-};
