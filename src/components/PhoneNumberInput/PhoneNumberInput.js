@@ -85,9 +85,8 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   };
 
   const openPP = () => {
-    WebBrowser.openBrowserAsync(
-      `https://hopp.bike${langParam}/app/privacy-policy`,
-    );
+    //TODO: Use langParam to point to different translations
+    WebBrowser.openBrowserAsync(`https://www.covid.is/app/privacystatement`);
   };
 
   const getPinNumber = async () => {
