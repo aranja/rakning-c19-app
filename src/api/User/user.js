@@ -22,6 +22,10 @@ export const updatePushToken = async pushToken => {
   });
 };
 
+export const ignoreDataRequest = async () => {
+  return ApiClient.delete('/user/data-request');
+};
+
 export const switchLocale = async locale => {
   return ApiClient.put(`/user`, {
     locale,
