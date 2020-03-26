@@ -4,7 +4,13 @@ import { scale, verticalScale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
 import Colors from '../../constants/Colors';
 import color from 'color';
-import { SafeAreaView, Platform, StatusBar, ViewProps } from 'react-native';
+import {
+  SafeAreaView,
+  Platform,
+  StatusBar,
+  ScrollView,
+  View,
+} from 'react-native';
 import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -48,7 +54,7 @@ export const SlimContent = ({
   children,
   ...props
 }: {
-children: ReactNode;
+  children: ReactNode;
 }) => (
   <LinearGradient
     colors={[color(Colors.background).alpha(0), Colors.background]}
@@ -65,12 +71,13 @@ interface Props {
   subtitle?: string;
   children: ReactNode;
   alt?: boolean;
+  scrollable?: boolean;
 }
 
-function AppShell({ title, subtitle, children, alt }: Props) {
+function AppShell({ title, subtitle, children, alt, scrollable }: Props) {
   const showHeader = title || subtitle;
   return (
-    <Wrap>
+    <Wrap as={scrollable ? ScrollView : View}>
       <StatusBar barStyle="light-content" />
       <Header
         alt={alt}

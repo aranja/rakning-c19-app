@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { CtaButton } from '../../../components/Button/Button';
 import { getPoints } from '../../../tracking';
 import AppShell, { Content } from '../../../components/AppShell';
@@ -13,7 +14,6 @@ import { scale, storage } from '../../../utils';
 import KeyboardAvoid from '../../../components/KeyboardAvoid';
 import { resetStack } from '../../../utils/navigation';
 import { useAlert } from '../../../context/alert';
-import { useTranslation } from 'react-i18next';
 
 const SECURE_STORE_KEY = 'rakning-kennitala';
 
@@ -51,6 +51,7 @@ const AllowLocationScreen = ({ navigation }) => {
 
   return (
     <AppShell
+      scrollable
       alt
       title={t('requestDataTitle')}
       subtitle={t('requestDataSubTitle')}

@@ -14,7 +14,7 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <AppShell title={t('welcomeTitle')} subtitle={t('welcomeSubtitle')}>
       <ScrollView>
-        <Content style={{ paddingBottom: verticalScale(110) }}>
+        <Content style={{ paddingBottom: verticalScale(140) }}>
           <Text bold>{t('welcomeHowTitle')}</Text>
 
           <Text>{t('welcomeHowDescription')}</Text>

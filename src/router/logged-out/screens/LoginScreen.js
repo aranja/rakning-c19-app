@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
 import PhoneNumberInput from '../../../components/PhoneNumberInput';
 import PinNumber from '../../../components/PinNumber';
-import KeyboardAvoid from '../../../components/KeyboardAvoid';
 import { switchLocale } from '../../../api/User';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
-import Colors from '../../../constants/Colors';
-import { verticalScale } from '../../../utils';
 import { Trans } from 'react-i18next';
 
 class LoginScreen extends React.Component {
@@ -49,38 +46,43 @@ class LoginScreen extends React.Component {
     const { pinToken, phoneNumber, countryCode } = this.state;
     return (
       <AppShell>
-        <KeyboardAvoid
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            marginTop: 30,
-          }}
+        <ScrollView
+          centerContent={true}
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
         >
-          <Content>
-            <Heading>
-              <Trans>{pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}</Trans>
-            </Heading>
-            <Text>
-              <Trans>
-                {pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'}
-              </Trans>
-            </Text>
-          </Content>
-          <View>
-            {pinToken ? (
-              <PinNumber
-                countryCode={countryCode}
-                phoneNumber={phoneNumber}
-                pinToken={pinToken}
-                onVerified={this.onSubmitPin}
-              />
-            ) : (
-              <>
-                <PhoneNumberInput onSendPin={this.onSendPin} />
-              </>
-            )}
+          <View
+            style={{
+              marginTop: 30,
+            }}
+          >
+            <Content>
+              <Heading>
+                <Trans>
+                  {pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}
+                </Trans>
+              </Heading>
+              <Text>
+                <Trans>
+                  {pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'}
+                </Trans>
+              </Text>
+            </Content>
+            <View>
+              {pinToken ? (
+                <PinNumber
+                  countryCode={countryCode}
+                  phoneNumber={phoneNumber}
+                  pinToken={pinToken}
+                  onVerified={this.onSubmitPin}
+                />
+              ) : (
+                <>
+                  <PhoneNumberInput onSendPin={this.onSendPin} />
+                </>
+              )}
+            </View>
           </View>
-        </KeyboardAvoid>
+        </ScrollView>
       </AppShell>
     );
   }
