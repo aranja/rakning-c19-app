@@ -51,7 +51,7 @@ const PinNumber = ({
       );
       return onVerified(token, isNewUser);
     } catch (error) {
-      startTimeout();
+      setShowResetBtn(true);
 
       if (error.status === 400) {
         createAlert({
