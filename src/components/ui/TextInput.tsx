@@ -11,8 +11,8 @@ import {
 
 const CustomTextInput = styled.TextInput`
   color: ${Colors.breidholtAtNight};
-  background-color: ${({ focused }) =>
-    focused ? Colors.white : Colors.backgroundAlt};
+  background-color: ${({ focused, empty }) =>
+    focused || !empty ? Colors.white : Colors.backgroundAlt};
   border: 1px solid ${Colors.backgroundAlt};
   font-size: ${scale(22)};
   font-weight: bold;

@@ -3,7 +3,7 @@ import { getUser } from '../api/User/index';
 
 interface User {
   id?: number;
-  phone?: string;
+  requiresKennitala?: boolean;
 }
 
 interface State extends User {
@@ -32,7 +32,6 @@ interface ContextValue extends State {
 const initialState: State = {
   id: null,
   isReady: false,
-  phone: null,
 };
 
 function reducer(state: State, action: Actions): State {
@@ -63,6 +62,7 @@ const UserProvider = ({ children }) => {
   const fetchUser = async () => {
     const res = await getUser();
     dispatch({ type: 'LOAD_USER', user: res });
+    return res;
   };
 
   const updateUser = updatedUser => {
