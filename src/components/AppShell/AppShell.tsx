@@ -10,6 +10,8 @@ import {
   StatusBar,
   ScrollView,
   View,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -72,12 +74,23 @@ interface Props {
   children: ReactNode;
   alt?: boolean;
   scrollable?: boolean;
+  scrollContainerStyles?: StyleProp<ViewStyle>;
 }
 
-function AppShell({ title, subtitle, children, alt, scrollable }: Props) {
+function AppShell({
+  title,
+  subtitle,
+  children,
+  alt,
+  scrollable,
+  scrollContainerStyles,
+}: Props) {
   const showHeader = title || subtitle;
   return (
-    <Wrap as={scrollable ? ScrollView : View}>
+    <Wrap
+      as={scrollable ? ScrollView : View}
+      contentContainerStyle={scrollContainerStyles}
+    >
       <StatusBar barStyle="light-content" />
       <Header
         alt={alt}

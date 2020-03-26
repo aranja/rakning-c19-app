@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
 import { useTranslation, withTranslation } from 'react-i18next';
-import { getUser } from '../../../api/User';
 import { AuthConsumer } from '../../../context/authentication';
 import { initBackgroundTracking } from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
@@ -71,7 +70,7 @@ const HomeScreen = ({ navigation, logout }) => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { clearUserData } = useContext(UserContext);
+  const { fetchUser, clearUserData } = useContext(UserContext);
 
   // Check if we still have location access
   useEffect(() => {
@@ -89,7 +88,7 @@ const HomeScreen = ({ navigation, logout }) => {
 
   // Check if user has been requested to share data
   const checkUser = async () => {
-    const user = await getUser();
+    const user = await fetchUser();
     if (user && user.dataRequested) {
       resetStack(navigation, 'RequestData');
     }

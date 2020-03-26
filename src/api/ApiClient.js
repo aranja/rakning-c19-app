@@ -87,6 +87,17 @@ class ApiClient {
     });
   }
 
+  delete(url, body) {
+    if (!this.hasToken()) {
+      return;
+    }
+
+    return safeFetch(url, this.token, {
+      method: 'DELETE',
+      body: JSON.stringify(body),
+    });
+  }
+
   put(url, body) {
     if (!this.hasToken()) {
       return;

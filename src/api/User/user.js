@@ -5,9 +5,8 @@ export const getUser = async () => {
   return (
     data && {
       id: data.id,
-      phone: data.phone,
-      locale: data.locale,
       dataRequested: data.dataRequested,
+      requiresKennitala: data.requiresKennitala,
     }
   );
 };
@@ -21,3 +20,8 @@ export const updatePushToken = async pushToken => {
     pushToken,
   });
 };
+
+export const ignoreDataRequest = async () => {
+  return ApiClient.delete('/user/data-request');
+};
+
