@@ -9,7 +9,6 @@ import { AlertProvider } from './context/alert';
 import LoadingScreen from './components/LoadingScreen';
 import initI18n from './i18n';
 import fixTextCutoff from './utils/fix-text-cutoff';
-import { AppStateProvider } from './context/app-state';
 import { initFirebaseConnection } from './push-notifications';
 import Colors from './constants/Colors';
 
@@ -65,12 +64,10 @@ const App = () => {
 export default () => (
   <>
     {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-    <AppStateProvider>
-      <AlertProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </AlertProvider>
-    </AppStateProvider>
+    <AlertProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </AlertProvider>
   </>
 );

@@ -3,7 +3,6 @@ import { getUser } from '../api/User/index';
 
 interface User {
   id?: number;
-  phone?: string;
   requiresKennitala?: boolean;
 }
 
@@ -33,7 +32,6 @@ interface ContextValue extends State {
 const initialState: State = {
   id: null,
   isReady: false,
-  phone: null,
 };
 
 function reducer(state: State, action: Actions): State {

@@ -5,8 +5,6 @@ export const getUser = async () => {
   return (
     data && {
       id: data.id,
-      phone: data.phone,
-      locale: data.locale,
       dataRequested: data.dataRequested,
       requiresKennitala: data.requiresKennitala,
     }

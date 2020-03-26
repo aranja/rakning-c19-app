@@ -7,8 +7,6 @@ export {
   moderateVerticalScale,
 } from './scale';
 export { secondsToTime, secondsToTimeString } from './time';
-export { metersToDistanceString } from './distance';
-export { getToastMessageFromErrorCode } from './error-codes';
 
 export const composeFn = (...fns) => (...args) => fns.map(fn => fn(...args));
 
