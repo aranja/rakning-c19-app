@@ -7,7 +7,7 @@ import * as ui from './ui';
 const LoadingScreen = () => {
   return (
     <ui.Container>
-      <ActivityIndicator color={Colors.white} />
+      <ActivityIndicator color={Colors.orange} />
     </ui.Container>
   );
 };
