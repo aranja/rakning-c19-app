@@ -22,7 +22,10 @@ const AllowLocationScreen = ({ navigation }) => {
     const checkLocationPermission = async () => {
       const { status } = await Permissions.getAsync(Permissions.LOCATION);
       if (status === 'granted') {
-        await initBackgroundTracking();
+        await initBackgroundTracking(
+          t('trackingTitle'),
+          t('trackingNotification'),
+        );
         resetStack(navigation, 'Home');
       } else {
         setLoading(false);
@@ -35,7 +38,10 @@ const AllowLocationScreen = ({ navigation }) => {
   const getPermission = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status === 'granted') {
-      await initBackgroundTracking();
+      await initBackgroundTracking(
+        t('trackingTitle'),
+        t('trackingNotification'),
+      );
       resetStack(navigation, 'Home');
     }
   };

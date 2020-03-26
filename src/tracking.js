@@ -30,17 +30,17 @@ export async function stopBackgroundTracking() {
   BackgroundGeolocation.stop();
 }
 
-export async function initBackgroundTracking() {
+export async function initBackgroundTracking(title, text) {
   try {
     await Permissions.askAsync(Permissions.LOCATION);
-    await restartBackgroundTracking();
+    await restartBackgroundTracking(title, text);
     return true;
   } catch (error) {
     return false;
   }
 }
 
-async function restartBackgroundTracking() {
+async function restartBackgroundTracking(title, text) {
   try {
     await stopBackgroundTracking();
 
@@ -49,8 +49,8 @@ async function restartBackgroundTracking() {
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 50,
       distanceFilter: 50,
-      notificationTitle: 'Background tracking',
-      notificationText: 'enabled',
+      notificationTitle: title,
+      notificationText: text,
       debug: false,
       startOnBoot: true,
       stopOnTerminate: false,

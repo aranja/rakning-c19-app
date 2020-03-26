@@ -112,7 +112,7 @@ const HomeScreen = ({ navigation, logout }) => {
   };
 
   useEffect(() => {
-    initBackgroundTracking();
+    initBackgroundTracking(t('trackingTitle'), t('trackingNotification'));
     registerPushNotifications();
   }, []);
 
