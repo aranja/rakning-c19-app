@@ -93,7 +93,7 @@ const AllowLocationScreen = ({ navigation }) => {
     >
       <Content style={{ flex: 1 }}>
         <KeyboardAvoid>
-          {requiresKennitala && (
+          {requiresKennitala ? (
             <>
               <Text>{t('requestDataKennitalaInfo')}</Text>
               <Input
@@ -104,7 +104,7 @@ const AllowLocationScreen = ({ navigation }) => {
               />
               <Vertical unit={0.5} />
             </>
-          )}
+          ) : null}
 
           <CtaButton
             justify

@@ -8,7 +8,7 @@ export const getUser = async () => {
       phone: data.phone,
       locale: data.locale,
       dataRequested: data.dataRequested,
-      requiresKennitala: Boolean(data.requiresKennitala),
+      requiresKennitala: data.requiresKennitala,
     }
   );
 };
