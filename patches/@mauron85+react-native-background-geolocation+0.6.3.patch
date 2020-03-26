@@ -298,6 +298,15 @@ index 18f1ba1..8f40b37 100644
 
  import com.marianhello.bgloc.Config;
  import com.marianhello.bgloc.ConnectivityListener;
+@@ -269,7 +269,7 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
+ 
+     @Override
+     public int onStartCommand(Intent intent, int flags, int startId) {
+-        if (intent == null) {
++        if (intent == null || !containsCommand(intent)) {
+             // when service was killed and restarted we will restart service
+             start();
+             return START_STICKY;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java
 index fd0b99e..3d95eba 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java
