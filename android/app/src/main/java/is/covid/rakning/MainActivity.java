@@ -1,4 +1,4 @@
-package com.rakning;
+package is.covid.rakning;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

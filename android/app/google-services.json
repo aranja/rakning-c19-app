@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:195603472125:android:1f920774250909ede9a894",
+        "mobilesdk_app_id": "1:195603472125:android:f6fc4718e5c766d0e9a894",
         "android_client_info": {
-          "package_name": "com.aranja.covid"
+          "package_name": "is.covid.rakning"
         }
       },
       "oauth_client": [
