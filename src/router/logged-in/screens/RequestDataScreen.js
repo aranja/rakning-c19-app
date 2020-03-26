@@ -30,7 +30,7 @@ const AllowLocationScreen = ({ navigation }) => {
 
     try {
       const points = await getPoints();
-      await logPoints(points);
+      await logPoints(points, kennitala);
 
       createAlert({
         type: 'success',
@@ -92,10 +92,10 @@ const AllowLocationScreen = ({ navigation }) => {
       scrollContainerStyles={{ flexGrow: 1 }}
     >
       <Content style={{ flex: 1 }}>
-        <Text>{t('requestDataKennitalaInfo')}</Text>
         <KeyboardAvoid>
           {requiresKennitala && (
             <>
+              <Text>{t('requestDataKennitalaInfo')}</Text>
               <Input
                 value={kennitala}
                 onChangeText={setKennitala}
