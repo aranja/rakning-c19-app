@@ -1,5 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 import { userAgent } from './shared';
+import { storage } from '../utils';
 import config from '../config';
 
 const getData = async res => {
@@ -53,17 +54,22 @@ class ApiClient {
 
   setToken({ token }) {
     this.token = token;
-    return SecureStore.setItemAsync('token', token);
+    return Promise.all([
+      SecureStore.setItemAsync('token', token),
+      storage.save('isRegistered', true),
+    ]);
   }
 
   clearToken() {
     this.token = undefined;
-    return SecureStore.deleteItemAsync('token');
+    return Promise.all([
+      SecureStore.deleteItemAsync('token'),
+      storage.remove('isRegistered'),
+    ]);
   }
 
   async hasToken() {
-    this.token = await SecureStore.getItemAsync('token');
-    return !!this.token;
+    return Boolean(await storage.get('isRegistered'));
   }
 
   get(url) {

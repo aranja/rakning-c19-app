@@ -13,8 +13,8 @@ export const composeFn = (...fns) => (...args) => fns.map(fn => fn(...args));
 export const storage = {
   async get(key, defaultValue = null) {
     try {
-      const trip = await AsyncStorage.getItem(key);
-      return trip ? JSON.parse(trip) : defaultValue;
+      const item = await AsyncStorage.getItem(key);
+      return item ? JSON.parse(item) : defaultValue;
     } catch (e) {
       return defaultValue;
     }
