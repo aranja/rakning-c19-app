@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { AppState, ScrollView } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { UserContext } from '../../../context/user';
@@ -17,6 +17,7 @@ import { scale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
+import LoadingScreen from '../../../components/LoadingScreen';
 
 const links = {
   en: {
@@ -70,6 +71,7 @@ const HomeScreen = ({ navigation, logout }) => {
     t,
     i18n: { language },
   } = useTranslation();
+  const [loadingUserData, setLoadingUserData] = useState(true);
   const { fetchUser, clearUserData } = useContext(UserContext);
 
   // Check if we still have location access
@@ -88,9 +90,17 @@ const HomeScreen = ({ navigation, logout }) => {
 
   // Check if user has been requested to share data
   const checkUser = async () => {
-    const user = await fetchUser();
-    if (user && user.dataRequested) {
-      resetStack(navigation, 'RequestData');
+    setLoadingUserData(true);
+
+    try {
+      const user = await fetchUser();
+      if (user && user.dataRequested) {
+        resetStack(navigation, 'RequestData');
+      }
+    } catch (error) {
+      // Error
+    } finally {
+      setLoadingUserData(false);
     }
   };
 
@@ -115,6 +125,10 @@ const HomeScreen = ({ navigation, logout }) => {
     initBackgroundTracking(t('trackingTitle'), t('trackingNotification'));
     registerPushNotifications();
   }, []);
+
+  if (loadingUserData) {
+    return <LoadingScreen />;
+  }
 
   return (
     <AppShell title={t('trackingTitle')} subtitle={t('trackingSubtitle')}>
