@@ -11,6 +11,8 @@ import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import LoadingScreen from '../../../components/LoadingScreen';
 import { resetStack } from '../../../utils/navigation';
+import { Vertical } from '../../../components/ui/Spacer';
+import Footer from '../../../components/Footer';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -80,7 +82,11 @@ const AllowLocationScreen = ({ navigation }) => {
               </Trans>
             </Text>
           )}
-          <Text>{t('enableNotificationDescription')}</Text>
+          <Text marginBottom={1}>{t('enableNotificationDescription')}</Text>
+
+          <Footer />
+          <Vertical unit={1} />
+
           <CtaButton onPress={getPermission}>
             {t('enableLocationButton')}
           </CtaButton>

@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { CtaButton } from '../../../components/Button/Button';
 import AppShell, { Content, SlimContent } from '../../../components/AppShell';
+import Footer from '../../../components/Footer';
 import Text from '../../../components/ui/Text';
 import { ScrollView } from 'react-native';
 import covidIcon from '../../../assets/images/covid-icon.png';
 import { scale, verticalScale } from '../../../utils';
+import { Vertical } from '../../../components/ui/Spacer';
 
 const WelcomeScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -14,7 +16,7 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <AppShell title={t('welcomeTitle')} subtitle={t('welcomeSubtitle')}>
       <ScrollView>
-        <Content style={{ paddingBottom: verticalScale(140) }}>
+        <Content style={{ paddingBottom: verticalScale(200) }}>
           <Text bold>{t('welcomeHowTitle')}</Text>
 
           <Text>{t('welcomeHowDescription')}</Text>
@@ -28,10 +30,12 @@ const WelcomeScreen = ({ navigation }) => {
           bottom: 0,
           width: '100%',
           paddingBottom: verticalScale(32),
-          paddingTop: verticalScale(64),
+          paddingTop: verticalScale(70),
           paddingHorizontal: scale(32),
         }}
       >
+        <Footer />
+        <Vertical unit={0.5} />
         <CtaButton
           onPress={() => navigation.navigate('Login')}
           image={covidIcon}
