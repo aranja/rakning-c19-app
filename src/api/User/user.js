@@ -4,7 +4,6 @@ export const getUser = async () => {
   const data = await ApiClient.get(`/user`);
   return (
     data && {
-      id: data.id,
       dataRequested: data.dataRequested,
       requiresKennitala: data.requiresKennitala,
     }
@@ -24,4 +23,3 @@ export const updatePushToken = async pushToken => {
 export const ignoreDataRequest = async () => {
   return ApiClient.delete('/user/data-request');
 };
-
