@@ -1,5 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { Platform, StatusBar } from 'react-native';
+import Constants from 'expo-constants'
 import * as Font from 'expo-font';
 import styled from 'styled-components/native';
 
@@ -27,7 +28,7 @@ const App = () => {
     try {
       await Promise.all([
         // Initialize firebase for push notifications.
-        initFirebaseConnection(),
+        Constants.isDevice && initFirebaseConnection(),
 
         // Load theme fonts
         Font.loadAsync({
