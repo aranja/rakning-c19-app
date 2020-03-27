@@ -171,6 +171,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           I agree to the <Link onPress={openPP}>Privacy Policy</Link>.
         </Trans>
       </Checkbox>
+      <Vertical unit={1} />
       <View style={styles.btn}>
         <CtaButton
           disabled={!tosAccepted || state.phoneNumber.length <= 0}
