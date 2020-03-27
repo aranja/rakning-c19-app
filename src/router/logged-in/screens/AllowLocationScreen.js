@@ -63,8 +63,6 @@ const AllowLocationScreen = ({ navigation }) => {
           <Text>
             {isIOS ? (
               <Trans i18nKey="enableLocationDescriptionIOS">
-                Appið mun óska eftir heimild til að skrá ferðir/staðsetningu
-                þína. Það er mjög mikilvægt að velja í ferlinu möguleikann{' '}
                 <Text bold>„Allow while using app“</Text>.
               </Trans>
             ) : (
@@ -74,11 +72,7 @@ const AllowLocationScreen = ({ navigation }) => {
           {isIOS && (
             <Text>
               <Trans i18nKey="enableLocationMessageIOS">
-                Nokkru eftir að appið hefur verið sett upp í tækinu þínu mun það
-                biðja þig um leyfi til að vista staðsetningar á meðan appið er
-                ekki í notkun. Þá er mikilbægt að velja{' '}
-                <Text bold>„Change to Always Allow“</Text>. Það er skilyrði
-                fyrir að appið gegni hlutverki sínu.
+                <Text bold>„Change to Always Allow“</Text>
               </Trans>
             </Text>
           )}
