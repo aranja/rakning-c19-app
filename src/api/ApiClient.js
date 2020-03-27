@@ -1,5 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 import { userAgent } from './shared';
+import { storage } from '../utils';
 import config from '../config';
 
 const getData = async res => {
@@ -51,23 +52,32 @@ const safeFetch = async (url, token, options) => {
 class ApiClient {
   token = undefined;
 
-  setToken({ token }) {
+  setToken(token) {
     this.token = token;
-    return SecureStore.setItemAsync('token', token);
+    return Promise.all([
+      SecureStore.setItemAsync('token', token),
+      storage.save('isRegistered', true),
+    ]);
   }
 
   clearToken() {
     this.token = undefined;
-    return SecureStore.deleteItemAsync('token');
+    return Promise.all([
+      SecureStore.deleteItemAsync('token'),
+      storage.remove('isRegistered'),
+    ]);
   }
 
-  async hasToken() {
-    this.token = await SecureStore.getItemAsync('token');
-    return !!this.token;
+  async getToken() {
+    const isRegistered = Boolean(await storage.get('isRegistered'));
+    this.token = isRegistered
+      ? await SecureStore.getItemAsync('token')
+      : undefined;
+    return this.token;
   }
 
   get(url) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 
@@ -77,7 +87,7 @@ class ApiClient {
   }
 
   post(url, body) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 
@@ -88,7 +98,7 @@ class ApiClient {
   }
 
   delete(url, body) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 
@@ -99,7 +109,7 @@ class ApiClient {
   }
 
   put(url, body) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 

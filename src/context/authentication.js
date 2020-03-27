@@ -1,6 +1,6 @@
 import React from 'react';
 import * as SecureStore from 'expo-secure-store';
-import HoppClient from '../api/ApiClient';
+import ApiClient from '../api/ApiClient';
 import { verifyToken, updatePushToken } from '../api/User';
 
 export const AuthContext = React.createContext({
@@ -22,14 +22,13 @@ class AuthProvider extends React.Component {
 
   checkForValidToken = async () => {
     try {
-      const token = await SecureStore.getItemAsync('token');
+      const token = await ApiClient.getToken();
       if (!token) {
         return false;
       }
 
       this.setState({ token });
-      await HoppClient.setToken({ token });
-      return await verifyToken();
+      return verifyToken();
     } catch (error) {
       console.log(error);
     }
@@ -45,13 +44,13 @@ class AuthProvider extends React.Component {
 
   login = async token => {
     this.setState({ token });
-    await HoppClient.setToken({ token });
+    await ApiClient.setToken(token);
   };
 
   logout = async () => {
     await updatePushToken(null);
     this.setState({ token: null });
-    await HoppClient.clearToken();
+    await ApiClient.clearToken();
   };
 
   getToken = () => {
