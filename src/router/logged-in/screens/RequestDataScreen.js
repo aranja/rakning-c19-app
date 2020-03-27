@@ -17,6 +17,7 @@ import { resetStack } from '../../../utils/navigation';
 import { useAlert } from '../../../context/alert';
 import { ignoreDataRequest } from '../../../api/User/user';
 import { UserContext } from '../../../context/user';
+import Footer from '../../../components/Footer';
 
 const AllowLocationScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -116,6 +117,10 @@ const AllowLocationScreen = ({ navigation }) => {
           >
             {t('requestDataButton')}
           </CtaButton>
+
+          <Vertical unit={1.5} />
+
+          <Footer />
         </KeyboardAvoid>
 
         <Vertical fill />

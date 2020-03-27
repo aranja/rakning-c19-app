@@ -1,6 +1,7 @@
 import React from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 import colors from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export const Close = props => (
   <Svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -46,8 +47,9 @@ export const CheckIcon = ({ isChecked }) =>
         height="16"
         x="1"
         y="1.5723"
-        stroke="#ff7a4c"
-        strokeWidth="2"
+        fill="#ffffff"
+        stroke="#cccccc"
+        strokeWidth="1"
         rx="2"
       />
     </Svg>

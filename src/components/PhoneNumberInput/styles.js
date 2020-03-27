@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     paddingVertical: scale(10),
   },
   btn: {
-    paddingTop: verticalScale(45),
+    paddingTop: verticalScale(20),
     textTransform: 'uppercase',
   },
 });

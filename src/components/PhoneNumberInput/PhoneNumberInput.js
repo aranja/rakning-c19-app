@@ -165,7 +165,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
         countryCode={state.cca2}
         renderFlagButton={() => <View />}
       />
-      <Vertical unit={2} />
+      <Vertical unit={1} />
       <Checkbox checked={tosAccepted} onPress={acceptTOS}>
         <Trans i18nKey="tosAcceptance">
           I agree to the <Link onPress={openPP}>Privacy Policy</Link>.

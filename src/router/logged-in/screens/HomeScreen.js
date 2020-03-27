@@ -17,6 +17,7 @@ import { scale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
+import Footer from '../../../components/Footer';
 
 const links = {
   en: {
@@ -161,7 +162,7 @@ const HomeScreen = ({ navigation, logout }) => {
             ))}
           </ButtonGroup>
 
-          <Vertical unit={2.5} />
+          <Vertical unit={1} />
 
           <UrlButton transparent href="https://covid.is">
             <Text center>
@@ -172,7 +173,11 @@ const HomeScreen = ({ navigation, logout }) => {
             </Text>
           </UrlButton>
 
-          <Vertical unit={2.5} />
+          <Vertical unit={1} />
+
+          <Footer />
+
+          <Vertical unit={1} />
 
           {__DEV__ && (
             <CtaButton bgColor={Colors.gray} onPress={onPressLogout}>
