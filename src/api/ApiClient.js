@@ -52,7 +52,7 @@ const safeFetch = async (url, token, options) => {
 class ApiClient {
   token = undefined;
 
-  setToken({ token }) {
+  setToken(token) {
     this.token = token;
     return Promise.all([
       SecureStore.setItemAsync('token', token),
@@ -69,7 +69,11 @@ class ApiClient {
   }
 
   async hasToken() {
-    return Boolean(await storage.get('isRegistered'));
+    const isRegistered = Boolean(await storage.get('isRegistered'));
+    this.token = isRegistered
+      ? await SecureStore.getItemAsync('token')
+      : undefined;
+    return this.token;
   }
 
   get(url) {
