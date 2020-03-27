@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import { getUser } from '../api/User/index';
 
 interface User {
-  id?: number;
   requiresKennitala?: boolean;
 }
 
@@ -30,7 +29,6 @@ interface ContextValue extends State {
 }
 
 const initialState: State = {
-  id: null,
   isReady: false,
 };
 
