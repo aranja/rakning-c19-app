@@ -17,7 +17,7 @@ export function getPoints() {
           lat: trimLocation(location.latitude),
           lon: trimLocation(location.longitude),
           acc: Math.round(location.accuracy),
-          time: location.time,
+          time: Math.round(location.time),
         }));
         resolve(cleaned);
       },
