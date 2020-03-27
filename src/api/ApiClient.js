@@ -68,7 +68,7 @@ class ApiClient {
     ]);
   }
 
-  async hasToken() {
+  async getToken() {
     const isRegistered = Boolean(await storage.get('isRegistered'));
     this.token = isRegistered
       ? await SecureStore.getItemAsync('token')
@@ -77,7 +77,7 @@ class ApiClient {
   }
 
   get(url) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 
@@ -87,7 +87,7 @@ class ApiClient {
   }
 
   post(url, body) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 
@@ -98,7 +98,7 @@ class ApiClient {
   }
 
   delete(url, body) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 
@@ -109,7 +109,7 @@ class ApiClient {
   }
 
   put(url, body) {
-    if (!this.hasToken()) {
+    if (!this.getToken()) {
       return;
     }
 

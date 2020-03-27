@@ -22,7 +22,7 @@ class AuthProvider extends React.Component {
 
   checkForValidToken = async () => {
     try {
-      const token = await ApiClient.hasToken();
+      const token = await ApiClient.getToken();
       if (!token) {
         return false;
       }
