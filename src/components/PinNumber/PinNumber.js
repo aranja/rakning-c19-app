@@ -100,7 +100,10 @@ const PinNumber = ({
       <Vertical fill />
 
       <CtaButton transparent disabled={!showResetBtn} onPress={resetPin}>
-        <Text color={showResetBtn ? Colors.gray : 'transparent'}>
+        <Text
+          marginBottom={0}
+          color={showResetBtn ? Colors.gray : 'transparent'}
+        >
           {t('pinResendBtn')}
         </Text>
       </CtaButton>
