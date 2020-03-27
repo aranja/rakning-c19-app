@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Text from '../ui/Text';
 
 import { useAlert } from '../../context/alert';
@@ -20,13 +20,13 @@ const PinNumber = ({
   countryCode,
   resetPin,
   onVerified,
-  t,
 }) => {
   const [pin, setPin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showResetBtn, setShowResetBtn] = useState(false);
   const timeOutRef = useRef(null);
   const { createAlert } = useAlert();
+  const { t } = useTranslation();
 
   const startTimeout = () => {
     timeOutRef.current = setTimeout(() => {
@@ -49,9 +49,12 @@ const PinNumber = ({
         countryCode,
         phoneNumber,
       );
+
+      setIsLoading(false);
       return onVerified(token, isNewUser);
     } catch (error) {
       setShowResetBtn(true);
+      setIsLoading(false);
 
       if (error.status === 400) {
         createAlert({
@@ -64,8 +67,6 @@ const PinNumber = ({
           type: 'error',
         });
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -118,4 +119,4 @@ PinNumber.propTypes = {
   phoneNumber: PropTypes.string.isRequired,
 };
 
-export default withTranslation()(PinNumber);
+export default PinNumber;
