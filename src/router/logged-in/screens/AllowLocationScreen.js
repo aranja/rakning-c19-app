@@ -76,7 +76,10 @@ const AllowLocationScreen = ({ navigation }) => {
               </Trans>
             </Text>
           )}
-          <Text marginBottom={1}>{t('enableNotificationDescription')}</Text>
+
+          {isIOS && (
+            <Text marginBottom={1}>{t('enableNotificationDescription')}</Text>
+          )}
 
           <Footer />
           <Vertical unit={1} />
