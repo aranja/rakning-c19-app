@@ -1,7 +1,6 @@
 import React from 'react';
-import * as SecureStore from 'expo-secure-store';
 import ApiClient from '../api/ApiClient';
-import { verifyToken, updatePushToken } from '../api/User';
+import { updatePushToken } from '../api/User';
 
 export const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -23,12 +22,8 @@ class AuthProvider extends React.Component {
   checkForValidToken = async () => {
     try {
       const token = await ApiClient.getToken();
-      if (!token) {
-        return false;
-      }
-
       this.setState({ token });
-      return verifyToken();
+      return token;
     } catch (error) {
       console.log(error);
     }
