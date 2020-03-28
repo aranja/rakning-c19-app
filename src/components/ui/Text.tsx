@@ -1,4 +1,4 @@
-import React, { ReactText } from 'react';
+import React, { ReactText, ReactNode } from 'react';
 import styled, { css } from 'styled-components/native';
 import { scale, verticalScale } from '../../utils/index';
 import Colors from '../../constants/Colors';
@@ -8,7 +8,7 @@ interface FontProps {
   marginBottom?: 0 | 0.25 | 0.5 | 1 | 1.5 | 2;
   invert?: boolean;
   center?: boolean;
-  children?: ReactText;
+  children?: ReactText | ReactNode;
   color?: string;
   style?: StyleProp<TextStyle>;
 }
