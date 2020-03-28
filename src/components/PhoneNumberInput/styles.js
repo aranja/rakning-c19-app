@@ -79,5 +79,5 @@ export const coutryPickerTheme = StyleSheet.create({
 });
 
 export const TOSLink = styled.Text`
-  color: ${Colors.greenThunder};
+  color: ${Colors.blue};
 `;
