@@ -141,7 +141,7 @@ const HomeScreen = ({ navigation, logout }) => {
             <UrlButton
               align="left"
               justify="start"
-              href="https://www.covid.is/tilkynningar"
+              href={t('announcementsLink')}
               image={bullHorn}
               imageDimensions={{ height: scale(26), width: scale(26) }}
             >
@@ -178,7 +178,7 @@ const HomeScreen = ({ navigation, logout }) => {
 
           <Vertical unit={1} />
 
-          <UrlButton transparent href="https://covid.is">
+          <UrlButton transparent href={t('covidLink')}>
             <Text center>
               Meira á{' '}
               <Text bold color={Colors.blue}>

@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Localization from 'expo-localization';
 
-const storageKey = 'hopp/user-language';
+const storageKey = 'covid/user-language';
 
 const languageDetector = {
   type: 'languageDetector',

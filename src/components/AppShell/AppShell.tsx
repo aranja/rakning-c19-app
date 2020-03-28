@@ -95,11 +95,11 @@ function AppShell({
       <Header
         alt={alt}
         style={
-          showHeader && {
+          (showHeader && {
             paddingTop: verticalScale(64),
             paddingHorizontal: scale(32),
             paddingBottom: verticalScale(32),
-          }
+          }) || { zIndex: 1 }
         }
       >
         {showHeader && (

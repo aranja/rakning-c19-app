@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { Platform, StatusBar } from 'react-native';
-import Constants from 'expo-constants'
+import Constants from 'expo-constants';
 import * as Font from 'expo-font';
 import styled from 'styled-components/native';
 
