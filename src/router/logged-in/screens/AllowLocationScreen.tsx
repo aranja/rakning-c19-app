@@ -73,18 +73,27 @@ const AllowLocationScreen = ({ navigation }) => {
     Permissions.PermissionStatus
   >(Status.UNDETERMINED);
 
-  async function handlePermission({ status }: Permissions.PermissionResponse) {
-    if (status === 'granted') {
-      await initBackgroundTracking(
-        t('trackingTitle'),
-        t('trackingNotification'),
-      );
+  async function handlePermission({
+    permissions: { location: locationPermission },
+  }: Permissions.PermissionResponse) {
+    const hasScopeAlways = isIOS && locationPermission.ios?.scope === 'always';
 
-      return resetStack(navigation, 'Home');
+    if (locationPermission.granted) {
+      if (hasScopeAlways) {
+        await initBackgroundTracking(
+          t('trackingTitle'),
+          t('trackingNotification'),
+        );
+
+        return resetStack(navigation, 'Home');
+      }
+
+      setPermission(Status.DENIED);
+    } else {
+      setPermission(locationPermission.status);
     }
 
     setLoading(false);
-    setPermission(status);
   }
 
   function getPermission() {
