@@ -7,7 +7,10 @@ import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
-import { initBackgroundTracking, stopBackgroundTracking } from '../../../tracking';
+import {
+  initBackgroundTracking,
+  stopBackgroundTracking,
+} from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
@@ -77,18 +80,13 @@ const HomeScreen = ({ navigation, logout }) => {
   const { fetchUser, clearUserData } = useContext(UserContext);
 
   // Check if we still have location access
-  useEffect(() => {
-    const checkLocationPermission = async () => {
-      const { status } = await Permissions.getAsync(Permissions.LOCATION);
-      if (status !== 'granted') {
-        resetStack(navigation, 'Permission');
-        return;
-      }
-      await checkUser();
-    };
-
-    checkLocationPermission();
-  }, []);
+  const checkLocationPermission = async () => {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      resetStack(navigation, 'Permission');
+    }
+    return status === 'granted';
+  };
 
   const logoutUser = () => {
     navigation.navigate({ routeName: 'LoggedOut' });
@@ -108,25 +106,49 @@ const HomeScreen = ({ navigation, logout }) => {
       if (user && user.dataRequested) {
         resetStack(navigation, 'RequestData');
       }
+
+      return user;
     } catch (error) {
       setLoadingUserData(false);
 
       if (error instanceof AuthenticationError) {
         logoutUser();
       }
+
+      return null;
     }
   };
+
+  async function validateState() {
+    if (!(await checkUser())) {
+      return;
+    }
+
+    if (!(await checkLocationPermission())) {
+      return;
+    }
+
+    return true;
+  }
 
   /**
    * @param {AppStateStatus} state
    */
   function onAppStateChange(state) {
     if (state === 'active') {
-      checkUser();
+      validateState();
     }
   }
 
-  // Check user status when app is focused
+  useEffect(() => {
+    (async () => {
+      if (await validateState()) {
+        initBackgroundTracking(t('trackingTitle'), t('trackingNotification'));
+        registerPushNotifications();
+      }
+    })();
+  }, []);
+
   useEffect(() => {
     const unsubscribePushMessage = messaging().onMessage(checkUser);
     AppState.addEventListener('change', onAppStateChange);
@@ -135,11 +157,6 @@ const HomeScreen = ({ navigation, logout }) => {
       unsubscribePushMessage();
       AppState.removeEventListener('change', onAppStateChange);
     };
-  }, []);
-
-  useEffect(() => {
-    initBackgroundTracking(t('trackingTitle'), t('trackingNotification'));
-    registerPushNotifications();
   }, []);
 
   if (loadingUserData) {
