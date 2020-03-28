@@ -3,9 +3,11 @@ import { userAgent } from './shared';
 import { storage } from '../utils';
 import config from '../config';
 
+export class AuthenticationError extends Error {}
+
 const getData = async res => {
   if (res.status === 401) {
-    throw new Error('AUTH_FAILED');
+    throw new AuthenticationError();
   }
 
   let data = null;
