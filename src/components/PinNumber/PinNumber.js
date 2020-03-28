@@ -31,7 +31,7 @@ const PinNumber = ({
   const startTimeout = () => {
     timeOutRef.current = setTimeout(() => {
       setShowResetBtn(true);
-    }, 1200);
+    }, 12000);
   };
 
   const cancelTimeout = () => {
