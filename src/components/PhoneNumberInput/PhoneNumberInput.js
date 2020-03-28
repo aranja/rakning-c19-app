@@ -29,6 +29,12 @@ const initialState = {
   phoneNumber: '',
 };
 
+const privacyUrls = {
+  en: 'https://www.covid.is/app/privacystatement',
+  pl: 'https://www.covid.is/app/privacystatement-po',
+  is: 'https://www.covid.is/app/personuverndarstefna',
+};
+
 const reducer = (state, { phoneNumber, cca2, callingCode, type } = {}) => {
   switch (type) {
     case 'updateLocation':
@@ -58,7 +64,6 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   const phoneInputRef = useRef();
   const [tosAccepted, setTosAccepted] = useState(false);
   const [countryPickerOpen, setCountryPickerOpen] = useState(false);
-  const langParam = i18n.language === 'is' ? '' : `/${i18n.language}`;
 
   const onPressFlag = () => {
     setCountryPickerOpen(true);
@@ -85,8 +90,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   };
 
   const openPP = () => {
-    //TODO: Use langParam to point to different translations
-    WebBrowser.openBrowserAsync(`https://www.covid.is/app/privacystatement`);
+    WebBrowser.openBrowserAsync(privacyUrls[i18n.language] || privacyUrls.en);
   };
 
   const getPinNumber = async () => {
