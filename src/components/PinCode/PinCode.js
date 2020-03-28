@@ -207,7 +207,8 @@ class PinCode extends React.Component {
           onBlur={() => this.onFocused(false)}
           spellCheck={false}
           autoFocus={autoFocus}
-          keyboardType={keyboardType}
+          keyboardType="number-pad"
+          returnKeyType="done"
           numberOfLines={1}
           maxLength={codeLength}
           selection={{
