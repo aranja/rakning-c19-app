@@ -56,9 +56,9 @@ export const ButtonLabel = styled.Text`
   ${({ invert, color }) =>
     invert &&
     css`
-      color: ${color === 'pink'
-        ? Colors.reykjavikInBlossom
-        : Colors.greenThunder}};
+      color: ${
+        color === 'pink' ? Colors.reykjavikInBlossom : Colors.greenThunder
+      }};
     `}
 
   ${({ disabled }) =>
