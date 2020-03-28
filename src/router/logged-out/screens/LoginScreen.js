@@ -44,7 +44,7 @@ class LoginScreen extends React.Component {
 
     return (
       <AppShell>
-        <Content style={{ marginBottom: 0}}>
+        <Content style={{ marginBottom: 0 }}>
           <Heading>
             <Trans>{pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}</Trans>
           </Heading>
@@ -53,7 +53,7 @@ class LoginScreen extends React.Component {
               i18nKey={
                 pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'
               }
-              values={{ phoneNumber }}
+              values={{ phoneNumber: `+${countryCode} ${phoneNumber}` }}
             />
           </Text>
           <KeyboardAvoidingView
