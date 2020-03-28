@@ -1,5 +1,11 @@
 import React, { useEffect, useState, ReactNode } from 'react';
-import { Platform, ScrollView, Linking } from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  Linking,
+  AppState,
+  AppStateStatus,
+} from 'react-native';
 import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
 import { Trans } from 'react-i18next';
@@ -81,16 +87,28 @@ const AllowLocationScreen = ({ navigation }) => {
     setPermission(status);
   }
 
-  useEffect(() => {
-    Permissions.getAsync(Permissions.LOCATION).then(handlePermission);
-  }, []);
-
-  const getPermission = async () => {
+  function getPermission() {
     if (isIOS && permissionStatus === Status.DENIED) {
       return Linking.openSettings();
     }
+
     Permissions.askAsync(Permissions.LOCATION).then(handlePermission);
-  };
+  }
+
+  function onAppStateChange(state: AppStateStatus) {
+    if (state === 'active') {
+      Permissions.getAsync(Permissions.LOCATION).then(handlePermission);
+    }
+  }
+
+  useEffect(() => {
+    Permissions.getAsync(Permissions.LOCATION).then(handlePermission);
+    AppState.addEventListener('change', onAppStateChange);
+
+    return () => {
+      AppState.removeEventListener('change', onAppStateChange);
+    };
+  }, []);
 
   if (loading) {
     return <LoadingScreen />;
