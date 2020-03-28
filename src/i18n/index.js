@@ -59,7 +59,7 @@ export default function initI18n() {
       resources,
       whitelist: Object.keys(resources),
 
-      fallbackLng: 'is',
+      fallbackLng: 'en',
       saveMissing: true,
       missingKeyHandler: (locale, ns, key) => {
         if (__DEV__) {

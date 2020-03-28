@@ -1,7 +1,7 @@
 {
   "translation": {
-    "aboutCovidDescription": "Á heimasíðunni covid.is er að finna ýmis góð ráð og traustar upplýsingar.",
-    "aboutCovidTitle": "Upplýsingar um COVID-19",
+    "aboutCovidDescription": "Na stronie covid.is znajdziesz różne wskazówki i wiarygodne informacje.",
+    "aboutCovidTitle": "Informacje o COVID-19",
     "announcements": "Ogłoszenia",
     "announcementsLink": "https://www.covid.is/ogoszenia",
     "avoidInfectionLabel": "W jaki sposób zarażam?",
@@ -32,8 +32,6 @@
     "phoneValidationMessage": "Nieprawidłowy numer telefonu",
     "pinNumberDescription": "Wpisz kod otrzymany w wiadomości SMS",
     "pinNumberTitle": "Wpisz kod",
-    "pinPhone": "We'll send a pin code to {{phoneNumber}}.",
-    "pinResendBtn": "No text message? Try again.",
     "possibleInfectionLabel": "Potencjalne zarażenie",
     "possibleInfectionLink": "https://www.covid.is/flokkar-polsku/potencjalne-zarazenie",
     "quarantineLabel": "Co to kwarantanna",
