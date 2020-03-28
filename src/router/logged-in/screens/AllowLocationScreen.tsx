@@ -123,7 +123,7 @@ const AllowLocationScreen = ({ navigation }) => {
         <Heading level={1}>{t('changeLocationAllow')}</Heading>
         <Text>
           <Trans i18nKey={'changeLocationDescriptionIOS'}>
-            <Text bold>„Allow while using app“</Text>
+            <Text bold>„Always“</Text>
           </Trans>
         </Text>
       </ContentView>
