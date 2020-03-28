@@ -37,47 +37,12 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Allow Rakning C-19 to access your calendar</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow Rakning C-19 to use the camera</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Allow Rakning C-19 to access your contacts</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow Rakning C-19 to access your microphone</string>
-	<key>NSMotionUsageDescription</key>
-	<string>Allow Rakning C-19 to access your device's accelerometer</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Give Rakning C-19 permission to save photos</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Give Rakning C-19 permission to access your photos</string>
-	<key>NSRemindersUsageDescription</key>
-	<string>Allow Rakning C-19 to access your reminders</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>AntDesign.ttf</string>
-		<string>Entypo.ttf</string>
-		<string>EvilIcons.ttf</string>
-		<string>Feather.ttf</string>
-		<string>FontAwesome.ttf</string>
-		<string>FontAwesome5_Brands.ttf</string>
-		<string>FontAwesome5_Regular.ttf</string>
-		<string>FontAwesome5_Solid.ttf</string>
-		<string>Fontisto.ttf</string>
-		<string>Foundation.ttf</string>
-		<string>Ionicons.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
-		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
-		<string>SimpleLineIcons.ttf</string>
-		<string>Zocial.ttf</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
