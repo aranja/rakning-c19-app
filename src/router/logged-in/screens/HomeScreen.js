@@ -7,7 +7,10 @@ import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
-import { initBackgroundTracking, stopBackgroundTracking } from '../../../tracking';
+import {
+  initBackgroundTracking,
+  stopBackgroundTracking,
+} from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
