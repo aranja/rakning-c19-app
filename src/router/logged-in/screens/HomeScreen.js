@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { AppState, ScrollView } from 'react-native';
+import { AppState, AppStateStatus, ScrollView } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
@@ -105,14 +105,23 @@ const HomeScreen = ({ navigation, logout }) => {
     }
   };
 
+  /**
+   * @param {AppStateStatus} state
+   */
+  function onAppStateChange(state) {
+    if (state === 'active') {
+      checkUser();
+    }
+  }
+
   // Check user status when app is focused
   useEffect(() => {
     const unsubscribePushMessage = messaging().onMessage(checkUser);
-    AppState.addEventListener('change', checkUser);
+    AppState.addEventListener('change', onAppStateChange);
 
     return () => {
       unsubscribePushMessage();
-      AppState.removeEventListener('change', checkUser);
+      AppState.removeEventListener('change', onAppStateChange);
     };
   }, []);
 
