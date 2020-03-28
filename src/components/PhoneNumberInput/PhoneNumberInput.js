@@ -1,10 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react';
-import {
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  StatusBar,
-} from 'react-native';
+import { View, TextInput, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import PhoneInput from '../PhoneInput';
 import CountryPicker from 'react-native-country-picker-modal';
@@ -21,6 +16,8 @@ import { scale } from '../../utils';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
 
+const libPhoneNumber = require('google-libphonenumber');
+const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
 const linkTouchPadding = 12;
 
 const initialState = {
@@ -34,6 +31,16 @@ const privacyUrls = {
   pl: 'https://www.covid.is/app/privacystatement-po',
   is: 'https://www.covid.is/app/personuverndarstefna',
 };
+
+function isValid(countryCode, phoneNumber) {
+  try {
+    return phoneUtil.isValidNumber(
+      phoneUtil.parse(`+${countryCode}${phoneNumber}`),
+    );
+  } catch (error) {
+    return false;
+  }
+}
 
 const reducer = (state, { phoneNumber, cca2, callingCode, type } = {}) => {
   switch (type) {
@@ -97,7 +104,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
     const { phoneNumber } = state;
     const countryCode = phoneInputRef.current;
 
-    if (phoneNumber.length === 0 || Number.isNaN(phoneNumber)) {
+    if (!isValid(countryCode.getCountryCode(), phoneNumber)) {
       createAlert({
         message: t('phoneValidationMessage'),
         type: 'error',
