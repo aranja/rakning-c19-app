@@ -13,7 +13,7 @@
     "enableLocationAllow": "Leyfa staðsetningu og tilkynningar",
     "enableLocationButton": "Áfram",
     "changeLocationAllow": "Leyfa staðsetningu",
-    "changeLocationDescriptionIOS": "Það er mjög mikilvægt að leyfa appinu að fylgjast með staðsetningum. Vinsamlegast breyttu leyfinu fyrir notkun staðsetningu í valmöguleikann <0>„Allow while using app“</0>.",
+    "changeLocationDescriptionIOS": "Það er mjög mikilvægt að leyfa appinu að fylgjast með staðsetningum. Vinsamlegast breyttu leyfinu fyrir notkun staðsetningu í valmöguleikann <0>„Always“</0>.",
     "changeLocationSettings": "Breyta stillingum",
     "enableLocationDescriptionAndroid": "Appið mun óska eftir heimild til að skrá ferðir/staðsetningu þína. Það er mjög mikilvægt að velja í ferlinu möguleikann <0>„Allow all the time“</0>.",
     "enableLocationDescriptionIOS": "Appið mun óska eftir heimild til að skrá ferðir/staðsetningu þína. Það er mjög mikilvægt að velja í ferlinu möguleikann <0>„Allow while using app“</0>.",
