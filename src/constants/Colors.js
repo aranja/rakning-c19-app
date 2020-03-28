@@ -19,5 +19,5 @@ export default {
   reykjavikInBlossom: '#ff5783',
   backgroundGray: '#ececec',
   chenin: '#D3E262',
-  placeholder: '#acacac',
+  placeholder: '#868686',
 };
