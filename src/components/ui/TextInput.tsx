@@ -31,6 +31,7 @@ const Input = ({ onBlur, onFocus, ...props }: TextInputProps) => {
       ref={inputRef}
       focused={focused}
       empty={inputRef.current?.state ?? true}
+      placeholderTextColor={Colors.placeholder}
       onFocus={(event: NativeSyntheticEvent<TextInputFocusEventData>) => {
         setFocused(true);
         if (typeof onFocus === 'function') {

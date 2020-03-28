@@ -10,6 +10,8 @@ import Text, { Heading } from '../../../components/ui/Text';
 import { Trans } from 'react-i18next';
 import { verticalScale } from '../../../utils';
 import { Vertical } from '../../../components/ui/Spacer';
+import color from 'color';
+import Colors from '../../../constants/Colors';
 
 class LoginScreen extends React.Component {
   state = {
@@ -42,30 +44,26 @@ class LoginScreen extends React.Component {
 
     return (
       <AppShell>
-        <KeyboardAvoidingView
-          behavior="height"
-          keyboardVerticalOffset={verticalScale(pinToken ? 12 : 32)}
-          style={{
-            justifyContent: 'center',
-            flex: 1,
-          }}
-        >
-          <View>
-            <Content>
-              <Heading>
-                <Trans>
-                  {pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}
-                </Trans>
-              </Heading>
-              <Text>
-                <Trans
-                  i18nKey={
-                    pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'
-                  }
-                  values={{ phoneNumber }}
-                />
-              </Text>
-            </Content>
+        <Content style={{ marginBottom: 0 }}>
+          <Heading>
+            <Trans>{pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}</Trans>
+          </Heading>
+          <Text marginBottom={0}>
+            <Trans
+              i18nKey={
+                pinToken ? 'pinNumberDescription' : 'phoneNumberDescription'
+              }
+              values={{ phoneNumber: `+${countryCode} ${phoneNumber}` }}
+            />
+          </Text>
+          <KeyboardAvoidingView
+            behavior="position"
+            keyboardVerticalOffset={verticalScale(pinToken ? 12 : 32)}
+            contentContainerStyle={{
+              backgroundColor: color(Colors.background).alpha(0.75),
+              paddingTop: verticalScale(32),
+            }}
+          >
             {pinToken ? (
               <PinNumber
                 countryCode={countryCode}
@@ -79,8 +77,8 @@ class LoginScreen extends React.Component {
                 <PhoneNumberInput onSendPin={this.onSendPin} />
               </>
             )}
-          </View>
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </Content>
       </AppShell>
     );
   }

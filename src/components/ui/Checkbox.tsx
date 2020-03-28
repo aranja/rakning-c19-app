@@ -2,15 +2,15 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
 import { GestureResponderEvent, TouchableWithoutFeedback } from 'react-native';
 import { CheckIcon } from '../Icons/Icons';
+import { scale } from '../../utils';
 
 const Wrapper = styled.View`
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-right: 24px;
 `;
 
 const Checkmark = styled.View`
-  margin-right: 16px;
+  margin-right: ${scale(10)};
 `;
 
 const Content = styled.Text<{ checked: boolean }>`
