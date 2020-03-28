@@ -30,7 +30,7 @@
     "phoneNumberDescription": "Otrzymasz kod, który należy wprowadzić w następnym kroku",
     "phoneNumberTitle": "Wpisz Twoj numer telefonu",
     "phoneValidationMessage": "Nieprawidłowy numer telefonu",
-    "pinNumberDescription": "Wpisz kod otrzymany w wiadomości SMS",
+    "pinNumberDescription": "Wpisz kod otrzymany w wiadomości SMS na numer telefonu {{phoneNumber}}.",
     "pinNumberTitle": "Wpisz kod",
     "possibleInfectionLabel": "Potencjalne zarażenie",
     "possibleInfectionLink": "https://www.covid.is/flokkar-polsku/potencjalne-zarazenie",
