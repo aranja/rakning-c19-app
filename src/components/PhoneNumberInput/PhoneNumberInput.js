@@ -133,9 +133,6 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle={countryPickerOpen ? 'dark-content' : 'light-content'}
-      />
       <View style={styles.phoneInputContainer}>
         <PhoneInput
           ref={phoneInputRef}
@@ -155,6 +152,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           autoCapitalize="none"
           placeholderTextColor={Colors.placeholder}
           autoCorrect={false}
+          autoFocus
           style={styles.phoneInputNumber}
           onChangeText={onChangePhoneNumber}
         />

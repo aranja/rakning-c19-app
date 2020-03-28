@@ -4,10 +4,6 @@ import Colors from '../../constants/Colors';
 import { scale, verticalScale } from '../../utils/scale';
 
 export const styles = StyleSheet.create({
-  container: {
-    padding: scale(32),
-    paddingTop: 0,
-  },
   phoneInputContainer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -44,7 +40,6 @@ export const styles = StyleSheet.create({
     paddingVertical: scale(10),
   },
   btn: {
-    paddingTop: verticalScale(20),
     textTransform: 'uppercase',
   },
 });
