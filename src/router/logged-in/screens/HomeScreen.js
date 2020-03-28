@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { AppState, ScrollView } from 'react-native';
+import { AppState, AppStateStatus, ScrollView } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
@@ -7,7 +7,7 @@ import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
-import { initBackgroundTracking } from '../../../tracking';
+import { initBackgroundTracking, stopBackgroundTracking } from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
@@ -19,6 +19,7 @@ import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import LoadingScreen from '../../../components/LoadingScreen';
+import { AuthenticationError } from '../../../api/ApiClient';
 
 const links = {
   en: {
@@ -89,38 +90,52 @@ const HomeScreen = ({ navigation, logout }) => {
     checkLocationPermission();
   }, []);
 
+  const logoutUser = () => {
+    navigation.navigate({ routeName: 'LoggedOut' });
+    stopBackgroundTracking();
+    logout();
+    clearUserData();
+  };
+
   // Check if user has been requested to share data
   const checkUser = async () => {
     setLoadingUserData(true);
 
     try {
       const user = await fetchUser();
+      setLoadingUserData(false);
+
       if (user && user.dataRequested) {
         resetStack(navigation, 'RequestData');
       }
     } catch (error) {
-      // Error
-    } finally {
       setLoadingUserData(false);
+
+      if (error instanceof AuthenticationError) {
+        logoutUser();
+      }
     }
   };
+
+  /**
+   * @param {AppStateStatus} state
+   */
+  function onAppStateChange(state) {
+    if (state === 'active') {
+      checkUser();
+    }
+  }
 
   // Check user status when app is focused
   useEffect(() => {
     const unsubscribePushMessage = messaging().onMessage(checkUser);
-    AppState.addEventListener('change', checkUser);
+    AppState.addEventListener('change', onAppStateChange);
 
     return () => {
       unsubscribePushMessage();
-      AppState.removeEventListener('change', checkUser);
+      AppState.removeEventListener('change', onAppStateChange);
     };
   }, []);
-
-  const onPressLogout = () => {
-    navigation.navigate({ routeName: 'LoggedOut' });
-    logout();
-    clearUserData();
-  };
 
   useEffect(() => {
     initBackgroundTracking(t('trackingTitle'), t('trackingNotification'));
@@ -194,7 +209,7 @@ const HomeScreen = ({ navigation, logout }) => {
           <Vertical unit={1} />
 
           {__DEV__ && (
-            <CtaButton bgColor={Colors.gray} onPress={onPressLogout}>
+            <CtaButton bgColor={Colors.gray} onPress={logoutUser}>
               Dev only log out
             </CtaButton>
           )}
