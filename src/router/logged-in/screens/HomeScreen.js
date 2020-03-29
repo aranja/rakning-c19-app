@@ -21,7 +21,6 @@ import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
-import LoadingScreen from '../../../components/LoadingScreen';
 import { AuthenticationError } from '../../../api/ApiClient';
 
 const links = {
@@ -76,7 +75,6 @@ const HomeScreen = ({ navigation, logout }) => {
     t,
     i18n: { language },
   } = useTranslation();
-  const [loadingUserData, setLoadingUserData] = useState(true);
   const { fetchUser, clearUserData } = useContext(UserContext);
 
   // Check if we still have location access
@@ -97,11 +95,8 @@ const HomeScreen = ({ navigation, logout }) => {
 
   // Check if user has been requested to share data
   const checkUser = async () => {
-    setLoadingUserData(true);
-
     try {
       const user = await fetchUser();
-      setLoadingUserData(false);
 
       if (user && user.dataRequested) {
         resetStack(navigation, 'RequestData');
@@ -109,8 +104,6 @@ const HomeScreen = ({ navigation, logout }) => {
 
       return user;
     } catch (error) {
-      setLoadingUserData(false);
-
       if (error instanceof AuthenticationError) {
         logoutUser();
       }
@@ -158,10 +151,6 @@ const HomeScreen = ({ navigation, logout }) => {
       AppState.removeEventListener('change', onAppStateChange);
     };
   }, []);
-
-  if (loadingUserData) {
-    return <LoadingScreen />;
-  }
 
   return (
     <AppShell title={t('trackingTitle')} subtitle={t('trackingSubtitle')}>
