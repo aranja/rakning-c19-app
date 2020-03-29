@@ -12,6 +12,7 @@
   "dependencies": {
     "@mauron85/react-native-background-geolocation": "^0.6.3",
     "@react-native-community/async-storage": "^1.8.1",
+    "@react-native-community/push-notification-ios": "^1.1.0",
     "@react-native-firebase/app": "6.4.0-rc2",
     "@react-native-firebase/messaging": "6.4.0-rc2",
     "@types/react": "^16.9.0",

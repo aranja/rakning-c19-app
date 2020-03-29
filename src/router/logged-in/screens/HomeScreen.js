@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { AppState, AppStateStatus, ScrollView } from 'react-native';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import * as Permissions from 'expo-permissions';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
@@ -104,6 +105,9 @@ const HomeScreen = ({ navigation, logout }) => {
       setLoadingUserData(false);
 
       if (user && user.dataRequested) {
+        // Reset badge on app icon
+        PushNotificationIOS.setApplicationIconBadgeNumber(0);
+
         resetStack(navigation, 'RequestData');
       }
 
