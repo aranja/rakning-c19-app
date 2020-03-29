@@ -1,12 +1,19 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { AppState, AppStateStatus, ScrollView } from 'react-native';
+import React, { useEffect, useContext } from 'react';
+import {
+  AppState,
+  AppStateStatus,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import * as Permissions from 'expo-permissions';
+import styled from 'styled-components/native';
+import { useTranslation, withTranslation } from 'react-i18next';
+import * as WebBrowser from 'expo-web-browser';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
-import { useTranslation, withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
 import {
   initBackgroundTracking,
@@ -23,6 +30,13 @@ import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
+import { TOSLink } from '../../../components/PhoneNumberInput/styles';
+
+const privacyUrls = {
+  en: 'https://www.covid.is/app/privacystatement',
+  pl: 'https://www.covid.is/app/privacystatement-po',
+  is: 'https://www.covid.is/app/personuverndarstefna',
+};
 
 const links = {
   en: {
@@ -71,7 +85,27 @@ const smallBtnStyle = {
   width: '48.5%',
 };
 
-const HomeScreen = ({ navigation, logout }) => {
+const PPLink = styled.Text`
+  color: ${Colors.blue};
+`;
+
+const linkTouchPadding = 12;
+const linkHitSlop = {
+  top: linkTouchPadding,
+  right: linkTouchPadding,
+  bottom: linkTouchPadding,
+  left: linkTouchPadding,
+};
+
+const Link = ({ children, onPress }) => {
+  return (
+    <TouchableWithoutFeedback onPress={onPress} hitSlop={linkHitSlop}>
+      <PPLink>{children[0]}</PPLink>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const HomeScreen = ({ navigation, i18n, logout }) => {
   const {
     t,
     i18n: { language },
@@ -92,6 +126,10 @@ const HomeScreen = ({ navigation, logout }) => {
     stopBackgroundTracking();
     logout();
     clearUserData();
+  };
+
+  const openPP = () => {
+    WebBrowser.openBrowserAsync(privacyUrls[i18n.language] || privacyUrls.en);
   };
 
   // Check if user has been requested to share data
@@ -211,6 +249,8 @@ const HomeScreen = ({ navigation, logout }) => {
               </Text>
             </Text>
           </UrlButton>
+
+          <Link onPress={openPP}>{t('privacyPolicy')}</Link>
 
           <Vertical unit={1} />
 
