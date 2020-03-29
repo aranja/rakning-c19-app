@@ -21,7 +21,6 @@ import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
-import LoadingScreen from '../../../components/LoadingScreen';
 import { AuthenticationError } from '../../../api/ApiClient';
 
 const links = {
