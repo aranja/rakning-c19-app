@@ -1,12 +1,19 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { AppState, AppStateStatus, ScrollView } from 'react-native';
+import React, { useEffect, useContext } from 'react';
+import {
+  AppState,
+  AppStateStatus,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import * as Permissions from 'expo-permissions';
+import styled from 'styled-components/native';
+import { useTranslation, withTranslation } from 'react-i18next';
+import * as WebBrowser from 'expo-web-browser';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
-import { useTranslation, withTranslation } from 'react-i18next';
 import { AuthConsumer } from '../../../context/authentication';
 import {
   initBackgroundTracking,
@@ -23,6 +30,14 @@ import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
+import { TOSLink } from '../../../components/PhoneNumberInput/styles';
+import { useAlert } from '../../../context/alert';
+
+const privacyUrls = {
+  en: 'https://www.covid.is/app/privacystatement',
+  pl: 'https://www.covid.is/app/privacystatement-po',
+  is: 'https://www.covid.is/app/personuverndarstefna',
+};
 
 const links = {
   en: {
@@ -71,12 +86,33 @@ const smallBtnStyle = {
   width: '48.5%',
 };
 
-const HomeScreen = ({ navigation, logout }) => {
+const PPLink = styled.Text`
+  color: ${Colors.blue};
+`;
+
+const linkTouchPadding = 12;
+const linkHitSlop = {
+  top: linkTouchPadding,
+  right: linkTouchPadding,
+  bottom: linkTouchPadding,
+  left: linkTouchPadding,
+};
+
+const Link = ({ children, onPress }) => {
+  return (
+    <TouchableWithoutFeedback onPress={onPress} hitSlop={linkHitSlop}>
+      <PPLink>{children[0]}</PPLink>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const HomeScreen = ({ navigation, i18n, logout }) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
   const { fetchUser, clearUserData } = useContext(UserContext);
+  const { createAlert } = useAlert();
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
@@ -203,16 +239,37 @@ const HomeScreen = ({ navigation, logout }) => {
 
           <Vertical unit={1} />
 
-          <UrlButton transparent href={t('covidLink')}>
-            <Text center>
-              Meira á{' '}
-              <Text bold color={Colors.blue}>
-                covid.is
+          <ButtonGroup>
+            <UrlButton bgColor={Colors.backgroundAlt} href={t('covidLink')}>
+              <Text center>
+                {t('covidLabel')}{' '}
+                <Text bold color={Colors.blue}>
+                  covid.is
+                </Text>
               </Text>
-            </Text>
-          </UrlButton>
+            </UrlButton>
 
-          <Vertical unit={1} />
+            <UrlButton
+              bgColor={Colors.backgroundAlt}
+              href={privacyUrls[i18n.language] || privacyUrls.en}
+            >
+              <Text center>{t('privacyPolicy')}</Text>
+            </UrlButton>
+
+            <CtaButton
+              bgColor={Colors.backgroundAlt}
+              onPress={() => {
+                createAlert({
+                  type: 'info',
+                  message: t('uninstallAppToast'),
+                });
+              }}
+            >
+              <Text center>{t('stopTracking')}</Text>
+            </CtaButton>
+          </ButtonGroup>
+
+          <Vertical unit={2} />
 
           <Footer />
 

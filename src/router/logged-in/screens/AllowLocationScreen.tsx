@@ -76,10 +76,10 @@ const AllowLocationScreen = ({ navigation }) => {
   async function handlePermission({
     permissions: { location: locationPermission },
   }: Permissions.PermissionResponse) {
-    const hasScopeAlways = isIOS && locationPermission.ios?.scope === 'always';
-
     if (locationPermission.granted) {
-      if (hasScopeAlways) {
+      const hasScopeAlways = locationPermission.ios?.scope === 'always';
+
+      if (!isIOS || hasScopeAlways) {
         await initBackgroundTracking(
           t('trackingTitle'),
           t('trackingNotification'),

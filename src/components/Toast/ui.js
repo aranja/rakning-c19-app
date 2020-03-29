@@ -8,7 +8,7 @@ const statusBarOffsett =
 const backgrounds = {
   error: Colors.text,
   success: Colors.green,
-  neutral: Colors.orange,
+  neutral: Colors.blue,
 };
 
 export const Wrap = styled(Animated.View)`
