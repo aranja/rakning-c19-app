@@ -5,6 +5,7 @@ import PhoneInput from '../PhoneInput';
 import CountryPicker from 'react-native-country-picker-modal';
 import { withTranslation, Trans } from 'react-i18next';
 import * as WebBrowser from 'expo-web-browser';
+import libPhoneNumber from 'google-libphonenumber';
 
 import { useAlert } from '../../context/alert';
 import { getPin } from '../../api/Login';
@@ -16,7 +17,6 @@ import { scale } from '../../utils';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
 
-const libPhoneNumber = require('google-libphonenumber');
 const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
 const linkTouchPadding = 12;
 
@@ -33,10 +33,15 @@ const privacyUrls = {
 };
 
 function isValid(countryCode, phoneNumber) {
+  const fullPhoneNumber = `+${countryCode}${phoneNumber}`;
+
+  // For testing purposes
+  if (fullPhoneNumber === '+3541337' || fullPhoneNumber === '+3541338') {
+    return true;
+  }
+
   try {
-    return phoneUtil.isValidNumber(
-      phoneUtil.parse(`+${countryCode}${phoneNumber}`),
-    );
+    return phoneUtil.isValidNumber(phoneUtil.parse(fullPhoneNumber));
   } catch (error) {
     return false;
   }
