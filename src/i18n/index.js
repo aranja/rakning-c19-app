@@ -23,7 +23,7 @@ export const languages = [
     name: 'Íslenska',
     title: 'Rakning COVID-19',
     description:
-      'Hjálpum rakningarteymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi',
+      'Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi',
     button: 'Áfram á íslensku',
     flag: isFlag,
   },
