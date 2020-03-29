@@ -128,10 +128,6 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
     clearUserData();
   };
 
-  const openPP = () => {
-    WebBrowser.openBrowserAsync(privacyUrls[i18n.language] || privacyUrls.en);
-  };
-
   // Check if user has been requested to share data
   const checkUser = async () => {
     try {
@@ -241,18 +237,25 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
 
           <Vertical unit={1} />
 
-          <UrlButton transparent href={t('covidLink')}>
-            <Text center>
-              Meira á{' '}
-              <Text bold color={Colors.blue}>
-                covid.is
+          <ButtonGroup>
+            <UrlButton bgColor={Colors.backgroundAlt} href={t('covidLink')}>
+              <Text center>
+                Meira á{' '}
+                <Text bold color={Colors.blue}>
+                  covid.is
+                </Text>
               </Text>
-            </Text>
-          </UrlButton>
+            </UrlButton>
 
-          <Link onPress={openPP}>{t('privacyPolicy')}</Link>
+            <UrlButton
+              bgColor={Colors.backgroundAlt}
+              href={privacyUrls[i18n.language] || privacyUrls.en}
+            >
+              <Text center>{t('privacyPolicy')}</Text>
+            </UrlButton>
+          </ButtonGroup>
 
-          <Vertical unit={1} />
+          <Vertical unit={2} />
 
           <Footer />
 
