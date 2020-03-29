@@ -1287,6 +1287,13 @@
     wcwidth "^1.0.1"
     ws "^1.1.0"
 
+"@react-native-community/push-notification-ios@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/push-notification-ios/-/push-notification-ios-1.1.0.tgz#b0aa8196d60505866764937af641cc0390a60bd4"
+  integrity sha512-LBEPQAV55GduftmuwIG0pDB5GtAN93211BYQMaYLqEUSF+LtvSnsAp+F4P91q2qPp6byk/V1+wTRNzdDor7KDg==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native-firebase/app-types@6.4.0-rc2":
   version "6.4.0-rc2"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app-types/-/app-types-6.4.0-rc2.tgz#932f1a0f1274e306f70ddfa1b4c1a8d7e3f45199"
