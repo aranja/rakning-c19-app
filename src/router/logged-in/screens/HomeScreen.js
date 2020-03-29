@@ -31,6 +31,7 @@ import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
 import { TOSLink } from '../../../components/PhoneNumberInput/styles';
+import { useAlert } from '../../../context/alert';
 
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
@@ -111,6 +112,7 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
     i18n: { language },
   } = useTranslation();
   const { fetchUser, clearUserData } = useContext(UserContext);
+  const { createAlert } = useAlert();
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
@@ -240,7 +242,7 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
           <ButtonGroup>
             <UrlButton bgColor={Colors.backgroundAlt} href={t('covidLink')}>
               <Text center>
-                Meira á{' '}
+                {t('covidLabel')}{' '}
                 <Text bold color={Colors.blue}>
                   covid.is
                 </Text>
@@ -253,6 +255,18 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
             >
               <Text center>{t('privacyPolicy')}</Text>
             </UrlButton>
+
+            <CtaButton
+              bgColor={Colors.backgroundAlt}
+              onPress={() => {
+                createAlert({
+                  type: 'info',
+                  message: t('uninstallAppToast'),
+                });
+              }}
+            >
+              <Text center>{t('stopTracking')}</Text>
+            </CtaButton>
           </ButtonGroup>
 
           <Vertical unit={2} />
