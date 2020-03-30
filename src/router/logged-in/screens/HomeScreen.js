@@ -136,8 +136,10 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
       const user = await fetchUser();
 
       if (user && user.dataRequested) {
-        // Reset badge on app icon
-        PushNotificationIOS.setApplicationIconBadgeNumber(0);
+        if (Platform.OS === 'ios') {
+          // Reset badge on app icon
+          PushNotificationIOS.setApplicationIconBadgeNumber(0);
+        }
 
         resetStack(navigation, 'RequestData');
 
@@ -148,6 +150,8 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
     } catch (error) {
       if (error instanceof AuthenticationError) {
         logoutUser();
+      } else {
+        console.error(error);
       }
 
       return null;
