@@ -43,6 +43,8 @@
 	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
+  <key>NSMotionUsageDescription</key>
+  <string>Allow Rakning C-19 to access your device's accelerometer to better track your location.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
