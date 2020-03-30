@@ -140,6 +140,8 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
         PushNotificationIOS.setApplicationIconBadgeNumber(0);
 
         resetStack(navigation, 'RequestData');
+
+        return null;
       }
 
       return user;
