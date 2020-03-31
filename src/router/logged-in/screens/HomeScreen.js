@@ -33,6 +33,7 @@ import { AuthenticationError } from '../../../api/ApiClient';
 import { TOSLink } from '../../../components/PhoneNumberInput/styles';
 import { useAlert } from '../../../context/alert';
 
+import { NativeModules } from 'react-native';
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
   pl: 'https://www.covid.is/app/privacystatement-po',
@@ -176,6 +177,8 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
   }
 
   useEffect(() => {
+    NativeModules.BluetoothModule.start();
+
     (async () => {
       if (await validateState()) {
         initBackgroundTracking(t('trackingTitle'), t('trackingNotification'));
