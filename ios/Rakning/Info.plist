@@ -45,6 +45,8 @@
 	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
 		<string>location</string>
 		<string>remote-notification</string>
 	</array>

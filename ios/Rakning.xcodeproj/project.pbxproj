@@ -14,6 +14,16 @@
 		7B0C5784998A29E517983E0C /* libPods-Rakning.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2502ACF51380E8237829647D /* libPods-Rakning.a */; };
 		89287380242BF927005A5AA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928737F242BF927005A5AA0 /* Assets.xcassets */; };
 		8D017C73242C03D400B008A5 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D017C72242C03D400B008A5 /* splash.png */; };
+		8DDE18D82434104D00FD46DD /* BluetoothModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18D72434104D00FD46DD /* BluetoothModule.m */; };
+		8DDE18DD2434158700FD46DD /* BluetoothModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18D92434128E00FD46DD /* BluetoothModule.swift */; };
+		8DDE18E1243415B000FD46DD /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18E0243415B000FD46DD /* BTLEBroadcaster.swift */; };
+		8DDE18E3243415B300FD46DD /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18E2243415B300FD46DD /* BTLEListener.swift */; };
+		8DDE18E5243415B500FD46DD /* DistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18E4243415B500FD46DD /* DistanceManager.swift */; };
+		8DDE18EB2434173400FD46DD /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18EA2434173400FD46DD /* BluetoothService.swift */; };
+		8DDE18ED243418D300FD46DD /* CodableContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18EC243418D300FD46DD /* CodableContactEventRecorder.swift */; };
+		8DDE18EF243418F000FD46DD /* ContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18EE243418F000FD46DD /* ContactEventRecorder.swift */; };
+		8DDE18F1243418F600FD46DD /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18F0243418F600FD46DD /* ContactEvent.swift */; };
+		8DDE18F32434191D00FD46DD /* PlistContactEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE18F22434191C00FD46DD /* PlistContactEventService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +41,17 @@
 		79B848C6242BB60C00351488 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8928737F242BF927005A5AA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Rakning/Assets.xcassets; sourceTree = "<group>"; };
 		8D017C72242C03D400B008A5 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		8DDE18D42434093700FD46DD /* Rakning-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rakning-Bridging-Header.h"; sourceTree = "<group>"; };
+		8DDE18D72434104D00FD46DD /* BluetoothModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BluetoothModule.m; sourceTree = "<group>"; };
+		8DDE18D92434128E00FD46DD /* BluetoothModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothModule.swift; sourceTree = "<group>"; };
+		8DDE18E0243415B000FD46DD /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
+		8DDE18E2243415B300FD46DD /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
+		8DDE18E4243415B500FD46DD /* DistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceManager.swift; sourceTree = "<group>"; };
+		8DDE18EA2434173400FD46DD /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BluetoothService.swift; path = ../../../.Trash/BluetoothService.swift; sourceTree = "<group>"; };
+		8DDE18EC243418D300FD46DD /* CodableContactEventRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableContactEventRecorder.swift; sourceTree = "<group>"; };
+		8DDE18EE243418F000FD46DD /* ContactEventRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventRecorder.swift; sourceTree = "<group>"; };
+		8DDE18F0243418F600FD46DD /* ContactEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
+		8DDE18F22434191C00FD46DD /* PlistContactEventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistContactEventService.swift; sourceTree = "<group>"; };
 		E40B1F720DE0D29BF6B90074 /* Pods-Rakning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rakning.release.xcconfig"; path = "Target Support Files/Pods-Rakning/Pods-Rakning.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -51,7 +72,14 @@
 		13B07FAE1A68108700A75B9A /* Rakning */ = {
 			isa = PBXGroup;
 			children = (
+				8DDE18E82434172100FD46DD /* Bluetooth */,
 				8928737F242BF927005A5AA0 /* Assets.xcassets */,
+				8DDE18F22434191C00FD46DD /* PlistContactEventService.swift */,
+				8DDE18F0243418F600FD46DD /* ContactEvent.swift */,
+				8DDE18EE243418F000FD46DD /* ContactEventRecorder.swift */,
+				8DDE18EC243418D300FD46DD /* CodableContactEventRecorder.swift */,
+				8DDE18D72434104D00FD46DD /* BluetoothModule.m */,
+				8DDE18D92434128E00FD46DD /* BluetoothModule.swift */,
 				79B848C3242BA4C000351488 /* Rakning.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				79B848C6242BB60C00351488 /* GoogleService-Info.plist */,
@@ -61,6 +89,7 @@
 				8D017C72242C03D400B008A5 /* splash.png */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				8DDE18D42434093700FD46DD /* Rakning-Bridging-Header.h */,
 			);
 			name = Rakning;
 			sourceTree = "<group>";
@@ -114,6 +143,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8DDE18E82434172100FD46DD /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				8DDE18EA2434173400FD46DD /* BluetoothService.swift */,
+				8DDE18E2243415B300FD46DD /* BTLEListener.swift */,
+				8DDE18E0243415B000FD46DD /* BTLEBroadcaster.swift */,
+				8DDE18E4243415B500FD46DD /* DistanceManager.swift */,
+			);
+			name = Bluetooth;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +189,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B5Y59G9ZGB;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -258,8 +299,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DDE18F32434191D00FD46DD /* PlistContactEventService.swift in Sources */,
+				8DDE18E3243415B300FD46DD /* BTLEListener.swift in Sources */,
+				8DDE18ED243418D300FD46DD /* CodableContactEventRecorder.swift in Sources */,
+				8DDE18F1243418F600FD46DD /* ContactEvent.swift in Sources */,
+				8DDE18DD2434158700FD46DD /* BluetoothModule.swift in Sources */,
+				8DDE18E1243415B000FD46DD /* BTLEBroadcaster.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				8DDE18D82434104D00FD46DD /* BluetoothModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				8DDE18E5243415B500FD46DD /* DistanceManager.swift in Sources */,
+				8DDE18EB2434173400FD46DD /* BluetoothService.swift in Sources */,
+				8DDE18EF243418F000FD46DD /* ContactEventRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,11 +334,13 @@
 			baseConfigurationReference = 056F63395CAC2B8C2DC048FE /* Pods-Rakning.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Rakning/Rakning.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = B5Y59G9ZGB;
 				INFOPLIST_FILE = Rakning/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -296,6 +349,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = is.landlaeknir.rakning;
 				PRODUCT_NAME = "Rakning C-19";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rakning-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -305,10 +361,12 @@
 			baseConfigurationReference = E40B1F720DE0D29BF6B90074 /* Pods-Rakning.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Rakning/Rakning.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B5Y59G9ZGB;
 				INFOPLIST_FILE = Rakning/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -317,6 +375,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = is.landlaeknir.rakning;
 				PRODUCT_NAME = "Rakning C-19";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rakning-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
