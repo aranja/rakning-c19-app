@@ -46,7 +46,7 @@ async function restartBackgroundTracking(title, text) {
 
     // Start a new background task
     BackgroundGeolocation.configure({
-      desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
+      desiredAccuracy: BackgroundGeolocation.MEDIUM_ACCURACY,
       stationaryRadius: 50,
       distanceFilter: 50,
       notificationTitle: title,
