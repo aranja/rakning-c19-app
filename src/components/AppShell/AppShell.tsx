@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { ScrollView, useWindowDimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { scale, verticalScale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
@@ -8,8 +9,6 @@ import {
   SafeAreaView,
   Platform,
   StatusBar,
-  ScrollView,
-  View,
   StyleProp,
   ViewStyle,
 } from 'react-native';
@@ -18,7 +17,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Wrap = styled.View`
   background: ${Colors.background};
-  flex: 1;
+  flex-grow: 1;
 `;
 
 const Header = styled.View<{ alt: boolean }>`
@@ -46,23 +45,27 @@ const Circles = styled.View`
 
 const Main = styled.View`
   flex: 1;
+  padding-bottom: ${({ bottomPadding }) =>
+    bottomPadding ? verticalScale(200) : 0};
 `;
 
 export const Content = styled.View`
   padding: ${verticalScale(28)}px ${scale(32)}px;
 `;
 
-export const SlimContent = ({
-  children,
-  ...props
-}: {
-  children: ReactNode;
-}) => (
+export const SlimContent = ({ children }: { children: ReactNode }) => (
   <LinearGradient
     colors={[color(Colors.background).alpha(0), Colors.background]}
     start={[0, 0]}
     end={[0, 0.4]}
-    {...props}
+    style={{
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      paddingBottom: verticalScale(32),
+      paddingTop: verticalScale(70),
+      paddingHorizontal: scale(32),
+    }}
   >
     {children}
   </LinearGradient>
@@ -73,7 +76,7 @@ interface Props {
   subtitle?: string;
   children: ReactNode;
   alt?: boolean;
-  scrollable?: boolean;
+  footer?: ReactNode;
   scrollContainerStyles?: StyleProp<ViewStyle>;
 }
 
@@ -82,47 +85,50 @@ function AppShell({
   subtitle,
   children,
   alt,
-  scrollable,
+  footer,
   scrollContainerStyles,
 }: Props) {
   const showHeader = title || subtitle;
+  const { fontScale } = useWindowDimensions();
+  const isFixed = isNaN(fontScale) || fontScale < 2;
   return (
-    <Wrap
-      as={scrollable ? ScrollView : View}
-      contentContainerStyle={scrollContainerStyles}
-    >
-      <StatusBar barStyle="light-content" />
-      <Header
-        alt={alt}
-        style={
-          (showHeader && {
-            paddingTop: verticalScale(64),
-            paddingHorizontal: scale(32),
-            paddingBottom: verticalScale(32),
-          }) || { zIndex: 1 }
-        }
-      >
-        {showHeader && (
-          <>
-            <Circles>
-              <Circle x={90} y={-10} />
-              <Circle
-                color={alt ? Colors.orange : Colors.blue}
-                x={15}
-                y={-30}
-              />
-              <Circle x={-25} y={35} />
-            </Circles>
-            <SafeAreaView>
-              <Heading invert>{title}</Heading>
-              <Text invert marginBottom={0}>
-                {subtitle}
-              </Text>
-            </SafeAreaView>
-          </>
-        )}
-      </Header>
-      <Main>{children}</Main>
+    <Wrap>
+      <ScrollView contentContainerStyle={scrollContainerStyles}>
+        <StatusBar barStyle="light-content" />
+        <Header
+          alt={alt}
+          style={
+            (showHeader && {
+              paddingTop: verticalScale(64),
+              paddingHorizontal: scale(32),
+              paddingBottom: verticalScale(32),
+            }) || { zIndex: 1 }
+          }
+        >
+          {showHeader && (
+            <>
+              <Circles>
+                <Circle x={90} y={-10} />
+                <Circle
+                  color={alt ? Colors.orange : Colors.blue}
+                  x={15}
+                  y={-30}
+                />
+                <Circle x={-25} y={35} />
+              </Circles>
+              <SafeAreaView>
+                <Heading invert>{title}</Heading>
+                <Text invert marginBottom={0}>
+                  {subtitle}
+                </Text>
+              </SafeAreaView>
+            </>
+          )}
+        </Header>
+        <Main bottomPadding={footer && isFixed}>{children}</Main>
+        {footer && !isFixed ? <Content>{footer}</Content> : null}
+      </ScrollView>
+      {footer && isFixed ? <SlimContent>{footer}</SlimContent> : null}
     </Wrap>
   );
 }
