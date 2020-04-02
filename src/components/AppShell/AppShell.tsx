@@ -1,5 +1,9 @@
-import React, { ReactNode } from 'react';
-import { ScrollView, useWindowDimensions } from 'react-native';
+import React, { ReactNode, useEffect, useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  useWindowDimensions,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { scale, verticalScale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
@@ -93,57 +97,59 @@ function AppShell({
   footer,
   scrollContainerStyles,
 }: Props) {
-  const showHeader = title || subtitle;
   const { fontScale } = useWindowDimensions();
+  const showHeader = title || subtitle;
   const isFixed = isNaN(fontScale) || fontScale < 2;
   const headerColor = Colors[alt ? 'blue' : 'orange'];
 
   return (
     <Wrap>
       <StatusBar barStyle="light-content" />
-
-      <ScrollView
-        contentContainerStyle={scrollContainerStyles}
-        contentInset={{ top: -overScrollHeight }}
-        contentOffset={{ x: 0, y: overScrollHeight }}
-      >
-        {Platform.OS === 'ios' && (
-          <HeaderOverScroll style={{ backgroundColor: headerColor }} />
-        )}
-
-        <Header
-          alt={alt}
-          style={
-            (showHeader && {
-              paddingTop: verticalScale(64),
-              paddingHorizontal: scale(32),
-              paddingBottom: verticalScale(32),
-            }) || { zIndex: 1 }
-          }
+      <KeyboardAvoidingView behavior="height">
+        <ScrollView
+          contentContainerStyle={scrollContainerStyles}
+          contentInset={{ top: -overScrollHeight }}
+          contentOffset={{ x: 0, y: overScrollHeight }}
         >
-          {showHeader && (
-            <>
-              <Circles>
-                <Circle x={90} y={-10} />
-                <Circle
-                  color={alt ? Colors.orange : Colors.blue}
-                  x={15}
-                  y={-30}
-                />
-                <Circle x={-25} y={35} />
-              </Circles>
-              <SafeAreaView>
-                <Heading invert>{title}</Heading>
-                <Text invert marginBottom={0}>
-                  {subtitle}
-                </Text>
-              </SafeAreaView>
-            </>
+          {Platform.OS === 'ios' && (
+            <HeaderOverScroll style={{ backgroundColor: headerColor }} />
           )}
-        </Header>
-        <Main bottomPadding={footer && isFixed}>{children}</Main>
-        {footer && !isFixed ? <Content>{footer}</Content> : null}
-      </ScrollView>
+
+          <Header
+            alt={alt}
+            style={
+              (showHeader && {
+                paddingTop: verticalScale(64),
+                paddingHorizontal: scale(32),
+                paddingBottom: verticalScale(32),
+              }) || { zIndex: 1 }
+            }
+          >
+            {showHeader && (
+              <>
+                <Circles>
+                  <Circle x={90} y={-10} />
+                  <Circle
+                    color={alt ? Colors.orange : Colors.blue}
+                    x={15}
+                    y={-30}
+                  />
+                  <Circle x={-25} y={35} />
+                </Circles>
+                <SafeAreaView>
+                  <Heading invert>{title}</Heading>
+                  <Text invert marginBottom={0}>
+                    {subtitle}
+                  </Text>
+                </SafeAreaView>
+              </>
+            )}
+          </Header>
+          <Main bottomPadding={footer && isFixed}>{children}</Main>
+          {footer && !isFixed ? <Content>{footer}</Content> : null}
+        </ScrollView>
+      </KeyboardAvoidingView>
+
       {footer && isFixed ? <SlimContent>{footer}</SlimContent> : null}
     </Wrap>
   );
