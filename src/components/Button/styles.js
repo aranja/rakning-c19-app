@@ -48,7 +48,7 @@ ${({ small }) =>
 `;
 
 export const ButtonLabel = styled.Text`
-  color: ${Colors.white};
+  color: ${({ color = Colors.white }) => color};
   font-size: ${scale(16)};
   font-family: 'OpenSansExtraBold';
   text-align: center;

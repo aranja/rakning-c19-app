@@ -1,9 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  useWindowDimensions,
-} from 'react-native';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
 import { scale, verticalScale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
@@ -15,6 +10,9 @@ import {
   StatusBar,
   StyleProp,
   ViewStyle,
+  KeyboardAvoidingView,
+  ScrollView,
+  useWindowDimensions,
 } from 'react-native';
 import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -104,7 +102,6 @@ function AppShell({
 
   return (
     <Wrap>
-      <StatusBar barStyle="light-content" />
       <KeyboardAvoidingView behavior="height">
         <ScrollView
           keyboardShouldPersistTaps="always"
@@ -138,8 +135,14 @@ function AppShell({
                   <Circle x={-25} y={35} />
                 </Circles>
                 <SafeAreaView>
-                  <Heading invert>{title}</Heading>
-                  <Text invert marginBottom={0}>
+                  <Heading color={alt ? Colors.white : Colors.textDark}>
+                    {title}
+                  </Heading>
+                  <Text
+                    color={alt ? Colors.white : Colors.textDark}
+                    marginBottom={0}
+                    bold
+                  >
                     {subtitle}
                   </Text>
                 </SafeAreaView>
