@@ -107,6 +107,7 @@ function AppShell({
       <StatusBar barStyle="light-content" />
       <KeyboardAvoidingView behavior="height">
         <ScrollView
+          keyboardShouldPersistTaps="always"
           contentContainerStyle={scrollContainerStyles}
           contentInset={{ top: -overScrollHeight }}
           contentOffset={{ x: 0, y: overScrollHeight }}
