@@ -27,6 +27,11 @@ const Header = styled.View<{ alt: boolean }>`
     : verticalScale(71)};
 `;
 
+const overScrollHeight = 200;
+const HeaderOverScroll = styled.View`
+  height: ${overScrollHeight};
+`;
+
 const Circle = styled.View<{ color?: string; x: number; y: number }>`
   background: ${({ color }) => color ?? 'rgba(255, 255, 255, 0.25)'};
   border-radius: ${scale(70)};
@@ -91,10 +96,21 @@ function AppShell({
   const showHeader = title || subtitle;
   const { fontScale } = useWindowDimensions();
   const isFixed = isNaN(fontScale) || fontScale < 2;
+  const headerColor = Colors[alt ? 'blue' : 'orange'];
+
   return (
     <Wrap>
-      <ScrollView contentContainerStyle={scrollContainerStyles}>
-        <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" />
+
+      <ScrollView
+        contentContainerStyle={scrollContainerStyles}
+        contentInset={{ top: -overScrollHeight }}
+        contentOffset={{ x: 0, y: overScrollHeight }}
+      >
+        {Platform.OS === 'ios' && (
+          <HeaderOverScroll style={{ backgroundColor: headerColor }} />
+        )}
+
         <Header
           alt={alt}
           style={
