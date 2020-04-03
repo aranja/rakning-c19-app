@@ -9,7 +9,6 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import * as Permissions from 'expo-permissions';
 import styled from 'styled-components/native';
 import { useTranslation, withTranslation } from 'react-i18next';
-import * as WebBrowser from 'expo-web-browser';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
@@ -84,26 +83,6 @@ const links = {
 
 const smallBtnStyle = {
   width: '48.5%',
-};
-
-const PPLink = styled.Text`
-  color: ${Colors.blue};
-`;
-
-const linkTouchPadding = 12;
-const linkHitSlop = {
-  top: linkTouchPadding,
-  right: linkTouchPadding,
-  bottom: linkTouchPadding,
-  left: linkTouchPadding,
-};
-
-const Link = ({ children, onPress }) => {
-  return (
-    <TouchableWithoutFeedback onPress={onPress} hitSlop={linkHitSlop}>
-      <PPLink>{children[0]}</PPLink>
-    </TouchableWithoutFeedback>
-  );
 };
 
 const HomeScreen = ({ navigation, i18n, logout }) => {
@@ -236,6 +215,7 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
                 href={t(`${link}Link`)}
                 bgColor={Colors.orange}
                 style={smallBtnStyle}
+                color={Colors.textDark}
                 small
               >
                 {t(`${link}Label`)}

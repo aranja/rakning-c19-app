@@ -87,6 +87,7 @@ const PinNumber = ({
 
   return (
     <View style={styles.container}>
+      <Vertical unit={2} />
       <PinCode
         autoFocus
         value={pin}

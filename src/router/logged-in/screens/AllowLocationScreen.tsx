@@ -37,32 +37,22 @@ const ContentView = ({
   ctaAction: () => any;
   children: ReactNode;
 }) => (
-  <AppShell>
-    <ScrollView>
-      <Content style={{ paddingBottom: verticalScale(200) }}>
-        {children}
-      </Content>
-    </ScrollView>
-    <SlimContent
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
-        paddingBottom: verticalScale(32),
-        paddingTop: verticalScale(70),
-        paddingHorizontal: scale(32),
-      }}
-    >
-      <Footer />
-      <Vertical unit={0.5} />
-      <CtaButton
-        onPress={ctaAction}
-        image={covidIcon}
-        imageDimensions={{ height: scale(28), width: scale(24) }}
-      >
-        {ctaTitle}
-      </CtaButton>
-    </SlimContent>
+  <AppShell
+    footer={
+      <>
+        <Footer />
+        <Vertical unit={0.5} />
+        <CtaButton
+          onPress={ctaAction}
+          image={covidIcon}
+          imageDimensions={{ height: scale(28), width: scale(24) }}
+        >
+          {ctaTitle}
+        </CtaButton>
+      </>
+    }
+  >
+    <Content>{children}</Content>
   </AppShell>
 );
 
@@ -72,6 +62,8 @@ const AllowLocationScreen = ({ navigation }) => {
   const [permissionStatus, setPermission] = useState<
     Permissions.PermissionStatus
   >(Status.UNDETERMINED);
+  const [didAsk, setDidAsk] = useState(false);
+  const settingsIssue = isIOS && permissionStatus === Status.DENIED && didAsk;
 
   async function handlePermission({
     permissions: { location: locationPermission },
@@ -80,12 +72,8 @@ const AllowLocationScreen = ({ navigation }) => {
       const hasScopeAlways = locationPermission.ios?.scope === 'always';
 
       if (!isIOS || hasScopeAlways) {
-        await initBackgroundTracking(
-          t('trackingTitle'),
-          t('trackingNotification'),
-        );
-
-        return resetStack(navigation, 'Home');
+        resetStack(navigation, 'Home');
+        return true;
       }
 
       setPermission(Status.DENIED);
@@ -94,14 +82,21 @@ const AllowLocationScreen = ({ navigation }) => {
     }
 
     setLoading(false);
+    return false;
   }
 
   function getPermission() {
-    if (isIOS && permissionStatus === Status.DENIED) {
+    if (settingsIssue) {
       return Linking.openSettings();
     }
 
-    Permissions.askAsync(Permissions.LOCATION).then(handlePermission);
+    Permissions.askAsync(Permissions.LOCATION)
+      .then(handlePermission)
+      .then(hasPermission => {
+        if (!hasPermission) {
+          setDidAsk(true);
+        }
+      });
   }
 
   function onAppStateChange(state: AppStateStatus) {
@@ -123,7 +118,7 @@ const AllowLocationScreen = ({ navigation }) => {
     return <LoadingScreen />;
   }
 
-  if (isIOS && permissionStatus === Status.DENIED) {
+  if (settingsIssue) {
     return (
       <ContentView
         ctaAction={getPermission}

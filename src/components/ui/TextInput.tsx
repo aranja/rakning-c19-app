@@ -16,7 +16,7 @@ const CustomTextInput = styled.TextInput`
   border: 1px solid ${Colors.backgroundAlt};
   font-size: ${scale(22)};
   font-weight: bold;
-  height: ${scale(50)};
+  min-height: ${scale(50)};
   width: 100%;
   padding-horizontal: ${scale(32)};
   padding-vertical: ${verticalScale(10)};

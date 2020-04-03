@@ -1,6 +1,6 @@
 import React, { ReactText, ReactNode } from 'react';
 import styled, { css } from 'styled-components/native';
-import { scale, verticalScale } from '../../utils/index';
+import { scale } from '../../utils/index';
 import Colors from '../../constants/Colors';
 import { StyleProp, TextStyle } from 'react-native';
 

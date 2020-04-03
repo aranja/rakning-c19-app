@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 import { CtaButton } from '../../../components/Button/Button';
 import { getPoints } from '../../../tracking';
 import AppShell, { Content } from '../../../components/AppShell';
@@ -12,7 +12,6 @@ import { Vertical } from '../../../components/ui/Spacer';
 import Colors from '../../../constants/Colors';
 import covidIcon from '../../../assets/images/covid-icon.png';
 import { scale } from '../../../utils';
-import KeyboardAvoid from '../../../components/KeyboardAvoid';
 import { resetStack } from '../../../utils/navigation';
 import { useAlert } from '../../../context/alert';
 import { ignoreDataRequest } from '../../../api/User/user';
@@ -86,42 +85,40 @@ const AllowLocationScreen = ({ navigation }) => {
 
   return (
     <AppShell
-      scrollable
       alt
       title={t('requestDataTitle')}
       subtitle={t('requestDataSubTitle')}
-      scrollContainerStyles={{ flexGrow: 1 }}
     >
+      <StatusBar translucent barStyle="light-content" />
       <Content style={{ flex: 1 }}>
-        <KeyboardAvoid>
-          {requiresKennitala ? (
-            <>
-              <Text>{t('requestDataKennitalaInfo')}</Text>
-              <Input
-                value={kennitala}
-                onChangeText={setKennitala}
-                keyboardType="number-pad"
-                placeholder={t('requestDataKennitala')}
-              />
-              <Vertical unit={0.5} />
-            </>
-          ) : null}
+        {requiresKennitala ? (
+          <>
+            <Text>{t('requestDataKennitalaInfo')}</Text>
+            <Input
+              value={kennitala}
+              onChangeText={setKennitala}
+              keyboardType="number-pad"
+              returnKeyType="done"
+              placeholder={t('requestDataKennitala')}
+            />
+            <Vertical unit={0.5} />
+          </>
+        ) : null}
 
-          <CtaButton
-            justify
-            bgColor={Colors.green}
-            loading={loading}
-            onPress={shareData}
-            image={covidIcon}
-            imageDimensions={{ height: scale(28), width: scale(24) }}
-          >
-            {t('requestDataButton')}
-          </CtaButton>
+        <CtaButton
+          justify
+          bgColor={Colors.green}
+          loading={loading}
+          onPress={shareData}
+          image={covidIcon}
+          imageDimensions={{ height: scale(28), width: scale(24) }}
+        >
+          {t('requestDataButton')}
+        </CtaButton>
 
-          <Vertical unit={1.5} />
+        <Vertical unit={1.5} />
 
-          <Footer />
-        </KeyboardAvoid>
+        <Footer />
 
         <Vertical fill />
 

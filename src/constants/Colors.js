@@ -12,6 +12,7 @@ export default {
   green: '#619B4C',
   orange: '#ff7a4c',
   text: '#293342',
+  textDark: '#222428',
 
   breidholtAtNight: '#263343',
   greenThunder: '#ff7a4c',
