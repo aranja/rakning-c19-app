@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, useWindowDimensions } from 'react-native';
+import { Animated } from 'react-native';
 import * as ui from './ui';
 import { Close } from '../Icons';
 import Colors from '../../constants/Colors';
+import { useWindowDimensions } from '../../utils/hooks';
 
 const Toast = ({ type, message, isVisible, onClose }) => {
   const dimensions = useWindowDimensions();

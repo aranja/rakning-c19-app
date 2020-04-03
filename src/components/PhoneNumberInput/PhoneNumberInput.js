@@ -1,10 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react';
-import {
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  useWindowDimensions,
-} from 'react-native';
+import { View, TextInput, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import PhoneInput from '../PhoneInput';
 import CountryPicker from 'react-native-country-picker-modal';
@@ -18,7 +13,8 @@ import Colors from '../../constants/Colors';
 import { CtaButton } from '../Button';
 import { styles, TOSLink } from './styles';
 import covidIcon from '../../assets/images/covid-icon.png';
-import { scale, verticalScale } from '../../utils';
+import { scale } from '../../utils';
+import { useWindowDimensions } from '../../utils/hooks';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
 

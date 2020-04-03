@@ -12,10 +12,10 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   ScrollView,
-  useWindowDimensions,
 } from 'react-native';
 import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useWindowDimensions } from '../../utils/hooks';
 
 const Wrap = styled.View`
   background: ${Colors.background};
