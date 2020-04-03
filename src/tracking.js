@@ -57,7 +57,7 @@ async function restartBackgroundTracking(title, text) {
       startForeground: true,
       interval: 1000 * 60,
       stopOnStillActivity: false,
-      saveBatteryOnBackground: true,
+      saveBatteryOnBackground: false,
     });
     BackgroundGeolocation.start();
 
