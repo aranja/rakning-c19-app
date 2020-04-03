@@ -1,43 +1,31 @@
-# Project COVID-19 Tracker
+# Rakning C-19
 
-This is a React Native app for COVID-19 tracking.
+This is a React Native app for COVID-19 tracing in Iceland.
 
+### Setup
 
-## Local setup
-
-Test phone numbers:
-
-- 1337
-- 1338
-
-Test pin code: 1234
-
-### Development
-
+Install dependencies:
 ```
-# Install dependencies.
-yarn
-
-# Start RN bundler.
-yarn start
-
-# Build and start iOS and Android application in emulators.
-yarn react-native run-ios
-yarn react-native run-android
+yarn install
 ```
 
-### Test on iOS device
-
-You need XCode and an Apple developer account to run this on device. The project is here:
+### Run instructions for iOS:
 
 ```
-open ios/Rakning.xcworkspace
+yarn ios
 ```
 
-### Test on Android device
+or:
+* Open MyTestApp/ios/MyTestApp.xcworkspace in Xcode or run "xed -b ios"
+* Hit the Run button
 
-You need Android Studio to run this on device. The project is here:
+You need XCode and an Apple developer account to run this on device.
+
+### Run instructions for Android:
+
+Have an Android emulator running (quickest way to get started), or a device connected.
+Then run:
 
 ```
-open -a Android\ Studio android
+yarn android
 ```

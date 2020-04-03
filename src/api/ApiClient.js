@@ -49,7 +49,7 @@ const safeFetch = async (url, token, options) => {
 };
 
 /**
- * Call the Hopp API and handle errors.
+ * Call the Covid API and handle errors.
  */
 class ApiClient {
   token = undefined;
