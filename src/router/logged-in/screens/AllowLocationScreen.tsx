@@ -37,32 +37,22 @@ const ContentView = ({
   ctaAction: () => any;
   children: ReactNode;
 }) => (
-  <AppShell>
-    <ScrollView>
-      <Content style={{ paddingBottom: verticalScale(200) }}>
-        {children}
-      </Content>
-    </ScrollView>
-    <SlimContent
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
-        paddingBottom: verticalScale(32),
-        paddingTop: verticalScale(70),
-        paddingHorizontal: scale(32),
-      }}
-    >
-      <Footer />
-      <Vertical unit={0.5} />
-      <CtaButton
-        onPress={ctaAction}
-        image={covidIcon}
-        imageDimensions={{ height: scale(28), width: scale(24) }}
-      >
-        {ctaTitle}
-      </CtaButton>
-    </SlimContent>
+  <AppShell
+    footer={
+      <>
+        <Footer />
+        <Vertical unit={0.5} />
+        <CtaButton
+          onPress={ctaAction}
+          image={covidIcon}
+          imageDimensions={{ height: scale(28), width: scale(24) }}
+        >
+          {ctaTitle}
+        </CtaButton>
+      </>
+    }
+  >
+    <Content>{children}</Content>
   </AppShell>
 );
 

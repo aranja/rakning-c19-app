@@ -14,6 +14,7 @@ import { CtaButton } from '../Button';
 import { styles, TOSLink } from './styles';
 import covidIcon from '../../assets/images/covid-icon.png';
 import { scale } from '../../utils';
+import { useWindowDimensions } from '../../utils/hooks';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
 
@@ -76,6 +77,9 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   const phoneInputRef = useRef();
   const [tosAccepted, setTosAccepted] = useState(false);
   const [countryPickerOpen, setCountryPickerOpen] = useState(false);
+  const dimensions = useWindowDimensions();
+  const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
+  const inputHeight = scale(50 * fontScale);
 
   const onPressFlag = () => {
     setCountryPickerOpen(true);
@@ -145,13 +149,24 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.phoneInputContainer}>
+      <Vertical unit={1} />
+      <View
+        style={{
+          ...styles.phoneInputContainer,
+          ...(fontScale <= 1 && {
+            flexDirection: 'row',
+          }),
+        }}
+      >
         <PhoneInput
           ref={phoneInputRef}
           onPressFlag={onPressFlag}
           initialCountry="is"
-          style={styles.phoneInputCountry}
-          textStyle={styles.callingCode}
+          style={{
+            ...styles.phoneViewStyle,
+            height: inputHeight,
+          }}
+          textStyle={{ ...styles.phoneTextStyle, height: inputHeight }}
           flagStyle={styles.flag}
           offset={6}
           onChangePhoneNumber={onChangeCallingCode}
@@ -160,12 +175,14 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           placeholder={t('phoneNr').toUpperCase()}
           keyboardType="phone-pad"
           returnKeyType="done"
-          maxLength={15}
           autoCapitalize="none"
           placeholderTextColor={Colors.placeholder}
           autoCorrect={false}
-          autoFocus
-          style={styles.phoneInputNumber}
+          style={{
+            ...styles.phoneViewStyle,
+            ...styles.phoneTextStyle,
+            height: inputHeight,
+          }}
           onChangeText={onChangePhoneNumber}
         />
       </View>
