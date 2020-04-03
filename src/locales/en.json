@@ -65,7 +65,7 @@
     "touristsLink": "https://www.covid.is/sub-categories/tourists",
     "trackingSubtitle": "Well done! You are helping us to locate people who may be infected with COVID-19.",
     "trackingTitle": "Tracing underway",
-    "trackingNotification": "Well done! You are now part of the team.",
+    "trackingNotification": "This notification is needed to continue tracing in the background.",
     "travelLabel": "Travel",
     "travelLink": "https://www.covid.is/sub-categories/travel",
     "uninstallAppToast": "To stop tracking, simply uninstall the app from your device.",
