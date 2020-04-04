@@ -4,6 +4,8 @@
 
 package `is`.landlaeknir.rakning.ble
 
+import `is`.landlaeknir.rakning.db.AppDatabase
+import `is`.landlaeknir.rakning.db.ContactEventDao
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -15,13 +17,16 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.room.Room
 import io.invertase.firebase.app.ReactNativeFirebaseApp.getApplicationContext
 
+const val EXTRA_DEVICE_ID = "EXTRA_DEVICE_ID"
 
 class BluetoothService : Service() {
     companion object {
-        fun startService(context: Context) {
+        fun startService(context: Context, deviceId: String) {
             val startIntent = Intent(getApplicationContext(), BluetoothService::class.java)
+            startIntent.putExtra(EXTRA_DEVICE_ID, deviceId)
             ContextCompat.startForegroundService(context, startIntent)
         }
 
@@ -37,6 +42,7 @@ class BluetoothService : Service() {
     private lateinit var advertise: Advertise
     private lateinit var scan: BTLEListener
     private lateinit var btleBroadcaster: BTLEBroadcaster
+    private lateinit var db: AppDatabase
 
     override fun onCreate() {
         super.onCreate()
@@ -52,13 +58,19 @@ class BluetoothService : Service() {
             return START_NOT_STICKY
         }
 
+        val deviceId = intent?.getSerializableExtra(EXTRA_DEVICE_ID) as? String ?: return START_NOT_STICKY
+        db = Room.databaseBuilder(
+                this,
+                AppDatabase::class.java, "contact-events"
+        ).build()
+
         btleBroadcaster = BTLEBroadcaster(this, bluetoothManager).also {
-            it.start()
+            it.start(deviceId)
         }
         advertise = Advertise(bluetoothManager.adapter.bluetoothLeAdvertiser).also {
             it.start()
         }
-        scan = BTLEListener(this, bluetoothManager.adapter.bluetoothLeScanner).also {
+        scan = BTLEListener(this, bluetoothManager.adapter.bluetoothLeScanner, db.contactEventDao()).also {
             it.start()
         }
 
@@ -77,6 +89,7 @@ class BluetoothService : Service() {
         btleBroadcaster.stop()
         scan.stop()
         advertise.stop()
+        db.close()
     }
 
     private fun isPermissionGranted() = true

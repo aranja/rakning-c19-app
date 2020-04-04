@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
+import { Alert, NativeModules } from 'react-native';
 import { CtaButton } from '../../../components/Button/Button';
 import { getPoints } from '../../../tracking';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text from '../../../components/ui/Text';
-import { logPoints } from '../../../api/Point';
+import { sendData } from '../../../api/Point';
 import Input from '../../../components/ui/TextInput';
 import { Vertical } from '../../../components/ui/Spacer';
 import Colors from '../../../constants/Colors';
@@ -28,10 +28,16 @@ const AllowLocationScreen = ({ navigation }) => {
 
   async function shareData() {
     setLoading(true);
+    const { BluetoothModule } = NativeModules;
 
     try {
       const points = await getPoints();
-      await logPoints(points, kennitala);
+      let contactEvents;
+
+      if (BluetoothModule.getContactEvents) {
+        contactEvents = await BluetoothModule.getContactEvents();
+      }
+      await sendData({ points, contactEvents }, kennitala);
 
       createAlert({
         type: 'success',

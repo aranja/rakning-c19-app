@@ -1,8 +1,8 @@
 import ApiClient from '../ApiClient';
 
-export const logPoints = (points, kennitala = '') => {
+export const sendData = (data, kennitala = '') => {
   return ApiClient.post(`/points`, {
-    points,
+    ...data,
     kennitala,
   });
 };

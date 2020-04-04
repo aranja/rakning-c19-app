@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   AppState,
   AppStateStatus,
@@ -9,7 +9,6 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import * as Permissions from 'expo-permissions';
 import styled from 'styled-components/native';
 import { useTranslation, withTranslation } from 'react-i18next';
-import * as WebBrowser from 'expo-web-browser';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
@@ -30,7 +29,6 @@ import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
-import { TOSLink } from '../../../components/PhoneNumberInput/styles';
 import { useAlert } from '../../../context/alert';
 
 import { NativeModules } from 'react-native';
@@ -176,8 +174,13 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
     }
   }
 
+  // TODO: Use UUID from the API
+  function randomId() {
+    return Math.random().toString(36).substring(2, 15);
+  }
+
   useEffect(() => {
-    NativeModules.BluetoothModule.start();
+    NativeModules.BluetoothModule.start(randomId());
 
     (async () => {
       if (await validateState()) {
@@ -197,12 +200,27 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
     };
   }, []);
 
+  // TODO: Remove, just for testing BLE
+  const [bluetoothData, setBluetoothData] = useState([]);
+  const getBluetoothData = async () => {
+    const data = await NativeModules.BluetoothModule.getContactEvents();
+    setBluetoothData(data);
+  };
+
   return (
     <AppShell title={t('trackingTitle')} subtitle={t('trackingSubtitle')}>
       <ScrollView>
         <Content>
           <Heading level={3}>{t('aboutCovidTitle')}</Heading>
           <Text>{t('aboutCovidDescription')}</Text>
+          <CtaButton onPress={getBluetoothData}>Get bluetooth data</CtaButton>
+          {bluetoothData &&
+            bluetoothData.length > 0 &&
+            bluetoothData.map(item => (
+              <Text>{`${item.deviceId} - ${
+                (item.endDate - item.startDate) / 1000
+              } sek`}</Text>
+            ))}
           <ButtonGroup>
             <UrlButton
               align="left"

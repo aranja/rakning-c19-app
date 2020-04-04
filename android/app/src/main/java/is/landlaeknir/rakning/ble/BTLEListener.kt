@@ -5,6 +5,8 @@
 package `is`.landlaeknir.rakning.ble
 
 
+import `is`.landlaeknir.rakning.db.ContactEvent
+import `is`.landlaeknir.rakning.db.ContactEventDao
 import android.bluetooth.BluetoothAdapter.STATE_CONNECTED
 import android.bluetooth.BluetoothDevice.TRANSPORT_LE
 import android.bluetooth.BluetoothGatt
@@ -17,10 +19,14 @@ import android.os.Build
 import android.os.ParcelUuid
 import android.util.Log
 import androidx.annotation.RequiresApi
+import java.util.*
+
+const val SESSION_MINUTE_LIMIT = 5
 
 class BTLEListener(
     context: Context,
-    private val bluetoothLeScanner: BluetoothLeScanner
+    private val bluetoothLeScanner: BluetoothLeScanner,
+    private val contactEventDao: ContactEventDao
 ) {
     private val filters = listOf(
         ScanFilter.Builder()
@@ -33,7 +39,7 @@ class BTLEListener(
         .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
         .build()
 
-    private val scanCallBack = ScanningCallback(context, GattClientCallback())
+    private val scanCallBack = ScanningCallback(context, GattClientCallback(contactEventDao))
 
     fun start() {
         bluetoothLeScanner.startScan(
@@ -90,7 +96,9 @@ private class ScanningCallback(
     }
 }
 
-private class GattClientCallback : BluetoothGattCallback() {
+private class GattClientCallback(
+        private val contactEventDao: ContactEventDao
+) : BluetoothGattCallback() {
 
     override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
         Log.i("onServicesDiscovered", "status: $status")
@@ -108,10 +116,33 @@ private class GattClientCallback : BluetoothGattCallback() {
         characteristic: BluetoothGattCharacteristic,
         status: Int
     ) {
-        if (characteristic.isDeviceIdentifier()) {
+        Log.i("onCharacteristicRead", status.toString())
+        if (characteristic.isDeviceIdentifier() && characteristic.value != null) {
+            val deviceId = String(characteristic.value)
             Log.i(
-                "onCharacteristicRead", "Device Identifier: ${String(characteristic.value)}"
+                "onCharacteristicRead", "Device Identifier: ${deviceId}"
             )
+            contactEventDao.getLastByDeviceId(deviceId)
+            val today = Date()
+
+            val contactEvent: ContactEvent? = contactEventDao.getLastByDeviceId(deviceId)
+            if (contactEvent != null) {
+                Log.i("DATABASE", "Found existing event")
+                val minuteDiff = (today.time - contactEvent.endDate.time) / 1000 / 60 // minutes
+                if (minuteDiff < SESSION_MINUTE_LIMIT) {
+                    Log.i("DATABASE", "Same session, length ${(today.time - contactEvent.endDate.time) / 1000} sec")
+                    contactEvent.endDate = today
+                    contactEventDao.update(contactEvent)
+                    return
+                }
+            }
+
+            Log.i("DATABASE", "Creating new event")
+            contactEventDao.create(ContactEvent(
+                    deviceId = deviceId,
+                    startDate = today,
+                    endDate = today
+            ))
         }
     }
 

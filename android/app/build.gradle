@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
-apply plugin: 'kotlin-android'
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 import com.android.build.OutputFile
 
@@ -155,6 +156,7 @@ android {
 }
 
 def jscFlavor = 'org.webkit:android-jsc:+'
+def room_version = "2.2.5"
 
 def enableHermes = project.ext.react.get("enableHermes", false);
 
@@ -165,6 +167,13 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    // Room for data
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+
     addUnimodulesDependencies()
 
     if (enableHermes) {

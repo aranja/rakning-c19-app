@@ -10,7 +10,6 @@ import android.bluetooth.BluetoothGattCharacteristic.PERMISSION_READ
 import android.bluetooth.BluetoothGattCharacteristic.PROPERTY_READ
 import android.bluetooth.BluetoothGattService.SERVICE_TYPE_PRIMARY
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 
 
@@ -31,7 +30,7 @@ class BTLEBroadcaster(private val context: Context, private val bluetoothManager
 
     private lateinit var server: BluetoothGattServer
 
-    fun start() {
+    fun start(deviceId: String) {
         val callback = object : BluetoothGattServerCallback() {
             override fun onCharacteristicReadRequest(
                 device: BluetoothDevice,
@@ -39,21 +38,16 @@ class BTLEBroadcaster(private val context: Context, private val bluetoothManager
                 offset: Int,
                 characteristic: BluetoothGattCharacteristic
             ) {
-                Log.i("onCharacteristicReadReq", "UUID: ${characteristic.uuid}")
-
-                val sharedPref: SharedPreferences = context.getSharedPreferences("user-pref", 0)
-                if (sharedPref.contains("androidId")) {
-                    val androidId = sharedPref.getString("androidId", "")
-                    Log.i("SENDING ANDROID ID", "ANDID: $androidId")
-                    if (characteristic.isDeviceIdentifier()) {
-                        server.sendResponse(
-                            device,
-                            requestId,
-                            GATT_SUCCESS,
-                            0,
-                            androidId?.toByteArray()
-                        )
-                    }
+                Log.i("onCharacteristicReadReq", "Characteristic UUID: ${characteristic.uuid}")
+                Log.i("onCharacteristicReadReq", "Device ID: $deviceId")
+                if (characteristic.isDeviceIdentifier()) {
+                    server.sendResponse(
+                        device,
+                        requestId,
+                        GATT_SUCCESS,
+                        0,
+                            deviceId?.toByteArray()
+                    )
                 }
             }
         }
