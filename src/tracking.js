@@ -1,6 +1,60 @@
 import * as Permissions from 'expo-permissions';
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 
+function getConfiguration() {
+  const configuration = {
+    // Accept a 100 meter accuracy.
+    desiredAccuracy: BackgroundGeolocation.MEDIUM_ACCURACY,
+
+    // When the app is active, we update the location less often when it's stationary inside this radius.
+    stationaryRadius: 50,
+
+    // Only log a new location that is at least this distance from the previous location.
+    distanceFilter: 50,
+
+    // Run a foreground service on Android that shows up as a notification. This gives us
+    // more reliability in monitoring the location when the app is closed.
+    startForeground: true,
+    notificationTitle: title,
+    notificationText: text,
+
+    // Restart the foreground service on Android when the device boots.
+    startOnBoot: true,
+
+    // Keep monitoring location after the app terminates.
+    // - On Android, this works using a foreground service.
+    // - On iOS it switches to the Significant-Change Location Service which wakes up the
+    //   app when the device moves 500 meters or more.
+    stopOnTerminate: false,
+
+    // Only iOS: Try and get more location data in the rare cases when the app wakes in the background.
+    saveBatteryOnBackground: false,
+
+    // When enabled, the plugin will emit sounds for life-cycle events of background-geolocation!
+    debug: false,
+  }
+
+  if (Platform.OS === 'android') {
+    Object.assign(configuration, {
+      // Switch to ACTIVITY_PROVIDER on android, which uses a Google Play api to check if
+      // the user is stationary or moving.
+      locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
+
+      // How often to check the current activity.
+      activitiesInterval: 1000 * 30,
+
+      // Only Android: The minimum time interval between location updates when not stationary.
+      // - iOS ignores this and only posts location updates based on the `distanceFilter` above.
+      interval: 1000 * 60 * 2,
+
+      // Only Android: Allow more location updates. Only happens if other apps are requesting location.
+      fastestInterval: 1000 * 30,
+    });
+  }
+
+  return configuration;
+}
+
 export async function stopBackgroundTracking() {
   BackgroundGeolocation.stop();
 }
@@ -9,41 +63,7 @@ async function startBackgroundTracking(title, text) {
   try {
     await stopBackgroundTracking();
 
-    BackgroundGeolocation.configure({
-      // Accept a 100 meter inaccuracy.
-      desiredAccuracy: BackgroundGeolocation.MEDIUM_ACCURACY,
-
-      // When the app is active, we update the location less often when it's stationary inside this radius.
-      stationaryRadius: 50,
-
-      // Only log a new location that is at least this distance from the previous location.
-      distanceFilter: 50,
-
-      // Run a foreground service on Android that shows up as a notification. This gives us
-      // more reliability in monitoring the location when the app is closed.
-      startForeground: true,
-      notificationTitle: title,
-      notificationText: text,
-
-      // Restart the foreground service on Android when the device boots.
-      startOnBoot: true,
-
-      // Keep monitoring location after the app terminates.
-      // - On Android, this works using a foreground service.
-      // - On iOS it switches to the Significant-Change Location Service which wakes up the
-      //   app when the device moves 500 meters or more.
-      stopOnTerminate: false,
-
-      // Only Android: The minimum time interval between location updates when not stationary.
-      // - iOS ignores this and only posts location updates based on the `distanceFilter` above.
-      interval: 1000 * 60,
-
-      // Only iOS: Try and get more location data in the rare cases when the app wakes in the background.
-      saveBatteryOnBackground: false,
-
-      // When enabled, the plugin will emit sounds for life-cycle events of background-geolocation!
-      debug: false,
-    });
+    BackgroundGeolocation.configure(getConfiguration());
     BackgroundGeolocation.start();
 
     return true;
