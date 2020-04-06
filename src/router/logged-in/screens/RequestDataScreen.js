@@ -29,7 +29,10 @@ const AllowLocationScreen = ({ navigation }) => {
     setLoading(true);
 
     try {
+      // Get geolocation data from the internal database.
       const points = await getPoints();
+
+      // Send geolocation data to the API.
       await logPoints(points, kennitala);
 
       createAlert({
