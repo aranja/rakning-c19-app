@@ -1,7 +1,7 @@
 import * as Permissions from 'expo-permissions';
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 
-function getConfiguration() {
+function getConfiguration(title, text) {
   const configuration = {
     // Accept a 100 meter accuracy.
     desiredAccuracy: BackgroundGeolocation.MEDIUM_ACCURACY,
@@ -63,7 +63,7 @@ async function startBackgroundTracking(title, text) {
   try {
     await stopBackgroundTracking();
 
-    BackgroundGeolocation.configure(getConfiguration());
+    BackgroundGeolocation.configure(getConfiguration(title, text));
     BackgroundGeolocation.start();
 
     return true;
