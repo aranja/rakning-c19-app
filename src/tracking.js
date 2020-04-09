@@ -83,6 +83,7 @@ export function getPoints() {
           lon: trimLocation(location.longitude),
           acc: Math.round(location.accuracy),
           time: Math.round(location.time),
+          speed: Math.round(location.speed || 0),
         }));
         resolve(cleaned);
       },
