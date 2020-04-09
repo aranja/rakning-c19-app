@@ -36,6 +36,18 @@ yarn android
 
 ### FAQ
 
+#### How can I get the app?
+
+There are now three ways to get this app:
+
+* iOS: [App Store](https://apps.apple.com/is/app/rakning-c-19/id1504655876)
+* Android: [Play Store](https://play.google.com/store/apps/details?id=is.landlaeknir.rakning)
+* Android APK: [App Center](https://install.appcenter.ms/orgs/covid-iceland/apps/covid-19-tracking-android/distribution_groups/public)
+
+Never install the app from places not listed here or on
+[covid.is](https://covid.is), since they can be spreading a modified
+version of the app which could compromise your privacy and security.
+
 #### How does Rakning C-19 work?
 
 It authenticates users with their phone number. It stores the user's
