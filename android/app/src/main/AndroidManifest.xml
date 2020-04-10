@@ -2,17 +2,10 @@
     package="is.landlaeknir.rakning">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-
-    <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- These require runtime permissions on M -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- END OPTIONAL PERMISSIONS -->
 
     <application
@@ -21,6 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:allowBackup="false"
+        android:usesCleartextTraffic="${isDebug}"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"

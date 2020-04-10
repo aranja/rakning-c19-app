@@ -125,7 +125,12 @@ android {
         }
     }
     buildTypes {
+        debug {
+            manifestPlaceholders = [isDebug:true]
+        }
+
         release {
+            manifestPlaceholders = [isDebug:false]
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
 
