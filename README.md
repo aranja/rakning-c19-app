@@ -30,6 +30,22 @@ or:
 
 You need XCode and an Apple developer account to run this on device.
 
+### Troubleshooting
+
+If you get this error when building the project for iOS:
+
+```
+error: /Users/pedroteixeira/projects/rakning-c19-app/ios/Pods/Target Support Files/Pods-Rakning/Pods-Rakning.debug.xcconfig: unable to open file (in target "Rakning" in project "Rakning") (in target 'Rakning' from project 'Rakning')
+```
+
+Try running `yarn prepare`, which should fix this issue.
+
+For other CocoaPods issues, it sometimes helps to go into the `ios` folder and run:
+
+```.env
+pod install --repo-update
+```
+
 ## Run instructions for Android:
 
 Have an Android emulator running (quickest way to get started), or a device connected.

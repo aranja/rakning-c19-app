@@ -25,32 +25,21 @@ PODS:
   - EXConstants (8.0.0):
     - UMConstantsInterface
     - UMCore
-  - EXErrorRecovery (1.0.0):
-    - UMCore
   - EXFileSystem (8.0.0):
     - UMCore
     - UMFileSystemInterface
   - EXFont (8.0.0):
     - UMCore
     - UMFontInterface
-  - EXKeepAwake (8.0.0):
-    - UMCore
   - EXLinearGradient (8.0.0):
     - UMCore
   - EXLocalization (8.0.0):
     - UMCore
-  - EXLocation (8.0.0):
-    - UMCore
-    - UMPermissionsInterface
-    - UMTaskManagerInterface
   - EXPermissions (8.0.0):
     - UMCore
     - UMPermissionsInterface
   - EXSecureStore (8.0.0):
     - UMCore
-  - EXSQLite (8.0.0):
-    - UMCore
-    - UMFileSystemInterface
   - EXWebBrowser (8.0.0):
     - UMCore
   - FBLazyVector (0.61.5)
@@ -392,16 +381,12 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
-  - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
-  - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocalization (from `../node_modules/expo-localization/ios`)
-  - EXLocation (from `../node_modules/expo-location/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
-  - EXSQLite (from `../node_modules/expo-sqlite/ios`)
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -489,36 +474,24 @@ EXTERNAL SOURCES:
   EXConstants:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-constants/ios"
-  EXErrorRecovery:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/expo-error-recovery/ios"
   EXFileSystem:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-file-system/ios"
   EXFont:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-font/ios"
-  EXKeepAwake:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/expo-keep-awake/ios"
   EXLinearGradient:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-linear-gradient/ios"
   EXLocalization:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-localization/ios"
-  EXLocation:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/expo-location/ios"
   EXPermissions:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-permissions/ios"
   EXSecureStore:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-secure-store/ios"
-  EXSQLite:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/expo-sqlite/ios"
   EXWebBrowser:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-web-browser/ios"
@@ -636,16 +609,12 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EXAppLoaderProvider: ebdb6bc2632c1ccadbe49f5e4104d8d690969c49
   EXConstants: 4051b16c17ef3defa03c541d42811dc92b249146
-  EXErrorRecovery: d36db99ec6a3808f313f01b0890eb443796dd1c2
   EXFileSystem: 6e0d9bb6cc4ea404dbb8f583c1a8a2dcdf4b83b6
   EXFont: 6187b5ab46ee578d5f8e7f2ea092752e78772235
-  EXKeepAwake: 66e9f80b6d129633725a0e42f8d285c229876811
   EXLinearGradient: 75f302f9d6484267a3f6d3252df2e7a5f00e716a
   EXLocalization: 6a3ec1e9dda2ec9ba9dcc4a29dd840e5e950115e
-  EXLocation: 3c75d012ca92eed94d4338778d79c49d1252393a
   EXPermissions: 9bc08859a675d291e89be9a0870155c27c16ac35
   EXSecureStore: 1448b90d665c9400aaaf6655fccb464da14698f6
-  EXSQLite: 220226a354912b100dfe913f5fe6f31762c8927e
   EXWebBrowser: db32607359fb7b55b7b7b91df32dd3d8355bb3b7
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75

@@ -1,22 +1,17 @@
 import React, { useEffect, useContext } from 'react';
-import {
-  AppState,
-  AppStateStatus,
-  ScrollView,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { AppState, AppStateStatus, Platform, ScrollView } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-import * as Permissions from 'expo-permissions';
-import styled from 'styled-components/native';
-import { useTranslation, withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
-import { AuthConsumer } from '../../../context/authentication';
+import { useAuth } from '../../../context/authentication';
 import {
+  checkLocationStatus,
   initBackgroundTracking,
   stopBackgroundTracking,
+  LocationPermission,
 } from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
 import AppShell, { Content } from '../../../components/AppShell';
@@ -29,7 +24,6 @@ import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
-import { TOSLink } from '../../../components/PhoneNumberInput/styles';
 import { useAlert } from '../../../context/alert';
 
 const privacyUrls = {
@@ -89,21 +83,26 @@ const smallBtnStyle = {
   width: '48.5%',
 };
 
-const HomeScreen = ({ navigation, i18n, logout }) => {
+const HomeScreen = ({ navigation }) => {
   const {
     t,
-    i18n: { language },
+    i18n,
   } = useTranslation();
+  const { logout } = useAuth();
   const { fetchUser, clearUserData } = useContext(UserContext);
   const { createAlert } = useAlert();
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
-    const { status } = await Permissions.getAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
+    const status = await checkLocationStatus();
+    const hasLocationAccess =
+      status.locationPermission === LocationPermission.AUTHORIZED &&
+      status.locationServicesEnabled;
+
+    if (!hasLocationAccess) {
       resetStack(navigation, 'Permission');
     }
-    return status === 'granted';
+    return hasLocationAccess;
   };
 
   const logoutUser = () => {
@@ -197,7 +196,7 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
             >
               {t('announcements')}
             </UrlButton>
-            {links[language].primary.map(link => (
+            {links[i18n.language].primary.map(link => (
               <UrlButton
                 key={link}
                 justify="start"
@@ -213,7 +212,7 @@ const HomeScreen = ({ navigation, i18n, logout }) => {
           <Vertical unit={0.5} />
 
           <ButtonGroup row>
-            {links[language].secondary.map(link => (
+            {links[i18n.language].secondary.map(link => (
               <UrlButton
                 key={link}
                 href={t(`${link}Link`)}
@@ -283,14 +282,8 @@ HomeScreen.propTypes = {
   }).isRequired,
 };
 
-const Screen = withTranslation()(({ ...props }) => (
-  <AuthConsumer>
-    {({ logout }) => <HomeScreen {...props} logout={logout} />}
-  </AuthConsumer>
-));
-
-Screen.navigationOptions = {
+HomeScreen.navigationOptions = {
   header: null,
 };
 
-export default Screen;
+export default HomeScreen;
