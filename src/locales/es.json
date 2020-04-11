@@ -15,6 +15,8 @@
     "changeLocationAllow": "Permitir compartir su ubicación",
     "changeLocationDescriptionIOS": "Es muy importante permitir a la app obtener su ubicación. Cambia la configuración a <0>“Siempre“</0>.",
     "changeLocationSettings": "Cambiar configuración",
+    "enableLocationServices": "Activar los servicios de ubicación",
+    "enableLocationServicesDescription": "Los servicios de ubicación están desactivados en su teléfono. El botón le llevará a las opciones desde donde podrá activarlos de nuevo.",
     "enableLocationDescriptionAndroid": "La app solicitará permiso para registrar sus movimientos (datos de ubicación). Es muy importante seleccionar la opción <0>“Permitir siempre”</0>.",
     "enableLocationDescriptionIOS": "La app solicitará permiso para registrar sus movimientos (datos de ubicación). Es muy importante seleccionar la opción  <0>“Permitir mientras se usa la app”</0>.",
     "enableLocationMessageIOS": "Tras configurar la app en su dispositivo, solicitará permiso para guardar la ubicación cuando la app no está siendo utilizada. Es muy importante seleccionar la opción <0>“Cambiar a Permitir Siempre”</0>. Esto es imprescindible para que la app funcione como es debido.",
