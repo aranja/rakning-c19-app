@@ -7,22 +7,17 @@ import { ButtonGroup, CtaButton } from '../Button/index';
 import { verticalScale, scale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
 import { Content } from '../AppShell';
+import covidIcon from '../../assets/images/covid-icon.png';
 
-const AllLanguages = styled.View`
-  flex: 1;
+const LanguageScreen = styled.View``;
+
+const Title = styled(Content)`
+  height: ${verticalScale(150)};
 `;
 
-const Language = styled<{ index: number }>(Content)`
-  background: ${({ index }) =>
-    index % 2 ? Colors.backgroundAlt : 'transparent'};
-  flex: 1;
-`;
+const LanguageList = styled(Content)``;
 
-const LanguageContent = styled.View`
-  justify-content: space-between;
-  flex: 1;
-  padding-vertical: ${verticalScale(8)};
-`;
+const Continue = styled(Content)``;
 
 interface Props {
   navigation: {
@@ -31,46 +26,68 @@ interface Props {
 }
 
 function LanguagePicker({ navigation }: Props) {
+  const [locale, setLocale] = React.useState('is');
+  const selectedLanguage = languages.find(lang => lang.code === locale);
+
   const changeLocale = (locale: string) => () => {
     changeLanguage(locale);
     navigation.navigate('Welcome');
   };
 
   return (
-    <AllLanguages>
-      {languages.map(({ code, title, description, button, flag }, index) => (
-        <Language index={index} key={code}>
-          <LanguageContent>
-            <Text type="heading" level={2} marginBottom={0.25}>
-              {title}
-            </Text>
-            <Text
-              style={{
-                fontSize: verticalScale(16),
-                lineHeight: verticalScale(16 * 1.4),
-                marginBottom: verticalScale((16 * 1.4) / 2),
-              }}
-            >
-              {description}
-            </Text>
-            <ButtonGroup>
-              <CtaButton
-                align="left"
-                justify="start"
-                onPress={changeLocale(code)}
-                image={flag}
-                imageDimensions={{
-                  width: scale(28),
-                  height: scale(19),
-                }}
-              >
-                {button}
-              </CtaButton>
-            </ButtonGroup>
-          </LanguageContent>
-        </Language>
-      ))}
-    </AllLanguages>
+    <LanguageScreen>
+      <Title>
+        <Text type="heading" level={2} marginBottom={0.25}>
+          {selectedLanguage.title}
+        </Text>
+        <Text
+          style={{
+            fontSize: verticalScale(16),
+            lineHeight: verticalScale(16 * 1.4),
+            marginBottom: verticalScale((16 * 1.4) / 2),
+          }}
+        >
+          {selectedLanguage.description}
+        </Text>
+      </Title>
+
+      <LanguageList>
+        {languages.map(({ code, name, flag }, index) => (
+          <CtaButton
+            index={index}
+            key={code}
+            align="left"
+            justify="start"
+            onPress={() => setLocale(code)}
+            image={flag}
+            bgColor={locale === code ? Colors.blue : Colors.placeholder}
+            imageDimensions={{
+              width: scale(28),
+              height: scale(19),
+            }}
+          >
+            {name}
+          </CtaButton>
+        ))}
+      </LanguageList>
+
+      <Continue>
+        <ButtonGroup>
+          <CtaButton
+            align="center"
+            justify="center"
+            onPress={changeLocale(selectedLanguage.code)}
+            image={covidIcon}
+            imageDimensions={{
+              height: scale(28),
+              width: scale(24),
+            }}
+          >
+            {selectedLanguage.button}
+          </CtaButton>
+        </ButtonGroup>
+      </Continue>
+    </LanguageScreen>
   );
 }
 
