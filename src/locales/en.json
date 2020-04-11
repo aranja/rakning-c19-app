@@ -44,7 +44,7 @@
     "requestDataButton": "Send data",
     "requestDataKennitala": "National ID number",
     "requestDataKennitalaInfo": "Please enter your national ID number before you send your location data.",
-    "requestDataSubTitle": "The Department of Civil Protection and Emergency Management’s Contract Tracing Team requests that you submit your location data to assist in locating people who may be infected.",
+    "requestDataSubTitle": "The Department of Civil Protection and Emergency Management’s Contact Tracing Team requests that you submit your location data to assist in locating people who may be infected.",
     "requestDataThanks": "Thank you for sending you data to the Department of Civil Protection and Emergency Management!",
     "requestDataTitle": "Request from Contact Tracing Team",
     "requestDataWrongKennitala": "The National ID number does not match the National ID number that the Tracing Team has on file.",
