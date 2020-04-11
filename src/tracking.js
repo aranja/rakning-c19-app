@@ -41,7 +41,7 @@ function getConfiguration(title, text) {
       locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
 
       // How often to check the current activity.
-      activitiesInterval: 1000 * 30,
+      activitiesInterval: 1000 * 90,
 
       // Only Android: The minimum time interval between location updates when not stationary.
       // - iOS ignores this and only posts location updates based on the `distanceFilter` above.
