@@ -19,16 +19,9 @@ import { scale } from '../../utils/index';
 type ButtonProps = {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-} & (
-  | {
-      disabled?: boolean;
-      onPress: Function;
-    }
-  | {
-      disabled: true;
-      onPress?: Function;
-    }
-);
+  disabled?: boolean;
+  onPress?: Function;
+};
 
 const Button = ({
   onPress,

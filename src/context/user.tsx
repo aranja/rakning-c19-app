@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import { getUser } from '../api/User/index';
 
 interface User {
+  dataRequested?: boolean;
   requiresKennitala?: boolean;
 }
 
@@ -23,7 +24,7 @@ type Actions =
     };
 
 interface ContextValue extends State {
-  fetchUser: () => Promise<void>;
+  fetchUser: () => Promise<User>;
   updateUser: (user: Partial<State>) => void;
   clearUserData: () => void;
 }
