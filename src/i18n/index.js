@@ -3,10 +3,12 @@ import { initReactI18next } from 'react-i18next';
 import isFlag from '../assets/flags/is.png';
 import enFlag from '../assets/flags/gb.png';
 import plFlag from '../assets/flags/pl.png';
+import esFlag from '../assets/flags/es.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
 import pl from '../locales/pl.json';
+import es from '../locales/es.json';
 
 import languageDetector from './language-detector';
 
@@ -14,6 +16,7 @@ const resources = {
   en,
   is,
   pl,
+  es,
 };
 const namespace = 'translation';
 
@@ -44,6 +47,15 @@ export const languages = [
       'Help the Civil Protection Team to track potential COVID-19 infections in Iceland',
     button: 'Continue in English',
     flag: enFlag,
+  },
+  {
+    code: 'es',
+    name: 'Español',
+    title: 'Rastreo COVID-19',
+    description:
+      'Ayuda al Equipo de Protección Civil a rastrear posibles infecciones de COVID-19 en Islandia',
+    button: 'Continuar en español',
+    flag: esFlag,
   },
 ];
 
