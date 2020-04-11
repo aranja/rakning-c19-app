@@ -1,7 +1,6 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import {
   Platform,
-  ScrollView,
   Linking,
   AppState,
   AppStateStatus,
@@ -10,16 +9,20 @@ import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
 import { Trans } from 'react-i18next';
 import { CtaButton } from '../../../components/Button/Button';
-import { useTranslation, withTranslation } from 'react-i18next';
-import { AuthConsumer } from '../../../context/authentication';
-import { initBackgroundTracking } from '../../../tracking';
-import AppShell, { Content, SlimContent } from '../../../components/AppShell';
+import { useTranslation } from 'react-i18next';
+import {
+  checkLocationStatus,
+  LocationStatus,
+  openLocationServiceSettings,
+  LocationPermission,
+} from '../../../tracking';
+import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import LoadingScreen from '../../../components/LoadingScreen';
 import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import Footer from '../../../components/Footer';
-import { scale, verticalScale } from '../../../utils';
+import { scale } from '../../../utils';
 
 // @ts-ignore
 import covidIcon from '../../../assets/images/covid-icon.png';
@@ -59,54 +62,58 @@ const ContentView = ({
 const AllowLocationScreen = ({ navigation }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [permissionStatus, setPermission] = useState<
-    Permissions.PermissionStatus
-  >(Status.UNDETERMINED);
+  const [locationStatus, setLocationStatus] = useState<LocationStatus | null>(
+    null,
+  );
   const [didAsk, setDidAsk] = useState(false);
-  const settingsIssue = isIOS && permissionStatus === Status.DENIED && didAsk;
+  const serviceIssue =
+    locationStatus && locationStatus.locationServicesEnabled === false;
+  const settingsIssue =
+    locationStatus &&
+    locationStatus.locationPermission !== LocationPermission.AUTHORIZED &&
+    didAsk;
 
-  async function handlePermission({
-    permissions: { location: locationPermission },
-  }: Permissions.PermissionResponse) {
-    if (locationPermission.granted) {
-      const hasScopeAlways = locationPermission.ios?.scope === 'always';
+  async function checkStatus() {
+    const status = await checkLocationStatus();
 
-      if (!isIOS || hasScopeAlways) {
-        resetStack(navigation, 'Home');
-        return true;
-      }
-
-      setPermission(Status.DENIED);
-    } else {
-      setPermission(locationPermission.status);
+    if (
+      status.locationPermission === LocationPermission.AUTHORIZED &&
+      status.locationServicesEnabled
+    ) {
+      resetStack(navigation, 'Home');
+      return true;
     }
 
+    setLocationStatus(status);
     setLoading(false);
     return false;
   }
 
-  function getPermission() {
+  async function getPermission() {
+    if (serviceIssue) {
+      return openLocationServiceSettings();
+    }
+
     if (settingsIssue) {
       return Linking.openSettings();
     }
 
-    Permissions.askAsync(Permissions.LOCATION)
-      .then(handlePermission)
-      .then(hasPermission => {
-        if (!hasPermission) {
-          setDidAsk(true);
-        }
-      });
+    await Permissions.askAsync(Permissions.LOCATION);
+    const hasPermission = await checkStatus();
+
+    if (!hasPermission) {
+      setDidAsk(true);
+    }
   }
 
   function onAppStateChange(state: AppStateStatus) {
     if (state === 'active') {
-      Permissions.getAsync(Permissions.LOCATION).then(handlePermission);
+      checkStatus();
     }
   }
 
   useEffect(() => {
-    Permissions.getAsync(Permissions.LOCATION).then(handlePermission);
+    checkStatus();
     AppState.addEventListener('change', onAppStateChange);
 
     return () => {
@@ -116,6 +123,18 @@ const AllowLocationScreen = ({ navigation }) => {
 
   if (loading) {
     return <LoadingScreen />;
+  }
+
+  if (serviceIssue) {
+    return (
+      <ContentView
+        ctaAction={getPermission}
+        ctaTitle={t('changeLocationSettings')}
+      >
+        <Heading level={1}>{t('enableLocationServices')}</Heading>
+        <Text>{t('enableLocationServicesDescription')}</Text>
+      </ContentView>
+    );
   }
 
   if (settingsIssue) {
@@ -170,14 +189,8 @@ AllowLocationScreen.propTypes = {
   }).isRequired,
 };
 
-const Screen = withTranslation()(({ ...props }) => (
-  <AuthConsumer>
-    {({ logout }) => <AllowLocationScreen {...props} logout={logout} />}
-  </AuthConsumer>
-));
-
-Screen.navigationOptions = {
+AllowLocationScreen.navigationOptions = {
   header: null,
 };
 
-export default Screen;
+export default AllowLocationScreen;

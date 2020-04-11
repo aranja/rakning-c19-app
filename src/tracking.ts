@@ -1,5 +1,17 @@
+import { Linking, Platform } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
+
+export enum LocationPermission {
+  NOT_AUTHORIZED = BackgroundGeolocation.NOT_AUTHORIZED,
+  AUTHORIZED = BackgroundGeolocation.AUTHORIZED,
+  AUTHORIZED_FOREGROUND = BackgroundGeolocation.AUTHORIZED_FOREGROUND,
+}
+
+export interface LocationStatus {
+  locationPermission: LocationPermission;
+  locationServicesEnabled: boolean;
+}
 
 function getConfiguration(title, text) {
   const configuration = {
@@ -79,6 +91,25 @@ export async function initBackgroundTracking(title, text) {
     return true;
   } catch (error) {
     return false;
+  }
+}
+
+export async function checkLocationStatus(): Promise<LocationStatus> {
+  return new Promise((resolve, reject) => {
+    BackgroundGeolocation.checkStatus(
+      ({ authorization: locationPermission, locationServicesEnabled }) => {
+        resolve({ locationPermission, locationServicesEnabled });
+      },
+      error => reject(error),
+    );
+  });
+}
+
+export async function openLocationServiceSettings() {
+  if (Platform.OS === 'android') {
+    BackgroundGeolocation.showLocationSettings();
+  } else {
+    Linking.openURL('App-Prefs:Privacy');
   }
 }
 
