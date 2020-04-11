@@ -79,6 +79,10 @@ const links = {
       'riskAreas',
     ],
   },
+  es: {
+    primary: ['gatheringBan', 'icelandicAnswer', 'isolation', 'quarantine'],
+    secondary: ['groupsAtRisk'],
+  },
 };
 
 const smallBtnStyle = {
