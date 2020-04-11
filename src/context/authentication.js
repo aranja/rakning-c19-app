@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ApiClient from '../api/ApiClient';
 import { updatePushToken } from '../api/User';
 
@@ -12,6 +12,8 @@ export const AuthContext = React.createContext({
 });
 
 export const AuthConsumer = AuthContext.Consumer;
+
+export const useAuth = () => useContext(AuthContext);
 
 class AuthProvider extends React.Component {
   state = {
