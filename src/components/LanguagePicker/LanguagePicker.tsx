@@ -60,7 +60,8 @@ function LanguagePicker({ navigation }: Props) {
             justify="start"
             onPress={() => setLocale(code)}
             image={flag}
-            bgColor={locale === code ? Colors.blue : Colors.placeholder}
+            bgColor={locale === code ? Colors.blue : Colors.backgroundAlt}
+            color={locale === code ? Colors.almostWhite : Colors.gray}
             imageDimensions={{
               width: scale(28),
               height: scale(19),
