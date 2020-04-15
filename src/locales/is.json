@@ -80,6 +80,24 @@
     "workplacesLabel": "Vinnustaðir",
     "workplacesLink": "https://www.covid.is/undirflokkar/vinnustadir",
     "worriesAndAnxietyLabel": "Áhyggjur og kvíði",
-    "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar/ahyggjur-og-kvidi"
+    "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar/ahyggjur-og-kvidi",
+    "links": {
+      "primary": [
+        "avoidInfection",
+        "possibleInfection",
+        "isolation",
+        "quarantine"
+      ],
+      "secondary": [
+        "groupsAtRisk",
+        "seniorCitizens",
+        "childrenAndTeens",
+        "worriesAndAnxiety",
+        "workplaces",
+        "travel",
+        "foodPetsAndAnimals",
+        "riskAreas"
+      ]
+    }
   }
 }
