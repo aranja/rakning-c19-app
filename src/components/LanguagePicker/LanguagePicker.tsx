@@ -32,7 +32,7 @@ function LanguagePicker() {
     <LanguageScreen>
       <Title>
         <Text type="heading" level={2} marginBottom={0.25}>
-          {t('title')}
+          {t('welcomeTitle')}
         </Text>
         <Text
           style={{
