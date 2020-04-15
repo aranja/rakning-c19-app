@@ -17,7 +17,7 @@ export const CtaButtonContainer = styled.View`
   background-color: ${({ bgColor, transparent }) =>
     transparent ? 'transparent' : bgColor};
   padding: ${verticalScale(16)}px ${({ small }) => scale(small ? 16 : 32)}px;
-    
+
 ${({ small }) =>
   !small
     ? null
@@ -38,7 +38,7 @@ ${({ small }) =>
       : css`
           align-items: flex-start;
         `}
-  
+
   ${({ justify }) =>
     justify === 'center'
       ? null
@@ -52,6 +52,7 @@ export const ButtonLabel = styled.Text`
   font-size: ${scale(16)};
   font-family: 'OpenSansExtraBold';
   text-align: center;
+  width: 100%;
 
   ${({ invert, color }) =>
     invert &&
