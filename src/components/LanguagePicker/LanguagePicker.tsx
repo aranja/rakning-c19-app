@@ -3,11 +3,11 @@ import styled from 'styled-components/native';
 import Text from '../ui/Text';
 import { changeLanguage, languages } from '../../i18n/index';
 import Colors from '../../constants/Colors';
-import { ButtonGroup, CtaButton } from '../Button/index';
+import { CtaButton } from '../Button/index';
 import { verticalScale, scale } from '../../utils/index';
 import { withNavigation } from 'react-navigation';
 import { Content } from '../AppShell';
-import covidIcon from '../../assets/images/covid-icon.png';
+import { useTranslation } from 'react-i18next';
 
 const LanguageScreen = styled.View``;
 
@@ -19,35 +19,28 @@ const LanguageList = styled(Content)``;
 
 const Continue = styled(Content)``;
 
-interface Props {
-  navigation: {
-    navigate: (screen: string) => void;
-  };
-}
+function LanguagePicker() {
+  const { t, i18n } = useTranslation();
+  const [locale, setLocale] = React.useState(i18n.language);
 
-function LanguagePicker({ navigation }: Props) {
-  const [locale, setLocale] = React.useState('is');
-  const selectedLanguage = languages.find(lang => lang.code === locale);
-
-  const changeLocale = (locale: string) => () => {
-    changeLanguage(locale);
-    navigation.navigate('Welcome');
+  const changeLocale = (newLocale: string) => () => {
+    changeLanguage(newLocale);
+    setLocale(newLocale);
   };
 
   return (
     <LanguageScreen>
       <Title>
         <Text type="heading" level={2} marginBottom={0.25}>
-          {selectedLanguage.title}
+          {t('title')}
         </Text>
         <Text
           style={{
             fontSize: verticalScale(16),
             lineHeight: verticalScale(16 * 1.4),
-            marginBottom: verticalScale((16 * 1.4) / 2),
           }}
         >
-          {selectedLanguage.description}
+          {t('description')}
         </Text>
       </Title>
 
@@ -58,7 +51,7 @@ function LanguagePicker({ navigation }: Props) {
             key={code}
             align="left"
             justify="start"
-            onPress={() => setLocale(code)}
+            onPress={changeLocale(code)}
             image={flag}
             bgColor={locale === code ? Colors.blue : Colors.backgroundAlt}
             color={locale === code ? Colors.almostWhite : Colors.gray}
@@ -71,23 +64,6 @@ function LanguagePicker({ navigation }: Props) {
           </CtaButton>
         ))}
       </LanguageList>
-
-      <Continue>
-        <ButtonGroup>
-          <CtaButton
-            align="center"
-            justify="center"
-            onPress={changeLocale(selectedLanguage.code)}
-            image={covidIcon}
-            imageDimensions={{
-              height: scale(28),
-              width: scale(24),
-            }}
-          >
-            {selectedLanguage.button}
-          </CtaButton>
-        </ButtonGroup>
-      </Continue>
     </LanguageScreen>
   );
 }

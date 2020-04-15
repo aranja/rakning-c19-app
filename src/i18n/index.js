@@ -24,37 +24,21 @@ export const languages = [
   {
     code: 'is',
     name: 'Íslenska',
-    title: 'Rakning COVID-19',
-    description:
-      'Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi',
-    button: 'Áfram á íslensku',
     flag: isFlag,
   },
   {
     code: 'pl',
     name: 'Polski',
-    title: 'Śledzenie COVID-19',
-    description:
-      'Pomoc Obronie Cywilnej w śledzeniu potencjalnych infekcji COVID-19 na Islandii',
-    button: 'Prześlij do polskiego',
     flag: plFlag,
   },
   {
     code: 'en',
     name: 'English',
-    title: 'Tracking COVID-19',
-    description:
-      'Help the Civil Protection Team to track potential COVID-19 infections in Iceland',
-    button: 'Continue in English',
     flag: enFlag,
   },
   {
     code: 'es',
     name: 'Español',
-    title: 'Rastreo COVID-19',
-    description:
-      'Ayuda al Equipo de Protección Civil a rastrear posibles infecciones de COVID-19 en Islandia',
-    button: 'Continuar en español',
     flag: esFlag,
   },
 ];
