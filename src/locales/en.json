@@ -15,7 +15,7 @@
     "enableLocationAllow": "Allow location sharing and notifications",
     "enableLocationButton": "Next",
     "changeLocationAllow": "Allow location sharing",
-    "changeLocationDescriptionIOS": "It's very important to allow the app to track your location. Please change location sharing setting to <0>„Always“</0>.",
+    "changeLocationDescriptionIOS": "It's very important to allow the app to track your location. Please change location sharing setting to <0>“Always“</0>.",
     "changeLocationSettings": "Change setting",
     "enableLocationServices": "Enable location services",
     "enableLocationServicesDescription": "Location services are disabled on your phone. Tap the button to open settings where you can turn them on again.",
