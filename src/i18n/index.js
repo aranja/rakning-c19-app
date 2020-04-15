@@ -4,11 +4,13 @@ import isFlag from '../assets/flags/is.png';
 import enFlag from '../assets/flags/gb.png';
 import plFlag from '../assets/flags/pl.png';
 import esFlag from '../assets/flags/es.png';
+import frFlag from '../assets/flags/fr.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
 import pl from '../locales/pl.json';
 import es from '../locales/es.json';
+import fr from '../locales/fr.json';
 
 import languageDetector from './language-detector';
 
@@ -17,6 +19,7 @@ const resources = {
   is,
   pl,
   es,
+  fr,
 };
 const namespace = 'translation';
 
@@ -57,6 +60,14 @@ export const languages = [
     button: 'Continuar en español',
     flag: esFlag,
   },
+  {
+    code: 'fr',
+    name: 'Français',
+    title: 'Suivi du COVID-19',
+    description: `Aidez l'Équipe de la Protection Civile à suivre les infections potentielles au COVID-19 en Islande`,
+    button: 'Continuer en français',
+    flag: frFlag,
+  },
 ];
 
 /**
@@ -82,7 +93,6 @@ export default function initI18n() {
       },
       ns: namespace,
       defaultNs: namespace,
-
       keySeparator: false,
       nsSeparator: false,
       interpolation: {
