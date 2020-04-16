@@ -26,6 +26,11 @@ import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
 import { useAlert } from '../../../context/alert';
 
+interface LocaleLinks {
+  primary?: string[];
+  secondary?: string[];
+}
+
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
   pl: 'https://www.covid.is/app/privacystatement-po',
@@ -44,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
   const { logout } = useAuth();
   const { fetchUser, clearUserData } = useContext(UserContext);
   const { createAlert } = useAlert();
-  const links = t('links', { returnObjects: true }) as any;
+  const links = t('links', { returnObjects: true }) as LocaleLinks;
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
