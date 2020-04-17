@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { AppState, AppStateStatus, Platform, ScrollView } from 'react-native';
+import { AppState, Platform, ScrollView } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../../../context/user';
@@ -26,57 +26,15 @@ import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
 import { useAlert } from '../../../context/alert';
 
+interface LocaleLinks {
+  primary?: string[];
+  secondary?: string[];
+}
+
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
   pl: 'https://www.covid.is/app/privacystatement-po',
   is: 'https://www.covid.is/app/personuverndarstefna',
-};
-
-const links = {
-  en: {
-    primary: ['avoidInfection', 'possibleInfection', 'isolation', 'quarantine'],
-    secondary: [
-      'groupsAtRisk',
-      'seniorCitizens',
-      'childrenAndTeens',
-      'worriesAndAnxiety',
-      'workplaces',
-      'travel',
-      'foodPetsAndAnimals',
-      'tourists',
-      'riskAreas',
-    ],
-  },
-  is: {
-    primary: ['avoidInfection', 'possibleInfection', 'isolation', 'quarantine'],
-    secondary: [
-      'groupsAtRisk',
-      'seniorCitizens',
-      'childrenAndTeens',
-      'worriesAndAnxiety',
-      'workplaces',
-      'travel',
-      'foodPetsAndAnimals',
-      'riskAreas',
-    ],
-  },
-  pl: {
-    primary: ['avoidInfection', 'possibleInfection', 'isolation', 'quarantine'],
-    secondary: [
-      'groupsAtRisk',
-      'seniorCitizens',
-      'childrenAndTeens',
-      'worriesAndAnxiety',
-      'workplaces',
-      'travel',
-      'foodPetsAndAnimals',
-      'riskAreas',
-    ],
-  },
-  es: {
-    primary: ['gatheringBan', 'icelandicAnswer', 'isolation', 'quarantine'],
-    secondary: ['groupsAtRisk'],
-  },
 };
 
 const smallBtnStyle = {
@@ -91,6 +49,7 @@ const HomeScreen = ({ navigation }) => {
   const { logout } = useAuth();
   const { fetchUser, clearUserData } = useContext(UserContext);
   const { createAlert } = useAlert();
+  const links = t('links', { returnObjects: true }) as LocaleLinks;
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
@@ -186,6 +145,7 @@ const HomeScreen = ({ navigation }) => {
         <Content>
           <Heading level={3}>{t('aboutCovidTitle')}</Heading>
           <Text>{t('aboutCovidDescription')}</Text>
+
           <ButtonGroup>
             <UrlButton
               align="left"
@@ -196,7 +156,8 @@ const HomeScreen = ({ navigation }) => {
             >
               {t('announcements')}
             </UrlButton>
-            {links[i18n.language].primary.map(link => (
+
+            {(links.primary ?? []).map(link => (
               <UrlButton
                 key={link}
                 justify="start"
@@ -212,7 +173,7 @@ const HomeScreen = ({ navigation }) => {
           <Vertical unit={0.5} />
 
           <ButtonGroup row>
-            {links[i18n.language].secondary.map(link => (
+            {(links.secondary ?? []).map(link => (
               <UrlButton
                 key={link}
                 href={t(`${link}Link`)}

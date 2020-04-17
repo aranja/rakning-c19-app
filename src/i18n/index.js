@@ -5,12 +5,14 @@ import enFlag from '../assets/flags/gb.png';
 import plFlag from '../assets/flags/pl.png';
 import esFlag from '../assets/flags/es.png';
 import frFlag from '../assets/flags/fr.png';
+import thFlag from '../assets/flags/th.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
 import pl from '../locales/pl.json';
 import es from '../locales/es.json';
 import fr from '../locales/fr.json';
+import th from '../locales/th.json';
 
 import languageDetector from './language-detector';
 
@@ -20,6 +22,7 @@ const resources = {
   pl,
   es,
   fr,
+  th,
 };
 const namespace = 'translation';
 
@@ -67,6 +70,14 @@ export const languages = [
     description: `Aidez l'Équipe de la Protection Civile à suivre les infections potentielles au COVID-19 en Islande`,
     button: 'Continuer en français',
     flag: frFlag,
+  },
+  {
+    code: 'th',
+    name: 'ภาษาไทย',
+    title: 'ติดตาม COVID-19',
+    description: 'ช่วยเหลือทีมติดตามของกรมพลเรือนและเหตุฉุกเฉินในการติดตาม COVID-19 ในประเทศไอซ์แลนด์i',
+    button: 'ดูต่อในภาษาไทย',
+    flag: thFlag,
   },
 ];
 
