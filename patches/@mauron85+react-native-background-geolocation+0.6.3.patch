@@ -1,8 +1,13 @@
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/VERSIONS.gradle b/node_modules/@mauron85/react-native-background-geolocation/android/common/VERSIONS.gradle
-index 61f0865..17a0623 100644
+index 61f0865..fb574e8 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/VERSIONS.gradle
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/VERSIONS.gradle
-@@ -21,11 +21,11 @@ def RESOURCE_PREFIX = "mauron85_bgloc_"
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ import org.gradle.util.GradleVersion
+ 
+ def DEFAULT_COMPILE_SDK_VERSION = 28
+@@ -21,11 +22,11 @@ def RESOURCE_PREFIX = "mauron85_bgloc_"
  ext {
      getApplicationId = { ->
          def applicationId = "com.marianhello.app"
@@ -20,10 +25,15 @@ index 61f0865..17a0623 100644
              applicationId = rootProject.applicationId
          }
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/build.gradle b/node_modules/@mauron85/react-native-background-geolocation/android/common/build.gradle
-index 98542b1..07961e8 100644
+index 98542b1..fa94e98 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/build.gradle
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/build.gradle
-@@ -64,7 +64,7 @@ android {
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ apply plugin: 'com.android.library'
+ 
+ apply from: './VERSIONS.gradle'
+@@ -64,7 +65,7 @@ android {
          resValue "string", resourcePrefix + "account_name", 'Locations'
          resValue "string", resourcePrefix + "account_type", accountPrefix + '.account'
          resValue "string", resourcePrefix + "content_authority", accountPrefix + '.provider'
@@ -33,10 +43,11 @@ index 98542b1..07961e8 100644
          versionCode 1
          versionName "1.0"
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BackgroundGeolocationFacadeTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BackgroundGeolocationFacadeTest.java
-index 24fc246..3de1756 100644
+index 24fc246..94b72b0 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BackgroundGeolocationFacadeTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BackgroundGeolocationFacadeTest.java
-@@ -1,7 +1,7 @@
+@@ -1,7 +1,8 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.bgloc;
 
 -import android.support.test.InstrumentationRegistry;
@@ -47,11 +58,13 @@ index 24fc246..3de1756 100644
  import com.marianhello.bgloc.data.BackgroundLocation;
  import com.marianhello.bgloc.provider.TestLocationProviderFactory;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BatchManagerTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BatchManagerTest.java
-index 33e5c69..cd1439d 100644
+index 33e5c69..9c3068a 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BatchManagerTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/BatchManagerTest.java
-@@ -2,9 +2,9 @@ package com.marianhello.bgloc;
-
+@@ -1,10 +1,11 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
  import android.content.Context;
  import android.database.sqlite.SQLiteDatabase;
 -import android.support.test.InstrumentationRegistry;
@@ -64,10 +77,15 @@ index 33e5c69..cd1439d 100644
  import android.util.JsonToken;
 
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/ContentProviderLocationDAOTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/ContentProviderLocationDAOTest.java
-index a255b87..e7aaec7 100644
+index a255b87..6c648cf 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/ContentProviderLocationDAOTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/ContentProviderLocationDAOTest.java
-@@ -16,7 +16,7 @@ import java.util.ArrayList;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
+ import android.database.sqlite.SQLiteDatabase;
+@@ -16,7 +17,7 @@ import java.util.ArrayList;
  import java.util.Collection;
  import java.util.Iterator;
 
@@ -77,10 +95,11 @@ index a255b87..e7aaec7 100644
  import static junit.framework.Assert.assertEquals;
 
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/DBLogReaderTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/DBLogReaderTest.java
-index 27c27c9..026a547 100644
+index 27c27c9..cfc11a4 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/DBLogReaderTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/DBLogReaderTest.java
-@@ -1,9 +1,9 @@
+@@ -1,9 +1,10 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.bgloc;
 
  import android.content.Context;
@@ -94,10 +113,15 @@ index 27c27c9..026a547 100644
  import com.marianhello.logging.DBLogReader;
  import com.marianhello.logging.LogEntry;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceProxyTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceProxyTest.java
-index 01c5271..ceaad33 100644
+index 01c5271..b6414d7 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceProxyTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceProxyTest.java
-@@ -6,20 +6,17 @@ import android.content.Intent;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
+ import android.content.BroadcastReceiver;
+@@ -6,20 +7,17 @@ import android.content.Intent;
  import android.content.IntentFilter;
  import android.os.Bundle;
  import android.os.IBinder;
@@ -123,10 +147,15 @@ index 01c5271..ceaad33 100644
  import org.junit.Rule;
  import org.junit.Test;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceTest.java
-index 6698819..dee5233 100644
+index 6698819..c1c9ec0 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/LocationServiceTest.java
-@@ -7,12 +7,12 @@ import android.content.IntentFilter;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
+ import android.content.BroadcastReceiver;
+@@ -7,12 +8,12 @@ import android.content.IntentFilter;
  import android.location.Location;
  import android.os.Bundle;
  import android.os.IBinder;
@@ -146,10 +175,13 @@ index 6698819..dee5233 100644
  import com.marianhello.bgloc.data.BackgroundLocation;
  import com.marianhello.bgloc.provider.MockLocationProvider;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteConfigurationDAOTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteConfigurationDAOTest.java
-index 2257931..d5b3bb6 100644
+index 2257931..0ff13e2 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteConfigurationDAOTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteConfigurationDAOTest.java
-@@ -3,11 +3,10 @@ package com.marianhello.bgloc;
+@@ -1,13 +1,13 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
  import android.content.Context;
  import android.database.Cursor;
  import android.database.sqlite.SQLiteDatabase;
@@ -173,10 +205,13 @@ index 2257931..d5b3bb6 100644
  /**
   * Created by finch on 13/07/16.
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOTest.java
-index 3c8ff11..92bb501 100644
+index 3c8ff11..732a7ff 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOTest.java
-@@ -3,9 +3,9 @@ package com.marianhello.bgloc;
+@@ -1,11 +1,12 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
  import android.content.Context;
  import android.database.sqlite.SQLiteDatabase;
  import android.location.Location;
@@ -190,10 +225,13 @@ index 3c8ff11..92bb501 100644
  import com.marianhello.bgloc.data.BackgroundLocation;
  import com.marianhello.bgloc.data.sqlite.SQLiteLocationDAO;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOThreadTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOThreadTest.java
-index 32b9b7b..eccc276 100644
+index 32b9b7b..6391f44 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOThreadTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteLocationDAOThreadTest.java
-@@ -3,9 +3,9 @@ package com.marianhello.bgloc;
+@@ -1,11 +1,12 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
  import android.content.Context;
  import android.database.sqlite.SQLiteDatabase;
  import android.location.Location;
@@ -207,10 +245,15 @@ index 32b9b7b..eccc276 100644
  import com.marianhello.bgloc.data.BackgroundLocation;
  import com.marianhello.bgloc.data.sqlite.SQLiteLocationDAO;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteOpenHelperTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteOpenHelperTest.java
-index 169c6c4..d5efa03 100644
+index 169c6c4..a1b1fda 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteOpenHelperTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/androidTest/java/com/marianhello/bgloc/SQLiteOpenHelperTest.java
-@@ -5,9 +5,9 @@ import android.content.Context;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
+ import android.content.ContentValues;
+@@ -5,9 +6,9 @@ import android.content.Context;
  import android.database.Cursor;
  import android.database.sqlite.SQLiteDatabase;
  import android.location.Location;
@@ -224,10 +267,15 @@ index 169c6c4..d5efa03 100644
  import com.marianhello.bgloc.data.BackgroundLocation;
  import com.marianhello.bgloc.data.sqlite.SQLiteConfigurationContract;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/BackgroundGeolocationFacade.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/BackgroundGeolocationFacade.java
-index a8c755f..e428e3a 100644
+index a8c755f..71c7750 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/BackgroundGeolocationFacade.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/BackgroundGeolocationFacade.java
-@@ -14,8 +14,8 @@ import android.os.Build;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc;
+ 
+ import android.Manifest;
+@@ -14,8 +15,8 @@ import android.os.Build;
  import android.os.Bundle;
  import android.provider.Settings;
  import android.provider.Settings.SettingNotFoundException;
@@ -239,10 +287,17 @@ index a8c755f..e428e3a 100644
 
  import com.github.jparkie.promise.Promise;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/Config.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/Config.java
-index db809d0..09a6432 100644
+index db809d0..124e416 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/Config.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/Config.java
-@@ -12,7 +12,7 @@ package com.marianhello.bgloc;
+@@ -6,13 +6,14 @@ https://github.com/christocracy/cordova-plugin-background-geolocation
+ 
+ This is a new class
+ */
++// Modifications copyright (C) 2020 Aranja
+ 
+ package com.marianhello.bgloc;
+ 
  import android.os.Bundle;
  import android.os.Parcel;
  import android.os.Parcelable;
@@ -252,10 +307,15 @@ index db809d0..09a6432 100644
  import com.marianhello.bgloc.data.AbstractLocationTemplate;
  import com.marianhello.bgloc.data.LocationTemplate;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/BackgroundLocation.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/BackgroundLocation.java
-index f41b12a..9d2e7ce 100644
+index f41b12a..1386470 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/BackgroundLocation.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/BackgroundLocation.java
-@@ -7,9 +7,8 @@ import android.os.Build;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc.data;
+ 
+ import android.content.ContentValues;
+@@ -7,9 +8,8 @@ import android.os.Build;
  import android.os.Bundle;
  import android.os.Parcel;
  import android.os.Parcelable;
@@ -267,10 +327,11 @@ index f41b12a..9d2e7ce 100644
 
  import org.json.JSONException;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/LocationTransform.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/LocationTransform.java
-index 3e3b65c..41e2002 100644
+index 3e3b65c..1cf8a78 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/LocationTransform.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/LocationTransform.java
-@@ -1,10 +1,8 @@
+@@ -1,10 +1,9 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.bgloc.data;
 
  import android.content.Context;
@@ -284,10 +345,18 @@ index 3e3b65c..41e2002 100644
  public interface LocationTransform
  {
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceImpl.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceImpl.java
-index 18f1ba1..8f40b37 100644
+index 18f1ba1..d6cd0a9 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceImpl.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceImpl.java
-@@ -29,8 +29,8 @@ import android.os.IBinder;
+@@ -6,6 +6,7 @@ https://github.com/christocracy/cordova-plugin-background-geolocation
+ 
+ This is a new class
+ */
++// Modifications copyright (C) 2020 Aranja
+ 
+ package com.marianhello.bgloc.service;
+ 
+@@ -29,8 +30,8 @@ import android.os.IBinder;
  import android.os.Looper;
  import android.os.Message;
  import android.os.Process;
@@ -298,7 +367,7 @@ index 18f1ba1..8f40b37 100644
 
  import com.marianhello.bgloc.Config;
  import com.marianhello.bgloc.ConnectivityListener;
-@@ -269,7 +269,7 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
+@@ -269,7 +270,7 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
  
      @Override
      public int onStartCommand(Intent intent, int flags, int startId) {
@@ -308,10 +377,17 @@ index 18f1ba1..8f40b37 100644
              start();
              return START_STICKY;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java
-index fd0b99e..3d95eba 100644
+index fd0b99e..09b1464 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/service/LocationServiceIntentBuilder.java
-@@ -21,7 +21,7 @@ import android.content.Context;
+@@ -1,5 +1,6 @@
+ /*
+  * Copyright 2017 R3BL LLC.
++ * Modifications copyright (C) 2020 Aranja
+  *
+  * Licensed to the Apache Software Foundation (ASF) under one or more contributor
+  * license agreements. See the NOTICE file distributed with this work for additional
+@@ -21,7 +22,7 @@ import android.content.Context;
  import android.content.Intent;
  import android.os.Bundle;
  import android.os.Parcelable;
@@ -321,10 +397,15 @@ index fd0b99e..3d95eba 100644
  import java.lang.annotation.Retention;
  import java.lang.annotation.RetentionPolicy;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/NotificationHelper.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/NotificationHelper.java
-index 9be9687..0959766 100644
+index 9be9687..d48898d 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/NotificationHelper.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/NotificationHelper.java
-@@ -9,8 +9,8 @@ import android.content.Intent;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc.sync;
+ 
+ import android.app.Notification;
+@@ -9,8 +10,8 @@ import android.content.Intent;
  import android.graphics.BitmapFactory;
  import android.graphics.Color;
  import android.os.Build;
@@ -336,10 +417,15 @@ index 9be9687..0959766 100644
  import com.marianhello.bgloc.ResourceResolver;
  import com.marianhello.logging.LoggerManager;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/SyncAdapter.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/SyncAdapter.java
-index 9c713e9..c2fe392 100644
+index 9c713e9..9bafad2 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/SyncAdapter.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/sync/SyncAdapter.java
-@@ -11,8 +11,8 @@ import android.content.SyncResult;
+@@ -1,3 +1,4 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc.sync;
+ 
+ import android.accounts.Account;
+@@ -11,8 +12,8 @@ import android.content.SyncResult;
  import android.os.Bundle;
  import android.os.Handler;
  import android.os.Looper;
@@ -351,10 +437,11 @@ index 9c713e9..c2fe392 100644
  import com.marianhello.bgloc.Config;
  import com.marianhello.bgloc.HttpPostService;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/BackgroundLocationTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/BackgroundLocationTest.java
-index 145816a..35ffe15 100644
+index 145816a..76aa168 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/BackgroundLocationTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/BackgroundLocationTest.java
-@@ -1,7 +1,7 @@
+@@ -1,7 +1,8 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.backgroundgeolocation;
 
  import android.os.Build;
@@ -364,10 +451,11 @@ index 145816a..35ffe15 100644
  import com.marianhello.bgloc.data.BackgroundLocation;
 
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/ConfigTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/ConfigTest.java
-index 01ee7f9..80ab3d8 100644
+index 01ee7f9..ac38b0c 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/ConfigTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/ConfigTest.java
-@@ -1,6 +1,6 @@
+@@ -1,6 +1,7 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.backgroundgeolocation;
 
 -import android.support.test.filters.SmallTest;
@@ -376,10 +464,11 @@ index 01ee7f9..80ab3d8 100644
  import com.marianhello.bgloc.Config;
  import com.marianhello.bgloc.data.ArrayListLocationTemplate;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/DBLogReaderTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/DBLogReaderTest.java
-index 39e3d3e..6072a6f 100644
+index 39e3d3e..6f2abb8 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/DBLogReaderTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/common/src/test/java/com/marianhello/backgroundgeolocation/DBLogReaderTest.java
-@@ -1,6 +1,6 @@
+@@ -1,6 +1,7 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.backgroundgeolocation;
 
 -import android.support.test.filters.SmallTest;
@@ -388,21 +477,32 @@ index 39e3d3e..6072a6f 100644
  import com.marianhello.logging.DBLogReader;
 
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/gradle.properties b/node_modules/@mauron85/react-native-background-geolocation/android/gradle.properties
-index 89e0d99..915f0e6 100644
+index 89e0d99..8d9c1ee 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/gradle.properties
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/gradle.properties
-@@ -16,3 +16,5 @@
+@@ -16,3 +16,8 @@
  # This option should only be used with decoupled projects. More details, visit
  # http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
  # org.gradle.parallel=true
++
++# Modifications copyright (C) 2020 Aranja
++
 +android.enableJetifier=true
 +android.useAndroidX=true
-\ No newline at end of file
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/lib/build.gradle b/node_modules/@mauron85/react-native-background-geolocation/android/lib/build.gradle
-index 3a8b36c..32c46bc 100644
+index 3a8b36c..3f3c543 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/lib/build.gradle
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/lib/build.gradle
-@@ -69,7 +69,7 @@ android {
+@@ -23,6 +23,8 @@
+ //
+ // If you don't like this please ask react guys nicely to add google maven repo into
+ // their templates.
++//
++// Modifications copyright (C) 2020 Aranja
+ 
+ apply plugin: 'com.android.library'
+ 
+@@ -69,7 +71,7 @@ android {
      useLibrary 'android.test.mock'
 
      defaultConfig {
@@ -412,10 +512,11 @@ index 3a8b36c..32c46bc 100644
          targetSdkVersion project.ext.getTargetSdkVersion()
          versionCode 1 // intentionally not updating version as we're not uploading to any java repository
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/androidTest/java/com/marianhello/bgloc/react/ConfigMapperTest.java b/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/androidTest/java/com/marianhello/bgloc/react/ConfigMapperTest.java
-index 44682bc..48b1676 100644
+index 44682bc..5f43b2e 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/androidTest/java/com/marianhello/bgloc/react/ConfigMapperTest.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/androidTest/java/com/marianhello/bgloc/react/ConfigMapperTest.java
-@@ -1,9 +1,9 @@
+@@ -1,9 +1,10 @@
++// Modifications copyright (C) 2020 Aranja
  package com.marianhello.bgloc.react;
 
  import android.content.Context;
@@ -429,11 +530,13 @@ index 44682bc..48b1676 100644
  import com.facebook.react.bridge.Arguments;
  import com.facebook.react.bridge.ReadableMap;
 diff --git a/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/main/java/com/marianhello/bgloc/react/headless/HeadlessService.java b/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/main/java/com/marianhello/bgloc/react/headless/HeadlessService.java
-index 50a31b4..298f6fb 100644
+index 50a31b4..1d55001 100644
 --- a/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/main/java/com/marianhello/bgloc/react/headless/HeadlessService.java
 +++ b/node_modules/@mauron85/react-native-background-geolocation/android/lib/src/main/java/com/marianhello/bgloc/react/headless/HeadlessService.java
-@@ -2,7 +2,7 @@ package com.marianhello.bgloc.react.headless;
-
+@@ -1,8 +1,9 @@
++// Modifications copyright (C) 2020 Aranja
+ package com.marianhello.bgloc.react.headless;
+ 
  import android.content.Intent;
  import android.os.Bundle;
 -import android.support.annotation.Nullable;
