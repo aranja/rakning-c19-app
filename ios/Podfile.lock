@@ -35,6 +35,10 @@ PODS:
     - UMCore
   - EXLocalization (8.0.0):
     - UMCore
+  - EXLocation (8.1.0):
+    - UMCore
+    - UMPermissionsInterface
+    - UMTaskManagerInterface
   - EXPermissions (8.0.0):
     - UMCore
     - UMPermissionsInterface
@@ -385,6 +389,7 @@ DEPENDENCIES:
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocalization (from `../node_modules/expo-localization/ios`)
+  - EXLocation (from `../node_modules/expo-location/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
@@ -486,6 +491,9 @@ EXTERNAL SOURCES:
   EXLocalization:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-localization/ios"
+  EXLocation:
+    :path: !ruby/object:Pathname
+    path: "../node_modules/expo-location/ios"
   EXPermissions:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-permissions/ios"
@@ -613,6 +621,7 @@ SPEC CHECKSUMS:
   EXFont: 6187b5ab46ee578d5f8e7f2ea092752e78772235
   EXLinearGradient: 75f302f9d6484267a3f6d3252df2e7a5f00e716a
   EXLocalization: 6a3ec1e9dda2ec9ba9dcc4a29dd840e5e950115e
+  EXLocation: bbd487fd96a18a3ad9725389bbb94c4a5f78edf3
   EXPermissions: 9bc08859a675d291e89be9a0870155c27c16ac35
   EXSecureStore: 1448b90d665c9400aaaf6655fccb464da14698f6
   EXWebBrowser: db32607359fb7b55b7b7b91df32dd3d8355bb3b7

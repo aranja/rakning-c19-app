@@ -76,6 +76,24 @@
     "workplacesLabel": "Miejsca pracy",
     "workplacesLink": "https://www.covid.is/undirflokkar-polsku/miejsca-pracy",
     "worriesAndAnxietyLabel": "Zmartwienia i lęki",
-    "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar-polsku/zmartwienia-i-leki"
+    "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar-polsku/zmartwienia-i-leki",
+    "links": {
+      "primary": [
+        "avoidInfection",
+        "possibleInfection",
+        "isolation",
+        "quarantine"
+      ],
+      "secondary": [
+        "groupsAtRisk",
+        "seniorCitizens",
+        "childrenAndTeens",
+        "worriesAndAnxiety",
+        "workplaces",
+        "travel",
+        "foodPetsAndAnimals",
+        "riskAreas"
+      ]
+    }
   }
 }

@@ -87,6 +87,17 @@
     "workplacesLabel": "MISSING_SPANISH_VERSION",
     "workplacesLink": "MISSING_SPANISH_VERSION",
     "worriesAndAnxietyLabel": "MISSING_SPANISH_VERSION",
-    "worriesAndAnxietyLink": "MISSING_SPANISH_VERSION"
+    "worriesAndAnxietyLink": "MISSING_SPANISH_VERSION",
+    "links": {
+      "primary": [
+        "gatheringBan",
+        "icelandicAnswer",
+        "isolation",
+        "quarantine"
+      ],
+      "secondary": [
+        "groupsAtRisk"
+      ]
+    }
   }
 }
