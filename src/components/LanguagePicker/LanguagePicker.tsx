@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Text from '../ui/Text';
-import { changeLanguage, languages } from '../../i18n/index';
+import {
+  changeLanguage,
+  languages,
+  LanguageDefinition,
+} from '../../i18n/index';
 import Colors from '../../constants/Colors';
 import { CtaButton } from '../Button/index';
 import { verticalScale, scale } from '../../utils/index';
@@ -28,6 +32,14 @@ function LanguagePicker() {
     setLocale(newLocale);
   };
 
+  const langSorter = (a: LanguageDefinition, b: LanguageDefinition) => {
+    if (a.name === 'Íslenska') return -1;
+    if (b.name === 'Íslenska') return 1;
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  };
+
   return (
     <LanguageScreen>
       <Title>
@@ -40,29 +52,31 @@ function LanguagePicker() {
             lineHeight: verticalScale(16 * 1.4),
           }}
         >
-          {t('description')}
+          {t('languageDescription')}
         </Text>
       </Title>
 
       <LanguageList>
-        {languages.map(({ code, name, flag }, index) => (
-          <CtaButton
-            index={index}
-            key={code}
-            align="left"
-            justify="start"
-            onPress={changeLocale(code)}
-            image={flag}
-            bgColor={locale === code ? Colors.blue : Colors.backgroundAlt}
-            color={locale === code ? Colors.almostWhite : Colors.gray}
-            imageDimensions={{
-              width: scale(28),
-              height: scale(19),
-            }}
-          >
-            {name}
-          </CtaButton>
-        ))}
+        {languages
+          .sort((a, b) => langSorter(a, b))
+          .map(({ code, name, flag }, index) => (
+            <CtaButton
+              index={index}
+              key={code}
+              align="left"
+              justify="start"
+              onPress={changeLocale(code)}
+              image={flag}
+              bgColor={locale === code ? Colors.blue : Colors.backgroundAlt}
+              color={locale === code ? Colors.almostWhite : Colors.gray}
+              imageDimensions={{
+                width: scale(28),
+                height: scale(19),
+              }}
+            >
+              {name}
+            </CtaButton>
+          ))}
       </LanguageList>
     </LanguageScreen>
   );
