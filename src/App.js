@@ -32,10 +32,10 @@ const App = () => {
 
         // Load theme fonts
         Font.loadAsync({
-          OpenSans: require('./assets/fonts/OpenSans-Regular.ttf'),
-          OpenSansSemiBold: require('./assets/fonts/OpenSans-SemiBold.ttf'),
-          OpenSansBold: require('./assets/fonts/OpenSans-Bold.ttf'),
-          OpenSansExtraBold: require('./assets/fonts/OpenSans-ExtraBold.ttf'),
+          OpenSans: require('./assets/fonts/OpenSans/OpenSans-Regular.ttf'),
+          OpenSansSemiBold: require('./assets/fonts/OpenSans/OpenSans-SemiBold.ttf'),
+          OpenSansBold: require('./assets/fonts/OpenSans/OpenSans-Bold.ttf'),
+          OpenSansExtraBold: require('./assets/fonts/OpenSans/OpenSans-ExtraBold.ttf'),
         }),
       ]);
 
