@@ -1,7 +1,5 @@
 {
   "translation": {
-    "description": "Pomoc Obronie Cywilnej w śledzeniu potencjalnych infekcji COVID-19 na Islandii",
-    "continue": "Prześlij do polskiego",
     "aboutCovidDescription": "Na stronie covid.is znajdziesz różne wskazówki i wiarygodne informacje.",
     "aboutCovidTitle": "Informacje o COVID-19",
     "announcements": "Ogłoszenia",
@@ -29,6 +27,8 @@
     "incorrentPINMessage": "Niepoprawny numer PIN, spróbuj ponownie.",
     "isolationLabel": "Co to izlolacja",
     "isolationLink": "https://www.covid.is/flokkar-polsku/izolacja",
+    "languageDescription": "Pomoc Obronie Cywilnej w śledzeniu potencjalnych infekcji COVID-19 na Islandii",
+    "languageContinue": "Prześlij do polskiego",
     "next": "Kolejny",
     "phoneNr": "Phone nr.",
     "phoneNumber": "Phone number",

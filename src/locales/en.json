@@ -1,7 +1,5 @@
 {
   "translation": {
-    "description": "Help the Civil Protection Team to track potential COVID-19 infections in Iceland",
-    "continue": "Continue in English",
     "aboutCovidDescription": "Sound advice and reliable information can be found on the covid.is website.",
     "aboutCovidTitle": "Information on COVID-19",
     "announcements": "Announcements",
@@ -31,6 +29,8 @@
     "incorrentPINMessage": "Oops! Incorrect code. Please try again.",
     "isolationLabel": "How does isolation work?",
     "isolationLink": "https://www.covid.is/categories/how-does-isolation-work",
+    "languageDescription": "Help the Civil Protection Team to track potential COVID-19 infections in Iceland",
+    "languageContinue": "Continue in English",
     "next": "Next",
     "phoneNr": "Telephone no.",
     "phoneNumber": "Telephone number",

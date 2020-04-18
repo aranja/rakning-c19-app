@@ -1,7 +1,5 @@
 {
   "translation": {
-    "description": "Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi",
-    "continue": "Áfram á íslensku",
     "aboutCovidDescription": "Á heimasíðunni covid.is er að finna ýmis góð ráð og traustar upplýsingar.",
     "aboutCovidTitle": "Upplýsingar um COVID-19",
     "announcements": "Tilkynningar",
@@ -31,6 +29,8 @@
     "incorrentPINMessage": "Ekki réttur kóði, vinsamlega reyndu aftur.",
     "isolationLabel": " Einangrun, hvernig virkar hún?",
     "isolationLink": "https://www.covid.is/flokkar/einangrun",
+    "languageDescription": "Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi",
+    "languageContinue": "Áfram á íslensku",
     "next": "Áfram",
     "phoneNr": "Símanr.",
     "phoneNumber": "Símanúmer",

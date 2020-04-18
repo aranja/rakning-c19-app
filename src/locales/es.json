@@ -1,7 +1,5 @@
 {
   "translation": {
-    "description": "Ayuda al ñsks sjpsj  ss sEquipo de Protección Civil a rastrear posibles infecciones de COVID-19 en Islandia",
-    "continue": "Continuar en español",
     "aboutCovidDescription": "Puedes encontrar consejos e información fiable en la web covid.is/es",
     "aboutCovidTitle": "Información sobre el COVID-19",
     "announcements": "Anuncios",
@@ -35,6 +33,8 @@
     "incorrentPINMessage": "¡Vaya! Código erróneo. Inténtelo de nuevo, por favor.",
     "isolationLabel": "¿En qué puede consistir el aislamiento?",
     "isolationLink": "https://www.covid.is/es/contagio-confirmado-significa-aislamiento",
+    "languageDescription": "Ayuda al Equipo de Protección Civil a rastrear posibles infecciones de COVID-19 en Islandia",
+    "languageContinue": "Continuar en español",
     "next": "Siguiente",
     "phoneNr": "Nº de teléfono",
     "phoneNumber": "Número de teléfono",
@@ -89,15 +89,8 @@
     "worriesAndAnxietyLabel": "MISSING_SPANISH_VERSION",
     "worriesAndAnxietyLink": "MISSING_SPANISH_VERSION",
     "links": {
-      "primary": [
-        "gatheringBan",
-        "icelandicAnswer",
-        "isolation",
-        "quarantine"
-      ],
-      "secondary": [
-        "groupsAtRisk"
-      ]
+      "primary": ["gatheringBan", "icelandicAnswer", "isolation", "quarantine"],
+      "secondary": ["groupsAtRisk"]
     }
   }
 }
