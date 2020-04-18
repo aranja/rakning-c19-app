@@ -170,6 +170,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "com.google.android.gms:play-services-gcm:15.0.1"
     implementation "com.google.android.gms:play-services-location:15.0.1"
+    implementation project(":@mauron85_react-native-background-geolocation-common")
 
     addUnimodulesDependencies()
 
