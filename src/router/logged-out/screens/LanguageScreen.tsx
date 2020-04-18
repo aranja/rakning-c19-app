@@ -27,7 +27,7 @@ const LanguageScreen = ({ navigation }: Props) => {
             image={covidIcon}
             imageDimensions={{ height: scale(28), width: scale(24) }}
           >
-            {t('welcomeRegisterButton')}
+            {t('languageContinue')}
           </CtaButton>
         </>
       }
