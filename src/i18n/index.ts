@@ -26,57 +26,41 @@ const resources = {
 };
 const namespace = 'translation';
 
-export const languages = [
+export interface LanguageDefinition {
+  code: string;
+  name: string;
+  flag: string;
+}
+
+export const languages: LanguageDefinition[] = [
   {
     code: 'is',
     name: 'Íslenska',
-    title: 'Rakning COVID-19',
-    description:
-      'Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi',
-    button: 'Áfram á íslensku',
     flag: isFlag,
   },
   {
     code: 'pl',
     name: 'Polski',
-    title: 'Śledzenie COVID-19',
-    description:
-      'Pomoc Obronie Cywilnej w śledzeniu potencjalnych infekcji COVID-19 na Islandii',
-    button: 'Prześlij do polskiego',
     flag: plFlag,
   },
   {
     code: 'en',
     name: 'English',
-    title: 'Tracking COVID-19',
-    description:
-      'Help the Civil Protection Team to track potential COVID-19 infections in Iceland',
-    button: 'Continue in English',
     flag: enFlag,
   },
   {
     code: 'es',
     name: 'Español',
-    title: 'Rastreo COVID-19',
-    description:
-      'Ayuda al Equipo de Protección Civil a rastrear posibles infecciones de COVID-19 en Islandia',
-    button: 'Continuar en español',
     flag: esFlag,
   },
   {
     code: 'fr',
     name: 'Français',
-    title: 'Suivi du COVID-19',
-    description: `Aidez l'Équipe de la Protection Civile à suivre les infections potentielles au COVID-19 en Islande`,
-    button: 'Continuer en français',
     flag: frFlag,
   },
   {
     code: 'th',
     name: 'ภาษาไทย',
-    title: 'ติดตาม COVID-19',
-    description: 'ช่วยเหลือทีมติดตามของกรมพลเรือนและเหตุฉุกเฉินในการติดตาม COVID-19 ในประเทศไอซ์แลนด์i',
-    button: 'ดูต่อในภาษาไทย',
     flag: thFlag,
   },
 ];
@@ -92,7 +76,6 @@ export default function initI18n() {
       debug: false,
       resources,
       whitelist: Object.keys(resources),
-
       fallbackLng: 'en',
       saveMissing: true,
       missingKeyHandler: (locale, ns, key) => {
@@ -103,7 +86,7 @@ export default function initI18n() {
         }
       },
       ns: namespace,
-      defaultNs: namespace,
+      defaultNS: namespace,
       keySeparator: false,
       nsSeparator: false,
       interpolation: {
