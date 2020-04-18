@@ -29,6 +29,8 @@
     "incorrentPINMessage": "Oups ! Code incorrect. Veuillez réessayer.",
     "isolationLabel": "Comment fonctionne l'isolement ?",
     "isolationLink": "https://www.covid.is/categories/how-does-isolation-work",
+    "languageDescription": "Aidez l'Équipe de la Protection Civile à suivre les infections potentielles au COVID-19 en Islande",
+    "languageContinue": "Continuer en français",
     "next": "Suivant",
     "phoneNr": "Numéro de téléphone",
     "phoneNumber": "Numéro de téléphone",
@@ -81,6 +83,25 @@
     "workplacesLabel": "Lieux de travail",
     "workplacesLink": "https://www.covid.is/sub-categories/workplaces",
     "worriesAndAnxietyLabel": "Inquiétudes et anxiété",
-    "worriesAndAnxietyLink": "https://www.covid.is/sub-categories/worries-and-anxiety"
+    "worriesAndAnxietyLink": "https://www.covid.is/sub-categories/worries-and-anxiety",
+    "links": {
+      "primary": [
+        "avoidInfection",
+        "possibleInfection",
+        "isolation",
+        "quarantine"
+      ],
+      "secondary": [
+        "groupsAtRisk",
+        "seniorCitizens",
+        "childrenAndTeens",
+        "worriesAndAnxiety",
+        "workplaces",
+        "travel",
+        "foodPetsAndAnimals",
+        "tourists",
+        "riskAreas"
+      ]
+    }
   }
 }
