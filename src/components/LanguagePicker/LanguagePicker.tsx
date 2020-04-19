@@ -28,7 +28,7 @@ interface Props {
   onLanguagePress?: () => void;
 }
 
-function LanguagePicker({ showTitle: showHeader, onLanguagePress }: Props) {
+function LanguagePicker({ showTitle, onLanguagePress }: Props) {
   const { t, i18n } = useTranslation();
   const [locale, setLocale] = React.useState(i18n.language);
 
@@ -49,7 +49,7 @@ function LanguagePicker({ showTitle: showHeader, onLanguagePress }: Props) {
 
   return (
     <LanguageScreen>
-      {showHeader && (
+      {showTitle && (
         <Title>
           <Text type="heading" level={2} marginBottom={0.25}>
             {t('welcomeTitle')}
