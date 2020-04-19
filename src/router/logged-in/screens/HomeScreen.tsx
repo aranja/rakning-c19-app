@@ -25,6 +25,7 @@ import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
 import { useAlert } from '../../../context/alert';
+import { languages } from '../../../i18n';
 
 interface LocaleLinks {
   primary?: string[];
@@ -42,10 +43,8 @@ const smallBtnStyle = {
 };
 
 const HomeScreen = ({ navigation }) => {
-  const {
-    t,
-    i18n,
-  } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const selectedLanguage = languages.find(lang => lang.code === i18n.language);
   const { logout } = useAuth();
   const { fetchUser, clearUserData } = useContext(UserContext);
   const { createAlert } = useAlert();
@@ -205,6 +204,18 @@ const HomeScreen = ({ navigation }) => {
             >
               <Text center>{t('privacyPolicy')}</Text>
             </UrlButton>
+
+            <CtaButton
+              onPress={() => navigation.navigate('ChangeLanguage')}
+              image={selectedLanguage.flag}
+              bgColor={Colors.backgroundAlt}
+              imageDimensions={{
+                width: scale(28),
+                height: scale(19),
+              }}
+            >
+              <Text center>{selectedLanguage.name}</Text>
+            </CtaButton>
 
             <CtaButton
               bgColor={Colors.backgroundAlt}
