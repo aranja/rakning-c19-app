@@ -15,6 +15,8 @@
     "changeLocationAllow": "Leyfa staðsetningu",
     "changeLocationDescriptionIOS": "Það er mjög mikilvægt að leyfa appinu að fylgjast með staðsetningum. Vinsamlegast breyttu leyfinu fyrir notkun staðsetningu í valmöguleikann <0>„Always“</0>.",
     "changeLocationSettings": "Breyta stillingum",
+    "enableLocationServices": "Leyfa staðsetningu",
+    "enableLocationServicesDescription": "Það er slökkt á staðsetningar-þjónustunni á símanum þínum. Ýttu á takkann til að opna stillingar þar sem þú getur kveikt á staðsetningarþjónustunni.",
     "enableLocationDescriptionAndroid": "Appið mun óska eftir heimild til að skrá ferðir/staðsetningu þína. Það er mjög mikilvægt að velja í ferlinu möguleikann <0>„Allow all the time“</0>.",
     "enableLocationDescriptionIOS": "Appið mun óska eftir heimild til að skrá ferðir/staðsetningu þína. Það er mjög mikilvægt að velja í ferlinu möguleikann <0>„Allow while using app“</0>.",
     "enableLocationMessageIOS": "Nokkru eftir að appið hefur verið sett upp í tækinu þínu mun það biðja þig um leyfi til að vista staðsetningar á meðan appið er ekki í notkun. Þá er mikilvægt að velja <0>„Change to Always Allow“</0>. Það er skilyrði fyrir að appið gegni hlutverki sínu.",
@@ -27,6 +29,8 @@
     "incorrentPINMessage": "Ekki réttur kóði, vinsamlega reyndu aftur.",
     "isolationLabel": " Einangrun, hvernig virkar hún?",
     "isolationLink": "https://www.covid.is/flokkar/einangrun",
+    "languageDescription": "Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi",
+    "languageContinue": "Áfram á íslensku",
     "next": "Áfram",
     "phoneNr": "Símanr.",
     "phoneNumber": "Símanúmer",
@@ -78,6 +82,24 @@
     "workplacesLabel": "Vinnustaðir",
     "workplacesLink": "https://www.covid.is/undirflokkar/vinnustadir",
     "worriesAndAnxietyLabel": "Áhyggjur og kvíði",
-    "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar/ahyggjur-og-kvidi"
+    "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar/ahyggjur-og-kvidi",
+    "links": {
+      "primary": [
+        "avoidInfection",
+        "possibleInfection",
+        "isolation",
+        "quarantine"
+      ],
+      "secondary": [
+        "groupsAtRisk",
+        "seniorCitizens",
+        "childrenAndTeens",
+        "worriesAndAnxiety",
+        "workplaces",
+        "travel",
+        "foodPetsAndAnimals",
+        "riskAreas"
+      ]
+    }
   }
 }

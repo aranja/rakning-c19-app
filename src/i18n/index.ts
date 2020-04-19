@@ -3,10 +3,18 @@ import { initReactI18next } from 'react-i18next';
 import isFlag from '../assets/flags/is.png';
 import enFlag from '../assets/flags/gb.png';
 import plFlag from '../assets/flags/pl.png';
+import esFlag from '../assets/flags/es.png';
+import frFlag from '../assets/flags/fr.png';
+import thFlag from '../assets/flags/th.png';
+import ruFlag from '../assets/flags/ru.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
 import pl from '../locales/pl.json';
+import es from '../locales/es.json';
+import fr from '../locales/fr.json';
+import th from '../locales/th.json';
+import ru from '../locales/ru.json';
 
 import languageDetector from './language-detector';
 
@@ -14,36 +22,54 @@ const resources = {
   en,
   is,
   pl,
+  es,
+  fr,
+  th,
+  ru,
 };
 const namespace = 'translation';
 
-export const languages = [
+export interface LanguageDefinition {
+  code: string;
+  name: string;
+  flag: string;
+}
+
+export const languages: LanguageDefinition[] = [
   {
     code: 'is',
     name: 'Íslenska',
-    title: 'Rakning COVID-19',
-    description:
-      'Hjálpum rakningateymi Almannavarna að rekja hugsanleg COVID-19 smit á Íslandi',
-    button: 'Áfram á íslensku',
     flag: isFlag,
   },
   {
     code: 'pl',
     name: 'Polski',
-    title: 'Śledzenie COVID-19',
-    description:
-      'Pomoc Obronie Cywilnej w śledzeniu potencjalnych infekcji COVID-19 na Islandii',
-    button: 'Prześlij do polskiego',
     flag: plFlag,
   },
   {
     code: 'en',
     name: 'English',
-    title: 'Tracking COVID-19',
-    description:
-      'Help the Civil Protection Team to track potential COVID-19 infections in Iceland',
-    button: 'Continue in English',
     flag: enFlag,
+  },
+  {
+    code: 'es',
+    name: 'Español',
+    flag: esFlag,
+  },
+  {
+    code: 'fr',
+    name: 'Français',
+    flag: frFlag,
+  },
+  {
+    code: 'th',
+    name: 'ภาษาไทย',
+    flag: thFlag,
+  },
+  {
+    code: 'ru',
+    name: 'Русский',
+    flag: ruFlag,
   },
 ];
 
@@ -52,13 +78,12 @@ export const languages = [
  */
 export default function initI18n() {
   i18next
-    .use(languageDetector)
+    .use(languageDetector(languages))
     .use(initReactI18next)
     .init({
       debug: false,
       resources,
       whitelist: Object.keys(resources),
-
       fallbackLng: 'en',
       saveMissing: true,
       missingKeyHandler: (locale, ns, key) => {
@@ -69,8 +94,7 @@ export default function initI18n() {
         }
       },
       ns: namespace,
-      defaultNs: namespace,
-
+      defaultNS: namespace,
       keySeparator: false,
       nsSeparator: false,
       interpolation: {
