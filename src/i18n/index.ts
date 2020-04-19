@@ -25,6 +25,7 @@ const resources = {
   es,
   fr,
   th,
+  ru,
 };
 const namespace = 'translation';
 
