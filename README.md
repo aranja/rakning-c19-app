@@ -139,3 +139,11 @@ If you believe you’ve found a security vulnerability, please send it to us by 
 * A detailed description of the steps required to reproduce the vulnerability (POC scripts, screenshots, and compressed screen captures are all helpful to us).
 
 Please practice Responsible Disclosure and give us sufficient time to deploy a fix to our users. 
+
+### Translations
+
+- 🇷🇺Russian - courtesy of [Constance Pomuran](https://www.facebook.com/cpomuran)
+- 🇹🇭Thai - courtesy of [Pidsinee Disa Einarsdottir](https://www.linkedin.com/in/pidsinee/)
+- 🇫🇷French - courtesy of [Jérémy Barbet](https://github.com/jeremybarbet)
+- 🇪🇸Spanish - courtesy of [Pablo Anaya](https://www.linkedin.com/in/pjanaya/)
+- Want to translate to your own language? please open an issue 💜
