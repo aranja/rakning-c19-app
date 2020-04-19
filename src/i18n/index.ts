@@ -6,6 +6,7 @@ import plFlag from '../assets/flags/pl.png';
 import esFlag from '../assets/flags/es.png';
 import frFlag from '../assets/flags/fr.png';
 import thFlag from '../assets/flags/th.png';
+import ruFlag from '../assets/flags/ru.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
@@ -13,6 +14,7 @@ import pl from '../locales/pl.json';
 import es from '../locales/es.json';
 import fr from '../locales/fr.json';
 import th from '../locales/th.json';
+import ru from '../locales/ru.json';
 
 import languageDetector from './language-detector';
 
@@ -23,6 +25,7 @@ const resources = {
   es,
   fr,
   th,
+  ru,
 };
 const namespace = 'translation';
 
@@ -63,6 +66,11 @@ export const languages: LanguageDefinition[] = [
     name: 'ภาษาไทย',
     flag: thFlag,
   },
+  {
+    code: 'ru',
+    name: 'Русский',
+    flag: ruFlag,
+  },
 ];
 
 /**
@@ -70,7 +78,7 @@ export const languages: LanguageDefinition[] = [
  */
 export default function initI18n() {
   i18next
-    .use(languageDetector)
+    .use(languageDetector(languages))
     .use(initReactI18next)
     .init({
       debug: false,

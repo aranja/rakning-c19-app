@@ -23,7 +23,7 @@ const LanguageScreen = ({ navigation }: Props) => {
         <>
           <Vertical unit={0.5} />
           <CtaButton
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('Welcome')}
             image={covidIcon}
             imageDimensions={{ height: scale(28), width: scale(24) }}
           >
