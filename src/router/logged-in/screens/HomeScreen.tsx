@@ -197,7 +197,6 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
               </Text>
             </UrlButton>
-
             <UrlButton
               bgColor={Colors.backgroundAlt}
               href={privacyUrls[i18n.language] || privacyUrls.en}
@@ -205,19 +204,17 @@ const HomeScreen = ({ navigation }) => {
               <Text center>{t('privacyPolicy')}</Text>
             </UrlButton>
 
-            {selectedLanguage && (
-              <CtaButton
-                onPress={() => navigation.navigate({ routeName: 'LoggedOut' })}
-                image={selectedLanguage.flag}
-                bgColor={Colors.backgroundAlt}
-                imageDimensions={{
-                  width: scale(28),
-                  height: scale(19),
-                }}
-              >
-                <Text center>{selectedLanguage.name}</Text>
-              </CtaButton>
-            )}
+            <CtaButton
+              onPress={() => navigation.navigate({ routeName: 'LoggedOut' })}
+              image={selectedLanguage.flag}
+              bgColor={Colors.backgroundAlt}
+              imageDimensions={{
+                width: scale(28),
+                height: scale(19),
+              }}
+            >
+              <Text center>{selectedLanguage.name}</Text>
+            </CtaButton>
 
             <CtaButton
               bgColor={Colors.backgroundAlt}
