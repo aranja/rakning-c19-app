@@ -78,7 +78,7 @@ export const languages: LanguageDefinition[] = [
  */
 export default function initI18n() {
   i18next
-    .use(languageDetector)
+    .use(languageDetector(languages))
     .use(initReactI18next)
     .init({
       debug: false,
