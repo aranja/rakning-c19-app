@@ -51,7 +51,7 @@ type CtaButtonProp = ButtonProps & {
   small?: boolean;
   align?: 'left' | 'center';
   bgColor?: string;
-  image?: ImageSourcePropType;
+  image?: ImageSourcePropType | 'string';
   imageDimensions?: { height: number; width: number };
   justify?: 'start' | 'center';
 };
