@@ -23,13 +23,20 @@ const LanguageList = styled(Content)``;
 
 const Continue = styled(Content)``;
 
-function LanguagePicker() {
+interface Props {
+  showTitle?: boolean;
+  onLanguagePress?: () => void;
+}
+
+function LanguagePicker({ showTitle, onLanguagePress }: Props) {
   const { t, i18n } = useTranslation();
   const [locale, setLocale] = React.useState(i18n.language);
 
   const changeLocale = (newLocale: string) => () => {
     changeLanguage(newLocale);
     setLocale(newLocale);
+
+    if (onLanguagePress) onLanguagePress();
   };
 
   const langSorter = (a: LanguageDefinition, b: LanguageDefinition) => {
@@ -42,19 +49,21 @@ function LanguagePicker() {
 
   return (
     <LanguageScreen>
-      <Title>
-        <Text type="heading" level={2} marginBottom={0.25}>
-          {t('welcomeTitle')}
-        </Text>
-        <Text
-          style={{
-            fontSize: verticalScale(16),
-            lineHeight: verticalScale(16 * 1.4),
-          }}
-        >
-          {t('languageDescription')}
-        </Text>
-      </Title>
+      {showTitle && (
+        <Title>
+          <Text type="heading" level={2} marginBottom={0.25}>
+            {t('welcomeTitle')}
+          </Text>
+          <Text
+            style={{
+              fontSize: verticalScale(16),
+              lineHeight: verticalScale(16 * 1.4),
+            }}
+          >
+            {t('languageDescription')}
+          </Text>
+        </Title>
+      )}
 
       <LanguageList>
         {languages
