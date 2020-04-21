@@ -7,6 +7,8 @@ import esFlag from '../assets/flags/es.png';
 import frFlag from '../assets/flags/fr.png';
 import thFlag from '../assets/flags/th.png';
 import ruFlag from '../assets/flags/ru.png';
+import jpFlag from '../assets/flags/jp.png';
+import phFlag from '../assets/flags/ph.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
@@ -15,6 +17,8 @@ import es from '../locales/es.json';
 import fr from '../locales/fr.json';
 import th from '../locales/th.json';
 import ru from '../locales/ru.json';
+import jp from '../locales/jp.json';
+import ph from '../locales/ph.json';
 
 import languageDetector from './language-detector';
 
@@ -26,6 +30,8 @@ const resources = {
   fr,
   th,
   ru,
+  jp,
+  ph,
 };
 const namespace = 'translation';
 
@@ -70,6 +76,16 @@ export const languages: LanguageDefinition[] = [
     code: 'ru',
     name: 'Русский',
     flag: ruFlag,
+  },
+  {
+    code: 'jp',
+    name: '日本語',
+    flag: jpFlag,
+  },
+  {
+    code: 'ph',
+    name: 'Filipino',
+    flag: phFlag,
   },
 ];
 

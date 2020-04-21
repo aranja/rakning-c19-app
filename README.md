@@ -146,4 +146,6 @@ Please practice Responsible Disclosure and give us sufficient time to deploy a f
 - 🇹🇭Thai - courtesy of [Pidsinee Disa Einarsdottir](https://www.linkedin.com/in/pidsinee/)
 - 🇫🇷French - courtesy of [Jérémy Barbet](https://github.com/jeremybarbet)
 - 🇪🇸Spanish - courtesy of [Pablo Anaya](https://www.linkedin.com/in/pjanaya/)
+- 🇯🇵Japanese - courtesy of [Yuka Ogura](https://www.facebook.com/YukaOgura55)
+- 🇵🇭Filipino - courtesy of [Ronald Fatalla](https://www.facebook.com/ronald.fatalla)
 - Want to translate to your own language? please open an issue 💜
