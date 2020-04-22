@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Text from '../ui/Text';
 import {
   changeLanguage,
   languages,
@@ -15,20 +14,15 @@ import { useTranslation } from 'react-i18next';
 
 const LanguageScreen = styled.View``;
 
-const Title = styled(Content)`
-  height: ${verticalScale(150)};
+const LanguageList = styled(Content)`
+  margin-bottom: ${verticalScale(80)};
 `;
 
-const LanguageList = styled(Content)``;
-
-const Continue = styled(Content)``;
-
 interface Props {
-  showTitle?: boolean;
   onLanguagePress?: () => void;
 }
 
-function LanguagePicker({ showTitle, onLanguagePress }: Props) {
+function LanguagePicker({ onLanguagePress }: Props) {
   const { t, i18n } = useTranslation();
   const [locale, setLocale] = React.useState(i18n.language);
 
@@ -49,22 +43,6 @@ function LanguagePicker({ showTitle, onLanguagePress }: Props) {
 
   return (
     <LanguageScreen>
-      {showTitle && (
-        <Title>
-          <Text type="heading" level={2} marginBottom={0.25}>
-            {t('welcomeTitle')}
-          </Text>
-          <Text
-            style={{
-              fontSize: verticalScale(16),
-              lineHeight: verticalScale(16 * 1.4),
-            }}
-          >
-            {t('languageDescription')}
-          </Text>
-        </Title>
-      )}
-
       <LanguageList>
         {languages
           .sort((a, b) => langSorter(a, b))
