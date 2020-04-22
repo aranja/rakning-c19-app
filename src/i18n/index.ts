@@ -9,6 +9,7 @@ import thFlag from '../assets/flags/th.png';
 import ruFlag from '../assets/flags/ru.png';
 import jpFlag from '../assets/flags/jp.png';
 import phFlag from '../assets/flags/ph.png';
+import arFlag from '../assets/flags/ma.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
@@ -19,6 +20,7 @@ import th from '../locales/th.json';
 import ru from '../locales/ru.json';
 import jp from '../locales/jp.json';
 import ph from '../locales/ph.json';
+import ar from '../locales/ar.json';
 
 import languageDetector from './language-detector';
 
@@ -32,6 +34,7 @@ const resources = {
   ru,
   jp,
   ph,
+  ar,
 };
 const namespace = 'translation';
 
@@ -39,6 +42,7 @@ export interface LanguageDefinition {
   code: string;
   name: string;
   flag: string;
+  rtl?: boolean;
 }
 
 export const languages: LanguageDefinition[] = [
@@ -87,6 +91,12 @@ export const languages: LanguageDefinition[] = [
     name: 'Filipino',
     flag: phFlag,
   },
+  {
+    code: 'ar',
+    name: 'عربي',
+    flag: arFlag,
+    rtl: true,
+  },
 ];
 
 /**
@@ -121,6 +131,9 @@ export default function initI18n() {
 
 export const changeLanguage = lang => {
   i18next.changeLanguage(lang);
+  i18next.dir(lang);
 };
 
 export const getLanguage = () => i18next.language;
+export const isRTL = () =>
+  languages.find(lang => lang.code === i18next.language).rtl;
