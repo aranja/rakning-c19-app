@@ -75,6 +75,11 @@ export const languages: LanguageDefinition[] = [
     code: 'ar',
     name: 'عربي',
     rtl: true,
+  }
+  {
+    code: 'fa',
+    name: 'فارسی',
+    rtl: true,
   },
 ];
 
