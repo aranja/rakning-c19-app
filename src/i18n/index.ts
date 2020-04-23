@@ -11,6 +11,7 @@ import ru from '../locales/ru.json';
 import jp from '../locales/jp.json';
 import ph from '../locales/ph.json';
 import ar from '../locales/ar.json';
+import fa from '../locales/fa.json';
 
 import languageDetector from './language-detector';
 
@@ -25,6 +26,7 @@ const resources = {
   jp,
   ph,
   ar,
+  fa,
 };
 const namespace = 'translation';
 
@@ -75,7 +77,7 @@ export const languages: LanguageDefinition[] = [
     code: 'ar',
     name: 'عربي',
     rtl: true,
-  }
+  },
   {
     code: 'fa',
     name: 'فارسی',
