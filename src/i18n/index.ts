@@ -1,15 +1,5 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import isFlag from '../assets/flags/is.png';
-import enFlag from '../assets/flags/gb.png';
-import plFlag from '../assets/flags/pl.png';
-import esFlag from '../assets/flags/es.png';
-import frFlag from '../assets/flags/fr.png';
-import thFlag from '../assets/flags/th.png';
-import ruFlag from '../assets/flags/ru.png';
-import jpFlag from '../assets/flags/jp.png';
-import phFlag from '../assets/flags/ph.png';
-import arFlag from '../assets/flags/ma.png';
 
 import en from '../locales/en.json';
 import is from '../locales/is.json';
@@ -41,7 +31,6 @@ const namespace = 'translation';
 export interface LanguageDefinition {
   code: string;
   name: string;
-  flag: string;
   rtl?: boolean;
 }
 
@@ -49,52 +38,42 @@ export const languages: LanguageDefinition[] = [
   {
     code: 'is',
     name: 'Íslenska',
-    flag: isFlag,
   },
   {
     code: 'pl',
     name: 'Polski',
-    flag: plFlag,
   },
   {
     code: 'en',
     name: 'English',
-    flag: enFlag,
   },
   {
     code: 'es',
     name: 'Español',
-    flag: esFlag,
   },
   {
     code: 'fr',
     name: 'Français',
-    flag: frFlag,
   },
   {
     code: 'th',
     name: 'ภาษาไทย',
-    flag: thFlag,
   },
   {
     code: 'ru',
     name: 'Русский',
-    flag: ruFlag,
   },
   {
     code: 'jp',
     name: '日本語',
-    flag: jpFlag,
   },
   {
     code: 'ph',
     name: 'Filipino',
-    flag: phFlag,
   },
   {
     code: 'ar',
     name: 'عربي',
-    flag: arFlag,
     rtl: true,
   },
 ];

@@ -46,20 +46,15 @@ function LanguagePicker({ onLanguagePress }: Props) {
       <LanguageList>
         {languages
           .sort((a, b) => langSorter(a, b))
-          .map(({ code, name, flag }, index) => (
+          .map(({ code, name }, index) => (
             <CtaButton
               index={index}
               key={code}
               align="left"
               justify="start"
               onPress={changeLocale(code)}
-              image={flag}
               bgColor={locale === code ? Colors.blue : Colors.backgroundAlt}
               color={locale === code ? Colors.almostWhite : Colors.gray}
-              imageDimensions={{
-                width: scale(28),
-                height: scale(19),
-              }}
             >
               {name}
             </CtaButton>
