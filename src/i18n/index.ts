@@ -12,6 +12,7 @@ import jp from '../locales/jp.json';
 import ph from '../locales/ph.json';
 import ar from '../locales/ar.json';
 import fa from '../locales/fa.json';
+import lt from '../locales/lt.json';
 
 import languageDetector from './language-detector';
 
@@ -27,6 +28,7 @@ const resources = {
   ph,
   ar,
   fa,
+  lt,
 };
 const namespace = 'translation';
 
@@ -82,6 +84,10 @@ export const languages: LanguageDefinition[] = [
     code: 'fa',
     name: 'فارسی',
     rtl: true,
+  },
+  {
+    code: 'lt',
+    name: 'Lietuvis',
   },
 ];
 
