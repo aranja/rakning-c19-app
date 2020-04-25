@@ -87,7 +87,7 @@ export const languages: LanguageDefinition[] = [
   },
   {
     code: 'lt',
-    name: 'Lietuvis',
+    name: 'Lietuviškai',
   },
 ];
 
