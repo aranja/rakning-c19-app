@@ -17,6 +17,7 @@ import { scale } from '../../utils';
 import { useWindowDimensions } from '../../utils/hooks';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
+import { isRTL } from '../../i18n';
 
 const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
 const linkTouchPadding = 12;
@@ -166,7 +167,11 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
             ...styles.phoneViewStyle,
             height: inputHeight,
           }}
-          textStyle={{ ...styles.phoneTextStyle, height: inputHeight }}
+          textStyle={{
+            ...styles.phoneTextStyle,
+            height: inputHeight,
+            textAlign: isRTL() ? 'right' : 'left',
+          }}
           flagStyle={styles.flag}
           offset={6}
           onChangePhoneNumber={onChangeCallingCode}
@@ -182,6 +187,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
             ...styles.phoneViewStyle,
             ...styles.phoneTextStyle,
             height: inputHeight,
+            textAlign: isRTL() ? 'right' : 'left',
           }}
           onChangeText={onChangePhoneNumber}
         />
