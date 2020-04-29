@@ -52,6 +52,7 @@ const Circles = styled.View`
 
 const Main = styled.View`
   flex: 1;
+  padding-top: ${({ topPadding }) => (topPadding ? verticalScale(220) : 0)}
   padding-bottom: ${({ bottomPadding }) =>
     bottomPadding ? verticalScale(200) : 0};
 `;
@@ -78,9 +79,71 @@ export const SlimContent = ({ children }: { children: ReactNode }) => (
   </LinearGradient>
 );
 
+interface HeaderProps {
+  title?: string;
+  subtitle?: string;
+  fixedHeader?: boolean;
+  alt?: boolean;
+}
+
+export const AppHeader = ({
+  alt,
+  title,
+  subtitle,
+  fixedHeader,
+}: HeaderProps) => {
+  console.log('AppHeader', fixedHeader);
+  const showHeader = title || subtitle;
+  let styles = {};
+  styles = { zIndex: 1 };
+
+  if (showHeader)
+    styles = {
+      paddingTop: verticalScale(64),
+      paddingHorizontal: scale(32),
+      paddingBottom: verticalScale(32),
+    };
+
+  if (fixedHeader) {
+    styles = {
+      ...styles,
+      position: 'absolute',
+      top: 0,
+      width: '100%',
+      zIndex: 2,
+    };
+  }
+  return (
+    <Header alt={alt} style={styles}>
+      {showHeader && (
+        <>
+          <Circles>
+            <Circle x={90} y={-10} />
+            <Circle color={alt ? Colors.orange : Colors.blue} x={15} y={-30} />
+            <Circle x={-25} y={35} />
+          </Circles>
+          <SafeAreaView>
+            <Heading color={alt ? Colors.white : Colors.textDark}>
+              {title}
+            </Heading>
+            <Text
+              color={alt ? Colors.white : Colors.textDark}
+              marginBottom={0}
+              bold
+            >
+              {subtitle}
+            </Text>
+          </SafeAreaView>
+        </>
+      )}
+    </Header>
+  );
+};
+
 interface Props {
   title?: string;
   subtitle?: string;
+  fixedHeader?: boolean;
   children: ReactNode;
   alt?: boolean;
   footer?: ReactNode;
@@ -90,18 +153,22 @@ interface Props {
 function AppShell({
   title,
   subtitle,
+  fixedHeader,
   children,
   alt,
   footer,
   scrollContainerStyles,
 }: Props) {
   const { fontScale } = useWindowDimensions();
-  const showHeader = title || subtitle;
+
   const isFixed = isNaN(fontScale) || fontScale < 2;
   const headerColor = Colors[alt ? 'blue' : 'orange'];
 
   return (
     <Wrap>
+      {fixedHeader && (
+        <AppHeader title={title} subtitle={subtitle} alt={alt} fixedHeader />
+      )}
       <KeyboardAvoidingView behavior="height">
         <ScrollView
           keyboardShouldPersistTaps="always"
@@ -112,44 +179,13 @@ function AppShell({
           {Platform.OS === 'ios' && (
             <HeaderOverScroll style={{ backgroundColor: headerColor }} />
           )}
+          {!fixedHeader && (
+            <AppHeader title={title} subtitle={subtitle} alt={alt} />
+          )}
 
-          <Header
-            alt={alt}
-            style={
-              (showHeader && {
-                paddingTop: verticalScale(64),
-                paddingHorizontal: scale(32),
-                paddingBottom: verticalScale(32),
-              }) || { zIndex: 1 }
-            }
-          >
-            {showHeader && (
-              <>
-                <Circles>
-                  <Circle x={90} y={-10} />
-                  <Circle
-                    color={alt ? Colors.orange : Colors.blue}
-                    x={15}
-                    y={-30}
-                  />
-                  <Circle x={-25} y={35} />
-                </Circles>
-                <SafeAreaView>
-                  <Heading color={alt ? Colors.white : Colors.textDark}>
-                    {title}
-                  </Heading>
-                  <Text
-                    color={alt ? Colors.white : Colors.textDark}
-                    marginBottom={0}
-                    bold
-                  >
-                    {subtitle}
-                  </Text>
-                </SafeAreaView>
-              </>
-            )}
-          </Header>
-          <Main bottomPadding={footer && isFixed}>{children}</Main>
+          <Main bottomPadding={footer && isFixed} topPadding={fixedHeader}>
+            {children}
+          </Main>
           {footer && !isFixed ? <Content>{footer}</Content> : null}
         </ScrollView>
       </KeyboardAvoidingView>
