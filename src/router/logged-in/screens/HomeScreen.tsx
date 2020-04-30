@@ -89,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
       return user;
     } catch (error) {
       if (error instanceof AuthenticationError) {
-        //logoutUser();
+        logoutUser();
       } else {
         console.error(error);
       }

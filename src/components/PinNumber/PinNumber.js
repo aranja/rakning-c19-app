@@ -42,8 +42,6 @@ const PinNumber = ({
     setIsLoading(true);
     cancelTimeout();
 
-    setIsLoading(false);
-    return onVerified('token', true);
     try {
       const { token, isNewUser } = await verifyPin(
         pinNumber,

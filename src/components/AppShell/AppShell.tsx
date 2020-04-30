@@ -92,17 +92,17 @@ export const AppHeader = ({
   subtitle,
   fixedHeader,
 }: HeaderProps) => {
+  console.log('AppHeader', fixedHeader);
   const showHeader = title || subtitle;
   let styles = {};
   styles = { zIndex: 1 };
 
-  if (showHeader) {
+  if (showHeader)
     styles = {
       paddingTop: verticalScale(64),
       paddingHorizontal: scale(32),
       paddingBottom: verticalScale(32),
     };
-  }
 
   if (fixedHeader) {
     styles = {
