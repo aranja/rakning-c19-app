@@ -18,6 +18,9 @@ const LanguageScreen = ({ navigation }: Props) => {
 
   return (
     <AppShell
+      title={t('welcomeTitle')}
+      subtitle={t('languageDescription')}
+      fixedHeader
       footer={
         <>
           <Vertical unit={0.5} />
@@ -31,7 +34,7 @@ const LanguageScreen = ({ navigation }: Props) => {
         </>
       }
     >
-      <LanguagePicker showTitle />
+      <LanguagePicker />
     </AppShell>
   );
 };
