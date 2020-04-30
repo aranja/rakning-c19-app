@@ -142,8 +142,13 @@ Please practice Responsible Disclosure and give us sufficient time to deploy a f
 
 ### Translations
 
-- 🇷🇺Russian - courtesy of [Constance Pomuran](https://www.facebook.com/cpomuran)
-- 🇹🇭Thai - courtesy of [Pidsinee Disa Einarsdottir](https://www.linkedin.com/in/pidsinee/)
-- 🇫🇷French - courtesy of [Jérémy Barbet](https://github.com/jeremybarbet)
-- 🇪🇸Spanish - courtesy of [Pablo Anaya](https://www.linkedin.com/in/pjanaya/)
-- Want to translate to your own language? please open an issue 💜
+- Russian - courtesy of [Constance Pomuran](https://www.facebook.com/cpomuran)
+- Thai - courtesy of [Pidsinee Disa Einarsdottir](https://www.linkedin.com/in/pidsinee/)
+- French - courtesy of [Jérémy Barbet](https://github.com/jeremybarbet)
+- Spanish - courtesy of [Pablo Anaya](https://www.linkedin.com/in/pjanaya/)
+- Japanese - courtesy of [Yuka Ogura](https://www.facebook.com/YukaOgura55)
+- Filipino - courtesy of [Ronald Fatalla](https://www.facebook.com/ronald.fatalla)
+- Arabic - courtesy of [Ouhta Youssef](https://www.facebook.com/euskal.sinapellidos)
+- Farsi - courtesy of [Younes Abghoui](https://www.linkedin.com/in/younesabghoui/)
+- Lithuanian - courtesy of [Tomas Petrauskas](https://www.facebook.com/tomas.petrauskas.734)
+- Want to translate to your own language? Please open an issue 💜

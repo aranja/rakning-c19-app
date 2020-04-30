@@ -3,10 +3,12 @@ import styled from 'styled-components/native';
 import { GestureResponderEvent, TouchableWithoutFeedback } from 'react-native';
 import { CheckIcon } from '../Icons/Icons';
 import { scale } from '../../utils';
+import { isRTL } from '../../i18n';
 
 const Wrapper = styled.View`
   flex-direction: row;
   flex-wrap: nowrap;
+  direction: ${() => (isRTL() ? 'rtl' : 'ltr')};
 `;
 
 const Checkmark = styled.View`

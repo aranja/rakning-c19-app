@@ -1,10 +1,5 @@
 import React, { useEffect, useState, ReactNode } from 'react';
-import {
-  Platform,
-  Linking,
-  AppState,
-  AppStateStatus,
-} from 'react-native';
+import { Platform, Linking, AppState, AppStateStatus } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
 import { Trans } from 'react-i18next';
@@ -146,7 +141,7 @@ const AllowLocationScreen = ({ navigation }) => {
         <Heading level={1}>{t('changeLocationAllow')}</Heading>
         <Text>
           <Trans i18nKey={'changeLocationDescriptionIOS'}>
-            <Text bold>„Always“</Text>
+            <Text bold>"Always"</Text>
           </Trans>
         </Text>
       </ContentView>
@@ -164,13 +159,13 @@ const AllowLocationScreen = ({ navigation }) => {
               : 'enableLocationDescriptionAndroid'
           }
         >
-          <Text bold>„Allow while using app“</Text>
+          <Text bold>"Allow while using app"</Text>
         </Trans>
       </Text>
       {isIOS && (
         <Text>
           <Trans i18nKey="enableLocationMessageIOS">
-            <Text bold>„Change to Always Allow“</Text>
+            <Text bold>"Change to Always Allow"</Text>
           </Trans>
         </Text>
       )}
