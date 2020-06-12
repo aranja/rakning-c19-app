@@ -44,7 +44,7 @@ function getConfiguration(title, text) {
 
     // When enabled, the plugin will emit sounds for life-cycle events of background-geolocation!
     debug: false,
-  }
+  };
 
   if (Platform.OS === 'android') {
     Object.assign(configuration, {

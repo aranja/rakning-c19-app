@@ -9,26 +9,26 @@ export const Wrapper = styled.View`
 `;
 
 export const Row = styled.View`
-    flex-direction: row;
-    margin-bottom: ${verticalScale(12)}px;
+  flex-direction: row;
+  margin-bottom: ${verticalScale(12)}px;
 `;
 
 export const Title = styled(Heading)`
-    margin-left: ${scale(14)}px;
+  margin-left: ${scale(14)}px;
 `;
 
 export const Bullets = styled.View`
-    padding-left: ${scale(45)}px;
+  padding-left: ${scale(45)}px;
 `;
 
 export const Phone = styled(Text)`
-    color: ${Colors.orange};
+  color: ${Colors.orange};
 `;
 
 export const BulletText = styled(Text)`
-    color: ${Colors.textGray};
-    font-size: ${scale(14)};
-    font-weight: 400;
-    line-height: ${scale(21)};
-    margin-bottom: ${scale(5)};
+  color: ${Colors.textGray};
+  font-size: ${scale(14)};
+  font-weight: 400;
+  line-height: ${scale(21)};
+  margin-bottom: ${scale(5)};
 `;

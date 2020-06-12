@@ -1,5 +1,8 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation';
 import { RouteProp } from '@react-navigation/native';
 import HomeScreen from './screens/HomeScreen';
 import AllowLocationScreen from './screens/AllowLocationScreen';
