@@ -1,11 +1,17 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation';
 import { RouteProp } from '@react-navigation/native';
 import HomeScreen from './screens/HomeScreen';
 import AllowLocationScreen from './screens/AllowLocationScreen';
 import RequestDataScreen from './screens/RequestDataScreen';
 import UserProvider from '../../context/user';
 import ChangeLanguageScreen from './screens/ChangeLanguageScreen';
+import { LiveChatScreen } from './screens/LiveChatScreen';
+import ContactScreen from './screens/ContactScreen';
+import QuestionsScreen from './screens/QuestionsScreen';
 
 const LoggedIn = createStackNavigator(
   {
@@ -13,6 +19,9 @@ const LoggedIn = createStackNavigator(
     Home: { screen: HomeScreen },
     RequestData: RequestDataScreen,
     ChangeLanguage: ChangeLanguageScreen,
+    LiveChat: LiveChatScreen,
+    Contact: ContactScreen,
+    Questions: QuestionsScreen,
   },
   {
     initialRouteName: 'Permission',

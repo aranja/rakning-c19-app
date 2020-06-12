@@ -11,12 +11,12 @@ export const ButtonContainer = styled.TouchableOpacity`
 export const CtaButtonContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  border-radius: ${scale(4)};
+  border-radius: ${scale(6)};
   justify-content: center;
   width: 100%;
   background-color: ${({ bgColor, transparent }) =>
     transparent ? 'transparent' : bgColor};
-  padding: ${verticalScale(16)}px ${({ small }) => scale(small ? 16 : 32)}px;
+  padding: ${verticalScale(18)}px ${({ small }) => scale(small ? 16 : 32)}px;
 
 ${({ small }) =>
   !small
@@ -49,8 +49,8 @@ ${({ small }) =>
 
 export const ButtonLabel = styled.Text`
   color: ${({ color = Colors.white }) => color};
-  font-size: ${scale(16)};
-  font-family: 'OpenSansExtraBold';
+  font-size: ${scale(14)};
+  font-family: 'OpenSansBold';
   text-align: center;
   width: 100%;
 
@@ -98,4 +98,19 @@ export const ImageWrap = styled(Image)`
   position: absolute;
   right: ${scale(16)}px;
   align-self: center;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const BackLabel = styled.Text`
+  color: ${Colors.breidholtAtNight};
+  font-size: ${scale(15)};
+  font-weight: 400;
+  font-family: 'OpenSans';
+  line-height: ${scale(18)}
+  letter-spacing: -0.2px;
+  margin-left: ${scale(10)}
 `;

@@ -18,6 +18,7 @@ const Checkmark = styled.View`
 const Content = styled.Text<{ checked: boolean }>`
   line-height: 20;
   opacity: ${({ checked }) => (checked ? 1 : 0.75)};
+  margin-right: ${scale(20)};
 `;
 
 interface CheckBoxProps {
