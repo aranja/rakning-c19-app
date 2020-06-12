@@ -43,7 +43,6 @@ class LoginScreen extends React.Component {
 
     return (
       <AppShell
-        scrollContainerStyles={{ flex: 1 }}
         title={
           <Heading level={2} center>
             <Trans>{pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}</Trans>
@@ -78,7 +77,6 @@ class LoginScreen extends React.Component {
             </>
           )}
         </Content>
-        <View style={{ flex: 1 }} />
       </AppShell>
     );
   }

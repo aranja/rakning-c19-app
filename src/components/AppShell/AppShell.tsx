@@ -45,7 +45,6 @@ const Back = styled.View`
 
 const Main = styled.View`
   flex: 1;
-  justify-content: flex-end;
   padding-top: ${verticalScale(90)};
   padding-bottom: ${({ bottomPadding }) =>
     bottomPadding ? verticalScale(200) : 0};
@@ -106,10 +105,7 @@ function AppShell({
   return (
     <Wrap bgColor={bgColor}>
       {circles && <Circles />}
-      <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
-      >
+      <KeyboardAvoidingView behavior="height">
         <ScrollView
           keyboardShouldPersistTaps="always"
           contentContainerStyle={scrollContainerStyles}

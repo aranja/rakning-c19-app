@@ -92,10 +92,9 @@ const AllowLocationScreen = ({ navigation }) => {
       title={t('requestDataTitle')}
       subtitle={t('requestDataSubTitle')}
       circles
-      scrollContainerStyles={{ flex: 1 }}
     >
       <StatusBar translucent barStyle="light-content" />
-      <Content>
+      <Content style={{ flex: 1 }}>
         {requiresKennitala ? (
           <>
             <Text center>{t('requestDataKennitalaInfo')}</Text>
@@ -129,10 +128,11 @@ const AllowLocationScreen = ({ navigation }) => {
         <Vertical fill />
 
         <CtaButton transparent loading={loading} onPress={confirmExit}>
-          <Text color={Colors.gray}>{t('requestDataExitButton')}</Text>
+          <Text center color={Colors.gray}>
+            {t('requestDataExitButton')}
+          </Text>
         </CtaButton>
       </Content>
-      <View style={{ flex: 1 }} />
     </AppShell>
   );
 };
