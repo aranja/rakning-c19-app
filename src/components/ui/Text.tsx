@@ -14,12 +14,13 @@ interface FontProps {
   style?: StyleProp<TextStyle>;
 }
 
-type Level = 1 | 2 | 3;
+type Level = 1 | 2 | 3 | 4;
 
 const headingSize = {
-  1: 30,
-  2: 24,
-  3: 16,
+  1: 54,
+  2: 34,
+  3: 24,
+  4: 16,
 };
 
 const font = (
@@ -44,7 +45,7 @@ export const Heading = styled.Text<FontProps & { level: Level }>`
   ${({ marginBottom, level = 1, center }) =>
     font(headingSize[level], 1.2, marginBottom, center)};
   font-weight: 900;
-  font-family: 'OpenSansExtraBold';
+  font-family: 'OpenSansBold';
 
   ${({ level = 1 }) =>
     level > 1

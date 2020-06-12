@@ -8,11 +8,12 @@ export default {
   // New Styles
   background: '#feefe8',
   backgroundAlt: '#eddfd7',
-  blue: '#2B6DBC',
+  blue: '#006DC2',
   green: '#619B4C',
   orange: '#ff7a4c',
   text: '#293342',
   textDark: '#222428',
+  textGray: '#606A77',
 
   breidholtAtNight: '#263343',
   greenThunder: '#ff7a4c',
@@ -21,4 +22,6 @@ export default {
   backgroundGray: '#ececec',
   chenin: '#D3E262',
   placeholder: '#868686',
+  bullet: '#f2f2f2',
+  bulletBorder: '#C9C9C9',
 };

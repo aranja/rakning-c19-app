@@ -166,6 +166,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           style={{
             ...styles.phoneViewStyle,
             height: inputHeight,
+            width: '40%',
           }}
           textStyle={{
             ...styles.phoneTextStyle,

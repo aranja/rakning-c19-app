@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
+import { View } from 'react-native';
+
 import { AuthConsumer } from '../../../context/authentication';
 import PhoneNumberInput from '../../../components/PhoneNumberInput';
 import PinNumber from '../../../components/PinNumber';
 import AppShell, { Content } from '../../../components/AppShell';
 import Text, { Heading } from '../../../components/ui/Text';
 import { Trans } from 'react-i18next';
+import { BackButton } from '../../../components/Button';
 
 class LoginScreen extends React.Component {
   state = {
@@ -36,13 +39,23 @@ class LoginScreen extends React.Component {
 
   render() {
     const { pinToken, phoneNumber, countryCode } = this.state;
+    const { navigation } = this.props;
 
     return (
-      <AppShell>
-        <Content style={{ marginBottom: 0 }}>
-          <Heading>
+      <AppShell
+        scrollContainerStyles={{ flex: 1 }}
+        title={
+          <Heading level={2} center>
             <Trans>{pinToken ? 'pinNumberTitle' : 'phoneNumberTitle'}</Trans>
           </Heading>
+        }
+        backButton={
+          <BackButton onPress={() => navigation.goBack()}>
+            <Trans>{'back'}</Trans>
+          </BackButton>
+        }
+      >
+        <Content style={{ marginBottom: 0 }}>
           <Text marginBottom={0}>
             <Trans
               i18nKey={
@@ -65,6 +78,7 @@ class LoginScreen extends React.Component {
             </>
           )}
         </Content>
+        <View style={{ flex: 1 }} />
       </AppShell>
     );
   }

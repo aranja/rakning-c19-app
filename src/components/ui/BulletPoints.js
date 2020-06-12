@@ -4,7 +4,7 @@ import Colors from '../../constants/Colors';
 import { scale, verticalScale } from '../../utils';
 
 const Item = styled.View`
-  color: ${Colors.white};
+  color: ${Colors.orange};
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -12,25 +12,25 @@ const Item = styled.View`
 `;
 
 const Text = styled.Text`
-  color: ${Colors.white};
-  font-size: ${scale(16)};
-  font-weight: bold;
-  line-height: ${scale(19)};
-  margin-bottom: ${scale(19)};
+  color: ${Colors.textGray};
+  font-size: ${scale(14)};
+  font-weight: 400;
+  line-height: ${scale(21)};
+  margin-bottom: ${scale(5)};
 `;
 
 const Bullet = styled.View`
-  background-color: ${Colors.reykjavikInBlossom};
-  border-radius: ${scale(4)};
-  width: ${scale(8)};
-  height: ${scale(8)};
-  margin-top: ${verticalScale(6)};
-  margin-right: ${scale(10)};
+  background-color: ${Colors.textGray};
+  border-radius: ${scale(2)};
+  width: ${scale(4)};
+  height: ${scale(4)};
+  margin-top: ${verticalScale(10)};
+  margin-right: ${scale(16)};
 `;
 
-const BulletPoints = ({ items = [] }) =>
-  items.map(item => (
-    <Item key={item}>
+const BulletPoints = ({ items = [], bulletColor, textColor }) =>
+  items.map((item, i) => (
+    <Item key={`bullet-${i + 1}`}>
       <Bullet />
       <Text>{item}</Text>
     </Item>

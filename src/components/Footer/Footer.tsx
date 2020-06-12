@@ -3,25 +3,32 @@ import styled from 'styled-components/native';
 import { Image } from 'react-native';
 import almannavarnirSrc from '../../assets/images/almannavarnir.png';
 import landlaeknirSrc from '../../assets/images/landlaeknir.png';
-import { scale } from '../../utils';
+import { scale, verticalScale } from '../../utils';
+import Colors from '../../constants/Colors';
 
 const Wrapper = styled.View`
-  align-items: center;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: ${verticalScale(40)};
+  background-color: ${({ bgColor }) => bgColor || Colors.background};
 `;
 
-const Footer = () => (
-  <Wrapper>
+interface FooterProps {
+  bgColor?: string;
+}
+
+const Footer = ({ bgColor }: FooterProps) => (
+  <Wrapper bgColor={bgColor}>
     <Image
       resizeMode="contain"
       source={landlaeknirSrc}
-      style={{ height: scale(46), width: '38%' }}
+      style={{ height: scale(36), width: '35%' }}
     />
     <Image
       resizeMode="contain"
       source={almannavarnirSrc}
-      style={{ height: scale(39), width: '50%' }}
+      style={{ height: scale(36), width: '50%' }}
     />
   </Wrapper>
 );

@@ -52,7 +52,9 @@ const Main = styled.View`
 `;
 
 export const Content = styled.View`
-  padding: 0px ${verticalScale(20)}px ${scale(28)}px;
+  padding-left: ${scale(20)}px;
+  padding-right: ${scale(20)}px;
+  padding-bottom: ${verticalScale(28)}px;
 `;
 
 export const SlimContent = ({ children }: { children: ReactNode }) => (

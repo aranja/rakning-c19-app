@@ -20,7 +20,7 @@ const LanguageScreen = ({ navigation }: Props) => {
     <AppShell
       title={t('welcomeTitle')}
       subtitle={t('languageDescription')}
-      fixedHeader
+      circles
       footer={
         <>
           <Vertical unit={0.5} />
