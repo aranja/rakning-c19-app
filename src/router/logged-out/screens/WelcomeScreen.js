@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { CtaButton } from '../../../components/Button/Button';
+import { CtaButton, BackButton } from '../../../components/Button/Button';
 import AppShell, { Content, SlimContent } from '../../../components/AppShell';
 import Footer from '../../../components/Footer';
 import Text from '../../../components/ui/Text';
@@ -16,9 +16,12 @@ const WelcomeScreen = ({ navigation }) => {
     <AppShell
       title={t('welcomeTitle')}
       subtitle={t('welcomeSubtitle')}
+      backButton={
+        <BackButton onPress={() => navigation.goBack()}>{t('back')}</BackButton>
+      }
       footer={
         <>
-          <Footer />
+          <Footer bgColor="transparent" />
           <Vertical unit={0.5} />
           <CtaButton
             onPress={() => navigation.navigate('Login')}
@@ -42,6 +45,7 @@ const WelcomeScreen = ({ navigation }) => {
 WelcomeScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 

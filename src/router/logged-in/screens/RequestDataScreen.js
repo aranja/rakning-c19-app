@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Alert, StatusBar } from 'react-native';
 import { CtaButton } from '../../../components/Button/Button';
@@ -88,15 +89,16 @@ const AllowLocationScreen = ({ navigation }) => {
 
   return (
     <AppShell
-      alt
       title={t('requestDataTitle')}
       subtitle={t('requestDataSubTitle')}
+      circles
     >
       <StatusBar translucent barStyle="light-content" />
       <Content style={{ flex: 1 }}>
         {requiresKennitala ? (
           <>
-            <Text>{t('requestDataKennitalaInfo')}</Text>
+            <Text center>{t('requestDataKennitalaInfo')}</Text>
+            <Vertical unit={1.5} />
             <Input
               value={kennitala}
               onChangeText={setKennitala}
@@ -126,7 +128,9 @@ const AllowLocationScreen = ({ navigation }) => {
         <Vertical fill />
 
         <CtaButton transparent loading={loading} onPress={confirmExit}>
-          <Text color={Colors.gray}>{t('requestDataExitButton')}</Text>
+          <Text center color={Colors.gray}>
+            {t('requestDataExitButton')}
+          </Text>
         </CtaButton>
       </Content>
     </AppShell>

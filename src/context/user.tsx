@@ -4,6 +4,7 @@ import { getUser } from '../api/User/index';
 interface User {
   dataRequested?: boolean;
   requiresKennitala?: boolean;
+  testResult?: boolean;
 }
 
 interface State extends User {

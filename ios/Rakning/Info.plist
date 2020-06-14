@@ -17,11 +17,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.0</string>
+	<string>2.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -38,13 +40,13 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
+	<string>Rakning C-19 tracks your location and stores it on your device. The contact tracing team may ask you to share your location data in case you contract Covid-19.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
+	<string>Rakning C-19 tracks your location and stores it on your device. The contact tracing team may ask you to share your location data in case you contract Covid-19.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Rakning C-19 uses your location to track who you might have come in contact with who is infected.</string>
-  <key>NSMotionUsageDescription</key>
-  <string>Allow Rakning C-19 to access your device's accelerometer to better track your location.</string>
+	<string>Rakning C-19 tracks your location and stores it on your device. The contact tracing team may ask you to share your location data in case you contract Covid-19.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Allow Rakning C-19 to access your device's accelerometer to better track your location.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -66,8 +68,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>

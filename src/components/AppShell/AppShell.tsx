@@ -12,52 +12,48 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   ScrollView,
+  View,
 } from 'react-native';
+
 import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useWindowDimensions } from '../../utils/hooks';
+import { CirclesSmall, TracingIcon } from '../../components/Icons';
 
 const Wrap = styled.View`
-  background: ${Colors.background};
+  background: ${({ bgColor }) => bgColor || Colors.background};
   flex-grow: 1;
 `;
 
-const Header = styled.View<{ alt: boolean }>`
-  background: ${({ alt = false }) => Colors[alt ? 'blue' : 'orange']};
-  min-height: ${Platform.OS === 'android'
-    ? StatusBar.currentHeight
-    : verticalScale(71)};
+const Header = styled.View`
+  align-items: center;
+  padding: 0 ${scale(20)}px ${verticalScale(20)}px;
 `;
 
-const overScrollHeight = 200;
-const HeaderOverScroll = styled.View`
-  height: ${overScrollHeight};
-`;
-
-const Circle = styled.View<{ color?: string; x: number; y: number }>`
-  background: ${({ color }) => color ?? 'rgba(255, 255, 255, 0.25)'};
-  border-radius: ${scale(70)};
+const Circles = styled(CirclesSmall)`
   position: absolute;
-  height: ${scale(70)};
-  right: ${({ x }) => scale(x)}px;
-  top: ${({ y }) => scale(y)}px;
-  width: ${scale(70)};
+  top: ${verticalScale(-30)}px;
+  right: ${scale(30)}px;
 `;
 
-const Circles = styled.View`
+const Back = styled.View`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: ${verticalScale(35)}px;
+  left: ${scale(20)}px;
+  z-index: 10;
 `;
 
 const Main = styled.View`
   flex: 1;
+  padding-top: ${verticalScale(90)};
   padding-bottom: ${({ bottomPadding }) =>
     bottomPadding ? verticalScale(200) : 0};
 `;
 
 export const Content = styled.View`
-  padding: ${verticalScale(28)}px ${scale(32)}px;
+  padding-left: ${scale(20)}px;
+  padding-right: ${scale(20)}px;
+  padding-bottom: ${verticalScale(28)}px;
 `;
 
 export const SlimContent = ({ children }: { children: ReactNode }) => (
@@ -79,11 +75,15 @@ export const SlimContent = ({ children }: { children: ReactNode }) => (
 );
 
 interface Props {
-  title?: string;
+  title?: string | ReactNode;
   subtitle?: string;
+  bgColor?: string;
+  fixedHeader?: boolean;
   children: ReactNode;
   alt?: boolean;
+  circles?: boolean;
   footer?: ReactNode;
+  backButton?: ReactNode;
   scrollContainerStyles?: StyleProp<ViewStyle>;
 }
 
@@ -94,62 +94,52 @@ function AppShell({
   alt,
   footer,
   scrollContainerStyles,
+  bgColor,
+  circles,
+  backButton,
 }: Props) {
   const { fontScale } = useWindowDimensions();
-  const showHeader = title || subtitle;
+
   const isFixed = isNaN(fontScale) || fontScale < 2;
-  const headerColor = Colors[alt ? 'blue' : 'orange'];
 
   return (
-    <Wrap>
+    <Wrap bgColor={bgColor}>
+      {circles && <Circles />}
       <KeyboardAvoidingView behavior="height">
         <ScrollView
           keyboardShouldPersistTaps="always"
           contentContainerStyle={scrollContainerStyles}
-          contentInset={{ top: -overScrollHeight }}
-          contentOffset={{ x: 0, y: overScrollHeight }}
         >
-          {Platform.OS === 'ios' && (
-            <HeaderOverScroll style={{ backgroundColor: headerColor }} />
-          )}
-
-          <Header
-            alt={alt}
-            style={
-              (showHeader && {
-                paddingTop: verticalScale(64),
-                paddingHorizontal: scale(32),
-                paddingBottom: verticalScale(32),
-              }) || { zIndex: 1 }
-            }
-          >
-            {showHeader && (
-              <>
-                <Circles>
-                  <Circle x={90} y={-10} />
-                  <Circle
-                    color={alt ? Colors.orange : Colors.blue}
-                    x={15}
-                    y={-30}
-                  />
-                  <Circle x={-25} y={35} />
-                </Circles>
-                <SafeAreaView>
-                  <Heading color={alt ? Colors.white : Colors.textDark}>
+          <Main bottomPadding={footer && isFixed}>
+            {backButton && <Back>{backButton}</Back>}
+            {(title || subtitle) && (
+              <Header>
+                {typeof title === 'string' ? (
+                  <Heading
+                    color={alt ? Colors.white : Colors.textDark}
+                    level={1}
+                    center
+                    marginBottom={0.1}
+                  >
                     {title}
                   </Heading>
+                ) : (
+                  title
+                )}
+                {subtitle && (
                   <Text
                     color={alt ? Colors.white : Colors.textDark}
                     marginBottom={0}
                     bold
+                    center
                   >
                     {subtitle}
                   </Text>
-                </SafeAreaView>
-              </>
+                )}
+              </Header>
             )}
-          </Header>
-          <Main bottomPadding={footer && isFixed}>{children}</Main>
+            {children}
+          </Main>
           {footer && !isFixed ? <Content>{footer}</Content> : null}
         </ScrollView>
       </KeyboardAvoidingView>

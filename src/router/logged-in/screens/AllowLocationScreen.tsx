@@ -1,10 +1,5 @@
 import React, { useEffect, useState, ReactNode } from 'react';
-import {
-  Platform,
-  Linking,
-  AppState,
-  AppStateStatus,
-} from 'react-native';
+import { Platform, Linking, AppState, AppStateStatus } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
 import { Trans } from 'react-i18next';
@@ -43,8 +38,6 @@ const ContentView = ({
   <AppShell
     footer={
       <>
-        <Footer />
-        <Vertical unit={0.5} />
         <CtaButton
           onPress={ctaAction}
           image={covidIcon}
@@ -52,16 +45,20 @@ const ContentView = ({
         >
           {ctaTitle}
         </CtaButton>
+        <Vertical unit={2} />
+        <Footer />
       </>
     }
   >
-    <Content>{children}</Content>
+    <Content style={{ marginLeft: scale(8), marginRight: scale(8) }}>
+      {children}
+    </Content>
   </AppShell>
 );
 
 const AllowLocationScreen = ({ navigation }) => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [locationStatus, setLocationStatus] = useState<LocationStatus | null>(
     null,
   );
@@ -131,8 +128,10 @@ const AllowLocationScreen = ({ navigation }) => {
         ctaAction={getPermission}
         ctaTitle={t('changeLocationSettings')}
       >
-        <Heading level={1}>{t('enableLocationServices')}</Heading>
-        <Text>{t('enableLocationServicesDescription')}</Text>
+        <Heading level={2} center marginBottom={1.2}>
+          {t('enableLocationServices')}
+        </Heading>
+        <Text center>{t('enableLocationServicesDescription')}</Text>
       </ContentView>
     );
   }
@@ -143,10 +142,12 @@ const AllowLocationScreen = ({ navigation }) => {
         ctaAction={getPermission}
         ctaTitle={t('changeLocationSettings')}
       >
-        <Heading level={1}>{t('changeLocationAllow')}</Heading>
-        <Text>
+        <Heading level={2} center marginBottom={1.2}>
+          {t('changeLocationAllow')}
+        </Heading>
+        <Text center>
           <Trans i18nKey={'changeLocationDescriptionIOS'}>
-            <Text bold>„Always“</Text>
+            <Text bold>"Always"</Text>
           </Trans>
         </Text>
       </ContentView>
@@ -155,8 +156,10 @@ const AllowLocationScreen = ({ navigation }) => {
 
   return (
     <ContentView ctaAction={getPermission} ctaTitle={t('enableLocationButton')}>
-      <Heading level={1}>{t('enableLocationAllow')}</Heading>
-      <Text>
+      <Heading level={2} center marginBottom={1.2}>
+        {t('enableLocationAllow')}
+      </Heading>
+      <Text center>
         <Trans
           i18nKey={
             isIOS
@@ -164,19 +167,21 @@ const AllowLocationScreen = ({ navigation }) => {
               : 'enableLocationDescriptionAndroid'
           }
         >
-          <Text bold>„Allow while using app“</Text>
+          <Text bold>"Allow while using app"</Text>
         </Trans>
       </Text>
       {isIOS && (
-        <Text>
+        <Text center>
           <Trans i18nKey="enableLocationMessageIOS">
-            <Text bold>„Change to Always Allow“</Text>
+            <Text bold>"Change to Always Allow"</Text>
           </Trans>
         </Text>
       )}
 
       {isIOS && (
-        <Text marginBottom={1}>{t('enableNotificationDescription')}</Text>
+        <Text center marginBottom={1}>
+          {t('enableNotificationDescription')}
+        </Text>
       )}
     </ContentView>
   );

@@ -1,7 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { AppState, Platform, ScrollView } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useTranslation } from 'react-i18next';
+import { format } from 'date-fns';
+import * as WebBrowser from 'expo-web-browser';
+
 import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
@@ -15,21 +18,26 @@ import {
 } from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
 import AppShell, { Content } from '../../../components/AppShell';
-import Text, { Heading } from '../../../components/ui/Text';
+import Text from '../../../components/ui/Text';
 import { ButtonGroup } from '../../../components/Button';
-import bullHorn from '../../../assets/images/bullhorn.png';
 import { scale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import messaging from '@react-native-firebase/messaging';
 import Footer from '../../../components/Footer';
 import { AuthenticationError } from '../../../api/ApiClient';
-import { useAlert } from '../../../context/alert';
+import { languages } from '../../../i18n';
+import Card from '../../../components/Card';
+import {
+  InfoIcon,
+  ChatIcon,
+  QuestionsIcon,
+  TracingIcon,
+} from '../../../components/Icons';
 
-interface LocaleLinks {
-  primary?: string[];
-  secondary?: string[];
-}
+import Announcements from '../../../components/Announcements';
+import TestResults from '../../../components/TestResultsModal/TestResultsModal';
+import { getAnnouncements } from '../../../api/Announcements';
 
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
@@ -37,19 +45,14 @@ const privacyUrls = {
   is: 'https://www.covid.is/app/personuverndarstefna',
 };
 
-const smallBtnStyle = {
-  width: '48.5%',
-};
-
 const HomeScreen = ({ navigation }) => {
-  const {
-    t,
-    i18n,
-  } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const selectedLanguage = languages.find(lang => lang.code === i18n.language);
   const { logout } = useAuth();
   const { fetchUser, clearUserData } = useContext(UserContext);
-  const { createAlert } = useAlert();
-  const links = t('links', { returnObjects: true }) as LocaleLinks;
+  const [isTestResultsModalOpen, setIsTestResultsModalOpen] = useState(false);
+  const [announcements, setAnnouncements] = useState([]);
+  const [announcementsLoading, setAnnouncementsLoading] = useState(false);
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
@@ -85,6 +88,10 @@ const HomeScreen = ({ navigation }) => {
         resetStack(navigation, 'RequestData');
 
         return null;
+      }
+
+      if (user && user.testResult === false) {
+        setIsTestResultsModalOpen(true);
       }
 
       return user;
@@ -130,6 +137,35 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    (async () => {
+      setAnnouncementsLoading(true);
+      const res = await getAnnouncements(selectedLanguage.code);
+      setAnnouncementsLoading(false);
+      setAnnouncements(
+        res.reduce((arr, cur) => {
+          const inIcelandic = selectedLanguage.code === 'is';
+          return [
+            ...arr,
+            {
+              title: inIcelandic ? cur['name'] : cur['name'],
+              subtitle: format(
+                new Date(cur['published-on']),
+                'MMMMMMM d, yyyy',
+              ),
+              description: inIcelandic
+                ? cur['meginmal']
+                : cur['meginmal-ensku'],
+              link: inIcelandic
+                ? cur['linkur-a-frett']
+                : cur['read-more-hlekkur-ensku'],
+            },
+          ];
+        }, []),
+      );
+    })();
+  }, []);
+
+  useEffect(() => {
     const unsubscribePushMessage = messaging().onMessage(checkUser);
     AppState.addEventListener('change', onAppStateChange);
 
@@ -140,90 +176,77 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <AppShell title={t('trackingTitle')} subtitle={t('trackingSubtitle')}>
+    <AppShell
+      title={t('trackingTitle')}
+      subtitle={t('trackingSubtitle')}
+      circles
+    >
       <ScrollView>
         <Content>
-          <Heading level={3}>{t('aboutCovidTitle')}</Heading>
-          <Text>{t('aboutCovidDescription')}</Text>
-
-          <ButtonGroup>
-            <UrlButton
-              align="left"
-              justify="start"
-              href={t('announcementsLink')}
-              image={bullHorn}
-              imageDimensions={{ height: scale(26), width: scale(26) }}
-            >
-              {t('announcements')}
-            </UrlButton>
-
-            {(links.primary ?? []).map(link => (
-              <UrlButton
-                key={link}
-                justify="start"
-                href={t(`${link}Link`)}
-                align="left"
-                bgColor={Colors.text}
-              >
-                {t(`${link}Label`)}
-              </UrlButton>
-            ))}
-          </ButtonGroup>
-
-          <Vertical unit={0.5} />
-
-          <ButtonGroup row>
-            {(links.secondary ?? []).map(link => (
-              <UrlButton
-                key={link}
-                href={t(`${link}Link`)}
-                bgColor={Colors.orange}
-                style={smallBtnStyle}
-                color={Colors.textDark}
-                small
-              >
-                {t(`${link}Label`)}
-              </UrlButton>
-            ))}
-          </ButtonGroup>
-
+          <Text color={Colors.orange} marginBottom={0} bold center>
+            {`${t('trackingAlert')}  `}
+            <TracingIcon />
+          </Text>
           <Vertical unit={1} />
 
-          <ButtonGroup>
-            <UrlButton bgColor={Colors.backgroundAlt} href={t('covidLink')}>
-              <Text center>
-                {t('covidLabel')}{' '}
-                <Text bold color={Colors.blue}>
-                  covid.is
-                </Text>
-              </Text>
+          <Announcements
+            alertText={t('importantAnnouncements')}
+            link={t('importantAnnouncementsLink')}
+            slides={announcements}
+            loading={announcementsLoading}
+          />
+          <Vertical unit={1} />
+
+          <Card
+            label={t('symptomsCardTitle')}
+            description={t('symptomsCardSubtitle')}
+            onPress={() => navigation.navigate('Contact')}
+            icon={<ChatIcon />}
+          />
+          <Vertical unit={0.5} />
+          <Card
+            label={t('informationForTouristCardTitle')}
+            description={t('informationForTouristCardSubtitle')}
+            onPress={() =>
+              WebBrowser.openBrowserAsync(t('informationForTouristCardLink'))
+            }
+            icon={<InfoIcon />}
+          />
+          <Vertical unit={0.5} />
+          <Card
+            label={t('questionsCardTitle')}
+            description={t('questionsCardSubtitle')}
+            onPress={() => WebBrowser.openBrowserAsync(t('questionsCardLink'))}
+            // onPress={() => navigation.navigate('Questions')}
+            icon={<QuestionsIcon color={Colors.orange} />}
+          />
+          <Vertical unit={1} />
+
+          <ButtonGroup
+            style={{ paddingLeft: scale(20), paddingRight: scale(20) }}
+          >
+            <UrlButton href={t('covidLink')}>
+              {t('covidLabel')}
+              {' covid.is'}
             </UrlButton>
 
-            <UrlButton
-              bgColor={Colors.backgroundAlt}
-              href={privacyUrls[i18n.language] || privacyUrls.en}
-            >
-              <Text center>{t('privacyPolicy')}</Text>
+            <UrlButton href={privacyUrls[i18n.language] || privacyUrls.en}>
+              {t('privacyPolicy')}
             </UrlButton>
-
-            <CtaButton
-              bgColor={Colors.backgroundAlt}
-              onPress={() => {
-                createAlert({
-                  type: 'info',
-                  message: t('uninstallAppToast'),
-                });
-              }}
-            >
-              <Text center>{t('stopTracking')}</Text>
-            </CtaButton>
           </ButtonGroup>
 
-          <Vertical unit={2} />
+          <Vertical unit={3} />
 
           <Footer />
 
-          <Vertical unit={1} />
+          <TestResults
+            isVisible={isTestResultsModalOpen}
+            title={t('testResultsModalTitle')}
+            kicker={t('testResultsModalKicker')}
+            description={t('testResultsModalDescription')}
+            buttonText={t('close')}
+            onPress={() => setIsTestResultsModalOpen(false)}
+          />
 
           {__DEV__ && (
             <CtaButton bgColor={Colors.gray} onPress={logoutUser}>

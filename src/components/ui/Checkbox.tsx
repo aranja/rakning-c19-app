@@ -3,10 +3,12 @@ import styled from 'styled-components/native';
 import { GestureResponderEvent, TouchableWithoutFeedback } from 'react-native';
 import { CheckIcon } from '../Icons/Icons';
 import { scale } from '../../utils';
+import { isRTL } from '../../i18n';
 
 const Wrapper = styled.View`
   flex-direction: row;
   flex-wrap: nowrap;
+  direction: ${() => (isRTL() ? 'rtl' : 'ltr')};
 `;
 
 const Checkmark = styled.View`
@@ -16,6 +18,7 @@ const Checkmark = styled.View`
 const Content = styled.Text<{ checked: boolean }>`
   line-height: 20;
   opacity: ${({ checked }) => (checked ? 1 : 0.75)};
+  margin-right: ${scale(20)};
 `;
 
 interface CheckBoxProps {

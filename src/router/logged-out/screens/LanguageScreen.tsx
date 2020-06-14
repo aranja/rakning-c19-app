@@ -1,7 +1,6 @@
 import React from 'react';
 import LanguagePicker from '../../../components/LanguagePicker';
 import AppShell from '../../../components/AppShell';
-import Footer from '../../../components/Footer';
 import { Vertical } from '../../../components/ui/Spacer';
 import { CtaButton } from '../../../components/Button/Button';
 import covidIcon from '../../../assets/images/covid-icon.png';
@@ -19,6 +18,9 @@ const LanguageScreen = ({ navigation }: Props) => {
 
   return (
     <AppShell
+      title={t('welcomeTitle')}
+      subtitle={t('languageDescription')}
+      circles
       footer={
         <>
           <Vertical unit={0.5} />

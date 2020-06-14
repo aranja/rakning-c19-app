@@ -11,10 +11,14 @@ import {
   ButtonLabel,
   Square,
   ImageWrap,
+  Row,
+  BackLabel,
 } from './styles';
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../../constants/Colors';
 import { scale } from '../../utils/index';
+import { BackIcon } from '../Icons';
+import Text from '../ui/Text';
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -51,7 +55,7 @@ type CtaButtonProp = ButtonProps & {
   small?: boolean;
   align?: 'left' | 'center';
   bgColor?: string;
-  image?: ImageSourcePropType;
+  image?: ImageSourcePropType | string;
   imageDimensions?: { height: number; width: number };
   justify?: 'start' | 'center';
 };
@@ -155,5 +159,16 @@ export const SquareButton = ({
     </Square>
   </Button>
 );
+
+export const BackButton = ({ onPress, disabled, children }: ButtonProps) => {
+  return (
+    <Button onPress={onPress} disabled={disabled}>
+      <Row>
+        <BackIcon />
+        <BackLabel color={Colors.textDark}>{children}</BackLabel>
+      </Row>
+    </Button>
+  );
+};
 
 export default Button;

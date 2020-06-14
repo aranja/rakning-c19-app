@@ -2,7 +2,11 @@ import React, { ReactText, ReactNode } from 'react';
 import styled, { css } from 'styled-components/native';
 import { scale } from '../../utils/index';
 import Colors from '../../constants/Colors';
-import { StyleProp, TextStyle } from 'react-native';
+import { StyleProp, TextStyle, Dimensions } from 'react-native';
+import { isRTL } from '../../i18n';
+const { width } = Dimensions.get('window');
+
+const smallScreen = width <= 375;
 
 interface FontProps {
   marginBottom?: 0 | 0.25 | 0.5 | 1 | 1.5 | 2;
@@ -13,12 +17,13 @@ interface FontProps {
   style?: StyleProp<TextStyle>;
 }
 
-type Level = 1 | 2 | 3;
+type Level = 1 | 2 | 3 | 4;
 
 const headingSize = {
-  1: 30,
-  2: 24,
-  3: 16,
+  1: smallScreen ? 45 : 54,
+  2: 34,
+  3: 24,
+  4: 16,
 };
 
 const font = (
@@ -31,19 +36,19 @@ const font = (
   font-size: ${scale(size)};
   line-height: ${scale(size * lineHeight)};
   margin-bottom: ${scale(size * lineHeight * bottomMargin)};
-  text-align: ${center ? 'center' : 'left'};
+  text-align: ${center ? 'center' : isRTL() ? 'right' : 'left'};
 `;
 
 export const Paragraph = styled.Text<FontProps & { bold?: boolean }>`
-  ${({ marginBottom }) => font(15, 1.5, marginBottom)};
+  ${({ marginBottom, center }) => font(15, 1.5, marginBottom, center)};
   font-family: 'OpenSans${({ bold }) => (bold ? 'Bold' : '')};
 `;
 
 export const Heading = styled.Text<FontProps & { level: Level }>`
-  ${({ marginBottom, level = 1 }) =>
-    font(headingSize[level], 1.2, marginBottom)};
+  ${({ marginBottom, level = 1, center }) =>
+    font(headingSize[level], 1.2, marginBottom, center)};
   font-weight: 900;
-  font-family: 'OpenSansExtraBold';
+  font-family: 'OpenSansBold';
 
   ${({ level = 1 }) =>
     level > 1

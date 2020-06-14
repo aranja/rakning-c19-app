@@ -19,6 +19,7 @@
     "appcenter-analytics": "3.0.0",
     "appcenter-crashes": "3.0.0",
     "color": "^3.1.2",
+    "date-fns": "^2.14.0",
     "eslint": "^6.7.1",
     "eslint-config-prettier": "4.0.0",
     "eslint-import-resolver-babel-module": "5.0.1",
@@ -47,12 +48,16 @@
     "react-native": "~0.61.4",
     "react-native-country-picker-modal": "^1.10.0",
     "react-native-gesture-handler": "~1.5.0",
+    "react-native-modal": "^11.5.6",
     "react-native-reanimated": "^1.7.1",
+    "react-native-render-html": "^4.2.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "9.13.3",
+    "react-native-swiper": "^1.6.0",
     "react-native-unimodules": "~0.7.0",
     "react-native-web": "~0.11.7",
+    "react-native-webview": "10.1.1",
     "react-navigation": "^3.11.1",
     "styled-components": "^4.3.1"
   },
@@ -63,7 +68,7 @@
     "babel-preset-expo": "~8.0.0",
     "jest-expo": "~36.0.1",
     "prettier": "^2.0.2",
-    "typescript": "~3.6.3"
+    "typescript": "^3.9.5"
   },
   "jest": {
     "preset": "react-native"

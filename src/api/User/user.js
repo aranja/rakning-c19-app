@@ -6,6 +6,7 @@ export const getUser = async () => {
     data && {
       dataRequested: data.dataRequested,
       requiresKennitala: data.requiresKennitala,
+      testResult: data.testResult,
     }
   );
 };
@@ -22,4 +23,8 @@ export const updatePushToken = async pushToken => {
 
 export const ignoreDataRequest = async () => {
   return ApiClient.delete('/user/data-request');
+};
+
+export const deleteTestResults = async () => {
+  return ApiClient.delete('/user/test-result');
 };
