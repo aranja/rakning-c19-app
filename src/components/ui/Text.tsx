@@ -2,8 +2,11 @@ import React, { ReactText, ReactNode } from 'react';
 import styled, { css } from 'styled-components/native';
 import { scale } from '../../utils/index';
 import Colors from '../../constants/Colors';
-import { StyleProp, TextStyle } from 'react-native';
+import { StyleProp, TextStyle, Dimensions } from 'react-native';
 import { isRTL } from '../../i18n';
+const { width } = Dimensions.get('window');
+
+const smallScreen = width <= 375;
 
 interface FontProps {
   marginBottom?: 0 | 0.25 | 0.5 | 1 | 1.5 | 2;
@@ -17,7 +20,7 @@ interface FontProps {
 type Level = 1 | 2 | 3 | 4;
 
 const headingSize = {
-  1: 54,
+  1: smallScreen ? 45 : 54,
   2: 34,
   3: 24,
   4: 16,
