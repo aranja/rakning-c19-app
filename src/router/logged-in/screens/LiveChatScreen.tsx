@@ -14,8 +14,9 @@ interface Props {
 }
 
 export const LiveChatScreen = ({ navigation }: Props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
+  const group = i18n.language === 'is' ? '1' : '2'; // Group 1 for Icelandic and group 2 for English
 
   return (
     <>
@@ -34,7 +35,7 @@ export const LiveChatScreen = ({ navigation }: Props) => {
         </View>
         <WebView
           source={{
-            uri: `https://secure.livechatinc.com/licence/${config.liveChatLicence}/v2/open_chat.cgi`,
+            uri: `https://secure.livechatinc.com/licence/${config.liveChatLicence}/v2/open_chat.cgi?group=${group}`,
           }}
           startInLoadingState={true}
           renderLoading={() => (
