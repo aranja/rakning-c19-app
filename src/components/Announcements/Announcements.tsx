@@ -46,7 +46,9 @@ const Announcements = ({
         activeOpacity={1}
       >
         <InfoIcon color={Colors.white} />
-        <ui.Alert bold>{alertText}</ui.Alert>
+        <ui.Alert bold adjustsFontSizeToFit numberOfLines={2}>
+          {alertText}
+        </ui.Alert>
       </ui.Header>
       <ui.SlideWrapper>
         {!isEmpty(slides) && (

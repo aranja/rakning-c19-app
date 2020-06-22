@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Text from '../ui/Text';
 
-import { useAlert } from '../../context/alert';
 import { verifyPin } from '../../api/Login';
 import PinCode from '../PinCode';
 
@@ -24,8 +23,8 @@ const PinNumber = ({
   const [pin, setPin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showResetBtn, setShowResetBtn] = useState(false);
+  const [error, setError] = useState('');
   const timeOutRef = useRef(null);
-  const { createAlert } = useAlert();
   const { t } = useTranslation();
 
   const startTimeout = () => {
@@ -55,27 +54,19 @@ const PinNumber = ({
     } catch (error) {
       setShowResetBtn(true);
       setIsLoading(false);
+      setPin('');
 
       if (error.status === 400) {
-        createAlert({
-          message: t('incorrentPINMessage'),
-          type: 'error',
-        });
+        setError(t('incorrentPINMessage'));
       } else {
-        createAlert({
-          message: t('genericErrorMessage'),
-          type: 'error',
-        });
+        setError(t('genericErrorMessage'));
       }
     }
   };
 
   const updatePin = value => {
+    setError(false);
     setPin(value);
-
-    if (value.length === 6) {
-      onVerifyPin(value);
-    }
   };
 
   const textColor = isLoading ? Colors.placeholder : Colors.text;
@@ -98,13 +89,29 @@ const PinNumber = ({
           color: textColor,
           fontSize: 36,
         }}
+        error={!!error}
       />
+      <Vertical unit={1} />
+      <Text
+        center
+        color={Colors.error}
+        numberOfLines={2}
+        adjustsFontSizeToFit
+        maxFontSizeMultiplier={2}
+      >
+        {error}
+      </Text>
       <Vertical fill />
-
-      <CtaButton transparent disabled={!showResetBtn} onPress={resetPin}>
+      <CtaButton disabled={pin.length < 6} onPress={() => onVerifyPin(pin)}>
+        {t('continue')}
+      </CtaButton>
+      <CtaButton transparent onPress={resetPin}>
         <Text
           marginBottom={0}
-          color={showResetBtn ? Colors.gray : 'transparent'}
+          color={Colors.breidholtAtNight}
+          center
+          bold
+          style={{ opacity: showResetBtn ? 1 : 0.3 }}
         >
           {t('pinResendBtn')}
         </Text>

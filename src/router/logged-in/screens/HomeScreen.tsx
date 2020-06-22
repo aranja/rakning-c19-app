@@ -17,7 +17,7 @@ import {
   LocationPermission,
 } from '../../../tracking';
 import { registerPushNotifications } from '../../../push-notifications';
-import AppShell, { Content } from '../../../components/AppShell';
+import AppShell, { Content, Header } from '../../../components/AppShell';
 import Text from '../../../components/ui/Text';
 import { ButtonGroup } from '../../../components/Button';
 import { scale } from '../../../utils';
@@ -38,6 +38,7 @@ import {
 import Announcements from '../../../components/Announcements';
 import TestResults from '../../../components/TestResultsModal/TestResultsModal';
 import { getAnnouncements } from '../../../api/Announcements';
+import { AppShellBackgroundType } from '../../../components/AppShell/AppShell';
 
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
@@ -70,6 +71,7 @@ const HomeScreen = ({ navigation }) => {
   const logoutUser = () => {
     navigation.navigate({ routeName: 'LoggedOut' });
     stopBackgroundTracking();
+
     logout();
     clearUserData();
   };
@@ -176,85 +178,80 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <AppShell
-      title={t('trackingTitle')}
-      subtitle={t('trackingSubtitle')}
-      circles
-    >
-      <ScrollView>
-        <Content>
-          <Text color={Colors.orange} marginBottom={0} bold center>
-            {`${t('trackingAlert')}  `}
-            <TracingIcon />
-          </Text>
-          <Vertical unit={1} />
+    <AppShell circles={AppShellBackgroundType.Small}>
+      <Content>
+        <Header title={t('trackingTitle')} subtitle={t('trackingSubtitle')} />
+        <Text color={Colors.orange} marginBottom={0} bold center>
+          {`${t('trackingAlert')}  `}
+          <TracingIcon />
+        </Text>
+        <Vertical unit={1} />
 
-          <Announcements
-            alertText={t('importantAnnouncements')}
-            link={t('importantAnnouncementsLink')}
-            slides={announcements}
-            loading={announcementsLoading}
-          />
-          <Vertical unit={1} />
+        <Announcements
+          alertText={t('importantAnnouncements')}
+          link={t('importantAnnouncementsLink')}
+          slides={announcements}
+          loading={announcementsLoading}
+        />
+        <Vertical unit={1} />
 
-          <Card
-            label={t('symptomsCardTitle')}
-            description={t('symptomsCardSubtitle')}
-            onPress={() => navigation.navigate('Contact')}
-            icon={<ChatIcon />}
-          />
-          <Vertical unit={0.5} />
-          <Card
-            label={t('informationForTouristCardTitle')}
-            description={t('informationForTouristCardSubtitle')}
-            onPress={() =>
-              WebBrowser.openBrowserAsync(t('informationForTouristCardLink'))
-            }
-            icon={<InfoIcon />}
-          />
-          <Vertical unit={0.5} />
-          <Card
-            label={t('questionsCardTitle')}
-            description={t('questionsCardSubtitle')}
-            onPress={() => WebBrowser.openBrowserAsync(t('questionsCardLink'))}
-            // onPress={() => navigation.navigate('Questions')}
-            icon={<QuestionsIcon color={Colors.orange} />}
-          />
-          <Vertical unit={1} />
+        <Card
+          label={t('symptomsCardTitle')}
+          description={t('symptomsCardSubtitle')}
+          onPress={() => navigation.navigate('Contact')}
+          icon={<ChatIcon />}
+        />
+        <Vertical unit={0.5} />
+        <Card
+          label={t('informationForTouristCardTitle')}
+          description={t('informationForTouristCardSubtitle')}
+          onPress={() =>
+            WebBrowser.openBrowserAsync(t('informationForTouristCardLink'))
+          }
+          icon={<InfoIcon />}
+        />
+        <Vertical unit={0.5} />
+        <Card
+          label={t('questionsCardTitle')}
+          description={t('questionsCardSubtitle')}
+          // onPress={() => WebBrowser.openBrowserAsync(t('questionsCardLink'))}
+          onPress={() => navigation.navigate('Questions')}
+          icon={<QuestionsIcon color={Colors.orange} />}
+        />
+        <Vertical unit={1} />
 
-          <ButtonGroup
-            style={{ paddingLeft: scale(20), paddingRight: scale(20) }}
-          >
-            <UrlButton href={t('covidLink')}>
-              {t('covidLabel')}
-              {' covid.is'}
-            </UrlButton>
+        <ButtonGroup
+          style={{ paddingLeft: scale(20), paddingRight: scale(20) }}
+        >
+          <UrlButton href={t('covidLink')}>
+            {t('covidLabel')}
+            {' covid.is'}
+          </UrlButton>
 
-            <UrlButton href={privacyUrls[i18n.language] || privacyUrls.en}>
-              {t('privacyPolicy')}
-            </UrlButton>
-          </ButtonGroup>
+          <UrlButton href={privacyUrls[i18n.language] || privacyUrls.en}>
+            {t('privacyPolicy')}
+          </UrlButton>
+        </ButtonGroup>
 
-          <Vertical unit={3} />
+        <Vertical unit={3} />
 
-          <Footer />
+        <Footer />
 
-          <TestResults
-            isVisible={isTestResultsModalOpen}
-            title={t('testResultsModalTitle')}
-            kicker={t('testResultsModalKicker')}
-            description={t('testResultsModalDescription')}
-            buttonText={t('close')}
-            onPress={() => setIsTestResultsModalOpen(false)}
-          />
+        <TestResults
+          isVisible={isTestResultsModalOpen}
+          title={t('testResultsModalTitle')}
+          kicker={t('testResultsModalKicker')}
+          description={t('testResultsModalDescription')}
+          buttonText={t('close')}
+          onPress={() => setIsTestResultsModalOpen(false)}
+        />
 
-          {__DEV__ && (
-            <CtaButton bgColor={Colors.gray} onPress={logoutUser}>
-              Dev only log out
-            </CtaButton>
-          )}
-        </Content>
-      </ScrollView>
+        {__DEV__ && (
+          <CtaButton bgColor={Colors.gray} onPress={logoutUser}>
+            Dev only log out
+          </CtaButton>
+        )}
+      </Content>
     </AppShell>
   );
 };

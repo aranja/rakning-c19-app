@@ -31,20 +31,23 @@
     "incorrentPINMessage": "Oops! Incorrect code. Please try again.",
     "isolationLabel": "How does isolation work?",
     "isolationLink": "https://www.covid.is/categories/how-does-isolation-work",
+    "language": "Language",
     "languageDescription": "Help the Civil Protection Team to track potential COVID-19 infections in Iceland",
     "languageContinue": "Continue in English",
+    "selectLanguage": "Select language",
     "next": "Next",
     "close": "Close",
+    "cancel": "Cancel",
     "continue": "Continue",
     "phoneNr": "Telephone",
     "phoneNumber": "Telephone number",
     "phoneNumberDescription": "You will then be sent a code, which you will enter in the next step.",
-    "phoneNumberTitle": "Enter your phone number.",
+    "phoneNumberTitle": "Enter \n phone number",
     "phoneValidationMessage": "Oops! Invalid phone number.",
     "pinNumberDescription": "Enter the code sent to you by text message (SMS) to phone number {{phoneNumber}}.",
-    "pinNumberTitle": "Enter verification code",
+    "pinNumberTitle": "Enter \n SMS code",
     "pinPhone": "We'll send a verification code to {{phoneNumber}}.",
-    "pinResendBtn": "No text message? Try again.",
+    "pinResendBtn": "Resend SMS code to",
     "possibleInfectionLabel": "Could you be affected?",
     "possibleInfectionLink": "https://www.covid.is/categories/could-you-be-infected",
     "quarantineLabel": "How does quarantine work?",
@@ -54,7 +57,7 @@
     "requestDataKennitalaInfo": "Please enter your national ID number before you send your location data.",
     "requestDataSubTitle": "The Department of Civil Protection and Emergency Management’s Contact Tracing Team requests that you submit your location data to assist in locating people who may be infected.",
     "requestDataThanks": "Thank you for sending you data to the Department of Civil Protection and Emergency Management!",
-    "requestDataTitle": "Data Request",
+    "requestDataTitle": "Data \n Request",
     "requestDataWrongKennitala": "The National ID number does not match the National ID number that the Tracing Team has on file.",
     "requestDataExitButton": "Do not send my data.",
     "requestDataExitTitle": "Are you sure?",
@@ -123,7 +126,12 @@
     "callClinicTitle": "After-hours clinic (Læknavaktin)",
     "callClinicDescription": "Call centre open 24/7.",
     "callClinicAction": "Call clinic",
+    "clinicsListCardTitle": "List of clinics",
+    "clinicsListAction": "Find clinics",
+    "clinicsListTitle": "List of Clinics",
+    "clinicsListSubtitle": "List of nearby medical clinics according to your location",
     "otherOptions": "Other options",
+    "additionalInfo": "Additional information",
     "back": "Back",
     "helplineTitle": "Red Cross helpline and online chat 1717 and raudikrossinn.is",
     "helplineBullets": [
@@ -152,7 +160,15 @@
         "foodPetsAndAnimals",
         "tourists",
         "riskAreas"
+      ],
+      "tertiary": [
+        "groupsAtRisk",
+        "seniorCitizens",
+        "childrenAndTeens",
+        "worriesAndAnxiety"
       ]
-    }
+    },
+
+    "chooseMap": "Choose map app"
   }
 }

@@ -19,7 +19,9 @@ const HelplineOptions = ({
     <ui.Wrapper>
       <ui.Row>
         <InfoIcon />
-        <ui.Title level={4}>{title}</ui.Title>
+        <ui.Title bold adjustsFontSizeToFit>
+          {title}
+        </ui.Title>
       </ui.Row>
       <ui.Bullets>
         <BulletPoints

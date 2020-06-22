@@ -29,15 +29,24 @@ export const Kicker = styled(Heading)`
 `;
 
 export const Title = styled(Heading)`
-  line-height: ${scale(28)}px;
-  font-size: ${scale(26)}px;
-  margin: 0px ${scale(20)}px ${verticalScale(4)}px;
+  line-height: ${scale(24)}px;
+  font-size: ${scale(21)}px;
+  margin: ${verticalScale(10)}px ${scale(20)}px;
 `;
 
-export const Date = styled(Text)`
-  font-size: ${scale(11)}px;
+export const MapButton = styled.TouchableOpacity`
+  padding: ${verticalScale(10)}px ${scale(14)}px;
+  border-width: 1px;
+  border-radius: ${scale(12)}px;
+  border-color: ${Colors.border};
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
+export const ButtonLabel = styled(Text)`
+  font-size: ${scale(14)}px;
   text-align: center;
-  margin-bottom: ${verticalScale(18)}px;
 `;
 
 export const Description = styled(Text)`
@@ -45,4 +54,10 @@ export const Description = styled(Text)`
   text-align: center;
   padding: 0 ${verticalScale(12)}px;
   line-height: ${scale(18)}px;
+`;
+
+export const ButtonWrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 `;

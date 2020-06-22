@@ -1,5 +1,5 @@
-import React, { useReducer, useRef, useState } from 'react';
-import { View, TextInput, TouchableWithoutFeedback } from 'react-native';
+import React, { useReducer, useRef, useState, createRef } from 'react';
+import { View, TextInput, TouchableWithoutFeedback, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import PhoneInput from '../PhoneInput';
 import CountryPicker from 'react-native-country-picker-modal';
@@ -80,7 +80,9 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   const [countryPickerOpen, setCountryPickerOpen] = useState(false);
   const dimensions = useWindowDimensions();
   const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
-  const inputHeight = scale(50 * fontScale);
+  const inputHeight = scale(fontScale <= 1 ? 50 : 50 * (fontScale * 0.5));
+
+  console.log('scale...', fontScale);
 
   const onPressFlag = () => {
     setCountryPickerOpen(true);
@@ -149,7 +151,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Vertical unit={1} />
       <View
         style={{
@@ -166,10 +168,10 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           style={{
             ...styles.phoneViewStyle,
             height: inputHeight,
-            width: '40%',
+            width: fontScale <= 1 ? '40%' : '100%',
           }}
           textStyle={{
-            ...styles.phoneTextStyle,
+            ...styles.codeTextStyle,
             height: inputHeight,
             textAlign: isRTL() ? 'right' : 'left',
           }}
@@ -178,7 +180,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           onChangePhoneNumber={onChangeCallingCode}
         />
         <TextInput
-          placeholder={t('phoneNr').toUpperCase()}
+          placeholder={t('phoneNr')}
           keyboardType="phone-pad"
           returnKeyType="done"
           autoCapitalize="none"
@@ -189,38 +191,27 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
             ...styles.phoneTextStyle,
             height: inputHeight,
             textAlign: isRTL() ? 'right' : 'left',
+            width: fontScale <= 1 ? '60%' : '100%',
           }}
           onChangeText={onChangePhoneNumber}
         />
       </View>
-      <CountryPicker
-        withCallingCode
-        withFilter
-        visible={countryPickerOpen}
-        onSelect={onSelectCountry}
-        onClose={onCountryPickerClose}
-        translation="eng"
-        countryCode={state.cca2}
-        renderFlagButton={() => <View />}
-      />
       <Vertical unit={1} />
       <Checkbox checked={tosAccepted} onPress={acceptTOS}>
         <Trans i18nKey="tosAcceptance">
           I agree to the <Link onPress={openPP}>Privacy Policy</Link>.
         </Trans>
       </Checkbox>
-      <Vertical unit={1} />
-      <View style={styles.btn}>
-        <CtaButton
-          disabled={!tosAccepted || state.phoneNumber.length <= 0}
-          onPress={getPinNumber}
-          image={covidIcon}
-          imageDimensions={{ height: scale(28), width: scale(24) }}
-        >
-          {t('next')}
-        </CtaButton>
-      </View>
-    </View>
+      <Vertical fill />
+      <CtaButton
+        disabled={!tosAccepted || state.phoneNumber.length <= 0}
+        onPress={getPinNumber}
+        image={covidIcon}
+        imageDimensions={{ height: scale(28), width: scale(24) }}
+      >
+        {t('next')}
+      </CtaButton>
+    </>
   );
 };
 

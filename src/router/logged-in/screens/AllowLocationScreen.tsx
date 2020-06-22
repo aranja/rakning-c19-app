@@ -50,7 +50,13 @@ const ContentView = ({
       </>
     }
   >
-    <Content style={{ marginLeft: scale(8), marginRight: scale(8) }}>
+    <Content
+      style={{
+        marginLeft: scale(8),
+        marginRight: scale(8),
+        flexGrow: 1,
+      }}
+    >
       {children}
     </Content>
   </AppShell>

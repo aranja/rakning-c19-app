@@ -13,6 +13,7 @@ import Svg, {
   Circle,
   Ellipse,
   Image,
+  RadialGradient,
 } from 'react-native-svg';
 import colors from '../../constants/Colors';
 import Colors from '../../constants/Colors';
@@ -36,35 +37,67 @@ export const Close = props => (
   </Svg>
 );
 
-export const CheckIcon = ({ isChecked }) =>
-  isChecked ? (
-    <Svg width="18" height="19" fill="none">
-      <Rect
-        width="16"
-        height="16"
-        x="1"
-        y="1.5723"
-        fill="#ff7a4c"
-        stroke="#ff7a4c"
-        strokeWidth="2"
-        rx="2"
-      />
+export const DropDown = props => (
+  <Svg width={11} height={6} {...props}>
+    <Path
+      d="M4.763 5.196l-3.227-3.52A1 1 0 012.273 0h6.454a1 1 0 01.737 1.676l-3.227 3.52a1 1 0 01-1.474 0z"
+      fill="#FF7A4C"
+      fillRule="evenodd"
+    />
+  </Svg>
+);
+
+export const List = props => (
+  <Svg width={18} height={12} {...props}>
+    <Defs>
       <Path
-        fill="#000"
-        d="M6.8061 12.2245L3.9517 9.3701l-.972.9652 3.8264 3.8264 8.2142-8.2141-.9652-.9652-7.249 7.2421z"
+        d="M4 16a1 1 0 110 2 1 1 0 010-2zm16.064 0c.515 0 .936.421.936.936v.128a.938.938 0 01-.936.936H7.936A.938.938 0 017 17.064v-.128c0-.515.42-.936.936-.936zM4 11a1 1 0 110 2 1 1 0 010-2zm16.064 0c.515 0 .936.421.936.936v.128a.938.938 0 01-.936.936H7.936A.938.938 0 017 12.064v-.128c0-.515.42-.936.936-.936zM4 6a1 1 0 110 2 1 1 0 010-2zm16.064 0c.515 0 .936.421.936.936v.128a.938.938 0 01-.936.936H7.936A.938.938 0 017 7.064v-.128C7 6.421 7.42 6 7.936 6z"
+        id="prefix__a"
       />
+    </Defs>
+    <Use
+      fill="#FE7A4C"
+      xlinkHref="#prefix__a"
+      transform="translate(-3 -6)"
+      fillRule="evenodd"
+    />
+  </Svg>
+);
+
+export const Marker = props => (
+  <Svg width={18} height={24} {...props}>
+    <Defs>
+      <Path
+        d="M8.075 23.516C1.265 13.642 0 12.629 0 9a9 9 0 1118 0c0 3.629-1.264 4.642-8.075 14.516a1.125 1.125 0 01-1.85 0zM9 12.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
+        id="prefix__a"
+      />
+    </Defs>
+    <Use fill="#FE7A4C" xlinkHref="#prefix__a" fillRule="evenodd" />
+  </Svg>
+);
+
+export const CheckIcon = ({ isChecked, ...props }) =>
+  isChecked ? (
+    <Svg width={20} height={20} {...props}>
+      <G fill="none" fillRule="evenodd">
+        <Rect fill="#FF7A4C" width={20} height={20} rx={6} />
+        <Path
+          stroke="#FFF"
+          strokeWidth={2}
+          strokeLinecap="round"
+          d="M4.967 10.068l4.23 4.135 6.19-8.284"
+        />
+      </G>
     </Svg>
   ) : (
-    <Svg width="18" height="19" fill="none">
+    <Svg width={22} height={22} {...props}>
       <Rect
-        width="16"
-        height="16"
-        x="1"
-        y="1.5723"
-        fill="#ffffff"
-        stroke="#cccccc"
-        strokeWidth="1"
-        rx="2"
+        width={20}
+        height={20}
+        rx={6}
+        transform="translate(1 1)"
+        stroke="#C8B7B0"
+        fill="none"
       />
     </Svg>
   );
@@ -131,7 +164,7 @@ export const PhoneIcon = props => (
 );
 
 export const BackIcon = props => (
-  <Svg width={16} height={14} {...props}>
+  <Svg width="100%" height="100%" viewBox="0 0 16 14" {...props}>
     <Path
       d="M15.956.514c0-.398-.552-.646-.995-.447l-2.784 1.25c-.206.092-.332.263-.332.447v10.44c0 .183.126.354.332.446l2.784 1.25c.443.199.995-.05.995-.446zm-4.985 2.238c0-.397-.553-.645-.995-.447l-1.602.72c-.206.092-.332.263-.332.447v7.023c0 .185.126.355.332.447l1.602.72c.442.198.995-.05.995-.447zM7.168 4.46c0-.397-.553-.645-.995-.447l-1.602.72c-.206.092-.332.262-.332.447v3.608c0 .184.126.354.332.446l1.602.72c.442.199.995-.05.995-.447zM3.365 6.168c0-.397-.553-.646-.995-.447l-1.817.816c-.442.198-.442.695 0 .893l1.817.816c.442.199.995-.05.995-.447z"
       fill="#006DC2"
@@ -256,7 +289,7 @@ export const TestResults = props => (
     </G>
   </Svg>
 );
-export const CirclesBig = props => (
+export const CirclesMedium = props => (
   <Svg width={352} height={377} {...props}>
     <Defs>
       <Path id="prefix__b" d="M0 .2h300v324H0z" />
@@ -303,8 +336,48 @@ export const CirclesBig = props => (
   </Svg>
 );
 
+export const CirclesBig = props => (
+  <Svg width={490} height={475} {...props}>
+    <Defs>
+      <Path id="prefix__a" d="M0 69h375v405H0z" />
+      <Path id="prefix__c" d="M.875.262h486v474h-486z" />
+      <Path id="prefix__e" d="M.875.262h486v474h-486z" />
+    </Defs>
+    <G fill="none" fillRule="evenodd">
+      <Mask id="prefix__b" fill="#fff">
+        <Use xlinkHref="#prefix__a" />
+      </Mask>
+      <G opacity={0.279} mask="url(#prefix__b)">
+        <G transform="translate(3)">
+          <Mask id="prefix__d" fill="#fff">
+            <Use xlinkHref="#prefix__c" />
+          </Mask>
+          <Path
+            d="M217.684 319.338c38.37 10.8 60.718 50.658 49.919 89.026-10.8 38.369-50.658 60.717-89.027 49.918s-60.718-50.657-49.918-89.026c10.8-38.37 50.658-60.719 89.026-49.918zm192.68-106.94c38.368 10.799 60.718 50.657 49.918 89.027-10.8 38.368-50.658 60.717-89.027 49.918-38.368-10.8-60.717-50.658-49.917-89.026 10.799-38.37 50.657-60.72 89.025-49.92zm-299.62-85.74c38.369 10.8 60.718 50.658 49.918 89.026-10.799 38.37-50.657 60.718-89.026 49.92-38.368-10.8-60.718-50.66-49.918-89.028 10.8-38.368 50.658-60.718 89.026-49.919zm192.68-106.94c38.369 10.8 60.717 50.658 49.918 89.027-10.799 38.368-50.657 60.717-89.027 49.918-38.368-10.8-60.717-50.658-49.918-89.027 10.8-38.369 50.658-60.718 89.027-49.918z"
+            fill="#FAB18F"
+            fillRule="nonzero"
+            mask="url(#prefix__d)"
+            transform="rotate(-23 241 239)"
+          />
+        </G>
+        <G transform="translate(3)">
+          <Mask id="prefix__f" fill="#fff">
+            <Use xlinkHref="#prefix__e" />
+          </Mask>
+          <Path
+            d="M220.497 308.29c-38.267-10.771-60.558-50.524-49.786-88.792 10.77-38.268 50.524-60.558 88.791-49.787 38.268 10.771 60.559 50.524 49.787 88.792-10.77 38.267-50.524 60.557-88.792 49.786"
+            fill="#006DC2"
+            fillRule="nonzero"
+            mask="url(#prefix__f)"
+          />
+        </G>
+      </G>
+    </G>
+  </Svg>
+);
+
 export const IcelandMap = props => (
-  <Svg width="100%" height="100%" viewBox="0 0 375 335" {...props}>
+  <Svg width={375} height={335} {...props}>
     <Defs>
       <Circle id="prefix__d" cx={85} cy={252} r={6} />
       <Circle id="prefix__f" cx={117} cy={234} r={6} />
@@ -688,6 +761,16 @@ export const OnboardingCardIcon = props => (
         mask="url(#prefix__b)"
         d="M0 251h375v84H0z"
       />
+      <G mask="url(#prefix__b)">
+        <G transform="translate(299 115)">
+          <Circle fill="#FE7A4C" cx={27} cy={27} r={27} />
+          <Path
+            stroke="#FFF"
+            strokeWidth={5}
+            d="M14.07 26.432l11.414 9.26 14.748-18.294"
+          />
+        </G>
+      </G>
     </G>
   </Svg>
 );
@@ -775,6 +858,7 @@ export const OnboardingChatIcon = props => (
 export default {
   close: Close,
   check: CheckIcon,
+  dropDown: DropDown,
   info: InfoIcon,
   chat: ChatIcon,
   question: QuestionsIcon,
@@ -783,9 +867,12 @@ export default {
   testResults: TestResults,
   tracing: TracingIcon,
   circlesSmall: CirclesSmall,
+  circlesMedium: CirclesMedium,
   circlesBig: CirclesBig,
   icelandMap: IcelandMap,
   onboardingPhone: OnboardingPhoneIcon,
   onboardingCardIcon: OnboardingCardIcon,
   onboardingChatIcon: OnboardingChatIcon,
+  marker: Marker,
+  list: List,
 };

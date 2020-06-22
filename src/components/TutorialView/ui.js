@@ -5,23 +5,22 @@ import { scale, verticalScale } from '../../utils/scale';
 import Text, { Heading } from '../ui/Text';
 
 const isAndroid = Platform.OS === 'android';
+const statusBarOffsett =
+  Platform.OS === 'android' ? StatusBar.currentHeight : 0;
 
-export const SafeArea = styled.SafeAreaView`
+export const SafeArea = styled.View`
   background-color: ${Colors.background};
   flex: 1;
-  height: 100%;
 `;
 
 export const ImageWrap = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: ${({ imagePosition }) =>
-    imagePosition === 'right' ? 'flex-end' : 'center'};
+  width: 100%;
 `;
 
 export const Container = styled.View``;
 
 export const Content = styled.View`
+  align-items: center;
   flex: 1;
 `;
 
@@ -29,7 +28,7 @@ export const Footer = styled.View`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: ${verticalScale(60)}px;
+  margin-bottom: ${verticalScale(20)}px;
   padding-left: ${scale(32)}px;
   padding-right: ${scale(32)}px;
 `;
@@ -48,8 +47,9 @@ export const Description = styled(Text)`
 
 export const CloseIconContainer = styled.View`
   position: absolute;
-  top: ${verticalScale(47)}px;
+  top: ${verticalScale(40)}px;
   left: ${scale(20)}px;
+  z-index: 100;
 `;
 
 export const LocaleToggleContainer = styled.View`

@@ -24,7 +24,7 @@ export const ActionWrapper = styled.View`
   border-radius: ${scale(12)};
   background: ${Colors.white};
   border-width: 1px;
-  border-color: #c8b7b0;
+  border-color: ${Colors.border};
 `;
 
 export const Row = styled.View`

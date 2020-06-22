@@ -11,16 +11,14 @@ import {
 
 const CustomTextInput = styled.TextInput`
   color: ${Colors.breidholtAtNight};
-  background-color: ${({ focused, empty }) =>
-    focused || !empty ? Colors.white : Colors.backgroundAlt};
-  border: 1px solid ${Colors.backgroundAlt};
+  border: 1px solid ${Colors.border};
   font-size: ${scale(22)};
   font-weight: bold;
   min-height: ${scale(50)};
   width: 100%;
-  padding-horizontal: ${scale(32)};
+  padding-horizontal: ${scale(10)};
   padding-vertical: ${verticalScale(10)};
-  border-radius: 4px;
+  border-radius: ${scale(6)};
 `;
 
 const Input = ({ onBlur, onFocus, ...props }: TextInputProps) => {

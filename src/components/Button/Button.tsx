@@ -16,9 +16,10 @@ import {
 } from './styles';
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../../constants/Colors';
-import { scale } from '../../utils/index';
+import { scale, verticalScale } from '../../utils/index';
 import { BackIcon } from '../Icons';
 import Text from '../ui/Text';
+import { useWindowDimensions } from '../../utils/hooks';
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -108,10 +109,11 @@ export const CtaButton = ({
             invert={invert}
             color={color}
             disabled={loading || disabled}
+            maxFontSizeMultiplier={2.2}
           >
             {children}
           </ButtonLabel>
-          {image && (
+          {image && !disabled && (
             <ImageWrap
               source={image}
               style={{
@@ -161,11 +163,20 @@ export const SquareButton = ({
 );
 
 export const BackButton = ({ onPress, disabled, children }: ButtonProps) => {
+  const dimensions = useWindowDimensions();
+
+  const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
+
   return (
-    <Button onPress={onPress} disabled={disabled}>
+    <Button onPress={onPress} disabled={disabled} style={{ paddingBottom: 10 }}>
       <Row>
-        <BackIcon />
-        <BackLabel color={Colors.textDark}>{children}</BackLabel>
+        <BackIcon
+          width={scale(16) * (fontScale <= 1 ? 1 : 0.5) * fontScale}
+          height={verticalScale(14) * (fontScale <= 1 ? 1 : 0.5) * fontScale}
+        />
+        <BackLabel color={Colors.textDark} maxFontSizeMultiplier={2.5}>
+          {children}
+        </BackLabel>
       </Row>
     </Button>
   );

@@ -12,6 +12,7 @@ import ChangeLanguageScreen from './screens/ChangeLanguageScreen';
 import { LiveChatScreen } from './screens/LiveChatScreen';
 import ContactScreen from './screens/ContactScreen';
 import QuestionsScreen from './screens/QuestionsScreen';
+import ClinicsScreen from './screens/ClinicsScreen';
 
 const LoggedIn = createStackNavigator(
   {
@@ -22,6 +23,7 @@ const LoggedIn = createStackNavigator(
     LiveChat: LiveChatScreen,
     Contact: ContactScreen,
     Questions: QuestionsScreen,
+    Clinics: ClinicsScreen,
   },
   {
     initialRouteName: 'Permission',

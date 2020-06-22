@@ -13,8 +13,9 @@ export const Row = styled.View`
   margin-bottom: ${verticalScale(12)}px;
 `;
 
-export const Title = styled(Heading)`
+export const Title = styled(Text)`
   margin-left: ${scale(14)}px;
+  font-size: ${scale(16)};
 `;
 
 export const Bullets = styled.View`

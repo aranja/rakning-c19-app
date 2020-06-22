@@ -28,8 +28,8 @@ ${({ small }) =>
   ${({ disabled }) =>
     disabled &&
     css`
-      border-color: ${Colors.gray};
-      opacity: 0.5;
+      border-color: #dcc2b7;
+      background-color: #dcc2b7;
     `}
 
   ${({ align }) =>

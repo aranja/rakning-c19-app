@@ -2,24 +2,19 @@ import * as React from 'react';
 import { ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import AppShell, { Content } from '../../../components/AppShell';
+import AppShell, { Content, Header } from '../../../components/AppShell';
 import Colors from '../../../constants/Colors';
-import Button, {
-  CtaButton,
-  UrlButton,
-  BackButton,
-} from '../../../components/Button/Button';
+import { UrlButton, BackButton } from '../../../components/Button/Button';
 import { Vertical } from '../../../components/ui/Spacer';
-import Text, { Heading } from '../../../components/ui/Text';
+import { Heading } from '../../../components/ui/Text';
 import { ButtonGroup } from '../../../components/Button';
 import Footer from '../../../components/Footer';
-import { scale, verticalScale } from '../../../utils';
-import { languages } from '../../../i18n';
-import { useAlert } from '../../../context/alert';
+import { verticalScale } from '../../../utils';
 
 interface LocaleLinks {
   primary?: string[];
   secondary?: string[];
+  tertiary?: string[];
 }
 
 interface QuestionsScreenProps {
@@ -40,20 +35,11 @@ const smallBtnStyle = {
 };
 
 const QuestionsScreen = ({ navigation }: QuestionsScreenProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const links = t('links', { returnObjects: true }) as LocaleLinks;
-  const selectedLanguage = languages.find(lang => lang.code === i18n.language);
-  const { createAlert } = useAlert();
 
   return (
-    <AppShell
-      title={t('questionsTitle')}
-      subtitle={t('questionsSubtitle')}
-      bgColor={Colors.white}
-      backButton={
-        <BackButton onPress={() => navigation.goBack()}>{t('back')}</BackButton>
-      }
-    >
+    <AppShell bgColor={Colors.white}>
       <ScrollView>
         <Content
           style={{
@@ -61,6 +47,15 @@ const QuestionsScreen = ({ navigation }: QuestionsScreenProps) => {
             paddingRight: verticalScale(30),
           }}
         >
+          <Header
+            title={t('questionsTitle')}
+            subtitle={t('questionsSubtitle')}
+            backButton={
+              <BackButton onPress={() => navigation.goBack()}>
+                {t('back')}
+              </BackButton>
+            }
+          />
           <ButtonGroup>
             {(links.primary ?? []).map(link => (
               <UrlButton
@@ -94,46 +89,26 @@ const QuestionsScreen = ({ navigation }: QuestionsScreenProps) => {
               </UrlButton>
             ))}
           </ButtonGroup>
-          <ButtonGroup>
-            <UrlButton bgColor={Colors.backgroundAlt} href={t('covidLink')}>
-              <Text center>
-                {t('covidLabel')}{' '}
-                <Text bold color={Colors.blue}>
-                  covid.is
-                </Text>
-              </Text>
-            </UrlButton>
 
-            <UrlButton
-              bgColor={Colors.backgroundAlt}
-              href={privacyUrls[i18n.language] || privacyUrls.en}
-            >
-              <Text center>{t('privacyPolicy')}</Text>
-            </UrlButton>
+          <Vertical unit={2} />
 
-            <CtaButton
-              onPress={() => navigation.navigate('ChangeLanguage')}
-              image={selectedLanguage.flag}
-              bgColor={Colors.backgroundAlt}
-              imageDimensions={{
-                width: scale(28),
-                height: scale(19),
-              }}
-            >
-              <Text center>{selectedLanguage.name}</Text>
-            </CtaButton>
+          <Heading center level={4}>
+            {t('additionalInfo')}
+          </Heading>
 
-            <CtaButton
-              bgColor={Colors.backgroundAlt}
-              onPress={() => {
-                createAlert({
-                  type: 'info',
-                  message: t('uninstallAppToast'),
-                });
-              }}
-            >
-              <Text center>{t('stopTracking')}</Text>
-            </CtaButton>
+          <ButtonGroup row>
+            {(links.tertiary ?? []).map(link => (
+              <UrlButton
+                key={link}
+                href={t(`${link}Link`)}
+                bgColor={Colors.blue}
+                style={smallBtnStyle}
+                color={Colors.white}
+                small
+              >
+                {t(`${link}Label`)}
+              </UrlButton>
+            ))}
           </ButtonGroup>
         </Content>
         <Footer bgColor={Colors.white} />
