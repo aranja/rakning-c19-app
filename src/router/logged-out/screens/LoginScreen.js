@@ -6,6 +6,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Animated,
 } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import CountryPicker from 'react-native-country-picker-modal';
@@ -25,6 +26,7 @@ import { CtaButton } from '../../../components/Button/Button';
 
 class LoginScreen extends React.Component {
   modalizeRef = createRef(null);
+  phoneNumberInputRef = createRef(null);
 
   state = {
     countryCode: '',
@@ -32,11 +34,11 @@ class LoginScreen extends React.Component {
     pinToken: null,
   };
 
-  onOpen = () => {
+  onOpenCountryModal = () => {
     this.modalizeRef.current?.open();
   };
 
-  onClose = () => {
+  onCloseCountryModal = () => {
     this.modalizeRef.current?.close();
   };
 
@@ -66,7 +68,6 @@ class LoginScreen extends React.Component {
     return (
       <>
         <AppShell>
-          {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
           <KeyboardAvoidingView
             behavior="height"
             style={{
@@ -109,7 +110,7 @@ class LoginScreen extends React.Component {
                   </Text>
                 }
                 backButton={
-                  <BackButton onPress={this.onOpen}>
+                  <BackButton onPress={() => navigation.goBack()}>
                     <Trans>{'back'}</Trans>
                   </BackButton>
                 }
@@ -124,12 +125,15 @@ class LoginScreen extends React.Component {
                 />
               ) : (
                 <>
-                  <PhoneNumberInput onSendPin={this.onSendPin} />
+                  <PhoneNumberInput
+                    onSendPin={this.onSendPin}
+                    onPressFlag={this.onOpenCountryModal}
+                    ref={this.phoneNumberInputRef}
+                  />
                 </>
               )}
             </Content>
           </KeyboardAvoidingView>
-          {/* </TouchableWithoutFeedback> */}
         </AppShell>
         <Modalize
           ref={this.modalizeRef}
@@ -138,52 +142,41 @@ class LoginScreen extends React.Component {
               level={3}
               center
               marginBottom={1}
-              style={{ marginTop: verticalScale(25) }}
+              style={{
+                marginTop: verticalScale(25),
+                marginLeft: scale(10),
+                marginRight: scale(10),
+              }}
             >
               <Trans i18nKey={'selectLanguage'} />
             </Heading>
           }
-          FooterComponent={
-            <View
+          customRenderer={
+            <Animated.View
               style={{
-                position: 'relative',
-                paddingBottom: verticalScale(44),
+                flex: 1,
                 paddingLeft: scale(20),
                 paddingRight: scale(20),
               }}
             >
-              <LinearGradient
-                colors={[color(Colors.white).alpha(0), Colors.white]}
-                start={[0, 0]}
-                end={[0, 1]}
-                style={{
-                  position: 'absolute',
-                  top: verticalScale(-60),
-                  left: 0,
-                  right: 0,
-                  height: verticalScale(60),
+              <CountryPicker
+                withCallingCode
+                withFilter
+                withModal={false}
+                visible={true}
+                onSelect={e => {
+                  this.phoneNumberInputRef?.current?.onSelectCountry(e);
+                  this.phoneNumberInputRef?.current?.phoneNumberInputFocus(e);
+                  this.onCloseCountryModal();
                 }}
+                onClose={() => {}}
+                translation="eng"
+                countryCode={this.phoneNumberInputRef?.current?.cca2()}
+                renderFlagButton={() => <View />}
               />
-              <CtaButton onPress={this.onClose}>
-                <Trans i18nKey={'languageContinue'} />
-              </CtaButton>
-            </View>
+            </Animated.View>
           }
-        >
-          <Content>
-            <CountryPicker
-              withCallingCode
-              withFilter
-              withModal={false}
-              visible={true}
-              onSelect={() => {}}
-              onClose={() => {}}
-              translation="eng"
-              countryCode={'IS'}
-              renderFlagButton={() => <View />}
-            />
-          </Content>
-        </Modalize>
+        />
       </>
     );
   }

@@ -21,6 +21,7 @@ import { Vertical } from '../../../components/ui/Spacer';
 import Text, { Heading } from '../../../components/ui/Text';
 import BulletPoints from '../../../components/ui/BulletPoints';
 import HelplineOptions from '../../../components/HelplineOptions/HelplineOptions';
+import { useWindowDimensions } from '../../../utils/hooks';
 
 interface ContactScreenProps {
   navigation: {
@@ -31,11 +32,22 @@ interface ContactScreenProps {
 
 const ContactScreen = ({ navigation }: ContactScreenProps) => {
   const { t } = useTranslation();
+  const { fontScale: fs } = useWindowDimensions();
+  const fontScale = isNaN(fs) ? 1 : fs;
+
   return (
     <AppShell bgColor={Colors.white}>
       <Content>
         <Header
-          title={t('symptomsTitle')}
+          title={
+            <Heading
+              center
+              marginBottom={0.1}
+              numberOfLines={fontScale > 1 ? 3 : 2}
+            >
+              {t('symptomsTitle')}
+            </Heading>
+          }
           subtitle={t('symptomsSubtitle')}
           backButton={
             <BackButton onPress={() => navigation.goBack()}>

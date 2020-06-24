@@ -40,79 +40,83 @@ const QuestionsScreen = ({ navigation }: QuestionsScreenProps) => {
 
   return (
     <AppShell bgColor={Colors.white}>
-      <ScrollView>
-        <Content
-          style={{
-            paddingLeft: verticalScale(30),
-            paddingRight: verticalScale(30),
-          }}
-        >
-          <Header
-            title={t('questionsTitle')}
-            subtitle={t('questionsSubtitle')}
-            backButton={
-              <BackButton onPress={() => navigation.goBack()}>
-                {t('back')}
-              </BackButton>
-            }
-          />
-          <ButtonGroup>
-            {(links.primary ?? []).map(link => (
-              <UrlButton
-                key={link}
-                justify="start"
-                href={t(`${link}Link`)}
-                align="left"
-                bgColor={Colors.text}
-              >
-                {t(`${link}Label`)}
-              </UrlButton>
-            ))}
-          </ButtonGroup>
+      <Content
+        style={{
+          paddingBottom: 0,
+        }}
+      >
+        <Header
+          title={t('questionsTitle')}
+          subtitle={t('questionsSubtitle')}
+          backButton={
+            <BackButton onPress={() => navigation.goBack()}>
+              {t('back')}
+            </BackButton>
+          }
+        />
+      </Content>
+      <Content
+        style={{
+          paddingLeft: verticalScale(30),
+          paddingRight: verticalScale(30),
+        }}
+      >
+        <ButtonGroup>
+          {(links.primary ?? []).map(link => (
+            <UrlButton
+              key={link}
+              justify="start"
+              href={t(`${link}Link`)}
+              align="left"
+              bgColor={Colors.text}
+            >
+              {t(`${link}Label`)}
+            </UrlButton>
+          ))}
+        </ButtonGroup>
 
-          <Vertical unit={2} />
-          <Heading center level={4}>
-            {t('otherOptions')}
-          </Heading>
+        <Vertical unit={2} />
+        <Heading center level={4}>
+          {t('otherOptions')}
+        </Heading>
 
-          <ButtonGroup row>
-            {(links.secondary ?? []).map(link => (
-              <UrlButton
-                key={link}
-                href={t(`${link}Link`)}
-                bgColor={Colors.orange}
-                style={smallBtnStyle}
-                color={Colors.white}
-                small
-              >
-                {t(`${link}Label`)}
-              </UrlButton>
-            ))}
-          </ButtonGroup>
+        <ButtonGroup row>
+          {(links.secondary ?? []).map(link => (
+            <UrlButton
+              key={link}
+              href={t(`${link}Link`)}
+              bgColor={Colors.orange}
+              style={smallBtnStyle}
+              color={Colors.white}
+              small
+            >
+              {t(`${link}Label`)}
+            </UrlButton>
+          ))}
+        </ButtonGroup>
 
-          <Vertical unit={2} />
+        <Vertical unit={2} />
 
-          <Heading center level={4}>
-            {t('additionalInfo')}
-          </Heading>
+        <Heading center level={4}>
+          {t('additionalInfo')}
+        </Heading>
 
-          <ButtonGroup row>
-            {(links.tertiary ?? []).map(link => (
-              <UrlButton
-                key={link}
-                href={t(`${link}Link`)}
-                bgColor={Colors.blue}
-                style={smallBtnStyle}
-                color={Colors.white}
-                small
-              >
-                {t(`${link}Label`)}
-              </UrlButton>
-            ))}
-          </ButtonGroup>
-        </Content>
-        <Footer bgColor={Colors.white} />
-      </ScrollView>
+        <ButtonGroup row>
+          {(links.tertiary ?? []).map(link => (
+            <UrlButton
+              key={link}
+              href={t(`${link}Link`)}
+              bgColor={Colors.blue}
+              style={smallBtnStyle}
+              color={Colors.white}
+              small
+            >
+              {t(`${link}Label`)}
+            </UrlButton>
+          ))}
+        </ButtonGroup>
+      </Content>
+      <Footer bgColor={Colors.white} />
     </AppShell>
   );
 };

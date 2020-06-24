@@ -1,9 +1,16 @@
-import React, { useReducer, useRef, useState, createRef } from 'react';
+import React, {
+  useReducer,
+  useRef,
+  useState,
+  createRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import { View, TextInput, TouchableWithoutFeedback, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import PhoneInput from '../PhoneInput';
 import CountryPicker from 'react-native-country-picker-modal';
-import { withTranslation, Trans } from 'react-i18next';
+import { withTranslation, Trans, useTranslation } from 'react-i18next';
 import * as WebBrowser from 'expo-web-browser';
 import libPhoneNumber from 'google-libphonenumber';
 
@@ -72,23 +79,23 @@ const reducer = (state, { phoneNumber, cca2, callingCode, type } = {}) => {
   }
 };
 
-const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
+const PhoneNumberInput = forwardRef(({ onSendPin, onPressFlag }, ref) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { createAlert } = useAlert();
   const phoneInputRef = useRef();
+  const numberInputRef = useRef();
+
   const [tosAccepted, setTosAccepted] = useState(false);
-  const [countryPickerOpen, setCountryPickerOpen] = useState(false);
   const dimensions = useWindowDimensions();
   const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
   const inputHeight = scale(fontScale <= 1 ? 50 : 50 * (fontScale * 0.5));
+  const { t, i18n } = useTranslation();
 
-  console.log('scale...', fontScale);
-
-  const onPressFlag = () => {
-    setCountryPickerOpen(true);
-  };
-
-  const onCountryPickerClose = () => setCountryPickerOpen(false);
+  useImperativeHandle(ref, () => ({
+    onSelectCountry,
+    phoneNumberInputFocus,
+    cca2,
+  }));
 
   const onChangePhoneNumber = phoneNumber => {
     dispatch({ type: 'updatePhoneNumber', phoneNumber });
@@ -98,11 +105,16 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
     dispatch({ type: 'updateCallingCode', callingCode });
   };
 
-  const onSelectCountry = ({ cca2, callingCode }) => {
-    setCountryPickerOpen(false);
+  function onSelectCountry({ cca2, callingCode }) {
     phoneInputRef.current.selectCountry(cca2.toLowerCase());
     dispatch({ type: 'updateLocation', cca2, callingCode });
+  }
+
+  const phoneNumberInputFocus = () => {
+    numberInputRef?.current?.focus();
   };
+
+  const cca2 = () => state.cca2;
 
   const acceptTOS = () => {
     setTosAccepted(!tosAccepted);
@@ -180,6 +192,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           onChangePhoneNumber={onChangeCallingCode}
         />
         <TextInput
+          ref={numberInputRef}
           placeholder={t('phoneNr')}
           keyboardType="phone-pad"
           returnKeyType="done"
@@ -213,10 +226,10 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
       </CtaButton>
     </>
   );
-};
+});
 
 PhoneNumberInput.propTypes = {
   onSendPin: PropTypes.func.isRequired,
 };
 
-export default withTranslation()(PhoneNumberInput);
+export default PhoneNumberInput;

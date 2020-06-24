@@ -26,7 +26,8 @@ const TutorialView = ({ screens, navigation }) => {
   let swiper = useRef(null);
   const { t } = useTranslation();
   const { width, height: screenHeight } = useWindowDimensions();
-  const smallScreen = width <= 375;
+  const smallScreen = screenHeight <= 700;
+  console.log('screenHeight', screenHeight);
 
   const back = () => {
     if (index > 0) {
@@ -67,7 +68,31 @@ const TutorialView = ({ screens, navigation }) => {
         >
           {t('continue')}
         </CtaButton>
-        <ui.Dots>
+        <ui.Dots
+          accessible={true}
+          pointerEvents="none"
+          accessibilityRole="adjustable"
+          accessibilityLabel="page indicator"
+          accessibilityValue={{
+            text: `Page: ${activePageIndex + 1} of ${total}`,
+          }}
+          accessabiltiyActions={[{ name: 'incerement' }, { name: 'decrement' }]}
+          onAccessibilityAction={e => {
+            switch (e.nativeEvent.actionName) {
+              case 'incerement':
+                if (activePageIndex + 1 === total) return;
+                updateIndex(activePageIndex + 1);
+                break;
+              case 'decrement':
+                if (activePageIndex - 1 === 1) return;
+                updateIndex(activePageIndex - 1);
+                break;
+
+              default:
+                break;
+            }
+          }}
+        >
           {screens.map((_, i) =>
             i === activePageIndex ? (
               <ui.ActiveDot key={i} />
@@ -121,9 +146,13 @@ const TutorialView = ({ screens, navigation }) => {
               imageAlignment = 'center',
               imageDimensions: { height: originalHeight },
             },
-            j,
+            pageIndex,
           ) => (
-            <View style={{ flex: 1 }} key={`screen-${j + 1}`}>
+            <View
+              style={{ flex: 1 }}
+              key={`screen-${pageIndex + 1}`}
+              accessibilityElementsHidden={index !== pageIndex}
+            >
               <Animated.ScrollView
                 bounces={false}
                 contentContainerStyle={{

@@ -21,11 +21,17 @@ interface FooterProps {
 const Footer = ({ bgColor }: FooterProps) => (
   <Wrapper bgColor={bgColor}>
     <Image
+      accessible={true}
+      accessibilityRole="image"
+      accessibilityLabel="Embætti landlæknir - Sóttvarnalæknir"
       resizeMode="contain"
       source={landlaeknirSrc}
       style={{ height: scale(36), width: '35%' }}
     />
     <Image
+      accessible={true}
+      accessibilityRole="image"
+      accessibilityLabel="Ríkislögreglustjórinn - Almannavarnadeild"
       resizeMode="contain"
       source={almannavarnirSrc}
       style={{ height: scale(36), width: '50%' }}

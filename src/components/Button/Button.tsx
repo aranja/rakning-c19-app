@@ -26,6 +26,7 @@ type ButtonProps = {
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
   onPress?: Function;
+  accessibilityRole?: 'button' | 'link';
 };
 
 const Button = ({
@@ -33,6 +34,7 @@ const Button = ({
   children,
   style,
   disabled = false,
+  accessibilityRole = 'button',
 }: ButtonProps) => {
   const onButtonPress = () => {
     if (disabled) {
@@ -42,7 +44,13 @@ const Button = ({
   };
 
   return (
-    <ButtonContainer disabled={disabled} onPress={onButtonPress} style={style}>
+    <ButtonContainer
+      disabled={disabled}
+      onPress={onButtonPress}
+      style={style}
+      accessibilityRole={accessibilityRole}
+      accessibilityState={disabled ? { disabled: true } : { selected: true }}
+    >
       {children}
     </ButtonContainer>
   );
@@ -59,6 +67,7 @@ type CtaButtonProp = ButtonProps & {
   image?: ImageSourcePropType | string;
   imageDimensions?: { height: number; width: number };
   justify?: 'start' | 'center';
+  accessibilityRole?: 'button' | 'link';
 };
 
 export const CtaButton = ({
@@ -76,8 +85,14 @@ export const CtaButton = ({
   small = false,
   image,
   imageDimensions = { height: 20, width: 20 },
+  accessibilityRole = 'button',
 }: CtaButtonProp) => (
-  <Button onPress={onPress} disabled={loading || disabled} style={style}>
+  <Button
+    onPress={onPress}
+    disabled={loading || disabled}
+    style={style}
+    accessibilityRole={accessibilityRole}
+  >
     <CtaButtonContainer
       invert={invert}
       color={color}
@@ -137,7 +152,7 @@ export const UrlButton = ({
     WebBrowser.openBrowserAsync(href);
   }
   return (
-    <CtaButton {...props} onPress={onPress}>
+    <CtaButton {...props} onPress={onPress} accessibilityRole="link">
       {children}
     </CtaButton>
   );

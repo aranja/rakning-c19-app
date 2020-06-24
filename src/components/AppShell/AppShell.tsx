@@ -67,7 +67,7 @@ export const Header = ({ title, subtitle, backButton }: any) => {
 
   return (
     <>
-      <HeaderWrapper>
+      <HeaderWrapper accessibilityRole="header">
         {backButton && <Back fontScale={fontScale}>{backButton}</Back>}
         {typeof title === 'string' ? (
           <Heading color={Colors.textDark} level={1} center marginBottom={0.1}>

@@ -68,23 +68,29 @@ export const Header = styled.TouchableOpacity`
   padding: ${verticalScale(19)}px ${scale(23)}px ${verticalScale(19)}px;
 `;
 
-export const styles = StyleSheet.create({
-  dot: {
-    marginBottom: 0,
-    opacity: 0.3,
-    height: 7,
-    width: 7,
-    borderRadius: 3.5,
-    marginRight: verticalScale(4.5),
-    marginLeft: verticalScale(4.5),
-  },
-  dotActive: {
-    marginBottom: 0,
-    opacity: 1,
-    height: 7,
-    width: 7,
-    borderRadius: 3.5,
-    marginRight: verticalScale(4.5),
-    marginLeft: verticalScale(4.5),
-  },
-});
+export const Dot = styled.View`
+  margin-bottom: 0px;
+  height: 7px;
+  width: 7px;
+  opacity: 0.3;
+  border-radius: 3.5;
+  margin-right: ${scale(4.5)}px;
+  margin-left: ${scale(4.5)}px;
+  background-color: ${Colors.black};
+`;
+
+export const ActiveDot = styled(Dot)`
+  opacity: 1;
+`;
+
+export const Dots = styled.View`
+  position: absolute;
+  bottom: 20;
+  left: 0;
+  right: 0;
+  flex: 1;
+  background-color: transparent;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;

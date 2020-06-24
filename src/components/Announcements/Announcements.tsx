@@ -31,12 +31,50 @@ const Announcements = ({
   loading,
   link,
 }: AnnouncementsProps) => {
+  const swiperRef = useRef(null);
+  const [index, updateIndex] = useState(0);
+
   const textStyles = {
     fontSize: scale(13),
     lineHeight: scale(18),
     color: Colors.textGray,
     margin: 0,
     padding: 0,
+  };
+
+  const renderPagination = (activePageIndex, total) => {
+    return (
+      <ui.Dots
+        accessible={true}
+        pointerEvents="none"
+        accessibilityRole="adjustable"
+        accessibilityLabel="page indicator"
+        accessibilityValue={{
+          text: `Page: ${activePageIndex + 1} of ${total}`,
+        }}
+        accessabiltiyActions={[{ name: 'incerement' }, { name: 'decrement' }]}
+        onAccessibilityAction={e => {
+          switch (e.nativeEvent.actionName) {
+            case 'incerement':
+              if (activePageIndex + 1 === total) return;
+              swiperRef?.current?.scrollBy(1, true);
+              break;
+            case 'decrement':
+              if (activePageIndex - 1 === 1) return;
+              swiperRef?.current?.scrollBy(-1, true);
+
+              break;
+
+            default:
+              break;
+          }
+        }}
+      >
+        {slides.map((_, i) =>
+          i === activePageIndex ? <ui.ActiveDot key={i} /> : <ui.Dot key={i} />,
+        )}
+      </ui.Dots>
+    );
   };
 
   return (
@@ -53,19 +91,19 @@ const Announcements = ({
       <ui.SlideWrapper>
         {!isEmpty(slides) && (
           <Swiper
+            ref={swiperRef}
             loop={false}
             height="100%"
-            dotStyle={ui.styles.dot}
-            dotColor={Colors.black}
-            activeDotStyle={ui.styles.dotActive}
-            activeDotColor={Colors.black}
-            paginationStyle={{ bottom: scale(20) }}
+            horizontal={true}
+            renderPagination={renderPagination}
+            onIndexChanged={x => updateIndex(x)}
           >
             {slides.map(({ title, subtitle, description, link }, i) => (
               <ui.Content
                 key={`slide-${i + 1}`}
                 onPress={() => WebBrowser.openBrowserAsync(link)}
                 activeOpacity={1}
+                accessabiltiyElementHidden={index !== i}
               >
                 <ui.Title bold numberOfLines={2} ellipsizeMode="tail">
                   {title}
