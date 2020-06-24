@@ -12,13 +12,14 @@ import { CtaButton, BackButton } from '../Button';
 import IconLink from '../IconLink';
 // import LocalePicker from '../LocalePicker';
 import { moderateVerticalScale, scale, verticalScale } from '../../utils/scale';
-import { ScrollView, View, Image, Text } from 'react-native';
+import { ScrollView, View, Image, Animated } from 'react-native';
 import forward from '../../assets/images/forward.png';
 import { Vertical } from '../ui/Spacer';
 import { useWindowDimensions } from '../../utils/hooks';
 import Footer from '../Footer';
 
 const TutorialView = ({ screens, navigation }) => {
+  const scrollY = new Animated.Value(0);
   const [index, updateIndex] = useState(0);
   const [offset, setOffset] = useState(1);
   const isLastScreen = index === screens.length - 1;
@@ -45,33 +46,55 @@ const TutorialView = ({ screens, navigation }) => {
   };
 
   const renderFooter = (activePageIndex, total) => (
-    <ui.Footer>
-      <LinearGradient
-        colors={[color(Colors.background).alpha(0), Colors.background]}
-        start={[0, 0]}
-        end={[0, 1]}
+    <>
+      <ui.Footer>
+        <LinearGradient
+          colors={[color(Colors.background).alpha(0), Colors.background]}
+          start={[0, 0]}
+          end={[0, 1]}
+          style={{
+            position: 'absolute',
+            top: verticalScale(-40),
+            left: 0,
+            right: 0,
+            height: verticalScale(30),
+          }}
+        />
+        <CtaButton
+          onPress={onNext}
+          image={forward}
+          imageDimensions={{ height: scale(24), width: scale(27) }}
+        >
+          {t('continue')}
+        </CtaButton>
+        <ui.Dots>
+          {screens.map((_, i) =>
+            i === activePageIndex ? (
+              <ui.ActiveDot key={i} />
+            ) : (
+              <ui.Dot key={i} />
+            ),
+          )}
+        </ui.Dots>
+        <Footer />
+      </ui.Footer>
+      <ui.CloseIconContainer
+        as={Animated.View}
         style={{
-          position: 'absolute',
-          top: verticalScale(-40),
-          left: 0,
-          right: 0,
-          height: verticalScale(30),
+          transform: [
+            {
+              translateY: scrollY.interpolate({
+                inputRange: [0, 100],
+                outputRange: [0, -100],
+                extrapolate: 'clamp',
+              }),
+            },
+          ],
         }}
-      />
-      <CtaButton
-        onPress={onNext}
-        image={forward}
-        imageDimensions={{ height: scale(24), width: scale(27) }}
       >
-        {t('continue')}
-      </CtaButton>
-      <ui.Dots>
-        {screens.map((_, i) =>
-          i === activePageIndex ? <ui.ActiveDot key={i} /> : <ui.Dot key={i} />,
-        )}
-      </ui.Dots>
-      <Footer />
-    </ui.Footer>
+        <BackButton onPress={back}>{t('back')}</BackButton>
+      </ui.CloseIconContainer>
+    </>
   );
 
   return (
@@ -101,7 +124,7 @@ const TutorialView = ({ screens, navigation }) => {
             j,
           ) => (
             <View style={{ flex: 1 }} key={`screen-${j + 1}`}>
-              <ScrollView
+              <Animated.ScrollView
                 bounces={false}
                 contentContainerStyle={{
                   flexGrow: 1,
@@ -111,6 +134,10 @@ const TutorialView = ({ screens, navigation }) => {
                   width: '100%',
                   height: '100%',
                 }}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                  { useNativeDriver: true },
+                )}
               >
                 <View
                   style={{
@@ -142,9 +169,6 @@ const TutorialView = ({ screens, navigation }) => {
                   />
                 </View>
 
-                <ui.CloseIconContainer>
-                  <BackButton onPress={back}>{t('back')}</BackButton>
-                </ui.CloseIconContainer>
                 <View
                   style={{
                     alignItems: 'center',
@@ -155,7 +179,7 @@ const TutorialView = ({ screens, navigation }) => {
                   <ui.Title level={2}>{title}</ui.Title>
                   <ui.Description center>{description}</ui.Description>
                 </View>
-              </ScrollView>
+              </Animated.ScrollView>
               <View style={{ marginTop: 10, opacity: 0, flexGrow: 0 }}>
                 {renderFooter(0, 0)}
               </View>
