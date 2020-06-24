@@ -12,18 +12,20 @@ import { CtaButton, BackButton } from '../Button';
 import IconLink from '../IconLink';
 // import LocalePicker from '../LocalePicker';
 import { moderateVerticalScale, scale, verticalScale } from '../../utils/scale';
-import { ScrollView, View, Image } from 'react-native';
+import { ScrollView, View, Image, Text } from 'react-native';
 import forward from '../../assets/images/forward.png';
 import { Vertical } from '../ui/Spacer';
-import map from '../../assets/images/map.png';
 import { useWindowDimensions } from '../../utils/hooks';
+import Footer from '../Footer';
 
 const TutorialView = ({ screens, navigation }) => {
   const [index, updateIndex] = useState(0);
+  const [offset, setOffset] = useState(1);
   const isLastScreen = index === screens.length - 1;
   let swiper = useRef(null);
   const { t } = useTranslation();
-  const { width } = useWindowDimensions();
+  const { width, height: screenHeight } = useWindowDimensions();
+  const smallScreen = width <= 375;
 
   const back = () => {
     if (index > 0) {
@@ -42,16 +44,42 @@ const TutorialView = ({ screens, navigation }) => {
     swiper.current.scrollBy(1);
   };
 
+  const renderFooter = (activePageIndex, total) => (
+    <ui.Footer>
+      <LinearGradient
+        colors={[color(Colors.background).alpha(0), Colors.background]}
+        start={[0, 0]}
+        end={[0, 1]}
+        style={{
+          position: 'absolute',
+          top: verticalScale(-40),
+          left: 0,
+          right: 0,
+          height: verticalScale(30),
+        }}
+      />
+      <CtaButton
+        onPress={onNext}
+        image={forward}
+        imageDimensions={{ height: scale(24), width: scale(27) }}
+      >
+        {t('continue')}
+      </CtaButton>
+      <ui.Dots>
+        {screens.map((_, i) =>
+          i === activePageIndex ? <ui.ActiveDot key={i} /> : <ui.Dot key={i} />,
+        )}
+      </ui.Dots>
+      <Footer />
+    </ui.Footer>
+  );
+
   return (
     <ui.SafeArea>
       <Swiper
         ref={swiper}
         index={index}
         loop={false}
-        dotStyle={ui.styles.dot}
-        dotColor={Colors.bullet}
-        activeDotStyle={ui.styles.dotActive}
-        activeDotColor={Colors.breidholtAtNight}
         onIndexChanged={i => updateIndex(i)}
         containerStyle={{ flex: 1 }}
         scrollEnabled={true}
@@ -59,102 +87,82 @@ const TutorialView = ({ screens, navigation }) => {
         // Default value is true for performance reasons when
         // there are many sub views, which we don't have.
         removeClippedSubviews={false}
+        renderPagination={renderFooter}
       >
         {screens.map(
-          ({
-            title,
-            description,
-            image: ImageEl,
-            imagePosition = 'center',
-          }) => (
-            <>
-              <ui.Content key={title}>
-                <ScrollView
-                  bounces={false}
-                  contentContainerStyle={{
-                    flexGrow: 1,
-                    alignItems: 'center',
-                    padding: 0,
-                  }}
+          (
+            {
+              title,
+              description,
+              image: ImageEl,
+              imageAlignment = 'center',
+              imageDimensions: { height: originalHeight },
+            },
+            j,
+          ) => (
+            <View style={{ flex: 1 }} key={`screen-${j + 1}`}>
+              <ScrollView
+                bounces={false}
+                contentContainerStyle={{
+                  flexGrow: 1,
+                  // backgroundColor: '#f90',
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              >
+                <View
                   style={{
+                    height:
+                      (moderateVerticalScale(smallScreen ? 35 : 40, 0.3) /
+                        100) *
+                      screenHeight,
+                    maxHeight: originalHeight,
                     width: '100%',
+                    alignItems: 'center',
+                  }}
+                  onLayout={({
+                    nativeEvent: {
+                      layout: { width, height },
+                    },
+                  }) => {
+                    const imageOffset =
+                      ((1 - height / originalHeight) * width) / 2;
+                    setOffset(-imageOffset);
                   }}
                 >
-                  {/* <Image
-                    source={map}
-                    resizeMode="cover"
-                    style={{
-                      width: 375,
-                      height: 335,
-                    }}
-                  /> */}
-
                   <ImageEl
                     style={{
-                      width: '100%',
+                      alignSelf:
+                        imageAlignment === 'right' ? 'flex-end' : 'center',
+                      marginRight: imageAlignment === 'right' ? offset : 0,
+                      opacity: offset <= 0 ? 1 : 0,
                     }}
                   />
+                </View>
 
-                  <ui.CloseIconContainer>
-                    <BackButton onPress={back}>{t('back')}</BackButton>
-                  </ui.CloseIconContainer>
-                  {/* <View
-                    style={
-                      {
-                        flex: 1,
-                      }
-                    }
-                  > */}
-                  {/* <View
-                    style={{
-                      width: '100%',
-                      // height: `${moderateVerticalScale(100, 0.3)}%`,
-                    }}
-                  >
-                    <ImageEl
-                      style={{
-                        width: '100%',
-                      }}
-                    />
-                  </View> */}
-                  <View
-                    style={{
-                      justifyContent: 'center',
-                      flex: 1,
-                      paddingBottom: verticalScale(100),
-                    }}
-                  >
-                    <ui.Title level={2}>{title}</ui.Title>
-                    <ui.Description center>{description}</ui.Description>
-                  </View>
-                  {/* </View> */}
-                </ScrollView>
-              </ui.Content>
-            </>
+                <ui.CloseIconContainer>
+                  <BackButton onPress={back}>{t('back')}</BackButton>
+                </ui.CloseIconContainer>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    flex: 1,
+                    paddingBottom: verticalScale(20),
+                  }}
+                >
+                  <ui.Title level={2}>{title}</ui.Title>
+                  <ui.Description center>{description}</ui.Description>
+                </View>
+              </ScrollView>
+              <View style={{ marginTop: 10, opacity: 0, flexGrow: 0 }}>
+                {renderFooter(0, 0)}
+              </View>
+            </View>
           ),
         )}
       </Swiper>
-      <ui.Footer>
-        <LinearGradient
-          colors={[color(Colors.background).alpha(0), Colors.background]}
-          start={[0, 0]}
-          end={[0, 1]}
-          style={{
-            position: 'absolute',
-            top: verticalScale(-30),
-            left: 0,
-            right: 0,
-            height: verticalScale(30),
-          }}
-        />
-        <CtaButton
-          onPress={onNext}
-          image={forward}
-          imageDimensions={{ height: scale(24), width: scale(27) }}
-        >
-          {t('continue')}
-        </CtaButton>
-      </ui.Footer>
     </ui.SafeArea>
   );
 };

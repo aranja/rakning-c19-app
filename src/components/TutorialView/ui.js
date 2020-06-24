@@ -28,7 +28,6 @@ export const Footer = styled.View`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: ${verticalScale(20)}px;
   padding-left: ${scale(32)}px;
   padding-right: ${scale(32)}px;
 `;
@@ -58,25 +57,26 @@ export const LocaleToggleContainer = styled.View`
   right: ${scale(18)}px;
 `;
 
-export const styles = StyleSheet.create({
-  dot: {
-    marginBottom: 0,
-    borderColor: Colors.bulletBorder,
-    borderWidth: 1,
-    height: 11,
-    width: 11,
-    borderRadius: 5.5,
-    marginRight: verticalScale(6),
-    marginLeft: verticalScale(6),
-  },
-  dotActive: {
-    marginBottom: 0,
-    height: 11,
-    width: 11,
-    borderRadius: 5.5,
-    borderColor: Colors.bulletBorder,
-    borderWidth: 1,
-    marginRight: verticalScale(6),
-    marginLeft: verticalScale(6),
-  },
-});
+export const Dot = styled.View`
+  margin-bottom: 0px;
+  border-color: ${Colors.bulletBorder};
+  border-width: 1px;
+  height: 11px;
+  width: 11px;
+  border-radius: 5.5;
+  margin-right: ${scale(6)}px;
+  margin-left: ${scale(6)}px;
+  background-color: ${Colors.bullet};
+`;
+
+export const ActiveDot = styled(Dot)`
+  background-color: ${Colors.breidholtAtNight};
+`;
+
+export const Dots = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${verticalScale(20)}px;
+  margin-bottom: ${verticalScale(20)}px;
+`;

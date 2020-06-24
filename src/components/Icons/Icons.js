@@ -377,7 +377,7 @@ export const CirclesBig = props => (
 );
 
 export const IcelandMap = props => (
-  <Svg width={375} height={335} {...props}>
+  <Svg width="375px" height="100%" viewBox="0 0 375 335" {...props}>
     <Defs>
       <Circle id="prefix__d" cx={85} cy={252} r={6} />
       <Circle id="prefix__f" cx={117} cy={234} r={6} />
@@ -419,7 +419,7 @@ export const IcelandMap = props => (
 );
 
 export const OnboardingPhoneIcon = props => (
-  <Svg width={375} height={308} {...props}>
+  <Svg width="375px" height="100%" viewBox="0 0 375 335" {...props}>
     <Defs>
       <LinearGradient
         x1="50%"
@@ -721,7 +721,7 @@ export const OnboardingPhoneIcon = props => (
 );
 
 export const OnboardingCardIcon = props => (
-  <Svg width={375} height={335} {...props}>
+  <Svg width="375px" height="100%" viewBox="0 0 375 335" {...props}>
     <Defs>
       <LinearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="prefix__c">
         <Stop stopColor="#FEEFE8" stopOpacity={0} offset="0%" />
@@ -776,7 +776,7 @@ export const OnboardingCardIcon = props => (
 );
 
 export const OnboardingChatIcon = props => (
-  <Svg width={375} height={335} {...props}>
+  <Svg width="375px" height="100%" viewBox="0 0 375 335" {...props}>
     <Defs>
       <Path id="prefix__a" d="M0 0h375v335H0z" />
       <Path
