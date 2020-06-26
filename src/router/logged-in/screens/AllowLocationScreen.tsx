@@ -17,7 +17,7 @@ import LoadingScreen from '../../../components/LoadingScreen';
 import { resetStack } from '../../../utils/navigation';
 import { Vertical } from '../../../components/ui/Spacer';
 import Footer from '../../../components/Footer';
-import { scale } from '../../../utils';
+import { scale, verticalScale } from '../../../utils';
 
 // @ts-ignore
 import covidIcon from '../../../assets/images/covid-icon.png';
@@ -162,9 +162,13 @@ const AllowLocationScreen = ({ navigation }) => {
 
   return (
     <ContentView ctaAction={getPermission} ctaTitle={t('enableLocationButton')}>
-      <Heading level={2} center marginBottom={1.2}>
+      <Heading level={2} center marginBottom={0.2}>
         {t('enableLocationAllow')}
       </Heading>
+      <Text center bold style={{ marginBottom: verticalScale(40) }}>
+        {' '}
+        {t('enableNotificationsAllow')}
+      </Text>
       <Text center>
         <Trans
           i18nKey={
