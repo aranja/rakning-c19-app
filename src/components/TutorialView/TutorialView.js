@@ -46,6 +46,9 @@ const TutorialView = ({ screens, navigation }) => {
     swiper.current.scrollBy(1);
   };
 
+  let imageHeightPercentage = 40;
+  if (screenHeight < 800) imageHeightPercentage = 34;
+
   const renderFooter = (activePageIndex, total) => (
     <>
       <ui.Footer>
@@ -123,7 +126,7 @@ const TutorialView = ({ screens, navigation }) => {
   );
 
   return (
-    <ui.SafeArea>
+    <ui.Container>
       <Swiper
         ref={swiper}
         index={index}
@@ -171,7 +174,7 @@ const TutorialView = ({ screens, navigation }) => {
                 <View
                   style={{
                     height:
-                      (moderateVerticalScale(smallScreen ? 35 : 40, 0.3) /
+                      (moderateVerticalScale(imageHeightPercentage, 0.3) /
                         100) *
                       screenHeight,
                     maxHeight: originalHeight,
@@ -216,7 +219,7 @@ const TutorialView = ({ screens, navigation }) => {
           ),
         )}
       </Swiper>
-    </ui.SafeArea>
+    </ui.Container>
   );
 };
 

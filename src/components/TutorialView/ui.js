@@ -8,7 +8,7 @@ const isAndroid = Platform.OS === 'android';
 const statusBarOffsett =
   Platform.OS === 'android' ? StatusBar.currentHeight : 0;
 
-export const SafeArea = styled.View`
+export const Container = styled.View`
   background-color: ${Colors.background};
   flex: 1;
 `;
@@ -16,8 +16,6 @@ export const SafeArea = styled.View`
 export const ImageWrap = styled.View`
   width: 100%;
 `;
-
-export const Container = styled.View``;
 
 export const Content = styled.View`
   align-items: center;
