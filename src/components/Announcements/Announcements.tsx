@@ -1,14 +1,13 @@
-import React, { useState, useRef } from 'react';
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
-import Swiper from 'react-native-swiper';
 import * as WebBrowser from 'expo-web-browser';
 import { isEmpty } from 'lodash';
-import Colors from '../../constants/Colors';
-import { InfoIcon } from '../Icons';
+import React, { useRef, useState } from 'react';
+import { Text } from 'react-native';
 import HTML from 'react-native-render-html';
 import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
-
+import Swiper from 'react-native-swiper';
+import Colors from '../../constants/Colors';
 import { scale } from '../../utils/scale';
+import { InfoIcon } from '../Icons';
 import * as ui from './styles';
 
 interface Slide {

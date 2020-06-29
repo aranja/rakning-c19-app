@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { getClinics } from '../../../api/Clinics';
-import { Header, Content } from '../../../components/AppShell';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Button, { BackButton } from '../../../components/Button/Button';
-import { View, SafeAreaView } from 'react-native';
+import { getClinics } from '../../../api/Clinics';
+import { Content, Header } from '../../../components/AppShell';
+import { BackButton } from '../../../components/Button/Button';
+import ClinicsList from '../../../components/ClinicsList/ClinicsList';
 import { getCurrentLocation } from '../../../tracking';
 import { calculateDistance } from '../../../utils/distance';
-import ClinicsList from '../../../components/ClinicsList/ClinicsList';
 
 interface Props {
   navigation: {
@@ -49,7 +48,6 @@ const ClinicsScreen = ({ navigation }: Props) => {
             };
           })
           .sort((a, b) => a.distanceInMeters - b.distanceInMeters);
-        console.log(dataWithDistance);
         setClinics(dataWithDistance);
         setIsLoading(false);
       } catch (error) {

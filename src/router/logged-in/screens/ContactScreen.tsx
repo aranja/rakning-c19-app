@@ -1,26 +1,14 @@
 import * as React from 'react';
-import { View, StyleSheet, ScrollView, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
-
+import { Linking } from 'react-native';
 import AppShell, { Content, Header } from '../../../components/AppShell';
+import { BackButton, CtaButton } from '../../../components/Button/Button';
 import Card from '../../../components/Card';
-import {
-  Close,
-  InfoIcon,
-  ChatIcon,
-  PhoneIcon,
-  List,
-} from '../../../components/Icons';
-import Colors from '../../../constants/Colors';
-import Button, {
-  CtaButton,
-  UrlButton,
-  BackButton,
-} from '../../../components/Button/Button';
-import { Vertical } from '../../../components/ui/Spacer';
-import Text, { Heading } from '../../../components/ui/Text';
-import BulletPoints from '../../../components/ui/BulletPoints';
 import HelplineOptions from '../../../components/HelplineOptions/HelplineOptions';
+import { ChatIcon, List, PhoneIcon } from '../../../components/Icons';
+import { Vertical } from '../../../components/ui/Spacer';
+import { Heading } from '../../../components/ui/Text';
+import Colors from '../../../constants/Colors';
 import { useWindowDimensions } from '../../../utils/hooks';
 
 interface ContactScreenProps {

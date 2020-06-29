@@ -1,22 +1,14 @@
-import React, { ReactNode } from 'react';
-import styled from 'styled-components/native';
-import { scale, verticalScale } from '../../utils/index';
-import { withNavigation } from 'react-navigation';
-import Colors from '../../constants/Colors';
 import color from 'color';
-import {
-  StyleProp,
-  ViewStyle,
-  KeyboardAvoidingView,
-  ScrollView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-
-import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
+import React, { ReactNode } from 'react';
+import { ScrollView } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import styled from 'styled-components/native';
+import { CirclesBig, CirclesSmall } from '../../components/Icons';
+import Colors from '../../constants/Colors';
 import { useWindowDimensions } from '../../utils/hooks';
-import { CirclesSmall, CirclesBig } from '../../components/Icons';
+import { scale, verticalScale } from '../../utils/index';
+import Text, { Heading } from '../ui/Text';
 
 const Wrap = styled.View`
   background: ${({ bgColor }) => bgColor || Colors.background};

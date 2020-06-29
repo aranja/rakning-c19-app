@@ -1,28 +1,30 @@
-import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { isEmpty } from 'lodash';
-import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, StatusBar } from 'react-native';
-import { CtaButton } from '../../../components/Button/Button';
-import { getPoints } from '../../../tracking';
-import AppShell, { Content } from '../../../components/AppShell';
-import Text, { Heading } from '../../../components/ui/Text';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
+import styled from 'styled-components/native';
 import { logPoints } from '../../../api/Point';
-import Input from '../../../components/ui/TextInput';
-import { Vertical } from '../../../components/ui/Spacer';
-import Colors from '../../../constants/Colors';
+import { ignoreDataRequest } from '../../../api/User/user';
 import covidIcon from '../../../assets/images/covid-icon.png';
+import { Content } from '../../../components/AppShell';
+import { CtaButton } from '../../../components/Button/Button';
+import Footer from '../../../components/Footer';
+import { CirclesSmall } from '../../../components/Icons';
+import { Vertical } from '../../../components/ui/Spacer';
+import Text, { Heading } from '../../../components/ui/Text';
+import Input from '../../../components/ui/TextInput';
+import Colors from '../../../constants/Colors';
+import { useAlert } from '../../../context/alert';
+import { UserContext } from '../../../context/user';
+import { getPoints } from '../../../tracking';
 import { scale, verticalScale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
-import { useAlert } from '../../../context/alert';
-import { ignoreDataRequest } from '../../../api/User/user';
-import { UserContext } from '../../../context/user';
-import Footer from '../../../components/Footer';
-import { AppShellBackgroundType } from '../../../components/AppShell/AppShell';
-import { useKeyboard } from '../../../utils/hooks';
-import { CirclesSmall, CirclesBig } from '../../../components/Icons';
 
 const Wrap = styled.View`
   background: ${({ bgColor }) => bgColor || Colors.background};

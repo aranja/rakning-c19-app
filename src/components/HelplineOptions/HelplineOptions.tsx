@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { View, StyleSheet, Linking } from 'react-native';
-import { Vertical } from '../ui/Spacer';
-import BulletPoints from '../ui/BulletPoints';
+import { Linking } from 'react-native';
 import { InfoIcon } from '../Icons';
+import BulletPoints from '../ui/BulletPoints';
 import * as ui from './styles';
-import Text, { Heading } from '../ui/Text';
 
 interface HelplineOptionsProps {
   title: string;

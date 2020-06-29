@@ -1,18 +1,11 @@
-import React, { useRef } from 'react';
-import styled from 'styled-components/native';
-import Text from '../ui/Text';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { withNavigation } from 'react-navigation';
 import {
   changeLanguage,
-  languages,
   LanguageDefinition,
+  languages,
 } from '../../i18n/index';
-import Colors from '../../constants/Colors';
-import { CtaButton } from '../Button/index';
-import { withNavigation } from 'react-navigation';
-import { Content } from '../AppShell';
-import { useTranslation } from 'react-i18next';
-import { Heading } from '../ui/Text';
-
 import * as ui from './styles';
 
 interface Props {

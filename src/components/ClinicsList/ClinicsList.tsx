@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { FlatList, Platform, Linking, ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, FlatList, Linking, Platform } from 'react-native';
+import Colors from '../../constants/Colors';
 import { Clinic } from '../../router/logged-in/screens/ClinicsScreen';
-import Text from '../ui/Text';
+import { useWindowDimensions } from '../../utils/hooks';
 import { Marker } from '../Icons';
 import MapChoiceModal from '../MapChoiceModal';
-import Colors from '../../constants/Colors';
-import { useWindowDimensions } from '../../utils/hooks';
+import Text from '../ui/Text';
 import * as ui from './styles';
 
 interface ClinicsListProps {

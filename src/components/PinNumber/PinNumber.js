@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Text from '../ui/Text';
-
+import { View } from 'react-native';
 import { verifyPin } from '../../api/Login';
-import PinCode from '../PinCode';
-
-import { styles } from './styles';
 import Colors from '../../constants/Colors';
 import { scale } from '../../utils';
 import { CtaButton } from '../Button';
+import PinCode from '../PinCode';
 import { Vertical } from '../ui/Spacer';
+import Text from '../ui/Text';
+import { styles } from './styles';
 
 const PinNumber = ({
   phoneNumber,

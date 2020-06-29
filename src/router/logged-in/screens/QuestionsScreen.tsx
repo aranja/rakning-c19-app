@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
-
 import AppShell, { Content, Header } from '../../../components/AppShell';
-import Colors from '../../../constants/Colors';
-import { UrlButton, BackButton } from '../../../components/Button/Button';
+import { ButtonGroup } from '../../../components/Button';
+import { BackButton, UrlButton } from '../../../components/Button/Button';
+import Footer from '../../../components/Footer';
 import { Vertical } from '../../../components/ui/Spacer';
 import { Heading } from '../../../components/ui/Text';
-import { ButtonGroup } from '../../../components/Button';
-import Footer from '../../../components/Footer';
+import Colors from '../../../constants/Colors';
 import { verticalScale } from '../../../utils';
 
 interface LocaleLinks {

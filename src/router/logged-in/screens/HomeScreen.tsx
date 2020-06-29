@@ -1,44 +1,42 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { AppState, Platform, ScrollView } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-import { useTranslation } from 'react-i18next';
+import messaging from '@react-native-firebase/messaging';
 import { format } from 'date-fns';
 import * as WebBrowser from 'expo-web-browser';
-
-import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
-import Colors from '../../../constants/Colors';
-import { CtaButton, UrlButton } from '../../../components/Button/Button';
-import { useAuth } from '../../../context/authentication';
-import {
-  checkLocationStatus,
-  initBackgroundTracking,
-  stopBackgroundTracking,
-  LocationPermission,
-} from '../../../tracking';
-import { registerPushNotifications } from '../../../push-notifications';
-import AppShell, { Content, Header } from '../../../components/AppShell';
-import Text from '../../../components/ui/Text';
-import { ButtonGroup } from '../../../components/Button';
-import { scale } from '../../../utils';
-import { resetStack } from '../../../utils/navigation';
-import { Vertical } from '../../../components/ui/Spacer';
-import messaging from '@react-native-firebase/messaging';
-import Footer from '../../../components/Footer';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { AppState, Platform } from 'react-native';
+import { getAnnouncements } from '../../../api/Announcements';
 import { AuthenticationError } from '../../../api/ApiClient';
-import { languages } from '../../../i18n';
+import Announcements from '../../../components/Announcements';
+import AppShell, { Content, Header } from '../../../components/AppShell';
+import { AppShellBackgroundType } from '../../../components/AppShell/AppShell';
+import { ButtonGroup } from '../../../components/Button';
+import { CtaButton, UrlButton } from '../../../components/Button/Button';
 import Card from '../../../components/Card';
+import Footer from '../../../components/Footer';
 import {
-  InfoIcon,
   ChatIcon,
+  InfoIcon,
   QuestionsIcon,
   TracingIcon,
 } from '../../../components/Icons';
-
-import Announcements from '../../../components/Announcements';
 import TestResults from '../../../components/TestResultsModal/TestResultsModal';
-import { getAnnouncements } from '../../../api/Announcements';
-import { AppShellBackgroundType } from '../../../components/AppShell/AppShell';
+import { Vertical } from '../../../components/ui/Spacer';
+import Text from '../../../components/ui/Text';
+import Colors from '../../../constants/Colors';
+import { useAuth } from '../../../context/authentication';
+import { UserContext } from '../../../context/user';
+import { languages } from '../../../i18n';
+import { registerPushNotifications } from '../../../push-notifications';
+import {
+  checkLocationStatus,
+  initBackgroundTracking,
+  LocationPermission,
+  stopBackgroundTracking,
+} from '../../../tracking';
+import { scale } from '../../../utils';
+import { resetStack } from '../../../utils/navigation';
 
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',

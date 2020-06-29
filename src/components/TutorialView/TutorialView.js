@@ -1,22 +1,18 @@
-import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import color from 'color';
 // eslint-disable-next-line import/default
 import { LinearGradient } from 'expo-linear-gradient';
+import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Animated, View } from 'react-native';
 import Swiper from 'react-native-swiper';
-import color from 'color';
-
-import Colors from '../../constants/Colors';
-import * as ui from './ui';
-import { CtaButton, BackButton } from '../Button';
-import IconLink from '../IconLink';
-// import LocalePicker from '../LocalePicker';
-import { moderateVerticalScale, scale, verticalScale } from '../../utils/scale';
-import { ScrollView, View, Image, Animated } from 'react-native';
 import forward from '../../assets/images/forward.png';
-import { Vertical } from '../ui/Spacer';
+import Colors from '../../constants/Colors';
 import { useWindowDimensions } from '../../utils/hooks';
+import { moderateVerticalScale, scale, verticalScale } from '../../utils/scale';
+import { BackButton, CtaButton } from '../Button';
 import Footer from '../Footer';
+import * as ui from './ui';
 
 const TutorialView = ({ screens, navigation }) => {
   const scrollY = new Animated.Value(0);
@@ -25,9 +21,7 @@ const TutorialView = ({ screens, navigation }) => {
   const isLastScreen = index === screens.length - 1;
   let swiper = useRef(null);
   const { t } = useTranslation();
-  const { width, height: screenHeight } = useWindowDimensions();
-  const smallScreen = screenHeight <= 700;
-  console.log('screenHeight', screenHeight);
+  const { height: screenHeight } = useWindowDimensions();
 
   const back = () => {
     if (index > 0) {

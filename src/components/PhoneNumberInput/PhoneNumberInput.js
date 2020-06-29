@@ -1,30 +1,27 @@
+import * as WebBrowser from 'expo-web-browser';
+import libPhoneNumber from 'google-libphonenumber';
+import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  useImperativeHandle,
   useReducer,
   useRef,
   useState,
-  createRef,
-  forwardRef,
-  useImperativeHandle,
 } from 'react';
-import { View, TextInput, TouchableWithoutFeedback, Text } from 'react-native';
-import PropTypes from 'prop-types';
-import PhoneInput from '../PhoneInput';
-import CountryPicker from 'react-native-country-picker-modal';
-import { withTranslation, Trans, useTranslation } from 'react-i18next';
-import * as WebBrowser from 'expo-web-browser';
-import libPhoneNumber from 'google-libphonenumber';
-
-import { useAlert } from '../../context/alert';
+import { Trans, useTranslation } from 'react-i18next';
+import { TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { getPin } from '../../api/Login';
-import Colors from '../../constants/Colors';
-import { CtaButton } from '../Button';
-import { styles, TOSLink } from './styles';
 import covidIcon from '../../assets/images/covid-icon.png';
+import Colors from '../../constants/Colors';
+import { useAlert } from '../../context/alert';
+import { isRTL } from '../../i18n';
 import { scale } from '../../utils';
 import { useWindowDimensions } from '../../utils/hooks';
+import { CtaButton } from '../Button';
+import PhoneInput from '../PhoneInput';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
-import { isRTL } from '../../i18n';
+import { styles, TOSLink } from './styles';
 
 const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
 const linkTouchPadding = 12;

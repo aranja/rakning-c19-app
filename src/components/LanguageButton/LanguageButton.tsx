@@ -1,9 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { DropDown } from '../Icons';
-
-import * as ui from './styles';
 import { LanguageDefinition } from '../../i18n';
+import { DropDown } from '../Icons';
+import * as ui from './styles';
 
 interface LanguageButtonProps {
   label: string;

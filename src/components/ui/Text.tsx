@@ -1,15 +1,13 @@
-import React, { ReactText, ReactNode } from 'react';
+import React, { ReactNode, ReactText } from 'react';
+import { Dimensions, StyleProp, TextStyle } from 'react-native';
 import styled, { css } from 'styled-components/native';
-import { scale } from '../../utils/index';
 import Colors from '../../constants/Colors';
-import { StyleProp, TextStyle, Dimensions } from 'react-native';
 import { isRTL } from '../../i18n';
+import { scale } from '../../utils/index';
 
 const { width, fontScale: fs } = Dimensions.get('window');
 const fontScale = isNaN(fs) ? 1 : fs;
 const smallScreen = width <= 375;
-
-console.log('fontScale', fontScale);
 
 interface FontProps {
   marginBottom?: 0 | 0.25 | 0.5 | 1 | 1.5 | 2;

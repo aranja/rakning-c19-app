@@ -1,26 +1,24 @@
-import React, { useEffect, useState, ReactNode } from 'react';
-import { Platform, Linking, AppState, AppStateStatus } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import PropTypes from 'prop-types';
-import { Trans } from 'react-i18next';
-import { CtaButton } from '../../../components/Button/Button';
-import { useTranslation } from 'react-i18next';
-import {
-  checkLocationStatus,
-  LocationStatus,
-  openLocationServiceSettings,
-  LocationPermission,
-} from '../../../tracking';
-import AppShell, { Content } from '../../../components/AppShell';
-import Text, { Heading } from '../../../components/ui/Text';
-import LoadingScreen from '../../../components/LoadingScreen';
-import { resetStack } from '../../../utils/navigation';
-import { Vertical } from '../../../components/ui/Spacer';
-import Footer from '../../../components/Footer';
-import { scale, verticalScale } from '../../../utils';
-
+import React, { ReactNode, useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { AppState, AppStateStatus, Linking, Platform } from 'react-native';
 // @ts-ignore
 import covidIcon from '../../../assets/images/covid-icon.png';
+import AppShell, { Content } from '../../../components/AppShell';
+import { CtaButton } from '../../../components/Button/Button';
+import Footer from '../../../components/Footer';
+import LoadingScreen from '../../../components/LoadingScreen';
+import { Vertical } from '../../../components/ui/Spacer';
+import Text, { Heading } from '../../../components/ui/Text';
+import {
+  checkLocationStatus,
+  LocationPermission,
+  LocationStatus,
+  openLocationServiceSettings,
+} from '../../../tracking';
+import { scale, verticalScale } from '../../../utils';
+import { resetStack } from '../../../utils/navigation';
 
 const isIOS = Platform.OS === 'ios';
 

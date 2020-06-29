@@ -1,16 +1,13 @@
 import * as React from 'react';
-import { View, Image } from 'react-native';
+import { Image, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { format } from 'date-fns';
-import * as ui from './styles';
-import { CtaButton } from '../Button/Button';
-import { GoogleMaps, AppleMaps } from '../Icons';
+import GoogleMapsI from '../../assets/images/google-maps.png';
+import AppleMapsI from '../../assets/images/ios-maps.png';
 import Colors from '../../constants/Colors';
 import { scale } from '../../utils';
-import AppleMapsI from '../../assets/images/ios-maps.png';
-import GoogleMapsI from '../../assets/images/google-maps.png';
-import { Clinic } from '../../router/logged-in/screens/ClinicsScreen';
+import { CtaButton } from '../Button/Button';
 import { MapApplication } from '../ClinicsList/ClinicsList';
+import * as ui from './styles';
 
 interface MapChoiceModalProps {
   isVisible: boolean;
