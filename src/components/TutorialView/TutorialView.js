@@ -79,10 +79,10 @@ const TutorialView = ({ screens, navigation }) => {
           accessibilityValue={{
             text: `Page: ${activePageIndex + 1} of ${total}`,
           }}
-          accessabiltiyActions={[{ name: 'incerement' }, { name: 'decrement' }]}
+          accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]}
           onAccessibilityAction={e => {
             switch (e.nativeEvent.actionName) {
-              case 'incerement':
+              case 'increment':
                 if (activePageIndex + 1 === total) return;
                 updateIndex(activePageIndex + 1);
                 break;

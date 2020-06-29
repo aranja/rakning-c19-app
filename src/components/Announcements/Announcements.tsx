@@ -52,10 +52,10 @@ const Announcements = ({
         accessibilityValue={{
           text: `Page: ${activePageIndex + 1} of ${total}`,
         }}
-        accessabiltiyActions={[{ name: 'incerement' }, { name: 'decrement' }]}
+        accessabilityActions={[{ name: 'increment' }, { name: 'decrement' }]}
         onAccessibilityAction={e => {
           switch (e.nativeEvent.actionName) {
-            case 'incerement':
+            case 'increment':
               if (activePageIndex + 1 === total) return;
               swiperRef?.current?.scrollBy(1, true);
               break;
@@ -104,7 +104,7 @@ const Announcements = ({
                 key={`slide-${i + 1}`}
                 onPress={() => WebBrowser.openBrowserAsync(link)}
                 activeOpacity={1}
-                accessabiltiyElementHidden={index !== i}
+                accessibilityElementHidden={index !== i}
               >
                 <ui.Title bold numberOfLines={2} ellipsizeMode="tail">
                   {title}
