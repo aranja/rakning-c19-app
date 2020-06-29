@@ -101,20 +101,14 @@ const QuestionsScreen = ({ navigation }: QuestionsScreenProps) => {
           {t('additionalInfo')}
         </Heading>
 
-        <ButtonGroup row>
-          {(links.tertiary ?? []).map(link => (
-            <UrlButton
-              key={link}
-              href={t(`${link}Link`)}
-              bgColor={Colors.blue}
-              style={smallBtnStyle}
-              color={Colors.white}
-              small
-            >
-              {t(`${link}Label`)}
-            </UrlButton>
-          ))}
-        </ButtonGroup>
+        <UrlButton
+          href={t(`covidLink`)}
+          bgColor={Colors.blue}
+          color={Colors.white}
+        >
+          {t(`covidLabel`)}
+          {' covid.is'}
+        </UrlButton>
       </Content>
       <Footer bgColor={Colors.white} />
     </AppShell>
