@@ -5,17 +5,36 @@ import Colors from '../../constants/Colors';
 const styles = StyleSheet.create({
   containerDefault: {},
   cellDefault: {
-    height: 31,
-    width: 31,
+    height: 33,
+    width: 33,
     borderWidth: 1,
     borderRadius: 100,
-    borderColor: '#C4C4C4',
+    borderColor: '#C9C9C9',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cellFocusedDefault: {
-    borderColor: '#C4C4C4',
+    borderColor: '#C9C9C9',
   },
   cellStyleFilledDefault: {
+    borderColor: '#C9C9C9',
+  },
+  cellStyleErrordDefault: {
+    borderColor: '#FE7A4C',
+  },
+  innerCellStyleDefault: {
+    height: 24,
+    width: 24,
+    borderWidth: 1,
+    borderRadius: 100,
     borderColor: 'transparent',
+  },
+  innerCellStyleFilledDefault: {
+    borderColor: 'transparent',
+  },
+  innerCellStyleFilledDefault: {
+    borderColor: Colors.breidholtAtNight,
+    backgroundColor: Colors.breidholtAtNight,
   },
   textStyleDefault: {
     color: Colors.greenThunder,
@@ -45,9 +64,14 @@ class PinCode extends React.Component {
     cellStyle: styles.cellDefault,
     cellStyleFocused: styles.cellFocusedDefault,
     cellStyleFilled: styles.cellStyleFilledDefault,
+    cellStyleError: styles.cellStyleErrordDefault,
+    innerCellStyle: styles.innerCellStyleDefault,
+    innerCellStyleFilled: styles.innerCellStyleFilledDefault,
+    innerCellStyleFocused: styles.innerCellStyleFocusedDefault,
     textStyle: styles.textStyleDefault,
     textStyleFocused: styles.textStyleFocusedDefault,
     animationFocused: 'pulse',
+    error: false,
   };
 
   state = {
@@ -125,9 +149,14 @@ class PinCode extends React.Component {
       cellStyle,
       cellStyleFocused,
       cellStyleFilled,
+      innerCellStyle,
+      innerCellStyleFilled,
+      innerCellStyleFocused,
+      cellStyleError,
       textStyle,
       textStyleFocused,
       keyboardType,
+      error,
     } = this.props;
     const { maskDelay, focused } = this.state;
     return (
@@ -180,9 +209,18 @@ class PinCode extends React.Component {
                       cellStyle,
                       cellFocused ? cellStyleFocused : {},
                       filled ? cellStyleFilled : {},
+                      error ? cellStyleError : {},
                     ]}
-                  />
-                  <Text
+                  >
+                    <View
+                      style={[
+                        innerCellStyle,
+                        cellFocused ? innerCellStyleFocused : {},
+                        filled ? innerCellStyleFilled : {},
+                      ]}
+                    />
+                  </View>
+                  {/* <Text
                     style={[
                       { position: 'absolute' },
                       textStyle,
@@ -193,7 +231,7 @@ class PinCode extends React.Component {
                       ? mask
                       : value.charAt(idx)}
                     {!filled && placeholder}
-                  </Text>
+                  </Text> */}
                 </View>
               );
             })}

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Keyboard } from 'react-native';
 
 export function useUpdatedProp(prop) {
   const ref = useRef(prop);
@@ -39,4 +39,36 @@ export function useWindowDimensions() {
   }, [dimensions]);
 
   return dimensions;
+}
+
+export function useKeyboard(config) {
+  const { useWillShow = false, useWillHide = false } = config;
+  const [visible, setVisible] = useState(false);
+  const showEvent = useWillShow ? 'keyboardWillShow' : 'keyboardDidShow';
+  const hideEvent = useWillHide ? 'keyboardWillHide' : 'keyboardDidHide';
+
+  function dismiss() {
+    Keyboard.dismiss();
+    setVisible(false);
+  }
+
+  useEffect(() => {
+    function onKeyboardShow() {
+      setVisible(true);
+    }
+
+    function onKeyboardHide() {
+      setVisible(false);
+    }
+
+    Keyboard.addListener(showEvent, onKeyboardShow);
+    Keyboard.addListener(hideEvent, onKeyboardHide);
+
+    return () => {
+      Keyboard.removeListener(showEvent, onKeyboardShow);
+      Keyboard.removeListener(hideEvent, onKeyboardHide);
+    };
+  }, [useWillShow, useWillHide]);
+
+  return [visible, dismiss];
 }

@@ -1,20 +1,12 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import Text from '../ui/Text';
+import { useTranslation } from 'react-i18next';
+import { withNavigation } from 'react-navigation';
 import {
   changeLanguage,
-  languages,
   LanguageDefinition,
+  languages,
 } from '../../i18n/index';
-import Colors from '../../constants/Colors';
-import { CtaButton } from '../Button/index';
-import { withNavigation } from 'react-navigation';
-import { Content } from '../AppShell';
-import { useTranslation } from 'react-i18next';
-
-const LanguageScreen = styled.View``;
-
-const LanguageList = styled(Content)``;
+import * as ui from './styles';
 
 interface Props {
   onLanguagePress?: () => void;
@@ -40,25 +32,26 @@ function LanguagePicker({ onLanguagePress }: Props) {
   };
 
   return (
-    <LanguageScreen>
-      <LanguageList>
-        {languages
-          .sort((a, b) => langSorter(a, b))
-          .map(({ code, name }, index) => (
-            <CtaButton
-              index={index}
-              key={code}
-              align="left"
-              justify="start"
-              onPress={changeLocale(code)}
-              bgColor={locale === code ? Colors.blue : Colors.backgroundAlt}
-              color={locale === code ? Colors.almostWhite : Colors.gray}
-            >
-              {name}
-            </CtaButton>
-          ))}
-      </LanguageList>
-    </LanguageScreen>
+    <ui.Container>
+      {languages
+        .sort((a, b) => langSorter(a, b))
+        .map(({ code, name, flag }, index) => (
+          <ui.RadioButton
+            index={index}
+            key={code}
+            onPress={changeLocale(code)}
+            activeOpacity={1}
+          >
+            <ui.Content>
+              <ui.ImageWrap source={flag} />
+              <ui.Label bold={locale === code}>{name}</ui.Label>
+              <ui.Circle>
+                <ui.CircleInner selected={locale === code} />
+              </ui.Circle>
+            </ui.Content>
+          </ui.RadioButton>
+        ))}
+    </ui.Container>
   );
 }
 

@@ -16,15 +16,17 @@ import {
 } from './styles';
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../../constants/Colors';
-import { scale } from '../../utils/index';
+import { scale, verticalScale } from '../../utils/index';
 import { BackIcon } from '../Icons';
 import Text from '../ui/Text';
+import { useWindowDimensions } from '../../utils/hooks';
 
 type ButtonProps = {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
   onPress?: Function;
+  accessibilityRole?: 'button' | 'link';
 };
 
 const Button = ({
@@ -32,6 +34,7 @@ const Button = ({
   children,
   style,
   disabled = false,
+  accessibilityRole = 'button',
 }: ButtonProps) => {
   const onButtonPress = () => {
     if (disabled) {
@@ -41,7 +44,13 @@ const Button = ({
   };
 
   return (
-    <ButtonContainer disabled={disabled} onPress={onButtonPress} style={style}>
+    <ButtonContainer
+      disabled={disabled}
+      onPress={onButtonPress}
+      style={style}
+      accessibilityRole={accessibilityRole}
+      accessibilityState={disabled ? { disabled: true } : { selected: true }}
+    >
       {children}
     </ButtonContainer>
   );
@@ -58,6 +67,7 @@ type CtaButtonProp = ButtonProps & {
   image?: ImageSourcePropType | string;
   imageDimensions?: { height: number; width: number };
   justify?: 'start' | 'center';
+  accessibilityRole?: 'button' | 'link';
 };
 
 export const CtaButton = ({
@@ -75,8 +85,14 @@ export const CtaButton = ({
   small = false,
   image,
   imageDimensions = { height: 20, width: 20 },
+  accessibilityRole = 'button',
 }: CtaButtonProp) => (
-  <Button onPress={onPress} disabled={loading || disabled} style={style}>
+  <Button
+    onPress={onPress}
+    disabled={loading || disabled}
+    style={style}
+    accessibilityRole={accessibilityRole}
+  >
     <CtaButtonContainer
       invert={invert}
       color={color}
@@ -108,10 +124,11 @@ export const CtaButton = ({
             invert={invert}
             color={color}
             disabled={loading || disabled}
+            maxFontSizeMultiplier={2.2}
           >
             {children}
           </ButtonLabel>
-          {image && (
+          {image && !disabled && (
             <ImageWrap
               source={image}
               style={{
@@ -135,7 +152,7 @@ export const UrlButton = ({
     WebBrowser.openBrowserAsync(href);
   }
   return (
-    <CtaButton {...props} onPress={onPress}>
+    <CtaButton {...props} onPress={onPress} accessibilityRole="link">
       {children}
     </CtaButton>
   );
@@ -161,11 +178,20 @@ export const SquareButton = ({
 );
 
 export const BackButton = ({ onPress, disabled, children }: ButtonProps) => {
+  const dimensions = useWindowDimensions();
+
+  const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
+
   return (
-    <Button onPress={onPress} disabled={disabled}>
+    <Button onPress={onPress} disabled={disabled} style={{ paddingBottom: 10 }}>
       <Row>
-        <BackIcon />
-        <BackLabel color={Colors.textDark}>{children}</BackLabel>
+        <BackIcon
+          width={scale(16) * (fontScale <= 1 ? 1 : 0.5) * fontScale}
+          height={verticalScale(14) * (fontScale <= 1 ? 1 : 0.5) * fontScale}
+        />
+        <BackLabel color={Colors.textDark} maxFontSizeMultiplier={2.5}>
+          {children}
+        </BackLabel>
       </Row>
     </Button>
   );

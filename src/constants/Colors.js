@@ -21,7 +21,9 @@ export default {
   reykjavikInBlossom: '#ff5783',
   backgroundGray: '#ececec',
   chenin: '#D3E262',
-  placeholder: '#868686',
+  placeholder: '#C8B7B0',
   bullet: '#f2f2f2',
   bulletBorder: '#C9C9C9',
+  border: '#C8B7B0',
+  error: '#F50000',
 };

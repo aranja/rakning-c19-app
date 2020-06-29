@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { WebView } from 'react-native-webview';
-import { StatusBar, SafeAreaView, ActivityIndicator, View } from 'react-native';
-import config from '../../../config';
 import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, SafeAreaView, StatusBar, View } from 'react-native';
+import { WebView } from 'react-native-webview';
 import { BackButton } from '../../../components/Button';
+import config from '../../../config';
 import { scale, verticalScale } from '../../../utils/scale';
 
 interface Props {

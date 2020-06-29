@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Colors from '../../constants/Colors';
 import { scale, verticalScale } from '../../utils';
+import { useWindowDimensions } from '../../utils/hooks';
 
 const Item = styled.View`
   color: ${Colors.orange};
@@ -11,29 +12,25 @@ const Item = styled.View`
   width: 100%;
 `;
 
-const Text = styled.Text`
-  color: ${Colors.textGray};
-  font-size: ${scale(14)};
-  font-weight: 400;
-  line-height: ${scale(21)};
-  margin-bottom: ${scale(5)};
-`;
-
 const Bullet = styled.View`
   background-color: ${Colors.textGray};
-  border-radius: ${scale(2)};
-  width: ${scale(4)};
-  height: ${scale(4)};
-  margin-top: ${verticalScale(10)};
+  border-radius: ${({ fontScale }) => scale(2) * fontScale};
+  width: ${({ fontScale }) => scale(4) * fontScale};
+  height: ${({ fontScale }) => scale(4) * fontScale};
+  margin-top: ${({ fontScale }) => verticalScale(10) * fontScale};
   margin-right: ${scale(16)};
 `;
 
-const BulletPoints = ({ items = [], bulletColor, textColor }) =>
-  items.map((item, i) => (
+const BulletPoints = ({ items = [] }) => {
+  const dimensions = useWindowDimensions();
+  const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
+
+  return items.map((item, i) => (
     <Item key={`bullet-${i + 1}`}>
-      <Bullet />
-      <Text>{item}</Text>
+      <Bullet fontScale={fontScale} />
+      {item}
     </Item>
   ));
+};
 
 export default BulletPoints;

@@ -1,1 +1,1 @@
-export { default, Content, SlimContent } from './AppShell';
+export { default, Content, SlimContent, Header } from './AppShell';

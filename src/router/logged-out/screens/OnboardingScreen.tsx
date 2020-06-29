@@ -11,34 +11,38 @@ import {
   OnboardingCardIcon,
   OnboardingChatIcon,
 } from '../../../components/Icons';
-import Footer from '../../../components/Footer';
 
 const OnboardingScreen = ({ navigation }) => {
   const { t } = useTranslation();
+  const imageDimensions = { width: 375, height: 335 };
+
   const screens = [
     {
       ...(t('onboarding-1', { returnObjects: true }) as Object),
       image: IcelandMap,
-      imagePosition: 'right',
+      imageAlignment: 'right',
+      imageDimensions,
     },
     {
       ...(t('onboarding-2', { returnObjects: true }) as Object),
       image: OnboardingPhoneIcon,
+      imageDimensions,
     },
     {
       ...(t('onboarding-3', { returnObjects: true }) as Object),
       image: OnboardingCardIcon,
+      imageDimensions,
     },
     {
       ...(t('onboarding-4', { returnObjects: true }) as Object),
       image: OnboardingChatIcon,
+      imageDimensions,
     },
   ];
   return (
     <>
       <StatusBar barStyle="light-content" />
       <TutorialView screens={screens} navigation={navigation} />
-      <Footer />
     </>
   );
 };

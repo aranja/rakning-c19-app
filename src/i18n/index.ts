@@ -14,6 +14,19 @@ import ar from '../locales/ar.json';
 import fa from '../locales/fa.json';
 import lt from '../locales/lt.json';
 
+import isFlag from '../assets/flags/is.png';
+import enFlag from '../assets/flags/gb.png';
+import plFlag from '../assets/flags/pl.png';
+import esFlag from '../assets/flags/es.png';
+import frFlag from '../assets/flags/fr.png';
+import thFlag from '../assets/flags/th.png';
+import ruFlag from '../assets/flags/ru.png';
+import jpFlag from '../assets/flags/jp.png';
+import phFlag from '../assets/flags/ph.png';
+import arFlag from '../assets/flags/ma.png';
+import ltFlag from '../assets/flags/lt.png';
+import faFlag from '../assets/flags/fa.png';
+
 import languageDetector from './language-detector';
 
 const resources = {
@@ -36,58 +49,71 @@ export interface LanguageDefinition {
   code: string;
   name: string;
   rtl?: boolean;
+  flag: string;
 }
 
 export const languages: LanguageDefinition[] = [
   {
     code: 'is',
     name: 'Íslenska',
+    flag: isFlag,
   },
   {
     code: 'pl',
     name: 'Polski',
+    flag: plFlag,
   },
   {
     code: 'en',
     name: 'English',
+    flag: enFlag,
   },
   {
     code: 'es',
     name: 'Español',
+    flag: esFlag,
   },
   {
     code: 'fr',
     name: 'Français',
+    flag: frFlag,
   },
   {
     code: 'th',
     name: 'ภาษาไทย',
+    flag: thFlag,
   },
   {
     code: 'ru',
     name: 'Русский',
+    flag: ruFlag,
   },
   {
     code: 'jp',
     name: '日本語',
+    flag: jpFlag,
   },
   {
     code: 'ph',
     name: 'Filipino',
+    flag: phFlag,
   },
   {
     code: 'ar',
     name: 'عربي',
     rtl: true,
+    flag: arFlag,
   },
   {
     code: 'fa',
     name: 'فارسی',
     rtl: true,
+    flag: faFlag,
   },
   {
     code: 'lt',
     name: 'Lietuviškai',
+    flag: ltFlag,
   },
 ];
 

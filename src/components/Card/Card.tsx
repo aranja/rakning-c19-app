@@ -5,7 +5,7 @@ import { Heading } from '../ui/Text';
 
 interface CardProps {
   label: string;
-  description: string;
+  description?: string;
   icon: React.ReactChild;
   onPress?: () => void;
   action?: React.ReactChild;
@@ -18,7 +18,7 @@ const Card = ({ onPress, label, description, icon, action }: CardProps) => {
         <ui.Icon>{icon}</ui.Icon>
         <ui.Header>{label}</ui.Header>
       </ui.Row>
-      <ui.Description>{description}</ui.Description>
+      {description && <ui.Description>{description}</ui.Description>}
     </>
   );
 

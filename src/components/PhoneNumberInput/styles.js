@@ -4,6 +4,9 @@ import Colors from '../../constants/Colors';
 import { scale } from '../../utils/scale';
 
 export const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+  },
   phoneInputContainer: {
     flexDirection: 'column',
     marginHorizontal: -5,
@@ -14,21 +17,29 @@ export const styles = StyleSheet.create({
     width: 24,
   },
   phoneViewStyle: {
-    backgroundColor: '#f6e7de',
     paddingHorizontal: scale(20),
     paddingVertical: scale(10),
     marginBottom: 10,
     marginHorizontal: 5,
-    width: '60%',
+    flexGrow: 1,
     flexShrink: 1,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: scale(6),
+  },
+  codeTextStyle: {
+    color: Colors.breidholtAtNight,
+    fontFamily: 'OpenSans',
+    fontSize: scale(14),
   },
   phoneTextStyle: {
     color: Colors.breidholtAtNight,
-    fontFamily: 'OpenSansBold',
-    fontSize: scale(22),
+    fontFamily: 'OpenSansExtraBold',
+    fontSize: scale(14),
   },
 });
 
 export const TOSLink = styled.Text`
-  color: ${Colors.blue};
+  color: ${Colors.orange};
+  font-family: 'OpenSansBold';
 `;

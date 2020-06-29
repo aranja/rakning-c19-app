@@ -1,51 +1,49 @@
-import React, { ReactNode } from 'react';
-import styled from 'styled-components/native';
-import { scale, verticalScale } from '../../utils/index';
-import { withNavigation } from 'react-navigation';
-import Colors from '../../constants/Colors';
 import color from 'color';
-import {
-  SafeAreaView,
-  Platform,
-  StatusBar,
-  StyleProp,
-  ViewStyle,
-  KeyboardAvoidingView,
-  ScrollView,
-  View,
-} from 'react-native';
-
-import Text, { Heading } from '../ui/Text';
 import { LinearGradient } from 'expo-linear-gradient';
+import React, { ReactNode } from 'react';
+import { ScrollView } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import styled from 'styled-components/native';
+import { CirclesBig, CirclesSmall } from '../../components/Icons';
+import Colors from '../../constants/Colors';
 import { useWindowDimensions } from '../../utils/hooks';
-import { CirclesSmall, TracingIcon } from '../../components/Icons';
+import { scale, verticalScale } from '../../utils/index';
+import Text, { Heading } from '../ui/Text';
 
 const Wrap = styled.View`
   background: ${({ bgColor }) => bgColor || Colors.background};
   flex-grow: 1;
 `;
 
-const Header = styled.View`
+const HeaderWrapper = styled.View`
   align-items: center;
   padding: 0 ${scale(20)}px ${verticalScale(20)}px;
 `;
 
-const Circles = styled(CirclesSmall)`
+const CirclesWrapperSmall = styled(CirclesSmall)`
   position: absolute;
   top: ${verticalScale(-30)}px;
   right: ${scale(30)}px;
 `;
 
+const CirclesWrapperBig = styled(CirclesBig)`
+  position: absolute;
+  top: ${verticalScale(-60)}px;
+  right: ${scale(-110)}px;
+`;
+
 const Back = styled.View`
   position: absolute;
-  top: ${verticalScale(35)}px;
-  left: ${scale(20)}px;
+  top: ${({ fontScale }) =>
+    verticalScale(fontScale <= 1 ? -55 : -55 * (fontScale * 0.5))}px;
+  left: 0;
   z-index: 10;
 `;
 
 const Main = styled.View`
   flex: 1;
-  padding-top: ${verticalScale(90)};
+  padding-top: ${({ fontScale }) =>
+    verticalScale(fontScale <= 1 ? 90 : 90 * (fontScale * 0.5))};
   padding-bottom: ${({ bottomPadding }) =>
     bottomPadding ? verticalScale(200) : 0};
 `;
@@ -55,6 +53,32 @@ export const Content = styled.View`
   padding-right: ${scale(20)}px;
   padding-bottom: ${verticalScale(28)}px;
 `;
+
+export const Header = ({ title, subtitle, backButton }: any) => {
+  const { fontScale } = useWindowDimensions();
+
+  return (
+    <>
+      <HeaderWrapper accessibilityRole="header">
+        {backButton && <Back fontScale={fontScale}>{backButton}</Back>}
+        {typeof title === 'string' ? (
+          <Heading color={Colors.textDark} level={1} center marginBottom={0.1}>
+            {title}
+          </Heading>
+        ) : (
+          title
+        )}
+        {typeof subtitle === 'string' ? (
+          <Text color={Colors.textDark} marginBottom={0} bold center>
+            {subtitle}
+          </Text>
+        ) : (
+          subtitle
+        )}
+      </HeaderWrapper>
+    </>
+  );
+};
 
 export const SlimContent = ({ children }: { children: ReactNode }) => (
   <LinearGradient
@@ -76,15 +100,21 @@ export const SlimContent = ({ children }: { children: ReactNode }) => (
 
 interface Props {
   title?: string | ReactNode;
-  subtitle?: string;
+  subtitle?: string | ReactNode;
   bgColor?: string;
   fixedHeader?: boolean;
   children: ReactNode;
   alt?: boolean;
-  circles?: boolean;
+  circles?: AppShellBackgroundType;
   footer?: ReactNode;
   backButton?: ReactNode;
-  scrollContainerStyles?: StyleProp<ViewStyle>;
+  scrollContainerStyles?: any;
+  mainStyles?: any;
+}
+
+export enum AppShellBackgroundType {
+  Small,
+  Large,
 }
 
 function AppShell({
@@ -94,6 +124,7 @@ function AppShell({
   alt,
   footer,
   scrollContainerStyles,
+  mainStyles,
   bgColor,
   circles,
   backButton,
@@ -104,45 +135,17 @@ function AppShell({
 
   return (
     <Wrap bgColor={bgColor}>
-      {circles && <Circles />}
-      <KeyboardAvoidingView behavior="height">
-        <ScrollView
-          keyboardShouldPersistTaps="always"
-          contentContainerStyle={scrollContainerStyles}
-        >
-          <Main bottomPadding={footer && isFixed}>
-            {backButton && <Back>{backButton}</Back>}
-            {(title || subtitle) && (
-              <Header>
-                {typeof title === 'string' ? (
-                  <Heading
-                    color={alt ? Colors.white : Colors.textDark}
-                    level={1}
-                    center
-                    marginBottom={0.1}
-                  >
-                    {title}
-                  </Heading>
-                ) : (
-                  title
-                )}
-                {subtitle && (
-                  <Text
-                    color={alt ? Colors.white : Colors.textDark}
-                    marginBottom={0}
-                    bold
-                    center
-                  >
-                    {subtitle}
-                  </Text>
-                )}
-              </Header>
-            )}
-            {children}
-          </Main>
-          {footer && !isFixed ? <Content>{footer}</Content> : null}
-        </ScrollView>
-      </KeyboardAvoidingView>
+      {circles === AppShellBackgroundType.Small && <CirclesWrapperSmall />}
+      {circles === AppShellBackgroundType.Large && <CirclesWrapperBig />}
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        contentContainerStyle={{ flexGrow: 1, ...scrollContainerStyles }}
+      >
+        <Main bottomPadding={footer && isFixed} fontScale={fontScale}>
+          {children}
+        </Main>
+        {footer && !isFixed ? <Content>{footer}</Content> : null}
+      </ScrollView>
 
       {footer && isFixed ? <SlimContent>{footer}</SlimContent> : null}
     </Wrap>
