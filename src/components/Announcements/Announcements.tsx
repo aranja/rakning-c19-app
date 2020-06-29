@@ -97,6 +97,7 @@ const Announcements = ({
             horizontal={true}
             renderPagination={renderPagination}
             onIndexChanged={x => updateIndex(x)}
+            loadMinimal={true}
           >
             {slides.map(({ title, subtitle, description, link }, i) => (
               <ui.Content
