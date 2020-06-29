@@ -24,6 +24,8 @@ import ruFlag from '../assets/flags/ru.png';
 import jpFlag from '../assets/flags/jp.png';
 import phFlag from '../assets/flags/ph.png';
 import arFlag from '../assets/flags/ma.png';
+import ltFlag from '../assets/flags/lt.png';
+import faFlag from '../assets/flags/fa.png';
 
 import languageDetector from './language-detector';
 
@@ -106,12 +108,12 @@ export const languages: LanguageDefinition[] = [
     code: 'fa',
     name: 'فارسی',
     rtl: true,
-    flag: arFlag, // TODO update flag
+    flag: faFlag,
   },
   {
     code: 'lt',
     name: 'Lietuviškai',
-    flag: arFlag, // TODO update flag
+    flag: ltFlag,
   },
 ];
 
