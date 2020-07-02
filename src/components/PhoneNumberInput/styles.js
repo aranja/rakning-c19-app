@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
   },
   phoneViewStyle: {
     paddingHorizontal: scale(20),
-    paddingVertical: scale(10),
     marginBottom: 10,
     marginHorizontal: 5,
     flexGrow: 1,
