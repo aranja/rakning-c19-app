@@ -212,7 +212,6 @@ const HomeScreen = ({ navigation }) => {
         <Card
           label={t('questionsCardTitle')}
           description={t('questionsCardSubtitle')}
-          // onPress={() => WebBrowser.openBrowserAsync(t('questionsCardLink'))}
           onPress={() => navigation.navigate('Questions')}
           icon={<QuestionsIcon color={Colors.orange} />}
         />
