@@ -28,7 +28,7 @@ const CirclesWrapperSmall = styled(CirclesSmall)`
 
 const CirclesWrapperBig = styled(CirclesBig)`
   position: absolute;
-  top: ${verticalScale(-60)}px;
+  top: ${verticalScale(-80)}px;
   right: ${scale(-110)}px;
 `;
 

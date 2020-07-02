@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Modalize } from 'react-native-modalize';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'react-native';
 import color from 'color';
 
 import LanguagePicker from '../../../components/LanguagePicker';
@@ -41,6 +42,7 @@ const LanguageScreen = ({ navigation }: Props) => {
 
   return (
     <>
+      <StatusBar translucent backgroundColor={'rgba(0,0,0,0)'} />
       <AppShell circles={AppShellBackgroundType.Large}>
         <Content
           style={{
