@@ -64,7 +64,7 @@ const AllowLocationScreen = ({ navigation }) => {
         message: t('requestDataThanks'),
       });
 
-      resetStack(navigation, 'Home');
+      resetStack(navigation, 'Home', { showDataRecievedAlert: true });
     } catch (error) {
       const message =
         error.status === 403

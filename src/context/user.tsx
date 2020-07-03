@@ -5,6 +5,7 @@ interface User {
   dataRequested?: boolean;
   requiresKennitala?: boolean;
   testResult?: boolean;
+  testResultsUpdatedAt?: Date;
 }
 
 interface State extends User {

@@ -85,7 +85,7 @@ const PhoneNumberInput = forwardRef(({ onSendPin, onPressFlag }, ref) => {
   const [tosAccepted, setTosAccepted] = useState(false);
   const dimensions = useWindowDimensions();
   const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
-  const inputHeight = scale(fontScale <= 1 ? 50 : 50 * (fontScale * 0.5));
+  const inputHeight = scale(fontScale <= 1 ? 50 : 50 * Math.min(fontScale, 2));
   const { t, i18n } = useTranslation();
 
   useImperativeHandle(ref, () => ({
@@ -176,12 +176,12 @@ const PhoneNumberInput = forwardRef(({ onSendPin, onPressFlag }, ref) => {
           initialCountry="is"
           style={{
             ...styles.phoneViewStyle,
-            height: inputHeight,
+            minHeight: inputHeight,
             width: fontScale <= 1 ? '40%' : '100%',
           }}
           textStyle={{
             ...styles.codeTextStyle,
-            height: inputHeight,
+            minHeight: inputHeight,
             textAlign: isRTL() ? 'right' : 'left',
           }}
           flagStyle={styles.flag}
@@ -199,7 +199,7 @@ const PhoneNumberInput = forwardRef(({ onSendPin, onPressFlag }, ref) => {
           style={{
             ...styles.phoneViewStyle,
             ...styles.phoneTextStyle,
-            height: inputHeight,
+            minHeight: inputHeight,
             textAlign: isRTL() ? 'right' : 'left',
             width: fontScale <= 1 ? '60%' : '100%',
           }}

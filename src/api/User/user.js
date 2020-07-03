@@ -7,6 +7,7 @@ export const getUser = async () => {
       dataRequested: data.dataRequested,
       requiresKennitala: data.requiresKennitala,
       testResult: data.testResult,
+      testResultsUpdatedAt: data.testResultsUpdatedAt,
     }
   );
 };

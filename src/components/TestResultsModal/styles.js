@@ -35,7 +35,7 @@ export const Title = styled(Heading)`
 `;
 
 export const Date = styled(Text)`
-  font-size: ${scale(11)}px;
+  font-size: ${scale(13)}px;
   text-align: center;
   margin-bottom: ${verticalScale(18)}px;
 `;
