@@ -66,6 +66,8 @@
     "requestDataExitYes": "Yes",
     "requestDataExitNo": "No",
     "requestDataExit": "I don't want to send my data.",
+    "recievedDataTitle": "Data Recieved",
+    "recievedDatasubitle": "Thank you for your help",
     "riskAreasLabel": "Areas with risk of infection",
     "riskAreasLink": "https://www.covid.is/sub-categories/areas-with-risk-of-infection",
     "seniorCitizensLabel": "Senior citizens",

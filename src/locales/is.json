@@ -61,6 +61,8 @@
     "requestDataExitNo": "Nei",
     "requestDataExit": "Ég vil ekki senda gögnin mín til rakningateymis Almannavarna.",
     "requestDataTitle": "Rakningar beiðni",
+    "recievedDataTitle": "Gögn móttekin",
+    "recievedDatasubitle": "Takk fyrir hjálpina",
     "riskAreasLabel": "Skilgreind hættusvæði",
     "riskAreasLink": "https://www.covid.is/undirflokkar/skilgreind-haettusvaedi",
     "seniorCitizensLabel": "Eldri borgarar",

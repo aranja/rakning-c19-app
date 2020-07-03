@@ -20,6 +20,8 @@ import {
   InfoIcon,
   QuestionsIcon,
   TracingIcon,
+  SuccessIcon,
+  TestResultsIcon,
 } from '../../../components/Icons';
 import TestResults from '../../../components/TestResultsModal/TestResultsModal';
 import { Vertical } from '../../../components/ui/Spacer';
@@ -37,6 +39,8 @@ import {
 } from '../../../tracking';
 import { scale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
+import Alert from '../../../components/Alert';
+import { storage } from '../../../utils';
 
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
@@ -52,6 +56,11 @@ const HomeScreen = ({ navigation }) => {
   const [isTestResultsModalOpen, setIsTestResultsModalOpen] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   const [announcementsLoading, setAnnouncementsLoading] = useState(false);
+  const [hasTestResults, setHasTestResults] = useState(false);
+  const [testResultsDate, setTestResultsDate] = useState(null);
+  const [showDataReceived, setShowDataReceived] = useState(
+    navigation?.state?.params?.showDataRecievedAlert || false,
+  );
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
@@ -91,8 +100,17 @@ const HomeScreen = ({ navigation }) => {
       }
 
       if (user && user.testResult === false) {
+        storage.save(
+          'testResultsDate',
+          user.testResultsUpdatedAt || new Date(),
+        );
+        setTestResultsDate(user.testResultsUpdatedAt);
         setIsTestResultsModalOpen(true);
       }
+
+      const testResultsDate = await storage.get('testResultsDate');
+      setTestResultsDate(new Date(testResultsDate));
+      setHasTestResults(Boolean(testResultsDate));
 
       return user;
     } catch (error) {
@@ -175,15 +193,43 @@ const HomeScreen = ({ navigation }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (showDataReceived) {
+      setTimeout(() => setShowDataReceived(false), 10000);
+    }
+  }, [showDataReceived]);
+
   return (
     <AppShell circles={AppShellBackgroundType.Small}>
       <Content>
         <Header title={t('trackingTitle')} subtitle={t('trackingSubtitle')} />
-        <Text color={Colors.orange} marginBottom={0} bold center>
-          {`${t('trackingAlert')}  `}
-          <TracingIcon />
-        </Text>
+        {showDataReceived ? (
+          <Alert
+            title={t('recievedDataTitle')}
+            subtitle={t('recievedDataSubitle')}
+            icon={<SuccessIcon />}
+            bgColor="#3E6D00"
+            onClose={() => setShowDataReceived(false)}
+          />
+        ) : (
+          <Text color={Colors.orange} marginBottom={0} bold center>
+            {`${t('trackingAlert')}  `}
+            <TracingIcon />
+          </Text>
+        )}
         <Vertical unit={1} />
+
+        {hasTestResults && (
+          <>
+            <Alert
+              title={t('testResultsModalKicker')}
+              icon={<TestResultsIcon />}
+              bgColor="#263343"
+              onPress={() => setIsTestResultsModalOpen(true)}
+            />
+            <Vertical unit={1} />
+          </>
+        )}
 
         <Announcements
           alertText={t('importantAnnouncements')}
@@ -239,6 +285,7 @@ const HomeScreen = ({ navigation }) => {
           title={t('testResultsModalTitle')}
           kicker={t('testResultsModalKicker')}
           description={t('testResultsModalDescription')}
+          date={testResultsDate}
           buttonText={t('close')}
           onPress={() => setIsTestResultsModalOpen(false)}
         />

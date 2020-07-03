@@ -18,4 +18,8 @@ export {
   OnboardingChatIcon,
   List,
   Marker,
+  SuccessIcon,
+  TestResultsIcon,
+  SmallCloseIcon,
+  ForwardIcon,
 } from './Icons';

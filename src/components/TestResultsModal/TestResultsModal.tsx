@@ -14,6 +14,7 @@ interface TestResultsModalProps {
   kicker: string;
   title: string;
   description: string;
+  date: Date;
 }
 
 const TestResultsModal = ({
@@ -22,10 +23,13 @@ const TestResultsModal = ({
   kicker,
   title,
   description,
+  date,
   onPress,
 }: TestResultsModalProps) => {
   const onClose = async () => {
-    await deleteTestResults();
+    try {
+      await deleteTestResults();
+    } catch (error) {}
 
     onPress();
   };
@@ -39,7 +43,7 @@ const TestResultsModal = ({
           <ui.Title center level={2}>
             {title}
           </ui.Title>
-          <ui.Date>{format(new Date(), 'MMMMMMM d, yyyy')}</ui.Date>
+          {date && <ui.Date>{format(date, 'MMMMMMM d, yyyy')}</ui.Date>}
           <ui.Description center color={Colors.textGray}>
             {description}
           </ui.Description>
