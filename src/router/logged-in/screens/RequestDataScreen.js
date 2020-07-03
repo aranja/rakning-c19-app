@@ -59,11 +59,6 @@ const AllowLocationScreen = ({ navigation }) => {
       // Send geolocation data to the API.
       await logPoints(points, kennitala);
 
-      createAlert({
-        type: 'success',
-        message: t('requestDataThanks'),
-      });
-
       resetStack(navigation, 'Home', { showDataRecievedAlert: true });
     } catch (error) {
       const message =
