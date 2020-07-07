@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import Colors from '../../constants/Colors';
 import { verticalScale, scale } from '../../utils';
 import Text, { Heading } from '../ui/Text';
-import { CirclesBig } from '../Icons';
+import { CirclesMedium } from '../Icons';
 
 export const Content = styled.View`
   position: relative;
@@ -13,7 +13,7 @@ export const Content = styled.View`
   overflow: hidden;
 `;
 
-export const Background = styled(CirclesBig)`
+export const Background = styled(CirclesMedium)`
   position: absolute;
   top: ${verticalScale(-130)}px;
   right: ${scale(-80)}px;
@@ -35,7 +35,7 @@ export const Title = styled(Heading)`
 `;
 
 export const Date = styled(Text)`
-  font-size: ${scale(11)}px;
+  font-size: ${scale(13)}px;
   text-align: center;
   margin-bottom: ${verticalScale(18)}px;
 `;

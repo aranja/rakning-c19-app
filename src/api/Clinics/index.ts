@@ -1,0 +1,1 @@
+export { getClinics } from './clinics';

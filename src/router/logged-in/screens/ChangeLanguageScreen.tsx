@@ -1,6 +1,6 @@
 import React from 'react';
-import LanguagePicker from '../../../components/LanguagePicker';
 import AppShell from '../../../components/AppShell';
+import LanguagePicker from '../../../components/LanguagePicker';
 
 interface Props {
   navigation: {

@@ -5,6 +5,7 @@ import { verticalScale, scale } from '../../utils/scale';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    flexGrow: 1,
   },
   title: {
     color: Colors.greenThunder,

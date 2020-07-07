@@ -61,6 +61,8 @@
     "requestDataExitNo": "Nei",
     "requestDataExit": "Ég vil ekki senda gögnin mín til rakningateymis Almannavarna.",
     "requestDataTitle": "Rakningar beiðni",
+    "recievedDataTitle": "Gögn móttekin",
+    "recievedDatasubitle": "Takk fyrir hjálpina",
     "riskAreasLabel": "Skilgreind hættusvæði",
     "riskAreasLink": "https://www.covid.is/undirflokkar/skilgreind-haettusvaedi",
     "seniorCitizensLabel": "Eldri borgarar",
@@ -83,14 +85,14 @@
     "welcomeInfoTitle": "Tækið geymir staðsetningar síðustu 14 daga. Eldri gögn eyðast sjálfkrafa.",
     "welcomeRegisterButton": "Skrá mig í rakningu",
     "welcomeSubtitle": "Hjálpum rakningateymi almannavarna að rekja hugsanleg COVID-19 smit á Íslandi.",
-    "welcomeTitle": "Rakning - COVID-19",
+    "welcomeTitle": "Rakning \n C-19",
     "workplacesLabel": "Vinnustaðir",
     "workplacesLink": "https://www.covid.is/undirflokkar/vinnustadir",
     "worriesAndAnxietyLabel": "Áhyggjur og kvíði",
     "worriesAndAnxietyLink": "https://www.covid.is/undirflokkar/ahyggjur-og-kvidi",
     "onboarding-1": {
       "title": "Appið geymir staðsetningar þínar",
-      "description": "Appið rekur ferðir þínar og geymir þær með öruggum hætti í tækinu þínu og verður ekki deilt nema með þínu samþykki. Aðrekja ferðir þínar mun hjálpa rakningarteymi Almannavarna aðfinna hverja þú hefur umgengist ef þú hefur greinst með COVID-19."
+      "description": "Appið rekur ferðir þínar og geymir þær með öruggum hætti í tækinu þínu og verður ekki deilt nema með þínu samþykki. Að rekja ferðir þínar mun hjálpa rakningarteymi Almannavarna að finna hverja þú hefur umgengist ef þú hefur greinst með COVID-19."
     },
     "onboarding-2": {
       "title": "Rakningarteymi Almannavarna óskar eftir staðsetningargögnum",
@@ -122,6 +124,10 @@
     "callClinicTitle": "Læknavaktin",
     "callClinicDescription": "Hér getur þú haft samband við læknavaktina í síma 1700",
     "callClinicAction": "Hringja í læknavaktina",
+    "clinicsListCardTitle": "Heilsugæslustöðvar",
+    "clinicsListAction": "Finna heilsugæslustöðvar",
+    "clinicsListTitle": "Heilsugæslustöðvar",
+    "clinicsListSubtitle": "Næstu heilsugæslustöðvar miðað við staðsetningu þína",
     "otherOptions": "Önnur númer",
     "back": "Til baka",
     "helplineTitle": "Hjálparsími Rauða Krossins 1717",

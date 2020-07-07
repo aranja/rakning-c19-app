@@ -142,3 +142,17 @@ export function getPoints() {
     );
   });
 }
+
+export function getCurrentLocation() {
+  return new Promise((resolve, reject) => {
+    BackgroundGeolocation.getCurrentLocation(
+      location => {
+        resolve({
+          latitude: trimLocation(location.latitude),
+          longitude: trimLocation(location.longitude),
+        });
+      },
+      error => reject(error),
+    );
+  });
+}

@@ -5,23 +5,20 @@ import { scale, verticalScale } from '../../utils/scale';
 import Text, { Heading } from '../ui/Text';
 
 const isAndroid = Platform.OS === 'android';
+const statusBarOffsett =
+  Platform.OS === 'android' ? StatusBar.currentHeight : 0;
 
-export const SafeArea = styled.SafeAreaView`
+export const Container = styled.View`
   background-color: ${Colors.background};
   flex: 1;
-  height: 100%;
 `;
 
 export const ImageWrap = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: ${({ imagePosition }) =>
-    imagePosition === 'right' ? 'flex-end' : 'center'};
+  width: 100%;
 `;
 
-export const Container = styled.View``;
-
 export const Content = styled.View`
+  align-items: center;
   flex: 1;
 `;
 
@@ -29,7 +26,6 @@ export const Footer = styled.View`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: ${verticalScale(60)}px;
   padding-left: ${scale(32)}px;
   padding-right: ${scale(32)}px;
 `;
@@ -48,8 +44,9 @@ export const Description = styled(Text)`
 
 export const CloseIconContainer = styled.View`
   position: absolute;
-  top: ${verticalScale(47)}px;
+  top: ${verticalScale(40)}px;
   left: ${scale(20)}px;
+  z-index: 100;
 `;
 
 export const LocaleToggleContainer = styled.View`
@@ -58,25 +55,26 @@ export const LocaleToggleContainer = styled.View`
   right: ${scale(18)}px;
 `;
 
-export const styles = StyleSheet.create({
-  dot: {
-    marginBottom: 0,
-    borderColor: Colors.bulletBorder,
-    borderWidth: 1,
-    height: 11,
-    width: 11,
-    borderRadius: 5.5,
-    marginRight: verticalScale(6),
-    marginLeft: verticalScale(6),
-  },
-  dotActive: {
-    marginBottom: 0,
-    height: 11,
-    width: 11,
-    borderRadius: 5.5,
-    borderColor: Colors.bulletBorder,
-    borderWidth: 1,
-    marginRight: verticalScale(6),
-    marginLeft: verticalScale(6),
-  },
-});
+export const Dot = styled.View`
+  margin-bottom: 0px;
+  border-color: ${Colors.bulletBorder};
+  border-width: 1px;
+  height: 11px;
+  width: 11px;
+  border-radius: 5.5;
+  margin-right: ${scale(6)}px;
+  margin-left: ${scale(6)}px;
+  background-color: ${Colors.bullet};
+`;
+
+export const ActiveDot = styled(Dot)`
+  background-color: ${Colors.breidholtAtNight};
+`;
+
+export const Dots = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${verticalScale(20)}px;
+  margin-bottom: ${verticalScale(20)}px;
+`;

@@ -1,23 +1,27 @@
-import React, { useReducer, useRef, useState } from 'react';
-import { View, TextInput, TouchableWithoutFeedback } from 'react-native';
-import PropTypes from 'prop-types';
-import PhoneInput from '../PhoneInput';
-import CountryPicker from 'react-native-country-picker-modal';
-import { withTranslation, Trans } from 'react-i18next';
 import * as WebBrowser from 'expo-web-browser';
 import libPhoneNumber from 'google-libphonenumber';
-
-import { useAlert } from '../../context/alert';
+import PropTypes from 'prop-types';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { getPin } from '../../api/Login';
-import Colors from '../../constants/Colors';
-import { CtaButton } from '../Button';
-import { styles, TOSLink } from './styles';
 import covidIcon from '../../assets/images/covid-icon.png';
+import Colors from '../../constants/Colors';
+import { useAlert } from '../../context/alert';
+import { isRTL } from '../../i18n';
 import { scale } from '../../utils';
 import { useWindowDimensions } from '../../utils/hooks';
+import { CtaButton } from '../Button';
+import PhoneInput from '../PhoneInput';
 import Checkbox from '../ui/Checkbox';
 import { Vertical } from '../ui/Spacer';
-import { isRTL } from '../../i18n';
+import { styles, TOSLink } from './styles';
 
 const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
 const linkTouchPadding = 12;
@@ -72,21 +76,23 @@ const reducer = (state, { phoneNumber, cca2, callingCode, type } = {}) => {
   }
 };
 
-const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
+const PhoneNumberInput = forwardRef(({ onSendPin, onPressFlag }, ref) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { createAlert } = useAlert();
   const phoneInputRef = useRef();
+  const numberInputRef = useRef();
+
   const [tosAccepted, setTosAccepted] = useState(false);
-  const [countryPickerOpen, setCountryPickerOpen] = useState(false);
   const dimensions = useWindowDimensions();
   const fontScale = isNaN(dimensions.fontScale) ? 1 : dimensions.fontScale;
-  const inputHeight = scale(50 * fontScale);
+  const inputHeight = scale(fontScale <= 1 ? 50 : 50 * Math.min(fontScale, 2));
+  const { t, i18n } = useTranslation();
 
-  const onPressFlag = () => {
-    setCountryPickerOpen(true);
-  };
-
-  const onCountryPickerClose = () => setCountryPickerOpen(false);
+  useImperativeHandle(ref, () => ({
+    onSelectCountry,
+    phoneNumberInputFocus,
+    cca2,
+  }));
 
   const onChangePhoneNumber = phoneNumber => {
     dispatch({ type: 'updatePhoneNumber', phoneNumber });
@@ -96,11 +102,16 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
     dispatch({ type: 'updateCallingCode', callingCode });
   };
 
-  const onSelectCountry = ({ cca2, callingCode }) => {
-    setCountryPickerOpen(false);
+  function onSelectCountry({ cca2, callingCode }) {
     phoneInputRef.current.selectCountry(cca2.toLowerCase());
     dispatch({ type: 'updateLocation', cca2, callingCode });
+  }
+
+  const phoneNumberInputFocus = () => {
+    numberInputRef?.current?.focus();
   };
+
+  const cca2 = () => state.cca2;
 
   const acceptTOS = () => {
     setTosAccepted(!tosAccepted);
@@ -149,7 +160,7 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Vertical unit={1} />
       <View
         style={{
@@ -165,12 +176,12 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           initialCountry="is"
           style={{
             ...styles.phoneViewStyle,
-            height: inputHeight,
-            width: '40%',
+            minHeight: inputHeight,
+            width: fontScale <= 1 ? '40%' : '100%',
           }}
           textStyle={{
-            ...styles.phoneTextStyle,
-            height: inputHeight,
+            ...styles.codeTextStyle,
+            minHeight: inputHeight,
             textAlign: isRTL() ? 'right' : 'left',
           }}
           flagStyle={styles.flag}
@@ -178,7 +189,8 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           onChangePhoneNumber={onChangeCallingCode}
         />
         <TextInput
-          placeholder={t('phoneNr').toUpperCase()}
+          ref={numberInputRef}
+          placeholder={t('phoneNr')}
           keyboardType="phone-pad"
           returnKeyType="done"
           autoCapitalize="none"
@@ -187,45 +199,34 @@ const PhoneNumberInput = ({ t, i18n, onSendPin }) => {
           style={{
             ...styles.phoneViewStyle,
             ...styles.phoneTextStyle,
-            height: inputHeight,
+            minHeight: inputHeight,
             textAlign: isRTL() ? 'right' : 'left',
+            width: fontScale <= 1 ? '60%' : '100%',
           }}
           onChangeText={onChangePhoneNumber}
         />
       </View>
-      <CountryPicker
-        withCallingCode
-        withFilter
-        visible={countryPickerOpen}
-        onSelect={onSelectCountry}
-        onClose={onCountryPickerClose}
-        translation="eng"
-        countryCode={state.cca2}
-        renderFlagButton={() => <View />}
-      />
       <Vertical unit={1} />
       <Checkbox checked={tosAccepted} onPress={acceptTOS}>
         <Trans i18nKey="tosAcceptance">
           I agree to the <Link onPress={openPP}>Privacy Policy</Link>.
         </Trans>
       </Checkbox>
-      <Vertical unit={1} />
-      <View style={styles.btn}>
-        <CtaButton
-          disabled={!tosAccepted || state.phoneNumber.length <= 0}
-          onPress={getPinNumber}
-          image={covidIcon}
-          imageDimensions={{ height: scale(28), width: scale(24) }}
-        >
-          {t('next')}
-        </CtaButton>
-      </View>
-    </View>
+      <Vertical fill />
+      <CtaButton
+        disabled={!tosAccepted || state.phoneNumber.length <= 0}
+        onPress={getPinNumber}
+        image={covidIcon}
+        imageDimensions={{ height: scale(28), width: scale(24) }}
+      >
+        {t('next')}
+      </CtaButton>
+    </>
   );
-};
+});
 
 PhoneNumberInput.propTypes = {
   onSendPin: PropTypes.func.isRequired,
 };
 
-export default withTranslation()(PhoneNumberInput);
+export default PhoneNumberInput;

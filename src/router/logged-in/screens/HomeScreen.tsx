@@ -1,43 +1,46 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { AppState, Platform, ScrollView } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-import { useTranslation } from 'react-i18next';
+import messaging from '@react-native-firebase/messaging';
 import { format } from 'date-fns';
 import * as WebBrowser from 'expo-web-browser';
-
-import { UserContext } from '../../../context/user';
 import PropTypes from 'prop-types';
-import Colors from '../../../constants/Colors';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { AppState, Platform } from 'react-native';
+import { getAnnouncements } from '../../../api/Announcements';
+import { AuthenticationError } from '../../../api/ApiClient';
+import Announcements from '../../../components/Announcements';
+import AppShell, { Content, Header } from '../../../components/AppShell';
+import { AppShellBackgroundType } from '../../../components/AppShell/AppShell';
+import { ButtonGroup } from '../../../components/Button';
 import { CtaButton, UrlButton } from '../../../components/Button/Button';
+import Card from '../../../components/Card';
+import Footer from '../../../components/Footer';
+import {
+  ChatIcon,
+  InfoIcon,
+  QuestionsIcon,
+  TracingIcon,
+  SuccessIcon,
+  TestResultsIcon,
+} from '../../../components/Icons';
+import TestResults from '../../../components/TestResultsModal/TestResultsModal';
+import { Vertical } from '../../../components/ui/Spacer';
+import Text from '../../../components/ui/Text';
+import Colors from '../../../constants/Colors';
 import { useAuth } from '../../../context/authentication';
+import { UserContext } from '../../../context/user';
+import { languages } from '../../../i18n';
+import { registerPushNotifications } from '../../../push-notifications';
 import {
   checkLocationStatus,
   initBackgroundTracking,
-  stopBackgroundTracking,
   LocationPermission,
+  stopBackgroundTracking,
 } from '../../../tracking';
-import { registerPushNotifications } from '../../../push-notifications';
-import AppShell, { Content } from '../../../components/AppShell';
-import Text from '../../../components/ui/Text';
-import { ButtonGroup } from '../../../components/Button';
 import { scale } from '../../../utils';
 import { resetStack } from '../../../utils/navigation';
-import { Vertical } from '../../../components/ui/Spacer';
-import messaging from '@react-native-firebase/messaging';
-import Footer from '../../../components/Footer';
-import { AuthenticationError } from '../../../api/ApiClient';
-import { languages } from '../../../i18n';
-import Card from '../../../components/Card';
-import {
-  InfoIcon,
-  ChatIcon,
-  QuestionsIcon,
-  TracingIcon,
-} from '../../../components/Icons';
-
-import Announcements from '../../../components/Announcements';
-import TestResults from '../../../components/TestResultsModal/TestResultsModal';
-import { getAnnouncements } from '../../../api/Announcements';
+import Alert from '../../../components/Alert';
+import { storage } from '../../../utils';
 
 const privacyUrls = {
   en: 'https://www.covid.is/app/privacystatement',
@@ -53,6 +56,11 @@ const HomeScreen = ({ navigation }) => {
   const [isTestResultsModalOpen, setIsTestResultsModalOpen] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   const [announcementsLoading, setAnnouncementsLoading] = useState(false);
+  const [hasTestResults, setHasTestResults] = useState(false);
+  const [testResultsDate, setTestResultsDate] = useState(null);
+  const [showDataReceived, setShowDataReceived] = useState(
+    navigation?.state?.params?.showDataRecievedAlert || false,
+  );
 
   // Check if we still have location access
   const checkLocationPermission = async () => {
@@ -70,6 +78,7 @@ const HomeScreen = ({ navigation }) => {
   const logoutUser = () => {
     navigation.navigate({ routeName: 'LoggedOut' });
     stopBackgroundTracking();
+
     logout();
     clearUserData();
   };
@@ -91,8 +100,17 @@ const HomeScreen = ({ navigation }) => {
       }
 
       if (user && user.testResult === false) {
+        storage.save(
+          'testResultsDate',
+          user.testResultsUpdatedAt || new Date(),
+        );
+        setTestResultsDate(user.testResultsUpdatedAt);
         setIsTestResultsModalOpen(true);
       }
+
+      const testResultsDate = await storage.get('testResultsDate');
+      setTestResultsDate(new Date(testResultsDate));
+      setHasTestResults(Boolean(testResultsDate));
 
       return user;
     } catch (error) {
@@ -175,86 +193,109 @@ const HomeScreen = ({ navigation }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (showDataReceived) {
+      setTimeout(() => setShowDataReceived(false), 10000);
+    }
+  }, [showDataReceived]);
+
   return (
-    <AppShell
-      title={t('trackingTitle')}
-      subtitle={t('trackingSubtitle')}
-      circles
-    >
-      <ScrollView>
-        <Content>
+    <AppShell circles={AppShellBackgroundType.Small}>
+      <Content>
+        <Header title={t('trackingTitle')} subtitle={t('trackingSubtitle')} />
+        {showDataReceived ? (
+          <Alert
+            title={t('recievedDataTitle')}
+            subtitle={t('recievedDataSubitle')}
+            icon={<SuccessIcon />}
+            bgColor="#3E6D00"
+            onClose={() => setShowDataReceived(false)}
+          />
+        ) : (
           <Text color={Colors.orange} marginBottom={0} bold center>
             {`${t('trackingAlert')}  `}
             <TracingIcon />
           </Text>
-          <Vertical unit={1} />
+        )}
+        <Vertical unit={1} />
 
-          <Announcements
-            alertText={t('importantAnnouncements')}
-            link={t('importantAnnouncementsLink')}
-            slides={announcements}
-            loading={announcementsLoading}
-          />
-          <Vertical unit={1} />
+        {hasTestResults && (
+          <>
+            <Alert
+              title={t('testResultsModalKicker')}
+              icon={<TestResultsIcon />}
+              bgColor="#263343"
+              onPress={() => setIsTestResultsModalOpen(true)}
+            />
+            <Vertical unit={1} />
+          </>
+        )}
 
-          <Card
-            label={t('symptomsCardTitle')}
-            description={t('symptomsCardSubtitle')}
-            onPress={() => navigation.navigate('Contact')}
-            icon={<ChatIcon />}
-          />
-          <Vertical unit={0.5} />
-          <Card
-            label={t('informationForTouristCardTitle')}
-            description={t('informationForTouristCardSubtitle')}
-            onPress={() =>
-              WebBrowser.openBrowserAsync(t('informationForTouristCardLink'))
-            }
-            icon={<InfoIcon />}
-          />
-          <Vertical unit={0.5} />
-          <Card
-            label={t('questionsCardTitle')}
-            description={t('questionsCardSubtitle')}
-            onPress={() => WebBrowser.openBrowserAsync(t('questionsCardLink'))}
-            // onPress={() => navigation.navigate('Questions')}
-            icon={<QuestionsIcon color={Colors.orange} />}
-          />
-          <Vertical unit={1} />
+        <Announcements
+          alertText={t('importantAnnouncements')}
+          link={t('importantAnnouncementsLink')}
+          slides={announcements}
+          loading={announcementsLoading}
+        />
+        <Vertical unit={1} />
 
-          <ButtonGroup
-            style={{ paddingLeft: scale(20), paddingRight: scale(20) }}
-          >
-            <UrlButton href={t('covidLink')}>
-              {t('covidLabel')}
-              {' covid.is'}
-            </UrlButton>
+        <Card
+          label={t('symptomsCardTitle')}
+          description={t('symptomsCardSubtitle')}
+          onPress={() => navigation.navigate('Contact')}
+          icon={<ChatIcon />}
+        />
+        <Vertical unit={0.5} />
+        <Card
+          label={t('informationForTouristCardTitle')}
+          description={t('informationForTouristCardSubtitle')}
+          onPress={() =>
+            WebBrowser.openBrowserAsync(t('informationForTouristCardLink'))
+          }
+          icon={<InfoIcon />}
+        />
+        <Vertical unit={0.5} />
+        <Card
+          label={t('questionsCardTitle')}
+          description={t('questionsCardSubtitle')}
+          onPress={() => navigation.navigate('Questions')}
+          icon={<QuestionsIcon color={Colors.orange} />}
+        />
+        <Vertical unit={1} />
 
-            <UrlButton href={privacyUrls[i18n.language] || privacyUrls.en}>
-              {t('privacyPolicy')}
-            </UrlButton>
-          </ButtonGroup>
+        <ButtonGroup
+          style={{ paddingLeft: scale(20), paddingRight: scale(20) }}
+        >
+          <UrlButton href={t('covidLink')}>
+            {t('covidLabel')}
+            {' covid.is'}
+          </UrlButton>
 
-          <Vertical unit={3} />
+          <UrlButton href={privacyUrls[i18n.language] || privacyUrls.en}>
+            {t('privacyPolicy')}
+          </UrlButton>
+        </ButtonGroup>
 
-          <Footer />
+        <Vertical unit={3} />
 
-          <TestResults
-            isVisible={isTestResultsModalOpen}
-            title={t('testResultsModalTitle')}
-            kicker={t('testResultsModalKicker')}
-            description={t('testResultsModalDescription')}
-            buttonText={t('close')}
-            onPress={() => setIsTestResultsModalOpen(false)}
-          />
+        <Footer />
 
-          {__DEV__ && (
-            <CtaButton bgColor={Colors.gray} onPress={logoutUser}>
-              Dev only log out
-            </CtaButton>
-          )}
-        </Content>
-      </ScrollView>
+        <TestResults
+          isVisible={isTestResultsModalOpen}
+          title={t('testResultsModalTitle')}
+          kicker={t('testResultsModalKicker')}
+          description={t('testResultsModalDescription')}
+          date={testResultsDate}
+          buttonText={t('close')}
+          onPress={() => setIsTestResultsModalOpen(false)}
+        />
+
+        {__DEV__ && (
+          <CtaButton bgColor={Colors.gray} onPress={logoutUser}>
+            Dev only log out
+          </CtaButton>
+        )}
+      </Content>
     </AppShell>
   );
 };
