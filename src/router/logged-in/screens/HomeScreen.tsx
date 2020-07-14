@@ -194,9 +194,13 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    let timer;
     if (showDataReceived) {
-      setTimeout(() => setShowDataReceived(false), 10000);
+      timer = setTimeout(() => setShowDataReceived(false), 10000);
     }
+    return () => {
+      clearTimeout(timer);
+    };
   }, [showDataReceived]);
 
   return (

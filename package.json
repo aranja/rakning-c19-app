@@ -18,6 +18,7 @@
     "appcenter": "3.0.0",
     "appcenter-analytics": "3.0.0",
     "appcenter-crashes": "3.0.0",
+    "bugsnag-react-native": "^2.23.9",
     "color": "^3.1.2",
     "date-fns": "^2.14.0",
     "eslint": "^6.7.1",

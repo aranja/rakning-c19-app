@@ -5,7 +5,7 @@ import Colors from '../../constants/Colors';
 import { Clinic } from '../../router/logged-in/screens/ClinicsScreen';
 import { useWindowDimensions } from '../../utils/hooks';
 import { Marker } from '../Icons';
-import MapChoiceModal from '../MapChoiceModal';
+import MapChoiceModal, { MapApplication } from '../MapChoiceModal';
 import Text from '../ui/Text';
 import * as ui from './styles';
 
@@ -13,11 +13,6 @@ interface ClinicsListProps {
   data: Clinic[];
   header: React.ReactElement;
   loading: boolean;
-}
-
-export enum MapApplication {
-  APPLE,
-  GOOGLE,
 }
 
 const ClinicsList = ({ data, header, loading }: ClinicsListProps) => {

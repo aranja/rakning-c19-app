@@ -20,6 +20,11 @@ PODS:
   - AppCenterReactNativeShared (3.0.1):
     - AppCenter/Core (= 3.1.0)
   - boost-for-react-native (1.63.0)
+  - BugsnagReactNative (2.23.9):
+    - BugsnagReactNative/Core (= 2.23.9)
+    - React
+  - BugsnagReactNative/Core (2.23.9):
+    - React
   - DoubleConversion (1.1.6)
   - EXAppLoaderProvider (8.0.0)
   - EXConstants (8.0.0):
@@ -384,6 +389,7 @@ DEPENDENCIES:
   - appcenter-analytics (from `../node_modules/appcenter-analytics/ios`)
   - appcenter-core (from `../node_modules/appcenter/ios`)
   - appcenter-crashes (from `../node_modules/appcenter-crashes/ios`)
+  - BugsnagReactNative (from `../node_modules/bugsnag-react-native`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -474,6 +480,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/appcenter/ios"
   appcenter-crashes:
     :path: "../node_modules/appcenter-crashes/ios"
+  BugsnagReactNative:
+    :path: "../node_modules/bugsnag-react-native"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXAppLoaderProvider:
@@ -619,6 +627,7 @@ SPEC CHECKSUMS:
   appcenter-crashes: add23a3c3cf0403e1f54c39d85e9b3c5db7279e7
   AppCenterReactNativeShared: a18a3da01dd569fbfbdd264c8c43491af6efa88d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  BugsnagReactNative: 10fc11d9a29800052b3747eb45e7c903b3b057d5
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EXAppLoaderProvider: ebdb6bc2632c1ccadbe49f5e4104d8d690969c49
   EXConstants: 4051b16c17ef3defa03c541d42811dc92b249146
@@ -693,4 +702,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1affb8c5ff1329fe97b3636be3845eff5fd268d1
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.9.1
