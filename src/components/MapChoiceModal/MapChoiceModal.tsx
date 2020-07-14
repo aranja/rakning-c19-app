@@ -6,7 +6,6 @@ import AppleMapsI from '../../assets/images/ios-maps.png';
 import Colors from '../../constants/Colors';
 import { scale } from '../../utils';
 import { CtaButton } from '../Button/Button';
-import { MapApplication } from '../ClinicsList/ClinicsList';
 import * as ui from './styles';
 
 interface MapChoiceModalProps {
@@ -17,6 +16,11 @@ interface MapChoiceModalProps {
   kicker: string;
   title: string;
   description: string;
+}
+
+export enum MapApplication {
+  APPLE,
+  GOOGLE,
 }
 
 const MapChoiceModal = ({
