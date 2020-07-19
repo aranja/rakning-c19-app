@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import Modal from 'react-native-modal';
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import * as ui from './styles';
 import { CtaButton } from '../Button/Button';
 import Colors from '../../constants/Colors';
@@ -43,7 +43,9 @@ const TestResultsModal = ({
           <ui.Title center level={2}>
             {title}
           </ui.Title>
-          {date && <ui.Date>{format(date, 'MMMMMMM d, yyyy')}</ui.Date>}
+          {date && isValid(date) && (
+            <ui.Date>{format(date, 'MMMMMMM d, yyyy')}</ui.Date>
+          )}
           <ui.Description center color={Colors.textGray}>
             {description}
           </ui.Description>

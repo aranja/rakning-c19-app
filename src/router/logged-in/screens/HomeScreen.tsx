@@ -100,11 +100,8 @@ const HomeScreen = ({ navigation }) => {
       }
 
       if (user && user.testResult === false) {
-        storage.save(
-          'testResultsDate',
-          user.testResultsUpdatedAt || new Date(),
-        );
-        setTestResultsDate(user.testResultsUpdatedAt);
+        storage.save('testResultsDate', user.testResultsUpdatedAt);
+        setTestResultsDate(new Date(user.testResultsUpdatedAt));
         setIsTestResultsModalOpen(true);
       }
 
