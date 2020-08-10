@@ -105,38 +105,42 @@ const Announcements = ({
                 activeOpacity={1}
                 accessibilityElementHidden={index !== i}
               >
-                <ui.Title bold numberOfLines={2} ellipsizeMode="tail">
-                  {title}
-                </ui.Title>
-                <ui.Subtitle>{subtitle}</ui.Subtitle>
-                <HTML
-                  html={`<div>${description}</div>`}
-                  allowFontScaling
-                  baseFontStyle={textStyles}
-                  containerStyle={{
-                    padding: 0,
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                  }}
-                  tagsStyles={{
-                    a: {
-                      ...textStyles,
-                      textDecorationLine: 'none',
-                    },
-                  }}
-                  renderers={{
-                    div: (_, children, convertedCSSStyles, passProps) => (
-                      <Text
-                        {...passProps}
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                      >
-                        {children}
-                      </Text>
-                    ),
-                  }}
-                  ignoredTags={[...IGNORED_TAGS, 'img', 'br']}
-                />
+                {title && (
+                  <ui.Title bold numberOfLines={2} ellipsizeMode="tail">
+                    {title}
+                  </ui.Title>
+                )}
+                {subtitle && <ui.Subtitle>{subtitle}</ui.Subtitle>}
+                {description && (
+                  <HTML
+                    html={`<div>${description}</div>`}
+                    allowFontScaling
+                    baseFontStyle={textStyles}
+                    containerStyle={{
+                      padding: 0,
+                      flexDirection: 'row',
+                      alignItems: 'flex-start',
+                    }}
+                    tagsStyles={{
+                      a: {
+                        ...textStyles,
+                        textDecorationLine: 'none',
+                      },
+                    }}
+                    renderers={{
+                      div: (_, children, convertedCSSStyles, passProps) => (
+                        <Text
+                          {...passProps}
+                          numberOfLines={2}
+                          ellipsizeMode="tail"
+                        >
+                          {children}
+                        </Text>
+                      ),
+                    }}
+                    ignoredTags={[...IGNORED_TAGS, 'img', 'br']}
+                  />
+                )}
               </ui.Content>
             ))}
           </Swiper>
