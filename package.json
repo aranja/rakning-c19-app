@@ -46,7 +46,7 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-i18next": "^10.11.4",
-    "react-native": "~0.61.4",
+    "react-native": "~0.62.3",
     "react-native-country-picker-modal": "^1.10.0",
     "react-native-gesture-handler": "~1.5.0",
     "react-native-modal": "^11.5.6",
