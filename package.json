@@ -59,7 +59,7 @@
     "react-native-swiper": "^1.6.0",
     "react-native-unimodules": "~0.7.0",
     "react-native-web": "~0.11.7",
-    "react-native-webview": "10.1.1",
+    "react-native-webview": "11.0.0",
     "react-navigation": "^3.11.1",
     "styled-components": "^4.3.1"
   },
