@@ -171,8 +171,8 @@ const HomeScreen = ({ navigation }) => {
                 ? cur['meginmal']
                 : cur['meginmal-ensku'],
               link: inIcelandic
-                ? cur['linkur-a-frett']
-                : cur['read-more-hlekkur-ensku'],
+                ? cur['linkur-a-frett'] || t('announcementsLink')
+                : cur['read-more-hlekkur-ensku'] || t('announcementsLink'),
             },
           ];
         }, []),
